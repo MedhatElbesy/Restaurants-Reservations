@@ -18,18 +18,18 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('address')->nullable();
             $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('governorate_id');
+            $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('state_id');
-            $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
             $table->integer('zip')->nullable();
             $table->integer('latitude')->nullable();
             $table->integer('longitude')->nullable();
+            $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
 
             $table->foreign('user_id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('country_id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('city_id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('governorate_id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('city_id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('state_id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
             $table->softDeletes();
             $table->rememberToken();

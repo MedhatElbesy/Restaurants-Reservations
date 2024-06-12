@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('country_code')->default('+20');
             $table->string('currency', 3)->nullable();
-            $table->enum('status' , [ItemStatus::Pending , ItemStatus::Enabled , ItemStatus::Disabled , ItemStatus::Deleted])->default(ItemStatus::Enabled)->index();
+            $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->enum('status' , [ItemStatus::Pending , ItemStatus::Enabled , ItemStatus::Disabled , ItemStatus::Deleted])->default(ItemStatus::Enabled)->index();
+            $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
             $table->timestamps();
         });
     }
