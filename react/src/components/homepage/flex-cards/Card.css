@@ -1,0 +1,55 @@
+.flex-card {
+    display: flex;
+  }
+  
+  .flex-card section {
+    flex: 1;
+    overflow: hidden;
+    position: relative; 
+  }
+  
+  .flex-card section:hover {
+    width: 30vw; 
+  }
+  
+  .image-container {
+    position: relative;
+    width: 100%; 
+    height: 100%;
+  }
+  
+  .image-container::after {
+    content: "Explore";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 10px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .image-container:hover::after {
+    opacity: 1; 
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
+  
+  
