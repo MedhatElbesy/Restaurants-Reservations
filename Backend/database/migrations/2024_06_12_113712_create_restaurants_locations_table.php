@@ -36,10 +36,10 @@ return new class extends Migration
             $table->string('hot_line')->nullable()->unique();
             $table->enum('status', [ItemStatus::Opened, ItemStatus::Closed])->default(ItemStatus::Opened);
 
-            $table->foreign('country_id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('city_id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('governorate_id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('state_id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('country_id')->references('id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('governorate_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('state_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
 
             $table->timestamps();
         });

@@ -1,9 +1,12 @@
 <?php
 
 use App\Enums\UserStatus;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -29,10 +32,44 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->string('facebook_id')->nullable();
             $table->string('twitter_id')->nullable();
-            $table->softDeletes();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
+
+        $admin = User::create([
+            'first_name'    => 'Admin',
+            'last_name'     => 'one',
+            'email'         => 'admin@gmail.com',
+            'password'      => bcrypt('admin'),
+            'roles_name'    => ["administrator"],
+            'status'        => UserStatus::Active,
+            'created_at'    => now(),
+            'updated_at'    => now(),
+        ]);
+
+        /*create role administrator and assign all permissions for this role*/
+        $role_admin = Role::create(['name' => 'administrator', 'guard_name' => 'web']);
+
+        $permissions = Permission::pluck('id','id')->all();
+
+        $role_admin->syncPermissions($permissions);
+        $admin->assignRole([$role_admin->id]);
+
+        $restaurant = User::create([
+            'first_name'    => 'Restaurant',
+            'last_name'     => 'One',
+            'email'         => 'restaurant@gmail.com',
+            'password'      => bcrypt('restaurant'),
+            'roles_name'    => ["restaurant"],
+            'status'        => UserStatus::Active,
+            'created_at'    => now(),
+            'updated_at'    => now(),
+        ]);
+
+        /*create role restaurant and assign all permissions for this role*/
+        $role_restaurant = Role::create(['name' => 'restaurant', 'guard_name' => 'web']);
+        $restaurant->assignRole([$role_restaurant->id]);
     }
 
     /**
