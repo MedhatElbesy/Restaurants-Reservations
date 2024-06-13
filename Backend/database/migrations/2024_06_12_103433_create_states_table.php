@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->foreignId('city_id')
                 ->constrained('cities')

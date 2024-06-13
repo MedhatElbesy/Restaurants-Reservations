@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique()->index();
             $table->string('name')->unique();
             $table->string('country_code')->default('+20');
             $table->string('currency', 3)->nullable();

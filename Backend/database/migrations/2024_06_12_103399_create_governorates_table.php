@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('governorates', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->foreignId('country_id')
                 ->constrained('countries')
