@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->enum('gender', ['female', 'male'])->nullable();
             $table->date('birth_date')->nullable();
-            $table->enum('role', ['user', 'business'])->default('user');
+            //$table->enum('role', ['user', 'business'])->default('user');
+            $table->text('roles_name');
             $table->enum('status', [ UserStatus::Active, UserStatus::InActive, UserStatus::Blocked, UserStatus::Deleted])->default(UserStatus::Active);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('google_id')->nullable();
