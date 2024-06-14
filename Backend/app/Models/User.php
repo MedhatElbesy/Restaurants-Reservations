@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,4 +61,17 @@ class User extends Authenticatable
         }
         return url('storage/' . $this->profile_image);
     }
+
+    public function getFullNameAttribute() : string{
+        return $this->first_name.''. $this->last_name;
+    }
+
+    public function addresses () : HasMany{
+        return $this->hasMany(UserAddress::class, 'user_id', 'id');
+    }
+
+    public function restaurants() : HasMany{
+        return $this->hasMany(Restaurant::class, 'user_id', 'id');
+    }
 }
+

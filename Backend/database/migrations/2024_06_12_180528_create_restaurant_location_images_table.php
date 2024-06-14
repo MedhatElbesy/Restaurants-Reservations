@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restaurant_images', function (Blueprint $table) {
+        Schema::create('restaurant_location_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')
-                ->constrained('restaurants')
+            $table->foreignId('restaurant_location_id')
+                ->constrained('restaurant_locations')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

@@ -26,6 +26,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
+            $table->unique('restaurant_id', 'category_id');
             $table->timestamps();
         });
     }
