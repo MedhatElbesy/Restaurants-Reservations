@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -33,3 +34,6 @@ Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 
 Route::post('profile', [UserController::class, 'profile']);
+
+
+Route::resource('restaurants', RestaurantController::class);
