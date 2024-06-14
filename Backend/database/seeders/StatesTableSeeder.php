@@ -135,7 +135,7 @@ class StatesTableSeeder extends Seeder
 
             // Taiz, Yemen
             ['city_id' => 24, 'name' => 'Taiz City'],
-            ['city_id' => 24, 'name' => 'Al Hudaydah'],
+            ['city_id' => 24, 'name' => 'Al Hudydah'],
             ['city_id' => 24, 'name' => 'Ibb'],
 
             // Muscat, Oman
@@ -173,7 +173,7 @@ class StatesTableSeeder extends Seeder
             // Muharraq, Bahrain
             ['city_id' => 32, 'name' => 'Muh'],
         ];
-        
+
         DB::table('states')->insert($states);
     }
 }

@@ -136,7 +136,7 @@ class CitiesTableSeeder extends Seeder
 
             // Taiz, Yemen
             ['governorate_id' => 24, 'name' => 'Taiz City'],
-            ['governorate_id' => 24, 'name' => 'Al Hudaydah'],
+            ['governorate_id' => 24, 'name' => 'Al Hudaydah2'],
             ['governorate_id' => 24, 'name' => 'Ibb'],
 
             // Muscat, Oman
