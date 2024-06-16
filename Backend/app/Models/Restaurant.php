@@ -21,7 +21,7 @@ class Restaurant extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(RestaurantImage::class, 'restaurant_id', 'id');
+        return $this->hasMany(RestaurantLocationImage::class, 'restaurant_id', 'id');
     }
 
     public function locations () : HasMany
