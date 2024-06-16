@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LogoutController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
@@ -32,4 +35,9 @@ Route::get('cities/{id}', [CityController::class, 'getCityByGovernorateId']);
 Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 
-Route::post('profile', [UserController::class, 'profile']);
+// route used to create access token to login
+Route::post('register' , [RegisterController::class , 'register'])->middleware('guest:sanctum');
+Route::post('login' , [LoginController::class , 'create_access_token'])->middleware('guest:sanctum')->name('login');
+Route::get('profile/{user}', [UserController::class , 'profile']);
+
+Route::delete('logout/{token?}', [LogoutController::class, 'destroy_token'])->middleware('auth:sanctum');
