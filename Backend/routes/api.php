@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -35,11 +36,10 @@ Route::get('cities/{id}', [CityController::class, 'getCityByGovernorateId']);
 Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 
-// route used to create access token to login
 Route::post('register' , [RegisterController::class , 'register'])->middleware('guest:sanctum');
 Route::post('login' , [LoginController::class , 'create_access_token'])->middleware('guest:sanctum')->name('login');
 Route::get('profile/{user}', [UserController::class , 'profile']);
 Route::put('profile/update/{user}', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
 Route::delete('profile/delete/{user}', [UserController::class , 'deleteAccount'])->middleware('auth:sanctum');
 
-Route::delete('logout/{token?}', [LogoutController::class, 'destroy_token'])->middleware('auth:sanctum');
+Route::apiResource('restaurants', RestaurantController::class);

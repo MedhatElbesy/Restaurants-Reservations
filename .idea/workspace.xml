@@ -5,21 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/City.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/Country.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/Governorate.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/State.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_103353_create_countries_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_103399_create_governorates_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_103400_create_cities_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_103433_create_states_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_05_19_104800_create_admins_table.php" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/StoreRestaurantRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/UpdateRestaurantRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_14_231941_add_deleted_at_to_restaurants_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/addRestaurant.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/delete.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/restaurantFetch.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/updateAtRestaurant.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Models/Restaurant.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/Restaurant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +165,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "D:/Restaurants-Reservations/Backend/database/migrations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
