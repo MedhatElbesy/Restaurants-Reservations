@@ -28,9 +28,9 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('country_id')->references('id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('governorate_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('governorate_id')->references('id')->on('governorates')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('state_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('state_id')->references('id')->on('states')->cascadeOnDelete()->cascadeOnDelete();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_addresses');
     }
 };
