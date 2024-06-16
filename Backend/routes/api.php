@@ -39,5 +39,7 @@ Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 Route::post('register' , [RegisterController::class , 'register'])->middleware('guest:sanctum');
 Route::post('login' , [LoginController::class , 'create_access_token'])->middleware('guest:sanctum')->name('login');
 Route::get('profile/{user}', [UserController::class , 'profile']);
+Route::put('profile/update/{user}', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
+Route::delete('profile/delete/{user}', [UserController::class , 'deleteAccount'])->middleware('auth:sanctum');
 
 Route::delete('logout/{token?}', [LogoutController::class, 'destroy_token'])->middleware('auth:sanctum');
