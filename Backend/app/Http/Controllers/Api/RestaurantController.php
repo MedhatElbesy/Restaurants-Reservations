@@ -19,8 +19,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        // $restaurants = Restaurant::with(['locations'])->get();
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with(['locations'])->get();
         if ($restaurants) {
             return ApiResponse::sendResponse(200, 'All Restaurants',$restaurants);
         }
@@ -119,6 +118,7 @@ class RestaurantController extends Controller
         return ApiResponse::sendResponse(404, 'Can`t find this Restaurant');
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -212,18 +212,30 @@ class RestaurantController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-{
-    try {
-        $restaurant = Restaurant::findOrFail($id);
+    {
+        try {
+            $restaurant = Restaurant::findOrFail($id);
 
-        DB::beginTransaction();
-        $restaurant->delete();
+            DB::beginTransaction();
+            $restaurant->delete();
 
-        DB::commit();
-        return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully');
-    } catch (\Throwable $e) {
-        DB::rollback();
-        return ApiResponse::sendResponse(500, 'Failed to delete restaurant', ['error' => $e->getMessage()]);
+            DB::commit();
+            return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully');
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to delete restaurant', ['error' => $e->getMessage()]);
+        }
     }
-}
+
+    public function getRestaurantsByUserId(string $user_id)
+    {
+        $restaurants = Restaurant::with('locations')->where('user_id', $user_id)->get();
+
+        if ($restaurants->isEmpty()) {
+            return ApiResponse::sendResponse(404, 'No restaurants found for this user.');
+        }
+
+        return ApiResponse::sendResponse(200, 'Restaurants', RestaurantResource::collection($restaurants));
+    }
+
 }

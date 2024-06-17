@@ -37,3 +37,4 @@ Route::post('profile', [UserController::class, 'profile']);
 
 
 Route::resource('restaurants', RestaurantController::class);
+Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
