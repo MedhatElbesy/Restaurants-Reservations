@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('check.restaurant.owner')->only(['update', 'destroy', 'store']);
+    }
 
     public function index()
     {
@@ -17,7 +22,6 @@ class RestaurantCategoryController extends Controller
 
     public function store(Request $request)
     {
-        // Basic Validation of Existence of the data
         $validatedData = $request->validate([
             'restaurant_id' => 'required|exists:restaurants,id',
             'category_id' => 'required|exists:categories,id',
@@ -37,7 +41,7 @@ class RestaurantCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $restaurantCategory = RestaurantCategory::findOrFail($id);
-        // Basic Validation of Existence of the data
+
         $validatedData = $request->validate([
             'restaurant_id' => 'required|exists:restaurants,id',
             'category_id' => 'required|exists:categories,id',

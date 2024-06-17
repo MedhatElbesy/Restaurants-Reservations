@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
-use App\Http\Controllers\Api\RestaurantCategoryController;
+
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\CategoryController;
+
+
+use App\Http\Controllers\RestaurantCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +40,9 @@ Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 Route::post('profile', [UserController::class, 'profile']);
 
 Route::apiResource('categories', CategoryController::class);
-Route::apiResource('restaurant-categories', RestaurantCategoryController::class);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('restaurant-categories', RestaurantCategoryController::class)
+        ->middleware('check.restaurant.owner')->only(['store', 'update', 'destroy']);
+});

@@ -5,7 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/Auth/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/Auth/LogoutController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/Auth/RegisterController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/UserController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/StoreRestaurantRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/UpdateRestaurantRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/User/LoginRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/User/StoreUserRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/UserAddressResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/UserResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Models/UserActivation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_14_231941_add_deleted_at_to_restaurants_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_16_171643_create_user_activations_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/resources/views/emails/activation.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/resources/views/emails/layout.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/addRestaurant.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/delete.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/restaurantFetch.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/api/restaurant/updateAtRestaurant.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react/src/axios.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantCategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Middleware/CheckRestaurantOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Middleware/CheckRestaurantOwner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,20 +180,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/Restaurants-Reservations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "C:/xampp/htdocs/Restaurants-Reservations",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -210,5 +240,8 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
