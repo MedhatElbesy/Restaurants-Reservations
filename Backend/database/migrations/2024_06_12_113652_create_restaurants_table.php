@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('summary')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', [UserStatus::Active, UserStatus::InActive, UserStatus::Deleted])->default(UserStatus::Active);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
