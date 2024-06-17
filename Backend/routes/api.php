@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,5 @@ Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 
 Route::post('profile', [UserController::class, 'profile']);
 
+Route::apiResource('categories', CategoryController::class);
 Route::apiResource('restaurant-categories', RestaurantCategoryController::class);
