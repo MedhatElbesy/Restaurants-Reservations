@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             GovernorateTableSeeder::class,
             CitiesTableSeeder::class,
-            StatesTableSeeder::class
+            StatesTableSeeder::class,
+            CategorySeeder::class,
+            RestaurantCategorySeeder::class
+
         ]);
 
         // \App\Models\User::factory(10)->create();
