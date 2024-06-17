@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CountriesTableSeeder::class,
-            GovernorateTableSeeder::class,
-            CitiesTableSeeder::class,
-            StatesTableSeeder::class,
+//            CountriesTableSeeder::class,
+//            GovernorateTableSeeder::class,
+//            CitiesTableSeeder::class,
+//            StatesTableSeeder::class,
             CategorySeeder::class,
             RestaurantCategorySeeder::class
 

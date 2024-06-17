@@ -25,7 +25,7 @@ class UserController extends Controller
         }
 
         $data = $user->load('addresses', 'restaurants',
-            'restaurants.images',
+            'restaurants.locations.images',
             'restaurants.locations',
             'restaurants.categories'
         );
