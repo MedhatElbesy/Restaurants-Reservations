@@ -2,51 +2,51 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Enums\ItemStatus;
-class CategorySeeder extends Seeder
+class MenuCategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
-        DB::table('categories')->insert([
+        DB::table('menu_categories')->insert([
             [
+                'restaurant_id' => 1,
                 'name' => 'Appetizers',
                 'slug' => Str::slug('Appetizers'),
-                'cover' => 'covers/appetizers.jpg',
-                'description' => 'A variety of starters to begin your meal.',
+                'description' => 'Delicious appetizers to start your meal.',
                 'status' => ItemStatus::Enabled,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
+                'restaurant_id' => 1,
                 'name' => 'Main Courses',
                 'slug' => Str::slug('Main Courses'),
-                'cover' => 'covers/main_courses.jpg',
-                'description' => 'Hearty and fulfilling main course options.',
+                'description' => 'Hearty and satisfying main courses.',
                 'status' => ItemStatus::Enabled,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
+                'restaurant_id' => 2,
                 'name' => 'Desserts',
                 'slug' => Str::slug('Desserts'),
-                'cover' => 'covers/desserts.jpg',
-                'description' => 'Sweet treats to end your meal on a high note.',
+                'description' => 'Sweet treats to end your meal.',
                 'status' => ItemStatus::Enabled,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
+                'restaurant_id' => 2,
                 'name' => 'Beverages',
                 'slug' => Str::slug('Beverages'),
-                'cover' => 'covers/beverages.jpg',
-                'description' => 'Refreshing drinks to accompany your meal.',
+                'description' => 'Refreshing drinks.',
                 'status' => ItemStatus::Enabled,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\RestaurantCategory;
-use App\Models\Restaurant;
-use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-
+use App\Enums\ItemStatus;
 class RestaurantCategorySeeder extends Seeder
 {
     /**
@@ -17,17 +14,21 @@ class RestaurantCategorySeeder extends Seeder
      */
     public function run()
     {
-        $restaurants = Restaurant::all();
-        $categories = Category::all();
-
-        foreach ($restaurants as $restaurant) {
-            foreach ($categories as $category) {
-                RestaurantCategory::create([
-                    'restaurant_id' => $restaurant->id,
-                    'category_id' => $category->id,
-                    'status' => 'enabled', // 'disabled', 'deleted'
-                ]);
-            }
-        }
+        DB::table('restaurant_categories')->insert([
+            [
+                'restaurant_id' => 1,
+                'category_id' => 1,
+                'status' => ItemStatus::Enabled,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'restaurant_id' => 2,
+                'category_id' => 3,
+                'status' => ItemStatus::Enabled,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }

@@ -18,9 +18,19 @@ class DatabaseSeeder extends Seeder
             GovernorateTableSeeder::class,
             CitiesTableSeeder::class,
             StatesTableSeeder::class,
+            UserAddressesSeeder::class,
+            RestaurantsSeeder::class,
+            RestaurantLocationsSeeder::class,
             CategorySeeder::class,
-            RestaurantCategorySeeder::class
-
+            RestaurantCategorySeeder::class,
+            RestaurantLocationImagesSeeder::class,
+            MenuCategoriesSeeder::class,
+            MenuItemsSeeder::class,
+            TablesSeeder::class,
+            TableAvailabilitiesSeeder::class,
+            TableImagesSeeder::class,
+            PaymentsSeeder::class,
+            UserActivationSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
