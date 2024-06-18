@@ -1,0 +1,61 @@
+img[alt="Profile"] {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  bottom: -75px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid white;
+  border-radius: 50%; 
+}
+
+.edit-icon {
+  font-size: 2em;
+}
+
+.userProfile{
+  overflow-x: hidden;
+}
+
+.userProfile strong,
+.userProfile h2 {
+  color: #ca8e46;
+}
+
+.userProfile h2 {
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 5px;
+  padding-left: 15px;
+  box-shadow: 3px 3px 10px rgba(234, 129, 9, 0.708);
+  height: 8vh;
+  display: flex;
+  align-items: center;
+
+}
+.userProfile p{
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.aside-data {
+ 
+ border-radius: 8px;
+  border: 1px solid white;
+  padding: 20px;
+  box-shadow: 4px 8px 14px rgba(234, 129, 9, 0.708);
+  
+}
+
+ .info {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+img[alt="side image"]{
+  width:100%;
+  height:100%;
+  border-radius: 8px;
+  object-fit:fill;
+}
+

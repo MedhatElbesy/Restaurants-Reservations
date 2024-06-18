@@ -38,8 +38,8 @@ return new class extends Migration
 
             $table->foreign('country_id')->references('id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('governorate_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
-            $table->foreign('state_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('governorate_id')->references('id')->on('governorates')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('state_id')->references('id')->on('states')->cascadeOnDelete()->cascadeOnDelete();
 
             $table->timestamps();
         });

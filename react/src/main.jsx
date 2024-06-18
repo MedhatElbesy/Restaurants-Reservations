@@ -8,11 +8,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import { BodyColorProvider } from './BodyColorContext';
 
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+<React.StrictMode>
     <BodyColorProvider>
-     <App />
-     </BodyColorProvider>
-  </React.StrictMode>,
+      <App />
+    </BodyColorProvider>
+</React.StrictMode>
 )

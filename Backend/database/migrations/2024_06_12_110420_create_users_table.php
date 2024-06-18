@@ -41,11 +41,12 @@ return new class extends Migration
             'first_name'    => 'Admin',
             'last_name'     => 'one',
             'email'         => 'admin@gmail.com',
-            'password'      => bcrypt('admin'),
+            'password'      =>'admin',
             'roles_name'    => ["administrator"],
             'status'        => UserStatus::Active,
             'created_at'    => now(),
             'updated_at'    => now(),
+            'email_verified_at'=> now()
         ]);
 
         /*create role administrator and assign all permissions for this role*/
@@ -60,11 +61,12 @@ return new class extends Migration
             'first_name'    => 'Restaurant',
             'last_name'     => 'One',
             'email'         => 'restaurant@gmail.com',
-            'password'      => bcrypt('restaurant'),
+            'password'      => 'restaurant',
             'roles_name'    => ["restaurant"],
             'status'        => UserStatus::Active,
             'created_at'    => now(),
             'updated_at'    => now(),
+            'email_verified_at'=> now()
         ]);
 
         /*create role restaurant and assign all permissions for this role*/
