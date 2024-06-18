@@ -22,8 +22,13 @@ export default function MyNavbar() {
         <span className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>Username</span>
       </Navbar.Brand>
 
-      <Navbar.Toggle aria-controls="basic-navbar-nav">
+
+      <Navbar.Toggle 
+       aria-controls="basic-navbar-nav"
+       className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+
         <FontAwesomeIcon icon={faBars} />
+
       </Navbar.Toggle>
 
       <Navbar.Collapse id="basic-navbar-nav">
