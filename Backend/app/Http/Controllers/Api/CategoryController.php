@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\CategoryController;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\ApiResponse;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -33,19 +37,43 @@ class CategoryController extends Controller
         return $category;
     }
 
+   
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'sometimes|required|unique:categories,name,' . $category->id,
-            'slug' => 'sometimes|required|unique:categories,slug,' . $category->id,
-            'cover' => 'nullable|string',
+            'name' => [
+                'sometimes',
+                'required'
+            ],
+            'slug' => [
+                'sometimes',
+                'required'
+            ],
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|in:Enabled,Disabled,Deleted',
         ]);
 
-        $category->update($request->all());
+        try {
+            $category->fill($request->all());
+            if ($request->hasFile('cover')) {
+                $cover = $request->file('cover');
+                $coverName = time() . '_cover.' . $cover->getClientOriginalExtension();
 
-        return response()->json($category);
+                if ($cover->move(public_path('images'), $coverName)) {
+                    $category->cover = $coverName;
+                } else {
+                    throw new \Exception('Failed to upload cover image');
+                }
+            }
+
+            $category->save();
+
+            return ApiResponse::sendResponse(200, 'Category updated successfully', $category);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to update category', ['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy(Category $category)
@@ -55,3 +83,4 @@ class CategoryController extends Controller
         return response()->json(null, 204);
     }
 }
+

@@ -39,9 +39,12 @@ class RestaurantCategoryController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+   {
+    try {
+        
         $restaurantCategory = RestaurantCategory::findOrFail($id);
 
+    
         $validatedData = $request->validate([
             'restaurant_id' => 'required|exists:restaurants,id',
             'category_id' => 'required|exists:categories,id',
@@ -49,8 +52,22 @@ class RestaurantCategoryController extends Controller
         ]);
 
         $restaurantCategory->update($validatedData);
-        return response()->json($restaurantCategory);
+
+        $category = Category::findOrFail($validatedData['category_id']);
+
+        return response()->json([
+            'restaurant_category' => $restaurantCategory,
+            'category' => $category,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to update restaurant category',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
+
 
     public function destroy($id)
     {
