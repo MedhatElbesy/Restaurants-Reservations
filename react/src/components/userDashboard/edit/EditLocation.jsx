@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UpdateUserForm() {
+export default function EditLocation() {
   return (
     <div>
       
