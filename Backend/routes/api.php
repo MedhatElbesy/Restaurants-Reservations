@@ -7,11 +7,11 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
-use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
-
+use App\Http\Controllers\Api\MenuCategoryController;
+use App\Http\Controllers\MenuItemController;
 
 use App\Http\Controllers\RestaurantCategoryController;
 use Illuminate\Http\Request;
@@ -67,3 +67,4 @@ Route::put('/restaurants/{restaurantId}/locations', [RestaurantController::class
 Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
 
 Route::apiResource('menu-categories', MenuCategoryController::class);
+Route::apiResource('menu-items', MenuItemController::class);
