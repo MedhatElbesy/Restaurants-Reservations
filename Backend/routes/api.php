@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
-
+use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
@@ -65,3 +65,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::put('/restaurants/{restaurantId}/locations', [RestaurantController::class,'updateLocations']);
 Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
+
+Route::apiResource('menu-categories', MenuCategoryController::class);
