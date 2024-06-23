@@ -64,3 +64,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::put('/restaurants/{restaurantId}/locations', [RestaurantController::class,'updateLocations']);
+Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
