@@ -61,3 +61,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('restaurant-categories', RestaurantCategoryController::class)
         ->middleware('check.restaurant.owner')->only(['store', 'update', 'destroy']);
 });
+
+
+Route::put('/restaurants/{restaurantId}/locations', [RestaurantController::class,'updateLocations']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantLocationsRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
@@ -116,7 +117,7 @@ class RestaurantController extends Controller
         }
         return ApiResponse::sendResponse(404, 'Can`t find this Restaurant');
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -237,4 +238,42 @@ class RestaurantController extends Controller
         return ApiResponse::sendResponse(200, 'Restaurants', RestaurantResource::collection($restaurants));
     }
 
+
+    public function updateLocations(UpdateRestaurantLocationsRequest $request, $restaurantId)
+    {
+        try {
+            $validatedData = $request->validated(); 
+
+            DB::beginTransaction();
+
+            foreach ($validatedData['locations'] as $locationData) {
+                $location = RestaurantLocation::findOrFail($locationData['id']);
+                $location->update([
+                    'address' => $locationData['address'],
+                    'country_id' => $locationData['country_id'],
+                    'governorate_id' => $locationData['governorate_id'],
+                    'city_id' => $locationData['city_id'],
+                    'state_id' => $locationData['state_id'],
+                    'zip' => $locationData['zip'] ?? null,
+                    'latitude' => $locationData['latitude'] ?? null,
+                    'longitude' => $locationData['longitude'] ?? null,
+                    'opening_time' => $locationData['opening_time'] ?? null,
+                    'closed_time' => $locationData['closed_time'] ?? null,
+                    'closed_days' => $locationData['closed_days'] ? implode(',', $locationData['closed_days']) : null,
+                    'number_of_tables' => $locationData['number_of_tables'] ?? 0,
+                    'phone_number' => $locationData['phone_number'] ?? null,
+                    'mobile_number' => $locationData['mobile_number'] ?? null,
+                    'hot_line' => $locationData['hot_line'] ?? null,
+                    'status' => $locationData['status'] ?? 'Opened',
+                ]);
+            }
+
+            DB::commit();
+
+            return ApiResponse::sendResponse(200, 'Locations Updated Successfully');
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to update locations', ['error' => $e->getMessage()]);
+        }
+    }
 }
