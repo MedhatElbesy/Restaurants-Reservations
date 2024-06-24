@@ -44,9 +44,9 @@ export const deleteRestaurantImage = async (imageId) => {
 };
 
 
-export const deleteMenuCategory = async (categoryId) => {
+export const deleteMenuCategory = async (menuCategoryId) => {
     try {
-        const response = await axios.delete(`/menu-categories/${categoryId}`);
+        const response = await axios.delete(`/menu-categories/${menuCategoryId}`);
         return response.data;
     } catch (error) {
         console.error("An error occurred while deleting menu category", error);

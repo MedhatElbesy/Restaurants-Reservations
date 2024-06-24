@@ -76,8 +76,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::put('/restaurants/{restaurantId}/locations', [RestaurantController::class,'updateLocations']);
+Route::put('/locations/{location_id}', [RestaurantController::class,'updateLocation']);
 Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
 
 Route::apiResource('menu-categories', MenuCategoryController::class);
 Route::apiResource('menu-items', MenuItemController::class);
+
+Route::get('/location/{id}', [RestaurantController::class,'getLocation']);

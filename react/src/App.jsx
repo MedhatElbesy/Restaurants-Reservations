@@ -34,6 +34,11 @@ import RestaurantHome from "./components/restaurant/home/Home.jsx";
 import Reservation from "./components/restaurant/reservation/Reservation.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
 import Tables from "./components/restaurant/tables/Tables.jsx";
+import MenuCategory from "./components/userDashboard/edit/MenuCategory.jsx";
+import MenuItem from "./components/userDashboard/edit/MenuItem.jsx";
+import AddMenuItem from "./components/userDashboard/add/AddMenuItem.jsx";
+import AddMenuCategory from "./components/userDashboard/add/AddMenuCategory.jsx";
+
 
 function App() {
   const routes = createRoutesFromElements(
@@ -59,13 +64,23 @@ function App() {
       </Route>
 
       {/* Restaurant Owner Routes */}
-      <Route path="/restaurant/:restaurantId" element={<Restaurant />} />
-      <Route path="/edit-restaurant/:restaurantId" element={<EditDetails />} />
-      <Route path="/edit-category/:categoryId" element={<EditCategory />} />
-      <Route path="/edit-location/:locationId" element={<EditLocation />} />
-      <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/user-dashboard/restaurant/:restaurantId" element={<Restaurant />} />
+        <Route path="/user-dashboard/edit-restaurant/:restaurantId" element={<EditDetails />} />
+        <Route path="/user-dashboard/edit-category/:categoryId" element={<EditCategory />} />
+        <Route path="/user-dashboard/edit-location/:locationId" element={<EditLocation />} />
+        <Route path="/user-dashboard/edit-profile" element={<EditProfile />} />
+        <Route path="/user-dashboard/edit-menu-category/:menuCategoryId" element={<MenuCategory />} />
+        <Route path="/user-dashboard/edit-menu-item/:menuItemId" element={<MenuItem />} />
+        <Route path="/user-dashboard/add-item/:menuCategoryId" element={<AddMenuItem />} />
+        <Route path="/user-dashboard/add-category/:restaurantId" element={<AddMenuCategory />} />
+     
+      
+      
+     
     </>
   );
+  
 
   const router = createBrowserRouter(routes);
   return (

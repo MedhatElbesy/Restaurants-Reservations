@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantLocationsRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
+use App\Http\Resources\MenuCategoryResource;
 use App\Models\Restaurant;
 use App\Models\RestaurantLocation;
 use Illuminate\Http\Request;
@@ -111,13 +112,22 @@ class RestaurantController extends Controller
 
     public function show(string $id)
     {
-        $restaurant = Restaurant::with(['locations', 'categories','menuCategories.menuItems'])->findOrFail($id);
-        if($restaurant){
+        $restaurant = Restaurant::with([
+            'locations.country', 
+            'locations.governorate', 
+            'locations.city', 
+            'locations.state', 
+            'locations', 
+            'categories',
+            'menuCategories.menuItems'
+
+        ])->findOrFail($id);
+        
+        if ($restaurant) {
             return ApiResponse::sendResponse(200, 'Restaurant', new RestaurantResource($restaurant));
         }
         return ApiResponse::sendResponse(404, 'Can`t find this Restaurant');
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -239,41 +249,54 @@ class RestaurantController extends Controller
     }
 
 
-    public function updateLocations(UpdateRestaurantLocationsRequest $request, $restaurantId)
-    {
-        try {
-            $validatedData = $request->validated(); 
+    public function updateLocation(UpdateRestaurantLocationsRequest $request, $locationId)
+{
+    try {
+        $validatedData = $request->validated(); 
 
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            foreach ($validatedData['locations'] as $locationData) {
-                $location = RestaurantLocation::findOrFail($locationData['id']);
-                $location->update([
-                    'address' => $locationData['address'],
-                    'country_id' => $locationData['country_id'],
-                    'governorate_id' => $locationData['governorate_id'],
-                    'city_id' => $locationData['city_id'],
-                    'state_id' => $locationData['state_id'],
-                    'zip' => $locationData['zip'] ?? null,
-                    'latitude' => $locationData['latitude'] ?? null,
-                    'longitude' => $locationData['longitude'] ?? null,
-                    'opening_time' => $locationData['opening_time'] ?? null,
-                    'closed_time' => $locationData['closed_time'] ?? null,
-                    'closed_days' => $locationData['closed_days'] ? implode(',', $locationData['closed_days']) : null,
-                    'number_of_tables' => $locationData['number_of_tables'] ?? 0,
-                    'phone_number' => $locationData['phone_number'] ?? null,
-                    'mobile_number' => $locationData['mobile_number'] ?? null,
-                    'hot_line' => $locationData['hot_line'] ?? null,
-                    'status' => $locationData['status'] ?? 'Opened',
-                ]);
-            }
+        $location = RestaurantLocation::findOrFail($locationId);
 
-            DB::commit();
+        $location->update([
+            'address' => $validatedData['address'],
+            'country_id' => $validatedData['country_id'],
+            'governorate_id' => $validatedData['governorate_id'],
+            'city_id' => $validatedData['city_id'],
+            'state_id' => $validatedData['state_id'] ?? null,
+            'zip' => $validatedData['zip'] ?? null,
+            'latitude' => $validatedData['latitude'] ?? null,
+            'longitude' => $validatedData['longitude'] ?? null,
+            'opening_time' => $validatedData['opening_time'] ?? null,
+            'closed_time' => $validatedData['closed_time'] ?? null,
+            'closed_days' => isset($validatedData['closed_days']) ? implode(',', $validatedData['closed_days']) : null,
+            'number_of_tables' => $validatedData['number_of_tables'] ?? 0,
+            'phone_number' => $validatedData['phone_number'] ?? null,
+            'mobile_number' => $validatedData['mobile_number'] ?? null,
+            'hot_line' => $validatedData['hot_line'] ?? null,
+            'status' => $validatedData['status'] ?? 'Opened',
+        ]);
 
-            return ApiResponse::sendResponse(200, 'Locations Updated Successfully');
-        } catch (\Throwable $e) {
-            DB::rollback();
-            return ApiResponse::sendResponse(500, 'Failed to update locations', ['error' => $e->getMessage()]);
-        }
+        DB::commit();
+
+        return ApiResponse::sendResponse(200, 'Location Updated Successfully');
+    } catch (\Throwable $e) {
+        DB::rollback();
+        return ApiResponse::sendResponse(500, 'Failed to update location', ['error' => $e->getMessage()]);
     }
+}
+
+
+public function getLocation($locationId)
+{
+    try {
+        $location = RestaurantLocation::findOrFail($locationId);
+        return ApiResponse::sendResponse(200, 'Location Retrieved Successfully', $location);
+    } catch (\Throwable $e) {
+        return ApiResponse::sendResponse(404, 'Location not found', ['error' => $e->getMessage()]);
+    }
+}
+
+
+
 }

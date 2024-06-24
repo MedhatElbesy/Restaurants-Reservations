@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
-// import MyNavbar from '../../../layouts/nav/My-navbar';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
 import './userProfile.css';
@@ -39,7 +38,7 @@ const UserProfile = () => {
 
   return (
     <>
-      {/* <MyNavbar /> */}
+  
 
       <main className="userProfile">
 
@@ -130,10 +129,13 @@ const UserProfile = () => {
 
             {role === 'restaurant' && (
             <section>
-              <h2>Restaurants <span> <FontAwesomeIcon
+              <h2>Restaurants
+                 <span>
+                   <FontAwesomeIcon
                         icon={faPlus}
                         className="text-warning mx-5" />
-                                     </span></h2>
+                  </span>
+              </h2>
              
                 {userData.restaurants && userData.restaurants.length > 0 ? (
                   userData.restaurants.map((restaurant) => (
@@ -144,10 +146,9 @@ const UserProfile = () => {
                        <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-4`}>
 
                          <strong>Name:</strong> {restaurant.name}
-                         <Link to={`/restaurant/${restaurant.id}`} className='ms-3 h5'>
-                           <FontAwesomeIcon icon={faEye} className="text-warning" />
+                         <Link to={`/user-dashboard/restaurant/${restaurant.id}`} className='ms-3 h5'>
+                            <FontAwesomeIcon icon={faEye} className="text-warning" />
                          </Link>
-
 
                        </p>
 
