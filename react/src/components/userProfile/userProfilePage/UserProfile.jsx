@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
-import MyNavbar from '../../../layouts/nav/My-navbar';
+// import MyNavbar from '../../../layouts/nav/My-navbar';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
 import './userProfile.css';
@@ -39,7 +39,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <MyNavbar />
+      {/* <MyNavbar /> */}
 
       <main className="userProfile">
 

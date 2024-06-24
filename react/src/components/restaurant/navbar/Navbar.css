@@ -1,0 +1,15 @@
+@import "../../../index.css";
+
+/* a:hover {
+  color: var(--secColor) !important;
+} */
+
+.nav-link:hover,
+.nav-link:active,
+.nav-link:focus {
+  color: var(--secColor) !important;
+}
+
+.nav .active {
+  color: var(--secColor) !important;
+}

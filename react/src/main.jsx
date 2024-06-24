@@ -5,7 +5,14 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCoffee, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCoffee, faCheckSquare);
+
+
 import { BodyColorProvider } from './BodyColorContext';
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

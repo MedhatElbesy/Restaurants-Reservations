@@ -1,29 +1,56 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {updateRestaurant} from '../../api/restaurant/updateAtRestaurant';
-import {getRestaurantById } from '../../api/restaurant/restaurantFetch';
+import axios from "../../axios";
+// import {updateRestaurant} from '../../api/restaurant/updateAtRestaurant';
 
+// export const updateRestaurantAsync = createAsyncThunk(
+//   'restaurant/updateRestaurant',
+//   async ({ restaurantId, formData }) => {
+//     try {
+//       const data= await updateRestaurant(restaurantId, formData)
+//       return data
+      
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
+// );
 
 export const updateRestaurantAsync = createAsyncThunk(
-  'restaurant/updateRestaurant',
-  async ({ restaurantId, formData }) => {
+  "restaurant/updateRestaurant",
+  async (restaurantId, formData, { rejectWithValue }) => {
     try {
-      const data= await updateRestaurant(restaurantId,formData)
-      return data
-      
+      const response = await axios.post(
+        `/restaurants/${restaurantId}?_method=PATCH`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
     }
   }
 );
 
 export const fetchRestaurantById = createAsyncThunk(
-  'restaurant/fetchById',
-  async (restaurantId) => {
+  "restaurant/fetchRestaurantById",
+  async (restaurantId, { rejectWithValue }) => {
     try {
-      const data = await getRestaurantById(restaurantId);
-      return data;
+      const response = await axios.get(`/restaurants/${restaurantId}`);
+      return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
     }
   }
 );
@@ -34,6 +61,7 @@ const restaurantSlice = createSlice({
   initialState: {
     restaurant: null,
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {
@@ -41,23 +69,28 @@ const restaurantSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchRestaurantById.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.loading = false;
+        state.status = "succeeded";
         state.restaurant = action.payload.data;
+        console.log(state.restaurant)
       })
       .addCase(updateRestaurantAsync.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.restaurant = action.payload.data;
       })
       .addMatcher(
-        (action) => action.type.endsWith('/pending'),
+        (action) => action.type.endsWith("/pending"),
         (state) => {
-          state.status = 'loading';
+          state.status = "loading";
+          state.loading = true;
+          state.error = null;
         }
       )
       .addMatcher(
-        (action) => action.type.endsWith('/rejected'),
+        (action) => action.type.endsWith("/rejected"),
         (state, action) => {
-          state.status = 'failed';
+          state.loading = false;
+          state.status = "failed";
           state.error = action.payload;
         }
       );

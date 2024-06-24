@@ -1,22 +1,19 @@
 import axios from '../../axios';
 
 
-
-
-
-export const updateRestaurant = async (restaurantId, formData) => {
-    try {
-      const response = await axios.post(`/restaurants/${restaurantId}?_method=PATCH`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('An error occurred while updating the restaurant', error);
-      throw error;
-    }
-  };
+// export const updateRestaurant = async (restaurantId, formData) => {
+//     try {
+//       const response = await axios.post(`/restaurants/${restaurantId}?_method=PATCH`, formData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       });
+//       return response.data;
+//     } catch (error) {
+//       console.error('An error occurred while updating the restaurant', error);
+//       throw error;
+//     }
+//   };
   
 
 

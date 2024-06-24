@@ -1,0 +1,61 @@
+.header {
+  background: url("https://media.licdn.com/dms/image/D4D12AQHJ76RoLk41qg/article-cover_image-shrink_600_2000/0/1662609219432?e=2147483647&v=beta&t=UBrHwuJkYoGGnY77Ylx-s3q6lV7US0-6tfFqWe2dU-Q")
+    center center/cover;
+  position: relative;
+  min-height: 60vh;
+}
+
+.more {
+  background-color: var(--secColor);
+  border: 1px solid #363636;
+  color: black !important;
+}
+
+.more:active {
+  background-color: #e0b370;
+  border: 1px solid #363636;
+  color: black !important;
+}
+
+.reserve {
+  min-height: 50vh;
+}
+
+.reserver-button {
+  background-color: transparent !important;
+  border-style: solid;
+  border-color: #e0b370;
+  border-width: 1px 0;
+  color: var(--textColor);
+}
+
+
+.rest-info div p:first-child {
+  font-family: "Montserrat", sans-serif;
+  color: var(--mainColor);
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.rest-info div p:last-child {
+  color: var(--textColor);
+}
+  
+  @media screen and (width <= 576px) {
+  .rest-info div:not(:last-child) {
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
+  }
+}
+
+.rest-info {
+  border-bottom: 1px solid;
+}
+
+svg {
+  padding-right: 5px;
+  color: var(--textColor);
+}
+
+.footer {
+  background-color: #26262633;
+}
