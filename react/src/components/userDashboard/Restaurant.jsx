@@ -1,12 +1,12 @@
+import { fetchRestaurantById } from '../../slices/restaurant/restaurantSlice';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { fetchRestaurantById } from '../../slices/restaurant/restaurantSlice';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {  faEdit, faPlus, faRemove} from '@fortawesome/free-solid-svg-icons';
 import Loader from '../../layouts/loader/loader';
-
+import { deleteMenuCategoryThunk } from '../../slices/restaurant/menuCategory/deleteMenuCategorySlice';
+import { deleteMenuItemThunk } from '../../slices/restaurant/menuItem/deleteMenuItemSlice';
 
 const Restaurant = () => {
 
@@ -16,30 +16,41 @@ const Restaurant = () => {
   const status = useSelector((state) => state.restaurant.status);
   const error = useSelector((state) => state.restaurant.error);
 
-  useEffect(() => {
+  const handleDelete = (menuCategoryId) => {
+    dispatch(deleteMenuCategoryThunk(menuCategoryId));
+  };
 
+  const handleDeleteItem = (menuItemId) => {
+    dispatch(deleteMenuItemThunk(menuItemId));
+  };
+
+
+  useEffect(() => {
     if (restaurantId) {
       dispatch(fetchRestaurantById(restaurantId));
     }
   }, [restaurantId]);
 
+
   if (status === 'loading') {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (status === 'failed') {
-    return <div>Error: {errorMessage}</div>;
+    return <div>Error: {error}</div>;
   }
+
 
   return (
 
     <section className="container-fluid">
+
       {restaurant ? (
         <div>
 
           <header>
-          <h1 className='text-light'>{restaurant.name}</h1>
-          <p className='text-light'>{restaurant.description}</p>
+            <h1 className='text-light'>{restaurant.name}</h1>
+            <p className='text-light'>{restaurant.description}</p>
           </header>
 
           <h2 className='text-light'>Details</h2>
@@ -49,22 +60,12 @@ const Restaurant = () => {
 
               <tr>
                 <th>Logo</th>
-                <td>
-                    {restaurant.logo ? (
-                  <img className='col-1' src={restaurant.logo} alt="Logo" />
-                    ) : ('N/A')}
-                 </td>
-
+                <td>{restaurant.logo ? <img className='col-1' src={restaurant.logo} alt="Logo" /> : 'N/A'}</td>
               </tr>
 
               <tr>
                 <th>Cover</th>
-                 <td>
-                  {restaurant.cover ?
-                   <img className='col-1'
-                    src={restaurant.cover}
-                    alt="Cover" /> : 'N/A'}
-                </td>
+                <td>{restaurant.cover ? <img className='col-1' src={restaurant.cover} alt="Cover" /> : 'N/A'}</td>
               </tr>
 
               <tr>
@@ -100,7 +101,7 @@ const Restaurant = () => {
               <tr>
                 <th>Actions</th>
                 <td>
-                  <Link to={`/edit-restaurant/${restaurant.id}`}>
+                  <Link to={`/user-dashboard/edit-restaurant/${restaurant.id}`}>
                     <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
                   </Link>
                 </td>
@@ -109,6 +110,7 @@ const Restaurant = () => {
             </tbody>
 
           </table>
+
 
           {restaurant.locations && restaurant.locations.length > 0 && (
             <div>
@@ -139,10 +141,10 @@ const Restaurant = () => {
                   {restaurant.locations.map((location) => (
                     <tr key={location.id}>
                       <td>{location.address}</td>
-                      <td>{location.country || 'N/A'}</td>
-                      <td>{location.governorate || 'N/A'}</td>
-                      <td>{location.city || 'N/A'}</td>
-                      <td>{location.state || 'N/A'}</td>
+                      <td>{location.country ? location.country.name : 'N/A'}</td>
+                      <td>{location.governorate ? location.governorate.name : 'N/A'}</td>
+                      <td>{location.city ? location.city.name : 'N/A'}</td>
+                      <td>{location.state ? location.state.name : 'N/A'}</td>
                       <td>{location.zip}</td>
                       <td>{location.latitude}</td>
                       <td>{location.longitude}</td>
@@ -155,7 +157,7 @@ const Restaurant = () => {
                       <td>{location.number_of_tables}</td>
                       <td>{location.status}</td>
                       <td>
-                        <Link to={`/edit-location/${location.id}`}>
+                        <Link to={`/user-dashboard/edit-location/${location.id}`}>
                           <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
                         </Link>
                       </td>
@@ -165,6 +167,7 @@ const Restaurant = () => {
               </table>
             </div>
           )}
+
 
           {restaurant.categories && restaurant.categories.length > 0 && (
             <div>
@@ -189,7 +192,7 @@ const Restaurant = () => {
                       <td>{category.description}</td>
                       <td>{category.status}</td>
                       <td>
-                        <Link to={`/edit-category/${category.id}`}>
+                        <Link to={`/user-dashboard/edit-category/${category.id}`}>
                           <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
                         </Link>
                       </td>
@@ -200,6 +203,101 @@ const Restaurant = () => {
             </div>
           )}
 
+
+          {restaurant.menu_categories && restaurant.menu_categories.length > 0 && (
+            <div>
+
+              <h2 className='text-light'>
+                Menu Categories
+                <span>
+                  <Link to={`/user-dashboard/add-category/${restaurantId}`}>
+                         <FontAwesomeIcon icon={faPlus} className="text-warning mx-3" />
+                   </Link>
+                </span>
+              </h2>
+
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Action</th>
+                    
+                    <th>Menu Items</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {restaurant.menu_categories.map((menuCategory) => (
+                    <tr key={menuCategory.id}>
+
+                      <td>{menuCategory.name}</td>
+
+                      <td>
+                        <Link to={`/user-dashboard/edit-menu-category/${menuCategory.id}`}>
+                          <FontAwesomeIcon icon={faEdit} className="text-success" />
+                        </Link>
+
+                        <FontAwesomeIcon 
+                        icon={faRemove} 
+                        onClick={() => handleDelete(menuCategory.id)} 
+                        className="text-danger mx-5" 
+                        />
+                      </td>
+                    
+                      <td>
+                        <table className="table table-bordered mt-2">
+                          <thead>
+
+                            <tr>
+                              <th colSpan={3}>
+                            <Link to={`/user-dashboard/add-item/${menuCategory.id}`}>
+                              <FontAwesomeIcon icon={faPlus} className="text-success h5" />
+                            </Link>
+                              </th>
+                            </tr>
+
+                            <tr>
+                              <th>Name</th>
+                              <th>Slug</th>
+                              <th>Description</th>
+                              <th>Price</th>
+                              <th>Sale Price</th>
+                              <th>Status</th>
+                              <th>Actions</th>
+                            </tr>
+
+                          </thead>
+                          <tbody>
+                            {menuCategory.menu_items.map((menuItem) => (
+                              <tr key={menuItem.id}>
+                                <td>{menuItem.name}</td>
+                                <td>{menuItem.slug}</td>
+                                <td>{menuItem.description}</td>
+                                <td>{menuItem.price}</td>
+                                <td>{menuItem.sale_price}</td>
+                                <td>{menuItem.status}</td>
+                                <td>
+                                  <Link to={`/user-dashboard/edit-menu-item/${menuItem.id}`}>
+                                    <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
+                                  </Link>
+                         
+                                  <FontAwesomeIcon 
+                                  icon={faRemove} 
+                                  onClick={() => handleDeleteItem(menuItem.id)} 
+                                  className="text-danger mx-5" 
+                                  />
+                                  
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       ) : (
         <div>No restaurant data</div>
