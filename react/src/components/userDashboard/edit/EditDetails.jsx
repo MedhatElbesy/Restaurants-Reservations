@@ -32,9 +32,9 @@ const EditDetails = () => {
   useEffect(() => {
     if (restaurant) {
       setFormData({
-        name: restaurant.name ,
-        slug: restaurant.slug ,
-        title: restaurant.title ,
+        name: restaurant.name,
+        slug: restaurant.slug,
+        title: restaurant.title,
         summary: restaurant.summary,
         description: restaurant.description,
         status: restaurant.status,
@@ -82,10 +82,11 @@ const EditDetails = () => {
       formDataForSubmission.append('cover', formData.cover);
     }
 
+    dispatch(updateRestaurantAsync({ restaurantId, formData: formDataForSubmission }));
   };
 
   if (status === 'loading') {
-    return <Loader/>;
+    return <Loader />;
   }
 
   if (status === 'failed') {
@@ -104,20 +105,20 @@ const EditDetails = () => {
       <h2>Edit Restaurant Details</h2>
 
       <form 
-      onSubmit={handleSubmit} 
-      className="text-light" 
-      encType="multipart/form-data">
+        onSubmit={handleSubmit} 
+        className="text-light" 
+        encType="multipart/form-data">
        
         <input
-         type="hidden" 
-         name="user_id" 
-         value={userId} />
+          type="hidden" 
+          name="user_id" 
+          value={userId} />
 
         <div className="mb-3">
 
           <label 
-          htmlFor="name" 
-          className="form-label">
+            htmlFor="name" 
+            className="form-label">
             Name
           </label>
 
@@ -136,8 +137,8 @@ const EditDetails = () => {
         <div className="mb-3">
 
           <label 
-          htmlFor="slug" 
-          className="form-label">
+            htmlFor="slug" 
+            className="form-label">
             Slug
           </label>
 
@@ -156,8 +157,8 @@ const EditDetails = () => {
         <div className="mb-3">
 
           <label 
-          htmlFor="title" 
-          className="form-label">
+            htmlFor="title" 
+            className="form-label">
             Title
           </label>
 
@@ -176,8 +177,9 @@ const EditDetails = () => {
         <div className="mb-3">
           
           <label 
-           htmlFor="summary" 
-           className="form-label">Summary
+            htmlFor="summary" 
+            className="form-label">
+            Summary
           </label>
 
           <textarea
@@ -188,15 +190,15 @@ const EditDetails = () => {
             onChange={handleChange}
             rows="3"
             required>
-           </textarea>
+          </textarea>
 
         </div>
 
         <div className="mb-3">
 
           <label 
-           htmlFor="description" 
-           className="form-label">
+            htmlFor="description" 
+            className="form-label">
             Description
           </label>
 
@@ -226,11 +228,15 @@ const EditDetails = () => {
                 id="active"
                 name="status"
                 value="Active"
-                checked={formData.status === 'active'}
+                checked={formData.status.toLowerCase() === 'active'}
                 onChange={handleChange}
               />
 
-              <label className="form-check-label" htmlFor="active">Active</label>
+              <label 
+              className="form-check-label" 
+              htmlFor="active">
+               Active
+              </label>
 
             </div>
 
@@ -242,11 +248,15 @@ const EditDetails = () => {
                 id="inactive"
                 name="status"
                 value="InActive"
-                checked={formData.status === 'inactive'}
+                checked={formData.status.toLowerCase() === 'inactive'}
                 onChange={handleChange}
               />
 
-              <label className="form-check-label" htmlFor="inactive">Inactive</label>
+              <label 
+              className="form-check-label" 
+              htmlFor="inactive">
+                Inactive
+              </label>
 
             </div>
 
@@ -258,10 +268,15 @@ const EditDetails = () => {
                 id="deleted"
                 name="status"
                 value="Deleted"
-                checked={formData.status === 'deleted'}
+                checked={formData.status.toLowerCase() === 'deleted'}
                 onChange={handleChange}
               />
-              <label className="form-check-label" htmlFor="deleted">Deleted</label>
+
+              <label 
+              className="form-check-label" 
+              htmlFor="deleted">
+                Deleted
+              </label>
 
             </div>
 
@@ -272,8 +287,8 @@ const EditDetails = () => {
         <div className="mb-3">
 
           <label
-           htmlFor="logo" 
-           className="form-label">
+            htmlFor="logo" 
+            className="form-label">
             Logo
           </label>
 
@@ -289,7 +304,11 @@ const EditDetails = () => {
 
         <div className="mb-3">
 
-          <label htmlFor="cover" className="form-label">Cover</label>
+          <label 
+          htmlFor="cover" 
+          className="form-label">
+            Cover
+          </label>
 
           <input
             type="file"
@@ -301,7 +320,12 @@ const EditDetails = () => {
 
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button
+         type="submit" 
+         className="btn btn-primary" 
+         onClick={handleSubmit}>
+          Submit
+        </button>
 
       </form>
       
@@ -310,3 +334,4 @@ const EditDetails = () => {
 };
 
 export default EditDetails;
+
