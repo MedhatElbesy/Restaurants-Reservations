@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\ChangePasswordController;
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
+use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
@@ -32,6 +36,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('register' , [RegisterController::class , 'register'])->middleware('guest:sanctum');
+Route::post('login' , [LoginController::class , 'create_access_token'])->middleware('guest:sanctum')->name('login');
+//Route::get('profile/{user}', [UserController::class , 'profile']);
+Route::put('profile/update/{user}', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
+Route::delete('profile/delete/{user}', [UserController::class , 'deleteAccount'])->middleware('auth:sanctum');
+Route::delete('logout/{token?}', [LogoutController::class, 'destroy_token'])->middleware('auth:sanctum');
+// route of verify email
+Route::get('verification/{token}', [VerificationController::class , 'verifyEmail']);
+
+// route of forget and rest password - use to send_token_to_reset_password and verify it then reset password
+Route::post('forget-password',[ForgotPasswordController::class,'sendResetToken']);
+Route::post('forget-password/verify-from-sent-token/{token}',[ResetPasswordController::class,'verifyFromSentToken']);
+Route::post('reset-password',[ResetPasswordController::class,'resetPassword']);
+
+// route of change password - (current_password, new_password, password_confirmation)
+Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth:sanctum');
 
 Route::get('countries', [CountryController::class, 'getAllCountries']);
 Route::get('countries/{id}', [CountryController::class, 'getCountryById']);
@@ -42,18 +62,10 @@ Route::get('cities/{id}', [CityController::class, 'getCityByGovernorateId']);
 Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 
-Route::post('profile', [UserController::class, 'profile']);
-
 Route::apiResource('categories', CategoryController::class);
 
 Route::resource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
-Route::post('register' , [RegisterController::class , 'register'])->middleware('guest:sanctum');
-Route::post('login' , [LoginController::class , 'create_access_token'])->middleware('guest:sanctum')->name('login');
-Route::get('profile/{user}', [UserController::class , 'profile']);
-Route::put('profile/update/{user}', [UserController::class , 'updateProfile'])->middleware('auth:sanctum');
-Route::delete('profile/delete/{user}', [UserController::class , 'deleteAccount'])->middleware('auth:sanctum');
-Route::delete('logout/{token?}', [LogoutController::class, 'destroy_token'])->middleware('auth:sanctum');
 
 Route::apiResource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);

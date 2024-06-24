@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\UploadImageTrait;
@@ -34,8 +35,9 @@ class UserController extends Controller
     }
 
     /* Update User Profile */
-    public function updateProfile(StoreUserRequest $request, User $user) : JsonResponse
+    public function updateProfile(UpdateUserRequest $request, User $user) : JsonResponse
     {
+        dd($request);
         $old_image = $user->profile_image;
         $data = $request->except('profile_image', '_token');
 
