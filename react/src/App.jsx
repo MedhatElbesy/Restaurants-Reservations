@@ -17,8 +17,9 @@ import Register from "./components/auth/register/register.jsx";
 // Home
 import Home from "./components/homepage/Home.jsx";
 
-// User
+// Layout
 import UserProfile from "./components/userProfile/userProfilePage/UserProfile.jsx";
+import MyNavbar from "./layouts/nav/My-navbar.jsx";
 
 // Restaurant Owner
 import Restaurant from "./components/userDashboard/Restaurant.jsx";
@@ -26,8 +27,6 @@ import EditCategory from "./components/userDashboard/edit/EditCategoryForm.jsx";
 import EditLocation from "./components/userDashboard/edit/EditLocation.jsx";
 import EditDetails from "./components/userDashboard/edit/EditDetails.jsx";
 import EditProfile from "./components/userProfile/editProfile/EditProfile.jsx";
-
-import MyNavbar from "./layouts/nav/My-navbar.jsx";
 
 // Restaurant Details
 import RestaurantDetails from "./components/restaurant/Restaurant.jsx";
@@ -39,10 +38,15 @@ import Tables from "./components/restaurant/tables/Tables.jsx";
 function App() {
   const routes = createRoutesFromElements(
     <>
+      {/* Auth Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Home />} />
+
+      {/* User Routes */}
       <Route path="/userprofile" element={<UserProfile />} />
+
+      {/* Restaurant Details Routes */}
       <Route
         path="/restaurant/res/:restaurantId"
         element={<RestaurantDetails />}
@@ -54,6 +58,7 @@ function App() {
         <Route path="tables" element={<Tables />} />
       </Route>
 
+      {/* Restaurant Owner Routes */}
       <Route path="/restaurant/:restaurantId" element={<Restaurant />} />
       <Route path="/edit-restaurant/:restaurantId" element={<EditDetails />} />
       <Route path="/edit-category/:categoryId" element={<EditCategory />} />

@@ -1,19 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from "../../axios";
-// import {updateRestaurant} from '../../api/restaurant/updateAtRestaurant';
-
-// export const updateRestaurantAsync = createAsyncThunk(
-//   'restaurant/updateRestaurant',
-//   async ({ restaurantId, formData }) => {
-//     try {
-//       const data= await updateRestaurant(restaurantId, formData)
-//       return data
-      
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
-// );
 
 export const updateRestaurantAsync = createAsyncThunk(
   "restaurant/updateRestaurant",

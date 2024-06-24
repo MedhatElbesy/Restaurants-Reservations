@@ -1,22 +1,5 @@
 import axios from '../../axios';
 
-
-// export const updateRestaurant = async (restaurantId, formData) => {
-//     try {
-//       const response = await axios.post(`/restaurants/${restaurantId}?_method=PATCH`, formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-//       return response.data;
-//     } catch (error) {
-//       console.error('An error occurred while updating the restaurant', error);
-//       throw error;
-//     }
-//   };
-  
-
-
 export const updateRestaurantLocation = async (locationId, data) => {
     try {
         const response = await axios.put(`/restaurant-location/${locationId}`, data);
@@ -27,11 +10,6 @@ export const updateRestaurantLocation = async (locationId, data) => {
     }
 };
 
-
-
-
-
-    
 export const updateRestaurantCategory = async (categoryId, data) => {
     try {
   
@@ -40,14 +18,9 @@ export const updateRestaurantCategory = async (categoryId, data) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
-      return response.data; // Ensure you return the response data
+      return response.data;
     } catch (error) {
       console.error("An error occurred while updating restaurant category", error);
       throw error;
     }
   };
-  
-  
-
-
