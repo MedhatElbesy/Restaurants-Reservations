@@ -37,7 +37,6 @@ class UserController extends Controller
     /* Update User Profile */
     public function updateProfile(UpdateUserRequest $request, User $user) : JsonResponse
     {
-        dd($request);
         $old_image = $user->profile_image;
         $data = $request->except('profile_image', '_token');
 
@@ -53,10 +52,13 @@ class UserController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        return response()->json([
-            'message' => "Account updated successfully",
-            'user' => $user->load('country', 'city')
-        ], 200);
+        $data = $user->load('addresses', 'restaurants',
+            'restaurants.locations.images',
+            'restaurants.locations',
+            'restaurants.categories'
+        );
+
+        return ApiResponse::sendResponse(200, 'Account updated successfully', new UserResource($data));
     }
 
 
@@ -67,8 +69,7 @@ class UserController extends Controller
         if ($user->profile_image) {
             Storage::disk('public')->delete($user->profile_image);
         }
-        return response()->json([
-            'message' => "Account deleted successfully!",
-        ], 200);
+
+        return ApiResponse::sendResponse(200, 'Account deleted successfully!');
     }
 }

@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
             return ApiResponse::sendResponse(200, 'The password reset code has been sent to your email!');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error in RegisterController@register: ' . $e->getMessage());
+            Log::error('Error in sendResetToken: ' . $e->getMessage());
 
             return ApiResponse::sendResponse(500, 'Failed to create account. Please try again later.');
         }
