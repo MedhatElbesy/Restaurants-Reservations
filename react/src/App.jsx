@@ -1,6 +1,6 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import './App.css';
-import LoginForm from './components/auth/login/login';
+import Login from './components/auth/login/login';
 import { Provider } from 'react-redux';
 import store from './store/Store.jsx';
 import Home from './components/homepage/Home.jsx';
@@ -10,6 +10,7 @@ import EditCategory from './components/userDashboard/edit/EditCategoryForm.jsx';
 import EditLocation from './components/userDashboard/edit/EditLocation.jsx';
 import EditDetails from './components/userDashboard/edit/EditDetails.jsx';
 import EditProfile from './components/userProfile/editProfile/EditProfile.jsx';
+import Register from './components/auth/register/register.jsx';
 
 
 
@@ -19,7 +20,8 @@ function App() {
   const routes = createRoutesFromElements(
     <>
     
-      <Route path="/login" element={<LoginForm/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/register" element={<Register/>} />
       <Route path="/" element={<Home/>} />
       <Route path="/userprofile" element={<UserProfile/>} />
       <Route path="/restaurant/:restaurantId" element={<Restaurant />} />
