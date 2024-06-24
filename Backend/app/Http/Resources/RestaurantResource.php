@@ -26,7 +26,7 @@ class RestaurantResource extends JsonResource
             'description' => $this->description,
             'locations' => RestaurantLocationResource::collection($this->whenLoaded('locations')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-           
+            'menu_categories' => MenuCategoryResource::collection($this->whenLoaded('menuCategories')),
             'status' => $this->status,
         ];
     }
