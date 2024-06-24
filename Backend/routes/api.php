@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
 use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\MenuItemController;
@@ -52,6 +53,9 @@ Route::post('reset-password',[ResetPasswordController::class,'resetPassword']);
 
 // route of change password - (current_password, new_password, password_confirmation)
 Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth:sanctum');
+
+Route::apiResource('user-addresses', UserAddressController::class);
+Route::get('user/addresses/{user_id}', [UserAddressController::class, 'getUserAddressByUserId'])->middleware('auth:sanctum');
 
 Route::get('countries', [CountryController::class, 'getAllCountries']);
 Route::get('countries/{id}', [CountryController::class, 'getCountryById']);
