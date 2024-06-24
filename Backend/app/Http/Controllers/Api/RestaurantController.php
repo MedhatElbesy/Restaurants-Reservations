@@ -111,7 +111,7 @@ class RestaurantController extends Controller
 
     public function show(string $id)
     {
-        $restaurant = Restaurant::with(['locations', 'categories'])->findOrFail($id);
+        $restaurant = Restaurant::with(['locations', 'categories','menuCategories.menuItems'])->findOrFail($id);
         if($restaurant){
             return ApiResponse::sendResponse(200, 'Restaurant', new RestaurantResource($restaurant));
         }
