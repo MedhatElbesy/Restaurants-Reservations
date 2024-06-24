@@ -7,13 +7,14 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\RestaurantLocationImageController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\MenuItemController;
 
-use App\Http\Controllers\RestaurantCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
