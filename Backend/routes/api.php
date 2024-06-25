@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
@@ -101,6 +102,7 @@ Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
+Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
 
 
 
