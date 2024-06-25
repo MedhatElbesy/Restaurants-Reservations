@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantlocationsController;
+use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\MenuItemController;
 
 use Illuminate\Http\Request;
@@ -97,3 +98,4 @@ Route::post('/restaurants/{restaurantId}/locations',[RestaurantLocationsControll
 Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
+Route::resource('/table-availabilities',TableAvailabilityController::class);

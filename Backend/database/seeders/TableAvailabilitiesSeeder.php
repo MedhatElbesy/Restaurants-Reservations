@@ -18,7 +18,71 @@ class TableAvailabilitiesSeeder extends Seeder
         $availabilities = [
             [
                 'table_id' => 1,
-                'start_time' => '08:00:00',
+                'start_time' => '01:00:00',
+                'end_time' => '03:00:00',
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'start_time' => '04:00:00',
+                'end_time' => '05:00:00',
+                'status' => ItemStatus::Unavailable,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'start_time' => '06:00:00',
+                'end_time' => '08:00:00',
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'start_time' => '09:00:00',
+                'end_time' => '10:00:00',
+                'status' => ItemStatus::Unavailable,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'start_time' => '11:00:00',
+                'end_time' => '12:00:00',
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 2,
+                'start_time' => '01:00:00',
+                'end_time' => '03:00:00',
+                'status' => ItemStatus::Unavailable,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 2,
+                'start_time' => '04:00:00',
+                'end_time' => '05:00:00',
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 2,
+                'start_time' => '06:00:00',
+                'end_time' => '08:00:00',
+                'status' => ItemStatus::Unavailable,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 2,
+                'start_time' => '09:00:00',
                 'end_time' => '10:00:00',
                 'status' => ItemStatus::Available,
                 'created_at' => now(),
@@ -26,13 +90,13 @@ class TableAvailabilitiesSeeder extends Seeder
             ],
             [
                 'table_id' => 2,
-                'start_time' => '09:00:00',
-                'end_time' => '11:00:00',
+                'start_time' => '11:00:00',
+                'end_time' => '12:00:00',
                 'status' => ItemStatus::Available,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            
+
         ];
 
         DB::table('table_availabilities')->insert($availabilities);
