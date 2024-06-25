@@ -27,7 +27,7 @@ class TableController extends Controller
             'price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'extra_number_of_chairs' => 'nullable|integer',
-            'status' => 'required|in:Enabled,Disabled,Deleted',
+            'status' => 'required|in:Available,Unavailable',
         ]);
 
         $data = $request->all();
@@ -88,7 +88,7 @@ class TableController extends Controller
             $table->delete();
 
             DB::commit();
-            return response()->json(null, 204);
+            return ApiResponse::sendResponse(204,"Successfully Deleted");
         } catch (\Throwable $e) {
             DB::rollback();
             return ApiResponse::sendResponse(500, 'Failed to delete table', ['error' => $e->getMessage()]);
