@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\UploadImageTrait;
@@ -34,7 +35,7 @@ class UserController extends Controller
     }
 
     /* Update User Profile */
-    public function updateProfile(StoreUserRequest $request, User $user) : JsonResponse
+    public function updateProfile(UpdateUserRequest $request, User $user) : JsonResponse
     {
         $old_image = $user->profile_image;
         $data = $request->except('profile_image', '_token');
@@ -51,10 +52,13 @@ class UserController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        return response()->json([
-            'message' => "Account updated successfully",
-            'user' => $user->load('country', 'city')
-        ], 200);
+        $data = $user->load('addresses', 'restaurants',
+            'restaurants.locations.images',
+            'restaurants.locations',
+            'restaurants.categories'
+        );
+
+        return ApiResponse::sendResponse(200, 'Account updated successfully', new UserResource($data));
     }
 
 
@@ -65,8 +69,7 @@ class UserController extends Controller
         if ($user->profile_image) {
             Storage::disk('public')->delete($user->profile_image);
         }
-        return response()->json([
-            'message' => "Account deleted successfully!",
-        ], 200);
+
+        return ApiResponse::sendResponse(200, 'Account deleted successfully!');
     }
 }
