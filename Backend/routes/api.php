@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\RestaurantLocationImageController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
+use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\MenuItemController;
 
 use Illuminate\Http\Request;
@@ -64,10 +65,18 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::put('/locations/{location_id}', [RestaurantController::class,'updateLocation']);
 Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
 
 Route::apiResource('menu-categories', MenuCategoryController::class);
 Route::apiResource('menu-items', MenuItemController::class);
 
+
+
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
+
+
+// Route::apiResource('restaurant-locations', RestaurantlocationsController::class);
+Route::get('/restaurantslocations/{restaurantId}', [RestaurantLocationsController::class, 'getLocationsByRestaurant']);
+Route::post('/restaurants/{restaurantId}/locations',[RestaurantLocationsController::class,'store']);
+Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
+Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
