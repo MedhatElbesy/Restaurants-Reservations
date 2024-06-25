@@ -39,7 +39,7 @@ class RegisterController extends Controller
             Mail::send('emails.activation', ['user' => $user, 'token' => $token], function ($message) use ($user) {
                 $message->from('noreply@example.com', config('app.name'));
                 $message->to($user['email']);
-                $message->subject('Email verified successfully!');
+                $message->subject('Email Verification');
             });
 
             DB::commit();

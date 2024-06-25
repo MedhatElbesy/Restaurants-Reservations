@@ -12,6 +12,32 @@ class RestaurantLocation extends Model
     use HasFactory;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
+
+
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+
     public function restaurant() : BelongsTo
     {
         return $this->belongsTo(Restaurant::class, 'restaurant_id', 'id');
@@ -26,4 +52,6 @@ class RestaurantLocation extends Model
     {
         return $this->hasMany(RestaurantLocationImage::class, 'restaurant_location_id', 'id');
     }
+
+
 }

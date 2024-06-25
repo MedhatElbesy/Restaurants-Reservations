@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/restaurant/categorySlice';
+import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { useParams } from 'react-router-dom';
 import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 

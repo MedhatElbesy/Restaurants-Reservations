@@ -1,31 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { updateRestaurantCategory } from '../../api/restaurant/updateAtRestaurant';
-import {  categoryById } from '../../api/restaurant/restaurantFetch';
+import { updateRestaurantCategory } from '../../../api/restaurant/updateAtRestaurant';
+import {  categoryById } from '../../../api/restaurant/restaurantFetch';
 
 
 export const fetchCategoryByIdAsync = createAsyncThunk(
   'category/fetchCategoryById',
   async (categoryId) => {
-    try {
       const data = await categoryById(categoryId);
       return data; 
-    } 
-    catch (error) {
-        throw error;
-    }
-
   }
 );
+
 
 export const updateCategoryAsync = createAsyncThunk(
   'category/updateCategory',
   async ({ categoryId, formData }) => {
-    try {
-      const data = await updateRestaurantCategory(categoryId, formData);
+     const data = await updateRestaurantCategory(categoryId, formData);
       return data;
-    } catch (error) {
-      throw error;
-    }
   }
 );
 

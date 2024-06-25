@@ -1,10 +1,11 @@
-
 <?php
-use App\Traits\UploadImageTrait;
-use Illuminate\Http\Request;
-use App\Models\RestaurantLocationImage;
+namespace App\Http\Controllers\Api;
+
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Models\RestaurantLocationImage;
+use App\Traits\UploadImageTrait;
+use Illuminate\Http\Request;
 
 class RestaurantLocationImageController extends Controller
 {

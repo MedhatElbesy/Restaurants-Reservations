@@ -31,7 +31,15 @@ export const updateRestaurantLocation = async (locationId, data) => {
 };
 
 
-
+export const updateMenuCategory = async (menuCategoryId, data) => {
+  try {
+      const response = await axios.put(`/menu-categories/${menuCategoryId}`, data);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred while updating MenuCategory", error);
+      throw error;
+  }
+};
 
 
     
@@ -44,13 +52,38 @@ export const updateRestaurantCategory = async (categoryId, data) => {
         },
       });
       
-      return response.data; // Ensure you return the response data
+      return response.data; 
     } catch (error) {
       console.error("An error occurred while updating restaurant category", error);
       throw error;
     }
   };
   
+
+
+  export const updateMenuItem = async (MenuItemId, data) => {
+    try {
+  
+      const response = await axios.put(`/menu-items/${MenuItemId}`, data);
+      
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while updating menu item", error);
+      throw error;
+    }
+  };
   
 
+  export const updateLocation = async (locationId, data) => {
+    try {
+  
+      const response = await axios.put(`/locations/${locationId}`, data);
+      
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while updating location", error);
+      throw error;
+    }
+  };
+  
 

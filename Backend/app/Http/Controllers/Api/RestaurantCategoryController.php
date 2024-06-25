@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,10 +42,10 @@ class RestaurantCategoryController extends Controller
     public function update(Request $request, $id)
    {
     try {
-        
+
         $restaurantCategory = RestaurantCategory::findOrFail($id);
 
-    
+
         $validatedData = $request->validate([
             'restaurant_id' => 'required|exists:restaurants,id',
             'category_id' => 'required|exists:categories,id',

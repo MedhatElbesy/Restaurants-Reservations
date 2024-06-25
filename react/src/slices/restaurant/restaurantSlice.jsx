@@ -3,28 +3,21 @@ import {updateRestaurant} from '../../api/restaurant/updateAtRestaurant';
 import {getRestaurantById } from '../../api/restaurant/restaurantFetch';
 
 
+
 export const updateRestaurantAsync = createAsyncThunk(
   'restaurant/updateRestaurant',
   async ({ restaurantId, formData }) => {
-    try {
       const data= await updateRestaurant(restaurantId,formData)
-      return data
-      
-    } catch (error) {
-      throw error;
-    }
+      return data;
   }
 );
+
 
 export const fetchRestaurantById = createAsyncThunk(
   'restaurant/fetchById',
   async (restaurantId) => {
-    try {
-      const data = await getRestaurantById(restaurantId);
+    const data = await getRestaurantById(restaurantId);
       return data;
-    } catch (error) {
-      throw error;
-    }
   }
 );
 

@@ -33,7 +33,6 @@ return new class extends Migration
             $table->integer('number_of_tables')->default(0);
             $table->string('phone_number')->nullable()->unique();
             $table->string('mobile_number')->nullable()->unique();
-            $table->string('hot_line')->nullable()->unique();
             $table->enum('status', [ItemStatus::Opened, ItemStatus::Closed])->default(ItemStatus::Opened);
 
             $table->foreign('country_id')->references('id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
