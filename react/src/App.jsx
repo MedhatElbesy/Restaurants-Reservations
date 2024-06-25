@@ -38,6 +38,7 @@ import MenuCategory from "./components/userDashboard/edit/MenuCategory.jsx";
 import MenuItem from "./components/userDashboard/edit/MenuItem.jsx";
 import AddMenuItem from "./components/userDashboard/add/AddMenuItem.jsx";
 import AddMenuCategory from "./components/userDashboard/add/AddMenuCategory.jsx";
+import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 
 
 function App() {
@@ -76,8 +77,8 @@ function App() {
         <Route path="/user-dashboard/add-category/:restaurantId" element={<AddMenuCategory />} />
      
       
-      
-     
+      {/* AdminDashboard */}
+      <Route path="/admin" element={<Dashboard />} />
     </>
   );
   

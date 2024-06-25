@@ -16,6 +16,7 @@ class LoginController extends Controller
     /* this function use to user make login and return access token for you */
     public function create_access_token(Request $request) : JsonResponse
     {
+        
         $user = User::where('status', '=', UserStatus::Active)->where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password))

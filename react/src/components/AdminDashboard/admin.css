@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+#wrapper {
+    display: flex;
+    width: 100%;
+  }
+  
+  #sidebar-wrapper {
+    width: 250px;
+    height: 100vh;
+  }
+  
+  #page-content-wrapper {
+    flex: 1;
+    overflow-x: hidden;
+  }
+  
+.sidebar-heading{
+    font-family: "Fugaz One", sans-serif;
+}
