@@ -12,7 +12,6 @@ export default function Footer({ restaurant }) {
   const data = restaurant.locations[0];
 
   const { fromTo } = openingDays(data.closed_days);
-  console.log(fromTo);
 
   return (
     <div className="footer row text-center">

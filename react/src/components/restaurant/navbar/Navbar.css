@@ -1,15 +1,18 @@
 @import "../../../index.css";
 
-/* a:hover {
-  color: var(--secColor) !important;
-} */
-
-.nav-link:hover,
-.nav-link:active,
-.nav-link:focus {
+.rest-nav .nav-link:hover,
+.rest-nav .nav-link:active,
+.rest-nav .nav-link:focus {
   color: var(--secColor) !important;
 }
 
-.nav .active {
+.rest-nav .nav-link {
+  color: var(--mainColor) !important;
+}
+
+.rest-nav .nav .active {
+  transition: .1s ease-in-out;
+  font-weight: bold;
+  font-size: 1.3rem;
   color: var(--secColor) !important;
 }

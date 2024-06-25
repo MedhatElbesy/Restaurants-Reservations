@@ -1,8 +1,7 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 :root {
   --mainColor: #f8f9fa;
@@ -10,14 +9,11 @@
   --textColor: #a4a2a4;
   ::-webkit-scrollbar {
     width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    /* border-radius: 10px; */
+    height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: transparent;
-    border: 1px solid #9999993d;;
+    background: #9999993d;
+    border: 1px solid #ffd18d36;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -28,22 +24,19 @@
   }
 }
 
-body {
-  font-family: 'Playfair Display', serif;
-}
-
-
-
-.restau {
-  margin-top: 20vh;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+body {
+  font-family: "Playfair Display", serif;
+}
+
+.restau {
+  margin-top: 20vh;
+}
 
 .text-main {
   color: var(--mainColor);
@@ -52,12 +45,13 @@ body {
 .text-sec {
   color: var(--secColor);
 }
+
 .text-color {
   color: var(--textColor);
 }
 
 .sec-font {
-  font-family: 'Bad Script', cursive;
+  font-family: "Bad Script", cursive;
 }
 
 a {
