@@ -31,7 +31,7 @@ class UpdateUserRequest extends FormRequest
             'profile_image'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gender'                => 'nullable|in:male,female',
             'birth_date'            => 'nullable|date',
-            'roles_name'            => 'sometimes|required|string',
+            'roles_name'            => 'sometimes|required|in:admin,user,owner',
             'status'                => 'sometimes|required|in:Active,InActive,Blocked,Deleted',
             'google_id'             => 'nullable|string',
             'facebook_id'           => 'nullable|string',
