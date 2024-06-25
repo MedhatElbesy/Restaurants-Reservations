@@ -32,11 +32,11 @@ class RestaurantlocationsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRestaurantLocationRequest $request, $restaurantId)
+    public function store(StoreRestaurantLocationRequest $request)
     {
         try {
             $validatedData = $request->validated();
-            $validatedData['restaurant_id'] = $restaurantId;
+            // $validatedData['restaurant_id'] = $restaurantId;
             // dd($restaurantId);
             $restaurantLocation = RestaurantLocation::create($validatedData);
             return ApiResponse::sendResponse(201,"Restaurant location created successfully",$restaurantLocation);
