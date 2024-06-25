@@ -1,91 +1,97 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Table;
-use App\Models\TableImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\TableResource;
+use App\Helpers\ApiResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TableController extends Controller
 {
+    public function index()
+    {
+        return TableResource::collection(Table::all());
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'restaurant_location_id' => 'required|exists:restaurant_locations,id',
-            'number_of_chairs' => 'required|integer|min:1',
-            'max_number_of_persons' => 'required|integer|min:1',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg',
-            'price' => 'required|numeric|min:0',
-            'sale_price' => 'nullable|numeric|min:0',
-            'extra_number_of_chairs' => 'nullable|integer|min:0',
-            'status' => 'required|in:available,unavailable',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg',
+            'restaurant_location_id' => 'required|integer',
+            'number_of_chairs' => 'required|integer',
+            'max_number_of_persons' => 'required|integer',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
+            'extra_number_of_chairs' => 'nullable|integer',
+            'status' => 'required|in:Enabled,Disabled,Deleted',
         ]);
 
-        $table = new Table($request->all());
+        $data = $request->all();
 
         if ($request->hasFile('cover')) {
-            $coverPath = $request->file('cover')->store('images', 'public');
-            $table->cover = basename($coverPath);
+            $coverPath = $request->file('cover')->store('images/table_covers', 'public');
+            $data['cover'] = basename($coverPath);
         }
 
-        $table->save();
+        $table = Table::create($data);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePath = $image->store('images', 'public');
-                $tableImage = new TableImage([
-                    'table_id' => $table->id,
-                    'image' => basename($imagePath),
-                ]);
-                $tableImage->save();
-            }
-        }
+        return ApiResponse::sendResponse(201, 'Table created successfully', new TableResource($table));
+    }
 
-        return new TableResource($table->load('images'));
+    public function show(Table $table)
+    {
+        return new TableResource($table);
     }
 
     public function update(Request $request, Table $table)
     {
         $request->validate([
-            'number_of_chairs' => 'integer|min:1',
-            'max_number_of_persons' => 'integer|min:1',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg',
-            'price' => 'numeric|min:0',
-            'sale_price' => 'nullable|numeric|min:0',
-            'extra_number_of_chairs' => 'nullable|integer|min:0',
-            'status' => 'in:available,unavailable',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg',
+            'restaurant_location_id' => 'nullable|integer',
+            'number_of_chairs' => 'nullable|integer',
+            'max_number_of_persons' => 'nullable|integer',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'nullable|numeric',
+            'sale_price' => 'nullable|numeric',
+            'extra_number_of_chairs' => 'nullable|integer',
+            'status' => 'nullable|in:Enabled,Disabled,Deleted',
         ]);
 
-        $table->fill($request->all());
+        $data = $request->all();
 
-        if ($request->hasFile('cover')) {
-            if ($table->cover) {
-                Storage::disk('public')->delete('images/' . $table->cover);
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('cover')) {
+                Storage::disk('public')->delete('images/table_covers/' . $table->cover);
+                $coverPath = $request->file('cover')->store('images/table_covers', 'public');
+                $data['cover'] = basename($coverPath);
             }
 
-            $coverPath = $request->file('cover')->store('images', 'public');
-            $table->cover = basename($coverPath);
+            $table->update($data);
+
+            DB::commit();
+            return ApiResponse::sendResponse(200, 'Table updated successfully', new TableResource($table));
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to update table', ['error' => $e->getMessage()]);
         }
+    }
 
-        $table->save();
+    public function destroy(Table $table)
+    {
+        DB::beginTransaction();
+        try {
+            Storage::disk('public')->delete('images/table_covers/' . $table->cover);
+            $table->delete();
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePath = $image->store('images', 'public');
-                $tableImage = new TableImage([
-                    'table_id' => $table->id,
-                    'image' => basename($imagePath),
-                ]);
-                $tableImage->save();
-            }
+            DB::commit();
+            return response()->json(null, 204);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to delete table', ['error' => $e->getMessage()]);
         }
-
-        return new TableResource($table->load('images'));
     }
 }

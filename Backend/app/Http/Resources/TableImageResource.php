@@ -17,7 +17,7 @@ class TableImageResource extends JsonResource
         return [
             'id' => $this->id,
             'table_id' => $this->table_id,
-            'image' => url('/images/table_images/' . basename($this->image))
+            'image' => $this->image ? url('images/table_images/' . basename($this->image)) : null,
         ];
     }
 }

@@ -19,7 +19,7 @@ class TableResource extends JsonResource
             'restaurant_location_id' => $this->restaurant_location_id,
             'number_of_chairs' => $this->number_of_chairs,
             'max_number_of_persons' => $this->max_number_of_persons,
-            'cover' => url('/images/cover/' . basename($this->cover)),
+            'cover' => $this->cover ? url('images/table_covers/' . basename($this->cover)) : null,
             'price' => $this->price,
             'sale_price' => $this->sale_price,
             'extra_number_of_chairs' => $this->extra_number_of_chairs,

@@ -23,8 +23,8 @@ use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\MenuItemController;
 
-use App\Http\Controllers\TableController;
-use App\Http\Controllers\TableImageController;
+use App\Http\Controllers\Api\TableController;
+use App\Http\Controllers\Api\TableImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
