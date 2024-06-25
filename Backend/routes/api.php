@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\MenuItemController;
 
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\TableImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -86,7 +88,7 @@ Route::post('/restaurant-location-images', [RestaurantLocationImageController::c
 
 Route::apiResource('menu-categories', MenuCategoryController::class);
 Route::apiResource('menu-items', MenuItemController::class);
-
+Route::apiResource('tables',TableController::class);
 
 
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
@@ -99,3 +101,11 @@ Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
+
+
+
+Route::get('tables/{tableId}/images', [TableImageController::class, 'index']);
+Route::post('tables/{tableId}/images', [TableImageController::class, 'store']);
+Route::get('table-images/{id}', [TableImageController::class, 'show']);
+Route::put('table-images/{id}', [TableImageController::class, 'update']);
+Route::delete('table-images/{id}', [TableImageController::class, 'destroy']);
