@@ -71,6 +71,18 @@ export default function MyNavbar() {
           </Nav.Link> 
 
           <Nav.Link 
+          className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}
+          href="#link">
+          Login
+          </Nav.Link> 
+
+          <Nav.Link 
+          className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}
+          href="#link">
+          Register
+          </Nav.Link> 
+          
+          <Nav.Link 
           className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`} 
           href="#link">
           Logout

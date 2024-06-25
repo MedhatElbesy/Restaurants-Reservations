@@ -11,7 +11,7 @@ import EditLocation from './components/userDashboard/edit/EditLocation.jsx';
 import EditDetails from './components/userDashboard/edit/EditDetails.jsx';
 import EditProfile from './components/userProfile/editProfile/EditProfile.jsx';
 import Register from './components/auth/register/register.jsx';
-
+import Dashboard from './components/AdminDashboard/dashboard.jsx';
 
 
 
@@ -22,6 +22,7 @@ function App() {
     
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
+      <Route path="/admin" element={<Dashboard/>} />
       <Route path="/" element={<Home/>} />
       <Route path="/userprofile" element={<UserProfile/>} />
       <Route path="/restaurant/:restaurantId" element={<Restaurant />} />

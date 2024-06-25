@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch , useSelector} from "react-redux";
 import { login as loginUser } from '../../../api/auth/login';
 import {
   Avatar,
@@ -38,19 +39,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.auth.status);
+  const authError = useSelector((state) => state.auth.error);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser(email, password);
-      localStorage.setItem('token', data.token);
+      await dispatch(loginUser({ email, password })).unwrap();
       navigate('/');
     } catch (err) {
-      setError('Invalid email or password');
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Invalid email or password',
+        text: authError || 'Invalid email or password',
       });
     }
   };

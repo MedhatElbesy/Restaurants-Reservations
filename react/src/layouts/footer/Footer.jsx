@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
             <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
               <h5 className="text-uppercase">Services</h5>
-              <ul className="list-unstyled mb-0">
+              <ul className="list-unstyled mb-0 ">
                 <li><a href="#!" className="text-white text-decoration-none">Service 1</a></li>
                 <li><a href="#!" className="text-white text-decoration-none">Service 2</a></li>
                 <li><a href="#!" className="text-white text-decoration-none">Service 3</a></li>
