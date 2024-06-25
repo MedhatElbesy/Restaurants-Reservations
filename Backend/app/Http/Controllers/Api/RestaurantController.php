@@ -113,16 +113,17 @@ class RestaurantController extends Controller
     public function show(string $id)
     {
         $restaurant = Restaurant::with([
-            'locations.country', 
-            'locations.governorate', 
-            'locations.city', 
-            'locations.state', 
-            'locations', 
+            'locations.country',
+            'locations.governorate',
+            'locations.city',
+            'locations.state',
+            'locations.tables.images',
+            'locations',
             'categories',
             'menuCategories.menuItems'
 
         ])->findOrFail($id);
-        
+
         if ($restaurant) {
             return ApiResponse::sendResponse(200, 'Restaurant', new RestaurantResource($restaurant));
         }
@@ -252,7 +253,7 @@ class RestaurantController extends Controller
     public function updateLocation(UpdateRestaurantLocationsRequest $request, $locationId)
 {
     try {
-        $validatedData = $request->validated(); 
+        $validatedData = $request->validated();
 
         DB::beginTransaction();
 
