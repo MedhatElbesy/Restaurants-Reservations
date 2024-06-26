@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
+use App\Http\Controllers\Api\ResturantImagesController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\UserController;
@@ -111,3 +112,5 @@ Route::post('tables/{tableId}/images', [TableImageController::class, 'store']);
 Route::get('table-images/{id}', [TableImageController::class, 'show']);
 Route::put('table-images/{id}', [TableImageController::class, 'update']);
 Route::delete('table-images/{id}', [TableImageController::class, 'destroy']);
+
+Route::apiResource('restaurant-images',ResturantImagesController::class);

@@ -10,7 +10,7 @@ class ResturantImages extends Model
 {
     use HasFactory;
     public $guarded = ['id','restaurant_id','image'];
-   public function resturantImage() : BelongsTo{
+   public function resturant() : BelongsTo{
         return $this->belongsTo(Restaurant::class);
     }
 }
