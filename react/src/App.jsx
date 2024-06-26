@@ -39,6 +39,7 @@ import MenuCategory from "./components/userDashboard/edit/MenuCategory.jsx";
 import MenuItem from "./components/userDashboard/edit/MenuItem.jsx";
 import AddMenuItem from "./components/userDashboard/add/AddMenuItem.jsx";
 import AddMenuCategory from "./components/userDashboard/add/AddMenuCategory.jsx";
+import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 
 function App() {
   const routes = createRoutesFromElements(
@@ -60,44 +61,23 @@ function App() {
         <Route path="reservation" element={<Reservation />} />
         <Route path="tables" element={<Tables />} />
       </Route>
-
-      {/* Restaurant Owner Routes */}
-      <Route path="/userprofile" element={<UserProfile />} />
-      <Route
-        path="/user-dashboard/restaurant/:restaurantId"
-        element={<Restaurant />}
-      />
-      <Route
-        path="/user-dashboard/edit-restaurant/:restaurantId"
-        element={<EditDetails />}
-      />
-      <Route
-        path="/user-dashboard/edit-category/:categoryId"
-        element={<EditCategory />}
-      />
-      <Route
-        path="/user-dashboard/edit-location/:locationId"
-        element={<EditLocation />}
-      />
-      <Route path="/user-dashboard/edit-profile" element={<EditProfile />} />
-      <Route
-        path="/user-dashboard/edit-menu-category/:menuCategoryId"
-        element={<MenuCategory />}
-      />
-      <Route
-        path="/user-dashboard/edit-menu-item/:menuItemId"
-        element={<MenuItem />}
-      />
-      <Route
-        path="/user-dashboard/add-item/:menuCategoryId"
-        element={<AddMenuItem />}
-      />
-      <Route
-        path="/user-dashboard/add-category/:restaurantId"
-        element={<AddMenuCategory />}
-      />
+ {/* Restaurant Owner Routes */}
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/user-dashboard/restaurant/:restaurantId" element={<Restaurant />} />
+        <Route path="/user-dashboard/edit-restaurant/:restaurantId" element={<EditDetails />} />
+        <Route path="/user-dashboard/edit-category/:categoryId" element={<EditCategory />} />
+        <Route path="/user-dashboard/edit-location/:locationId" element={<EditLocation />} />
+        <Route path="/user-dashboard/edit-profile" element={<EditProfile />} />
+        <Route path="/user-dashboard/edit-menu-category/:menuCategoryId" element={<MenuCategory />} />
+        <Route path="/user-dashboard/edit-menu-item/:menuItemId" element={<MenuItem />} />
+        <Route path="/user-dashboard/add-item/:menuCategoryId" element={<AddMenuItem />} />
+        <Route path="/user-dashboard/add-category/:restaurantId" element={<AddMenuCategory />} />
+      
+      {/* AdminDashboard */}
+      <Route path="/admin" element={<Dashboard />} />
     </>
   );
+  
 
   const router = createBrowserRouter(routes);
   return (
