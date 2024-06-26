@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
             $table->text('description')->nullable();
+            $table->enum('category_scope',['general','specific'])->default('general');
             $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
             $table->timestamps();
         });

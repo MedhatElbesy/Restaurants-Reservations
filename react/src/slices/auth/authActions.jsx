@@ -9,10 +9,12 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await login(email, password);
       console.log('Login response:', response); // Debugging
-      if (response && response.user) {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', response.user.id);
-        localStorage.setItem('role', response.user.roles_name[0]);
+      console.log("user data");
+      console.log(response.data);
+      if (response && response.data.user) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.user.id);
+        localStorage.setItem('role', response.data.user.roles_name[0]);
         return response;
       } else {
         throw new Error('Invalid response structure from login API');

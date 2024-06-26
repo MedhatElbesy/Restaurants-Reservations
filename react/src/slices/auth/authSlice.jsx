@@ -32,7 +32,10 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         const { data } = action.payload;
         console.log('from action fulfilled')
+
         if (data && data.user) {
+
+          console.log("authed");
           state.user = data.user;
           state.userId = data.user.id;
           state.token = data.token;
