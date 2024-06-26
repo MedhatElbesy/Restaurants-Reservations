@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Http\Controllers\Api\StateController;
+use App\Models\ResturantImages;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
             TableImagesSeeder::class,
             PaymentsSeeder::class,
             UserActivationSeeder::class,
+              RestaurantImagesSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

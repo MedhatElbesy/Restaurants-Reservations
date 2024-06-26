@@ -52,7 +52,7 @@ class RestaurantlocationsController extends Controller
     public function show($locationId)
     {
         try {
-        $location = RestaurantLocation::findOrFail($locationId);
+        $location = RestaurantLocation::with('tables.images')::findOrFail($locationId);
         return ApiResponse::sendResponse(200, 'Location Retrieved Successfully', $location);
     } catch (\Throwable $e) {
         return ApiResponse::sendResponse(404, 'Location not found', ['error' => $e->getMessage()]);

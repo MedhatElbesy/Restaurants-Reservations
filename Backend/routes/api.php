@@ -11,9 +11,11 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
+use App\Http\Controllers\Api\ResturantImagesController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\UserController;
@@ -22,6 +24,8 @@ use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\MenuItemController;
 
+use App\Http\Controllers\Api\TableController;
+use App\Http\Controllers\Api\TableImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -86,7 +90,7 @@ Route::post('/restaurant-location-images', [RestaurantLocationImageController::c
 
 Route::apiResource('menu-categories', MenuCategoryController::class);
 Route::apiResource('menu-items', MenuItemController::class);
-
+Route::apiResource('tables',TableController::class);
 
 
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
@@ -99,3 +103,14 @@ Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
+Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
+
+
+
+Route::get('tables/{tableId}/images', [TableImageController::class, 'index']);
+Route::post('tables/{tableId}/images', [TableImageController::class, 'store']);
+Route::get('table-images/{id}', [TableImageController::class, 'show']);
+Route::put('table-images/{id}', [TableImageController::class, 'update']);
+Route::delete('table-images/{id}', [TableImageController::class, 'destroy']);
+
+Route::apiResource('restaurant-images',ResturantImagesController::class);

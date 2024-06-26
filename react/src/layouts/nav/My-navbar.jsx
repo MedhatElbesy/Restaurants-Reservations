@@ -73,11 +73,22 @@ export default function MyNavbar() {
             Profile
           </Nav.Link>
 
-          <Nav.Link
-            className={`text-${bodyColor === "light" ? "dark" : "light"}`}
-            href="#link"
-          >
-            Logout
+          <Nav.Link 
+          className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}
+          href="#link">
+          Login
+          </Nav.Link> 
+
+          <Nav.Link 
+          className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}
+          href="#link">
+          Register
+          </Nav.Link> 
+          
+          <Nav.Link 
+          className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`} 
+          href="#link">
+          Logout
           </Nav.Link>
 
           <Button

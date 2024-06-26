@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { login } from '../../api/auth/login';
 
-export const loginUser = createAsyncThunk('auth/login', async ({ email, password }) => {
+export const loginUser = createAsyncThunk('auth/login', async ({ email, password }, { rejectWithValue }) => {
   try {
     const response = await login(email, password);
     return response.data;
   } catch (error) {
-    throw error;
+    console.error('Login error:', error.response ? error.response.data : error.message);
+    return rejectWithValue(error.response ? error.response.data : error.message);
   }
 });
+
 
 const initialState = {
   user: null,
