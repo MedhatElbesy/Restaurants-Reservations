@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch , useSelector} from "react-redux";
-import { login as loginUser } from '../../../api/auth/login';
+// import { login as loginUser } from '../../../api/auth/login';
 import {
   Avatar,
   CssBaseline,
@@ -18,6 +18,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Swal from 'sweetalert2';
+import { loginUser } from '../../../slices/auth/authActions';
 
 function Copyright(props) {
   return (
@@ -37,11 +38,11 @@ const defaultTheme = createTheme();
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState('');
   const authStatus = useSelector((state) => state.auth.status);
-  const authError = useSelector((state) => state.auth.error);
+  // const authError = useSelector((state) => state.auth.error);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +53,7 @@ const Login = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: authError || 'Invalid email or password',
+        text: error || 'Invalid email or password',
       });
     }
   };
