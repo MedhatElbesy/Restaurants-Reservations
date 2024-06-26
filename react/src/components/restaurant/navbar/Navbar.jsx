@@ -4,19 +4,22 @@ import "./Navbar.css";
 
 export default function Navbar() {
   return (
-    <Row className="text-center my-3 ">
+    <Row className="rest-nav text-center my-3 ">
       <Nav className="justify-content-center">
-        <Nav.Link as={NavLink} to="home" className="text-main">
+        <Nav.Link as={NavLink} to="home">
           Home
         </Nav.Link>
-        <Nav.Link as={NavLink} to="menu" className="text-main">
+        <Nav.Link as={NavLink} to="branches">
+          Branches
+        </Nav.Link>
+        <Nav.Link as={NavLink} to="menu">
           Menu
         </Nav.Link>
-        <Nav.Link as={NavLink} to="reservation" className="text-main">
-          Reservations
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="tables" className="text-main">
+        <Nav.Link as={NavLink} to="tables">
           Tables
+        </Nav.Link>
+        <Nav.Link as={NavLink} to="reservation">
+          Reservations
         </Nav.Link>
       </Nav>
     </Row>

@@ -120,6 +120,7 @@ class RestaurantController extends Controller
             'locations.tables.images',
             'locations',
             'categories',
+            'resturant_images',
             'menuCategories.menuItems'
 
         ])->findOrFail($id);

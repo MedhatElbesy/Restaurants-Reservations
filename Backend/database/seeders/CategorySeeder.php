@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Enums\ItemStatus;
+
 class CategorySeeder extends Seeder
 {
     /**
@@ -14,8 +16,16 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        $users = User::all();
+
+        if ($users->isEmpty()) {
+            $this->command->info('No users found. Please seed users table first.');
+            return;
+        }
+
         DB::table('categories')->insert([
             [
+                'user_id' => $users->random()->id,
                 'name' => 'Appetizers',
                 'slug' => Str::slug('Appetizers'),
                 'cover' => 'covers/appetizers.jpg',
@@ -25,6 +35,7 @@ class CategorySeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'user_id' => $users->random()->id,
                 'name' => 'Main Courses',
                 'slug' => Str::slug('Main Courses'),
                 'cover' => 'covers/main_courses.jpg',
@@ -34,6 +45,7 @@ class CategorySeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'user_id' => $users->random()->id,
                 'name' => 'Desserts',
                 'slug' => Str::slug('Desserts'),
                 'cover' => 'covers/desserts.jpg',
@@ -43,6 +55,7 @@ class CategorySeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'user_id' => $users->random()->id,
                 'name' => 'Beverages',
                 'slug' => Str::slug('Beverages'),
                 'cover' => 'covers/beverages.jpg',

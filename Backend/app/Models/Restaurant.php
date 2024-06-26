@@ -14,6 +14,10 @@ class Restaurant extends Model
 
     public $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function resturant_images() : HasMany
+    {
+        return $this->hasMany(ResturantImages::class,'restaurant_id','id');
+    }
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
