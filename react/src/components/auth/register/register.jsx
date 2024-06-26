@@ -66,8 +66,106 @@ const Register = () => {
     }));
   };
 
+  // Validate first name and last name
+  const validateName = (name) => {
+    const regex = /^[a-zA-Z]{4,}$/; // At least 4 characters, only letters
+    return regex.test(name);
+  };
+
+  // Validate password
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
+  // Validate email
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
+  // Validate mobile number
+  const validateMobileNumber = (mobileNumber) => {
+    const regex = /^\+20\d{10}$/; // +20 followed by 10 digits
+    return regex.test(mobileNumber);
+  };
+
+  // Validate birth date (not in the future)
+  const validateBirthDate = (birthDate) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(birthDate);
+    return selectedDate <= currentDate;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Validate first name and last name
+    const firstNameIsValid = validateName(formData.first_name);
+    const lastNameIsValid = validateName(formData.last_name);
+
+    // Validate password
+    const passwordIsValid = validatePassword(formData.password);
+
+    // Validate email
+    const emailIsValid = validateEmail(formData.email);
+
+    // Validate mobile number
+    const mobileNumberIsValid = validateMobileNumber(formData.mobile_number);
+
+    // Validate birth date (not in the future)
+    const birthDateIsValid = validateBirthDate(formData.birth_date);
+
+    if (!firstNameIsValid || !lastNameIsValid || !passwordIsValid || !emailIsValid || !mobileNumberIsValid || !birthDateIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please check the form fields for valid input.',
+      });
+      return;
+    }
+
+    if (!firstNameIsValid || !lastNameIsValid || !passwordIsValid || !emailIsValid || !mobileNumberIsValid || !birthDateIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please check the form fields for valid input.',
+      });
+      return;
+    }
+
+    if (!firstNameIsValid || !lastNameIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Name should not contain numbers.',
+      });
+      return;
+    }
+    if (!passwordIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Password should be more than or equal 8 characters.',
+      });
+      return;
+    }
+    if (!emailIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Invalid Email.',
+      });
+      return;
+    }
+    
+    if (!mobileNumberIsValid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Invalid Mobile number.',
+      });
+      return;
+    }
+
     if (formData.password !== confirmPassword) {
       Swal.fire({
         icon: 'error',
@@ -363,7 +461,7 @@ const Register = () => {
                   </Grid>
                 </Grid>
                 <Copyright sx={{ mt: 2 }} />
-                </Box>
+              </Box>
             </Box>
           </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch , useSelector} from "react-redux";
 // import { login as loginUser } from '../../../api/auth/login';
@@ -44,12 +44,23 @@ const Login = () => {
   const authStatus = useSelector((state) => state.auth.status);
   // const authError = useSelector((state) => state.auth.error);
 
+  useEffect(() => {
+    if (authStatus.isAuthenticated) {
+      if (authStatus.role === 'admin') {
+        navigate('/exams');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [authStatus.isAuthenticated, authStatus.role, navigate]);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await dispatch(loginUser({ email, password })).unwrap();
       navigate('/');
     } catch (err) {
+      console.log(err)
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

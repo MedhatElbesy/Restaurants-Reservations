@@ -31,6 +31,7 @@ const authSlice = createSlice({
       //login 
       .addCase(loginUser.fulfilled, (state, action) => {
         const { data } = action.payload;
+        console.log('from action fulfilled')
         if (data && data.user) {
           state.user = data.user;
           state.userId = data.user.id;
