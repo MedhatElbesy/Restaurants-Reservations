@@ -9,7 +9,7 @@ import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 
 const MapContainer = ({ latitude, longitude, popup }) => {
   // const position = [latitude || 40.7128, longitude || -74.006];
-  const position = [40.7128, -74.006];
+  const position = [30.0566, 31.3301];
 
   return (
     <LeafletMap
