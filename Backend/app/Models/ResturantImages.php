@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ResturantImages extends Model
 {
     use HasFactory;
-    public $guarded = ['id','restaurant_id','image'];
+    public $guarded = ['id','created_at','updated_at'];
    public function resturant() : BelongsTo{
         return $this->belongsTo(Restaurant::class);
     }

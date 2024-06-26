@@ -66,16 +66,69 @@ const Register = () => {
     }));
   };
 
+  // Validate first name and last name
+  const validateName = (name) => {
+    const regex = /^[a-zA-Z]{4,}$/;
+    return regex.test(name) ? null : 'Name should be at least 4 characters and contain only letters.';
+  };
+
+  // Validate password
+  const validatePassword = (password) => {
+    return password.length >= 8 ? null : 'Password should be at least 8 characters long.';
+  };
+
+  // Validate email
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email) ? null : 'Invalid email address.';
+  };
+
+  // Validate mobile number
+  const validateMobileNumber = (mobileNumber) => {
+    const regex = /^\+20\d{10}$/;
+    return regex.test(mobileNumber) ? null : 'Invalid mobile number. It should start with +20 followed by 10 digits.';
+  };
+
+  // Validate birth date (not in the future)
+  const validateBirthDate = (birthDate) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(birthDate);
+    return selectedDate <= currentDate ? null : 'Birth date cannot be in the future.';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const firstNameError = validateName(formData.first_name);
+    const lastNameError = validateName(formData.last_name);
+    const passwordError = validatePassword(formData.password);
+    const emailError = validateEmail(formData.email);
+    const mobileNumberError = validateMobileNumber(formData.mobile_number);
+    const birthDateError = validateBirthDate(formData.birth_date);
+
+    const errorMessages = [firstNameError, lastNameError, passwordError, emailError, mobileNumberError, birthDateError].filter(
+      (error) => error !== null
+    );
+
+    if (errorMessages.length > 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessages.join('\n'),
+      });
+      setError(errorMessages.join('\n'));
+      return;
+    }
+
     if (formData.password !== confirmPassword) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Passwords do not match',
+        text: 'Passwords do not match.',
       });
+      setError('Passwords do not match.');
       return;
     }
+
     try {
       const data = await dispatch(registerUser(formData)).unwrap();
       localStorage.setItem('token', data.token);
@@ -84,8 +137,9 @@ const Register = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: authError || 'Registration failed',
+        text: authError || 'Registration failed.',
       });
+      setError(authError || 'Registration failed.');
     }
   };
 
@@ -104,6 +158,7 @@ const Register = () => {
   const handleClickShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -339,6 +394,7 @@ const Register = () => {
                       label="Profile Image"
                       type="file"
                       id="profile_image"
+                      value={formData.profile_image}
                       onChange={handleImageChange}
                       InputLabelProps={{
                         shrink: true,
@@ -363,7 +419,7 @@ const Register = () => {
                   </Grid>
                 </Grid>
                 <Copyright sx={{ mt: 2 }} />
-                </Box>
+              </Box>
             </Box>
           </Grid>
         </Grid>
