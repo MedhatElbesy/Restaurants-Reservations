@@ -1,8 +1,8 @@
-import React from 'react';
 import { Button, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './admin.css';
 
 const Sidebar = () => {
   const showMobilemenu = () => {
