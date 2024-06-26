@@ -107,10 +107,6 @@ Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 
 
 
 
-Route::get('tables/{tableId}/images', [TableImageController::class, 'index']);
-Route::post('tables/{tableId}/images', [TableImageController::class, 'store']);
-Route::get('table-images/{id}', [TableImageController::class, 'show']);
-Route::put('table-images/{id}', [TableImageController::class, 'update']);
-Route::delete('table-images/{id}', [TableImageController::class, 'destroy']);
+Route::apiResource('table-images',TableImageController::class);
 
 Route::apiResource('restaurant-images',ResturantImagesController::class);

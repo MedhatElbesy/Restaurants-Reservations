@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register as registerUser } from '../../../api/auth/register';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Avatar,
   CssBaseline,
-  FormControlLabel,
-  Checkbox,
   Link,
   Paper,
   Grid,
@@ -21,6 +19,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { registerUser } from '../../../slices/auth/authActions';
+import Swal from 'sweetalert2';
 
 function Copyright(props) {
   return (
@@ -38,46 +38,117 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Register = () => {
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [mobile_number, setMobile] = useState('');
-  const [gender, setGender] = useState('');
-  const [profile_image, setImage] = useState('');
-  const [birth_date, setBirth] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    mobile_number: '',
+    gender: '',
+    profile_image: '',
+    birth_date: '',
+  });
+
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
+
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+  const authError = useSelector((state) => state.auth.error);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Validate first name and last name
+  const validateName = (name) => {
+    const regex = /^[a-zA-Z]{4,}$/;
+    return regex.test(name) ? null : 'Name should be at least 4 characters and contain only letters.';
+  };
+
+  // Validate password
+  const validatePassword = (password) => {
+    return password.length >= 8 ? null : 'Password should be at least 8 characters long.';
+  };
+
+  // Validate email
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email) ? null : 'Invalid email address.';
+  };
+
+  // Validate mobile number
+  const validateMobileNumber = (mobileNumber) => {
+    const regex = /^\+20\d{10}$/;
+    return regex.test(mobileNumber) ? null : 'Invalid mobile number. It should start with +20 followed by 10 digits.';
+  };
+
+  // Validate birth date (not in the future)
+  const validateBirthDate = (birthDate) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(birthDate);
+    return selectedDate <= currentDate ? null : 'Birth date cannot be in the future.';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    const firstNameError = validateName(formData.first_name);
+    const lastNameError = validateName(formData.last_name);
+    const passwordError = validatePassword(formData.password);
+    const emailError = validateEmail(formData.email);
+    const mobileNumberError = validateMobileNumber(formData.mobile_number);
+    const birthDateError = validateBirthDate(formData.birth_date);
+
+    const errorMessages = [firstNameError, lastNameError, passwordError, emailError, mobileNumberError, birthDateError].filter(
+      (error) => error !== null
+    );
+
+    if (errorMessages.length > 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessages.join('\n'),
+      });
+      setError(errorMessages.join('\n'));
       return;
     }
-    try {
-      const data = await registerUser({
-        first_name,
-        last_name,
-        email,
-        password,
-        mobile_number,
-        gender,
-        profile_image,
-        birth_date,
+
+    if (formData.password !== confirmPassword) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Passwords do not match.',
       });
+      setError('Passwords do not match.');
+      return;
+    }
+
+    try {
+      const data = await dispatch(registerUser(formData)).unwrap();
       localStorage.setItem('token', data.token);
       navigate('/');
     } catch (err) {
-      setError('Registration failed');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: authError || 'Registration failed.',
+      });
+      setError(authError || 'Registration failed.');
     }
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      profile_image: file,
+    }));
   };
 
   const handleClickShowPassword = () => {
@@ -87,6 +158,7 @@ const Register = () => {
   const handleClickShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -168,14 +240,14 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
-                      id="firstName"
+                      size="small"
+                      id="first_name"
                       label="First Name"
-                      name="firstName"
+                      name="first_name"
                       autoComplete="given-name"
                       autoFocus
-                      value={first_name}
-                      onChange={(e) => setFirstName(e.target.value)}
+                      value={formData.first_name}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -183,13 +255,13 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
-                      id="lastName"
+                      size="small"
+                      id="last_name"
                       label="Last Name"
-                      name="lastName"
+                      name="last_name"
                       autoComplete="family-name"
-                      value={last_name}
-                      onChange={(e) => setLastName(e.target.value)}
+                      value={formData.last_name}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -197,13 +269,13 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
+                      size="small"
                       id="email"
                       label="Email Address"
                       name="email"
                       autoComplete="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={formData.email}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -211,14 +283,14 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
+                      size="small"
                       name="password"
                       label="Password"
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}
                       id="password"
                       autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      value={formData.password}
+                      onChange={handleChange}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
@@ -239,10 +311,10 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
+                      size="small"
                       name="confirmPassword"
                       label="Confirm Password"
-                      type="password"
+                      type={showConfirmPassword ? 'text' : 'password'}
                       id="confirmPassword"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
@@ -250,7 +322,7 @@ const Register = () => {
                         endAdornment: (
                           <InputAdornment position="end">
                             <IconButton
-                              aria-label="toggle password visibility"
+                              aria-label="toggle confirm password visibility"
                               onClick={handleClickShowConfirmPassword}
                               edge="end"
                             >
@@ -266,14 +338,14 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
-                      name="mobileNumber"
+                      size="small"
+                      name="mobile_number"
                       label="Mobile Number"
                       type="tel"
-                      id="mobileNumber"
+                      id="mobile_number"
                       autoComplete="tel"
-                      value={mobile_number}
-                      onChange={(e) => setMobile(e.target.value)}
+                      value={formData.mobile_number}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -281,14 +353,14 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
-                      name="birthDate"
+                      size="small"
+                      name="birth_date"
                       label="Birth Date"
                       type="date"
-                      id="birthDate"
+                      id="birth_date"
                       autoComplete="bday"
-                      value={birth_date}
-                      onChange={(e) => setBirth(e.target.value)}
+                      value={formData.birth_date}
+                      onChange={handleChange}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -299,13 +371,13 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
+                      size="small"
                       select
                       name="gender"
                       label="Gender"
                       id="gender"
-                      value={gender}
-                      onChange={(e) => setGender(e.target.value)}
+                      value={formData.gender}
+                      onChange={handleChange}
                     >
                       <MenuItem value="male">Male</MenuItem>
                       <MenuItem value="female">Female</MenuItem>
@@ -317,11 +389,12 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      size='small'
-                      name="profileImage"
+                      size="small"
+                      name="profile_image"
                       label="Profile Image"
                       type="file"
-                      id="profileImage"
+                      id="profile_image"
+                      value={formData.profile_image}
                       onChange={handleImageChange}
                       InputLabelProps={{
                         shrink: true,
@@ -350,7 +423,6 @@ const Register = () => {
             </Box>
           </Grid>
         </Grid>
-
       </Grid>
     </ThemeProvider>
   );
