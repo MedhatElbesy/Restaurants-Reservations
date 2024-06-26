@@ -37,8 +37,9 @@ class StoreRestaurantLocationRequest extends FormRequest
             'number_of_tables' => 'required|integer|min:0',
             'phone_number' => 'nullable|string|unique:restaurant_locations,phone_number',
             'mobile_number' => 'nullable|string|unique:restaurant_locations,mobile_number',
-            'hot_line' => 'nullable|string|unique:restaurant_locations,hot_line',
             'status' => 'required|in:Opened,Closed',
+            'images' => 'required|array|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

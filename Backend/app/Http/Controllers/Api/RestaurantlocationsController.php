@@ -8,6 +8,8 @@ use App\Http\Requests\StoreRestaurantLocationRequest;
 use App\Http\Requests\UpdateRestaurantLocationsRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantLocation;
+use App\Models\RestaurantLocationImage;
+use App\Traits\UploadImageTrait;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 
 class RestaurantlocationsController extends Controller
 {
+    use UploadImageTrait;
     /**
      * Display a listing of the resource.
      */
@@ -36,9 +39,20 @@ class RestaurantlocationsController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            // $validatedData['restaurant_id'] = $restaurantId;
-            // dd($restaurantId);
             $restaurantLocation = RestaurantLocation::create($validatedData);
+
+            // Upload multiple images using the trait
+            if ($images = $request->file('images')) {
+                $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
+
+                foreach ($uploadedImages as $imageName) {
+                    RestaurantLocationImage::create([
+                        'restaurant_location_id' => $restaurantLocation->id,
+                        'image' => $imageName,
+                    ]);
+                }
+            }
+
             return ApiResponse::sendResponse(201,"Restaurant location created successfully",$restaurantLocation);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);

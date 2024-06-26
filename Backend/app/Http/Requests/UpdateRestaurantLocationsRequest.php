@@ -22,10 +22,10 @@ class UpdateRestaurantLocationsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'required|string',
-            'country_id' => 'required|exists:countries,id',
-            'governorate_id' => 'required|exists:governorates,id',
-            'city_id' => 'required|exists:cities,id',
+            'address' => 'sometimes|required|string',
+            'country_id' => 'sometimes|required|exists:countries,id',
+            'governorate_id' => 'sometimes|required|exists:governorates,id',
+            'city_id' => 'sometimes|required|exists:cities,id',
             'state_id' => 'nullable|exists:states,id',
             'zip' => 'nullable|string',
             'latitude' => 'nullable|numeric',
@@ -37,8 +37,9 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',
             'mobile_number' => 'nullable|string',
-            'hot_line' => 'nullable|string',
             'status' => 'nullable|in:Opened,Closed',
+            'images' => 'required|array|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

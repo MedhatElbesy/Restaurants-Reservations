@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\MenuItem;
 use App\Helpers\ApiResponse;
+use App\Http\Controllers\Controller;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 
 class MenuItemController extends Controller
