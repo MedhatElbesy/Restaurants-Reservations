@@ -13,7 +13,7 @@ export function BranchOpening({ branch }) {
   return (
     <article className=" py-5 border-bottom">
       <div className="opening mx-0 d-flex justify-content-between">
-        <div className="col-5">
+        <div className="col-5 d-flex flex-column justify-content-between">
           <h3 className="text-center fs-1 text-sec mb-3 p-3">
             Branch Opening Hours
           </h3>
@@ -38,7 +38,7 @@ export function BranchOpening({ branch }) {
         <div className="image col-6">
           <img
             src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_bg.jpg"
-            height="400px"
+            height="350px"
             width="100%"
           />
         </div>

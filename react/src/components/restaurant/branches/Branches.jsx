@@ -23,9 +23,9 @@ export default function Branches() {
                   {branch.city.name} Branch
                 </h2>
                 <div className="row justify-content-md-between justify-content-center p-3">
-                  <Branch key={branch.id} branch={branch} />
-                  <BranchOpening key={branch.id} branch={branch} />
-                  <BranchTables key={branch.id} branch={branch} />
+                  <Branch branch={branch} />
+                  <BranchOpening branch={branch} />
+                  <BranchTables branch={branch} />
                 </div>
               </Tab>
             );

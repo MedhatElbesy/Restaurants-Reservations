@@ -12,11 +12,11 @@ export function BranchTables({ branch }) {
         <div className="image col-6">
           <img
             src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_open_hour.jpg"
-            height="400px"
+            height="350px"
             width="100%"
           />
         </div>
-        <div className="col-5">
+        <div className="col-5 d-flex flex-column justify-content-between">
           <h3 className="text-center fs-1 text-sec mb-3 p-3">
             Avialable Tables
           </h3>
