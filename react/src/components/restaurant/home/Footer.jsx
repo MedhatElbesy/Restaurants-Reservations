@@ -24,9 +24,9 @@ export default function Footer({ restaurant }) {
         </div>
         <div className="col-9 col-sm-6 col-md-3">
           <p>
-            <FontAwesomeIcon icon={faPhone} /> Reservations
+            <FontAwesomeIcon icon={faPhone} /> Hot Line
           </p>
-          <p>{data.hot_line}</p>
+          <p>{restaurant.hot_line}</p>
         </div>
         <div className="col-9 col-sm-6 col-md-3">
           <p>

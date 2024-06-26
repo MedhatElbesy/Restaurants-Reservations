@@ -1,4 +1,4 @@
-function CategoriesTabs({ item }) {
+export default function Items({ item }) {
   return (
     <div
       className={`${
@@ -13,5 +13,3 @@ function CategoriesTabs({ item }) {
     </div>
   );
 }
-
-export default CategoriesTabs;
