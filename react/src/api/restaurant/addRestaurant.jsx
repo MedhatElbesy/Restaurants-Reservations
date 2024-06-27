@@ -51,4 +51,19 @@ export const addMenuItem = async (data) => {
   };
   
 
+  export const addRestaurant= async (data) => {
+    try {
+  
+      const response = await axios.post(`/restaurants`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding restaurant", error);
+      throw error;
+    }
+  };
+
   

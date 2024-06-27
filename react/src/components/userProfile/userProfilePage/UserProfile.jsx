@@ -1,22 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
+import { deleteRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import './userProfile.css';
 import { Link } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.userId); 
+  const userId = useSelector((state) => state.auth.userId);
   const role = useSelector((state) => state.auth.role);
   const userData = useSelector((state) => state.user.data);
   const userDataStatus = useSelector((state) => state.user.status);
   const userDataError = useSelector((state) => state.user.error);
   const { bodyColor, toggleColor } = useContext(BodyColorContext);
+  const [restaurants, setRestaurants] = useState([]);
+
 
   useEffect(() => {
     if (userId) {
@@ -24,8 +27,48 @@ const UserProfile = () => {
     }
   }, [userId]);
 
+
+  useEffect(() => {
+    if (userData && userData.restaurants) {
+      setRestaurants(userData.restaurants);
+    }
+  }, [userData]);
+
+
+  const handleDeleteRestaurant = (restaurantId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this restaurant!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setRestaurants(restaurants.filter((restaurant) => restaurant.id !== restaurantId));
+        dispatch(deleteRestaurantAsync(restaurantId))
+          .then(() => {
+            Swal.fire(
+              'Deleted!',
+              'The restaurant has been deleted.',
+              'success'
+            );
+          })
+          .catch((error) => {
+            Swal.fire(
+              'Error!',
+              'An error occurred while deleting the restaurant.',
+              'error'
+            );
+            setRestaurants(userData.restaurants);
+          });
+      }
+    });
+  };
+
   if (userDataStatus === 'loading') {
-    return <Loader/>;
+    return <Loader />;
   }
 
   if (userDataStatus === 'failed') {
@@ -33,23 +76,22 @@ const UserProfile = () => {
   }
 
   if (!userData) {
-    return null; 
+    return null;
   }
 
   return (
     <>
-  
-
       <main className="userProfile">
 
         <section className="row position-relative">
 
           <div className="col-12">
-            <img 
-            style={{ height: '70vh' }}
-            className="w-100"
-            src="/images/image_slide4.jpg"
-            alt="Cover" />
+            <img
+              style={{ height: '70vh' }}
+              className="w-100"
+              src="/images/image_slide4.jpg"
+              alt="Cover"
+            />
           </div>
 
           <div className="col-2 position-absolute bottom-0 start-0">
@@ -61,97 +103,85 @@ const UserProfile = () => {
           </div>
 
           <aside className="col-12 position-absolute top-0 start-50 translate-middle-x">
-          <Link to={`/user-dashboard/edit-profile/${userId}`}>
+            <Link to={`/user-dashboard/edit-profile/${userId}`}>
               <FontAwesomeIcon icon={faEdit} className="edit-icon text-warning" />
-              </Link>
+            </Link>
           </aside>
 
         </section>
-
 
         <section className="row my-5">
 
           <aside className="col-8 my-5">
 
             <section className="my-5">
-
               <h2 className='my-5'>Personal Information</h2>
-
-                <div className='info'>
-
-                 <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                   <strong>Name:</strong> {userData.first_name} {userData.last_name}
-                 </p>
-
-                 <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+              <div className='info'>
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                  <strong>Name:</strong> {userData.first_name} {userData.last_name}
+                </p>
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                   <strong>Email:</strong> {userData.email}
-                 </p>
-
-                 <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                </p>
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                   <strong>Mobile Number:</strong> {userData.mobile_number || 'N/A'}
-                 </p>
-
-                </div>
-
+                </p>
+              </div>
             </section>
 
             <section>
-
               <h2>Address Information</h2>
-
               {userData.addresses && userData.addresses.length > 0 ? (
                 userData.addresses.map((address) => (
                   <div key={address.id} className="info my-5">
-
                     <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                       <strong>Country:</strong> {address.country}
                     </p>
-
                     <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                       <strong>Governorate:</strong> {address.governorate}
                     </p>
-
                     <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                       <strong>City:</strong> {address.city}
                     </p>
-
                     <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                       <strong>State:</strong> {address.state}
                     </p>
-
                   </div>
                 ))
               ) : (
                 <p>No addresses found</p>
               )}
-
             </section>
 
             {role === 'owner' && (
-            <section>
-              <h2>Restaurants
-                 <span>
-                   <FontAwesomeIcon
+              <section>
+
+                <h2>Restaurants
+                  <span>
+                    <Link to={`/user-dashboard/add-restaurant/${userId}`}>
+                      <FontAwesomeIcon
                         icon={faPlus}
                         className="text-warning mx-5" />
+                    </Link>
                   </span>
-              </h2>
-             
-                {userData.restaurants && userData.restaurants.length > 0 ? (
-                  userData.restaurants.map((restaurant) => (
+                </h2>
+
+                {restaurants && restaurants.length > 0 ? (
+                  restaurants.map((restaurant) => (
                     <div
-                     key={restaurant.id} 
-                     className="info my-5 restaurant-info">
-
-                       <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-4`}>
-
-                         <strong>Name:</strong> {restaurant.name}
-                         <Link to={`/user-dashboard/restaurant/${restaurant.id}`} className='ms-3 h5'>
-                            <FontAwesomeIcon icon={faEye} className="text-warning" />
-                         </Link>
-
-                       </p>
-
+                      key={restaurant.id}
+                      className="info my-5 restaurant-info">
+                      <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-4`}>
+                        <strong>Name:</strong> {restaurant.name}
+                        <Link to={`/user-dashboard/restaurant/${restaurant.id}`} className='ms-3 h5'>
+                          <FontAwesomeIcon icon={faEye} className="text-warning" />
+                        </Link>
+                        <span onClick={() => handleDeleteRestaurant(restaurant.id)}>
+                          <FontAwesomeIcon
+                            icon={faTrash}
+                            className="text-warning mx-5" />
+                        </span>
+                      </p>
                     </div>
                   ))
                 ) : (
@@ -161,20 +191,16 @@ const UserProfile = () => {
             )}
           </aside>
 
-
           <aside className="col-4 aside-data">
-
             <img
-             src="/images/about.png"
-             alt="side image"
-             className="side-image" />
-
+              src="/images/about.png"
+              alt="side image"
+              className="side-image" />
           </aside>
-
-       </section>
-
+          
+        </section>
       </main>
-   </>
+    </>
   );
 };
 

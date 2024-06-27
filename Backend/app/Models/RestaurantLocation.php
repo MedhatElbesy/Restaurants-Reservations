@@ -12,7 +12,9 @@ class RestaurantLocation extends Model
     use HasFactory;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
-
+    protected $casts = [
+        'closed_days' => 'array',
+    ];
 
 
     public function country()

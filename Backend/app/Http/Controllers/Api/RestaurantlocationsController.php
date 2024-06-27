@@ -38,15 +38,15 @@ class RestaurantlocationsController extends Controller
     public function store(StoreRestaurantLocationRequest $request)
     {
         try {
-          
             $validatedData = $request->validated();
-            $validatedData['closed_days'] = json_encode($validatedData['closed_days']);
+            $validatedData['closed_days'] = is_array($validatedData['closed_days']) ? $validatedData['closed_days'] : explode(',', $validatedData['closed_days']);
+        
             $restaurantLocation = RestaurantLocation::create($validatedData);
-
+         
             // Upload multiple images using the trait
             if ($images = $request->file('images')) {
                 $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
-
+    
                 foreach ($uploadedImages as $imageName) {
                     RestaurantLocationImage::create([
                         'restaurant_location_id' => $restaurantLocation->id,
@@ -55,13 +55,12 @@ class RestaurantlocationsController extends Controller
                 }
             }
     
-            
             return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
         } catch (\Exception $e) {
-           
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);
         }
     }
+    
     
 
 
@@ -84,39 +83,41 @@ class RestaurantlocationsController extends Controller
     public function update(UpdateRestaurantLocationsRequest $request, $locationId)
     {
         try {
-        $validatedData = $request->validated();
-
-        DB::beginTransaction();
-
-        $location = RestaurantLocation::findOrFail($locationId);
-
-        $location->update([
-            'address' => $validatedData['address'],
-            'country_id' => $validatedData['country_id'],
-            'governorate_id' => $validatedData['governorate_id'],
-            'city_id' => $validatedData['city_id'],
-            'state_id' => $validatedData['state_id'] ?? null,
-            'zip' => $validatedData['zip'] ?? null,
-            'latitude' => $validatedData['latitude'] ?? null,
-            'longitude' => $validatedData['longitude'] ?? null,
-            'opening_time' => $validatedData['opening_time'] ?? null,
-            'closed_time' => $validatedData['closed_time'] ?? null,
-            'closed_days' => isset($validatedData['closed_days']) ? implode(',', $validatedData['closed_days']) : null,
-            'number_of_tables' => $validatedData['number_of_tables'] ?? 0,
-            'phone_number' => $validatedData['phone_number'] ?? null,
-            'mobile_number' => $validatedData['mobile_number'] ?? null,
-            'status' => $validatedData['status'] ?? 'Opened',
-        ]);
-
-        DB::commit();
-
-        return ApiResponse::sendResponse(200, 'Location Updated Successfully',$location);
-    } catch (\Throwable $e) {
-        DB::rollback();
-        return ApiResponse::sendResponse(500, 'Failed to update location', ['error' => $e->getMessage()]);
+            $validatedData = $request->validated();
+    
+            DB::beginTransaction();
+    
+            $location = RestaurantLocation::findOrFail($locationId);
+    
+            $closedDays = is_array($validatedData['closed_days']) ? $validatedData['closed_days'] : explode(',', $validatedData['closed_days']);
+    
+            $location->update([
+                'address' => $validatedData['address'],
+                'country_id' => $validatedData['country_id'],
+                'governorate_id' => $validatedData['governorate_id'],
+                'city_id' => $validatedData['city_id'],
+                'state_id' => $validatedData['state_id'] ?? null,
+                'zip' => $validatedData['zip'] ?? null,
+                'latitude' => $validatedData['latitude'] ?? null,
+                'longitude' => $validatedData['longitude'] ?? null,
+                'opening_time' => $validatedData['opening_time'] ?? null,
+                'closed_time' => $validatedData['closed_time'] ?? null,
+                'closed_days' => isset($closedDays) ? implode(',', $closedDays) : null,
+                'number_of_tables' => $validatedData['number_of_tables'] ?? 0,
+                'phone_number' => $validatedData['phone_number'] ?? null,
+                'mobile_number' => $validatedData['mobile_number'] ?? null,
+                'status' => $validatedData['status'] ?? 'Opened',
+            ]);
+    
+            DB::commit();
+    
+            return ApiResponse::sendResponse(200, 'Location Updated Successfully', $location);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return ApiResponse::sendResponse(500, 'Failed to update location', ['error' => $e->getMessage()]);
+        }
     }
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      */

@@ -26,7 +26,7 @@ const LocationMarker = ({ position, setPosition, setFormData }) => {
 
 
 const capitalizeFirstLetter = (string) => {
-  if (typeof string !== 'string' || string.length === 0) return '';
+  if (typeof string !== 'string' || string.length === 0) return ''; 
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
 
@@ -37,6 +37,9 @@ const EditLocation = () => {
   const location = useSelector((state) => state.location.location);
   const status = useSelector((state) => state.location.status);
   const error = useSelector((state) => state.location.error);
+  const [position, setPosition] = useState(null);
+  const [openingTime, setOpeningTime] = useState(null);
+  const [closingTime, setClosingTime] = useState(null);
 
   const [formData, setFormData] = useState({
     address: '',
@@ -45,7 +48,7 @@ const EditLocation = () => {
     longitude: '',
     opening_time: '',
     closed_time: '',
-    closed_days: [], 
+    closed_days: [],
     number_of_tables: '',
     phone_number: '',
     mobile_number: '',
@@ -57,11 +60,7 @@ const EditLocation = () => {
     images: [], 
   });
 
-
-  const [position, setPosition] = useState(null);
-  const [openingTime, setOpeningTime] = useState(null);
-  const [closingTime, setClosingTime] = useState(null);
-
+ 
 
   useEffect(() => {
     if (locationId) {
@@ -85,7 +84,7 @@ const EditLocation = () => {
         longitude: location.longitude || '',
         opening_time: location.opening_time || '',
         closed_time: location.closed_time || '',
-        closed_days: JSON.parse(location.closed_days) || [],
+        closed_days: location.closed_days || [],
         number_of_tables: location.number_of_tables || '',
         phone_number: location.phone_number || '',
         mobile_number: location.mobile_number || '',
@@ -95,6 +94,7 @@ const EditLocation = () => {
         city_id: location.city_id || 3,
         state_id: location.state_id || 1,
       });
+
 
       if (location.opening_time) {
         const openingTimeParts = location.opening_time.split(':');
@@ -126,6 +126,7 @@ const EditLocation = () => {
     }
   }, [location]);
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedValue = name === 'zip' ? String(value) : value;
@@ -134,6 +135,7 @@ const EditLocation = () => {
       [name]: updatedValue,
     });
   };
+
 
   const handleLatLngChange = (e) => {
     const { name, value } = e.target;
@@ -144,6 +146,7 @@ const EditLocation = () => {
       [name]: value,
     });
   };
+
 
   const handleTimeChange = (time, type) => {
     const formattedTime = time.toISOString().substr(11, 8);
@@ -162,6 +165,7 @@ const EditLocation = () => {
     }
   };
 
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setFormData({
@@ -169,6 +173,7 @@ const EditLocation = () => {
       images: files,
     });
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -196,13 +201,16 @@ const EditLocation = () => {
       });
   };
 
+
   if (status === 'loading') {
     return <Loader />;
   }
 
+
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
+
 
   return location ? (
     <main className="container">
@@ -288,28 +296,28 @@ const EditLocation = () => {
         </div>
 
         <div className="mb-3">
-         <label htmlFor="closed_days" className="form-label">Closed Days</label>
-           <select 
-             multiple
-             className="form-control" 
-             id="closed_days" 
-             name="closed_days" 
-             value={formData.closed_days} 
+          <label htmlFor="closed_days" className="form-label">Closed Days</label>
+          <select 
+            multiple
+            className="form-control" 
+            id="closed_days" 
+            name="closed_days" 
+            value={formData.closed_days} 
             onChange={(e) => setFormData({
-            ...formData,
-            closed_days: Array.from(e.target.selectedOptions, option => option.value), 
-         })}
-         >
-        <option value="Sunday" selected={formData.closed_days.includes("Sunday")}>Sunday</option>
-        <option value="Monday" selected={formData.closed_days.includes("Monday")}>Monday</option>
-        <option value="Tuesday" selected={formData.closed_days.includes("Tuesday")}>Tuesday</option>
-        <option value="Wednesday" selected={formData.closed_days.includes("Wednesday")}>Wednesday</option>
-        <option value="Thursday" selected={formData.closed_days.includes("Thursday")}>Thursday</option>
-        <option value="Friday" selected={formData.closed_days.includes("Friday")}>Friday</option>
-        <option value="Saturday" selected={formData.closed_days.includes("Saturday")}>Saturday</option>
-       </select>
-      </div>
-
+              ...formData,
+              closed_days: [...e.target.selectedOptions].map(option => option.value),
+            })}
+          >
+           <option value="Sunday" selected={formData.closed_days.includes("Sunday")}>Sunday</option>
+           <option value="Monday" selected={formData.closed_days.includes("Monday")}>Monday</option>
+           <option value="Tuesday" selected={formData.closed_days.includes("Tuesday")}>Tuesday</option>
+           <option value="Wednesday" selected={formData.closed_days.includes("Wednesday")}>Wednesday</option>
+           <option value="Thursday" selected={formData.closed_days.includes("Thursday")}>Thursday</option>
+           <option value="Friday" selected={formData.closed_days.includes("Friday")}>Friday</option>
+           <option value="Saturday" selected={formData.closed_days.includes("Saturday")}>Saturday</option>
+          </select>
+        </div>
+        
         <div className="mb-3">
           <label htmlFor="number_of_tables" className="form-label">Number of Tables</label>
           <input 

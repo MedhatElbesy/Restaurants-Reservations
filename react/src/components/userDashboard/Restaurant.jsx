@@ -120,7 +120,7 @@ const handleDeleteLocation = (locationId) =>{
           </table>
 
 
-          {restaurant.locations && restaurant.locations.length > 0 && (
+         
             <div>
               <h2 className='text-light'>Locations
               <span>
@@ -184,11 +184,11 @@ const handleDeleteLocation = (locationId) =>{
                 </tbody>
               </table>
             </div>
-          )}
+     
 
 
 
-{restaurant.locations && restaurant.locations.length > 0 && (
+
   <div>
     <h2 className='text-light'>LocationsTables
     <span>
@@ -296,9 +296,8 @@ const handleDeleteLocation = (locationId) =>{
       </tbody>
     </table>
   </div>
-)}
 
- {restaurant.categories && restaurant.categories.length > 0 && (
+
             <div>
               <h2 className='text-light'>Categories</h2>
               <table className="table table-bordered">
@@ -330,11 +329,11 @@ const handleDeleteLocation = (locationId) =>{
                 </tbody>
               </table>
             </div>
-          )}
+        
 
 
 
-          {restaurant.menu_categories && restaurant.menu_categories.length > 0 && (
+        
             <div>
 
               <h2 className='text-light'>
@@ -426,7 +425,7 @@ const handleDeleteLocation = (locationId) =>{
                 </tbody>
               </table>
             </div>
-          )}
+      
         </div>
       ) : (
         <div>No restaurant data</div>

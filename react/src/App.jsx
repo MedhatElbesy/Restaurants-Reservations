@@ -44,6 +44,7 @@ import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
 import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
+import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
 
 
 function App() {
@@ -108,14 +109,20 @@ function App() {
         element={<AddLocation />} 
       />
 
-        <Route 
+      <Route 
         path="/user-dashboard/add-table/:locationId" 
         element={<AddTableForm />} 
-        />
-        <Route 
+      />
+
+      <Route 
         path="/user-dashboard/edit-table/:tableId" 
         element={<EditTableForm />} 
-        />
+      />
+
+      <Route 
+        path="/user-dashboard/add-restaurant/:userId" 
+        element={<AddRestaurant />} 
+      />
 
       {/* AdminDashboard */}
       <Route path="/admin" element={<Dashboard/>} />

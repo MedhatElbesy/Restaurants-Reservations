@@ -31,24 +31,7 @@ class StoreRestaurantRequest extends FormRequest
             'summary' => 'nullable',
             'description' => 'nullable',
             'status' => 'nullable|in:Active,Inactive,Deleted',
-            'hot_line' => 'nullable|string|unique:restaurant_locations,hot_line',
-            'locations' => 'required|array|min:1',
-            'locations.*.address' => 'required',
-            'locations.*.country_id' => 'required|exists:countries,id',
-            'locations.*.governorate_id' => 'required|exists:governorates,id',
-            'locations.*.city_id' => 'required|exists:cities,id',
-            'locations.*.state_id' => 'required|exists:states,id',
-            'locations.*.zip' => 'nullable|integer',
-            'locations.*.latitude' => 'nullable|numeric',
-            'locations.*.longitude' => 'nullable|numeric',
-            'locations.*.opening_time' => 'nullable|date_format:H:i',
-            'locations.*.closed_time' => 'nullable|date_format:H:i',
-            'locations.*.closed_days' => 'nullable|array',
-            'locations.*.number_of_tables' => 'nullable|integer',
-            'locations.*.phone_number' => 'nullable|unique:restaurant_locations,phone_number',
-            'locations.*.mobile_number' => 'nullable|unique:restaurant_locations,mobile_number',
-            'locations.*.hot_line' => 'nullable|unique:restaurant_locations,hot_line',
-            'locations.*.status' => 'nullable|in:Opened,Closed',
+            'hot_line' => 'nullable|string|unique:restaurant_locations,hot_line'
         ];
     }
 }
