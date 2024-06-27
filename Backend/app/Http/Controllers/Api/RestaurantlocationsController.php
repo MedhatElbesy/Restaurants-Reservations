@@ -39,9 +39,9 @@ class RestaurantlocationsController extends Controller
     {
         try {
             $validatedData = $request->validated();
+            $validatedData['closed_days'] = json_encode($validatedData['closed_days']);
             $restaurantLocation = RestaurantLocation::create($validatedData);
 
-            // Upload multiple images using the trait
             if ($images = $request->file('images')) {
                 $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
 

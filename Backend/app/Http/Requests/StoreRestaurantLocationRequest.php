@@ -38,7 +38,7 @@ class StoreRestaurantLocationRequest extends FormRequest
             'phone_number' => 'nullable|string|unique:restaurant_locations,phone_number',
             'mobile_number' => 'nullable|string|unique:restaurant_locations,mobile_number',
             'status' => 'required|in:Opened,Closed',
-            'images' => 'required|array|max:2048',
+            'images' => 'nullable|array|max:2048',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
