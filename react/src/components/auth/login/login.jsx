@@ -1,7 +1,6 @@
-import React,{ useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch , useSelector} from "react-redux";
-// import { login as loginUser } from '../../../api/auth/login';
 import {
   Avatar,
   CssBaseline,
@@ -61,11 +60,11 @@ const Login = () => {
       navigate('/');
     } catch (err) {
       console.log(err)
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error || 'Invalid email or password',
-      });
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Oops...',
+      //   text: error || 'Invalid email or password',
+      // });
     }
   };
 

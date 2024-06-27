@@ -40,7 +40,6 @@ import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
 import Tables from "./components/restaurant/tables/Tables.jsx";
 
-
 import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 
 function App() {

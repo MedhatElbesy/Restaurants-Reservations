@@ -8,7 +8,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await login(email, password);
-      console.log('Login response:', response); // Debugging
+      console.log('Login response:', response);
       console.log("user data");
       console.log(response.data);
       if (response && response.data.user) {
