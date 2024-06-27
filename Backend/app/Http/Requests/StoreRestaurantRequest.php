@@ -31,6 +31,7 @@ class StoreRestaurantRequest extends FormRequest
             'summary' => 'nullable',
             'description' => 'nullable',
             'status' => 'nullable|in:Active,Inactive,Deleted',
+            'hot_line' => 'nullable|string|unique:restaurant_locations,hot_line',
             'locations' => 'required|array|min:1',
             'locations.*.address' => 'required',
             'locations.*.country_id' => 'required|exists:countries,id',

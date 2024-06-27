@@ -23,6 +23,9 @@ class TableResource extends JsonResource
             'price' => $this->price,
             'sale_price' => $this->sale_price,
             'extra_number_of_chairs' => $this->extra_number_of_chairs,
+            'number_of_extra_chairs'  => $this->number_of_extra_chairs,
+            'extra_number_of_childs_chairs'   => $this->extra_number_of_childs_chairs,
+            'number_of_extra_childs_chairs'   => $this->number_of_extra_childs_chairs,
             'status' => $this->status,
             'images' => TableImageResource::collection($this->whenLoaded('images')),
         ];

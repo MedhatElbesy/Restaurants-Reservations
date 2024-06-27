@@ -27,6 +27,9 @@ class TableController extends Controller
             'price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'extra_number_of_chairs' => 'nullable|integer',
+            'number_of_extra_chairs' => 'nullable|integer',
+            'extra_number_of_childs_chairs' => 'nullable|integer',
+            'number_of_extra_childs_chairs' => 'nullable|integer',
             'status' => 'required|in:Available,Unavailable',
         ]);
 
@@ -57,6 +60,9 @@ class TableController extends Controller
             'price' => 'nullable|numeric',
             'sale_price' => 'nullable|numeric',
             'extra_number_of_chairs' => 'nullable|integer',
+            'number_of_extra_chairs' => 'nullable|integer',
+            'extra_number_of_childs_chairs' => 'nullable|integer',
+            'number_of_extra_childs_chairs' => 'nullable|integer',
             'status' => 'nullable|in:Enabled,Disabled,Deleted',
         ]);
 

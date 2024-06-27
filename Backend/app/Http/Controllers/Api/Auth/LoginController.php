@@ -16,7 +16,7 @@ class LoginController extends Controller
     /* this function use to user make login and return access token for you */
     public function create_access_token(Request $request) : JsonResponse
     {
-        
+
         $user = User::where('status', '=', UserStatus::Active)->where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password))
@@ -34,7 +34,7 @@ class LoginController extends Controller
                 'user' => new UserResource($user->load('addresses', 'restaurants')),
             ];
 
-            return ApiResponse::sendResponse(201, 'Logged in successfully', $data);
+            return ApiResponse::sendResponse(200, 'Logged in successfully', $data);
 
         }else{
             return ApiResponse::sendResponse(401, 'Enter correct email and password.');

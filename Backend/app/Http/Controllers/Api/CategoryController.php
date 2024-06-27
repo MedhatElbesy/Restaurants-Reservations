@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Helpers\ApiResponse;
 use App\Models\Category;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    use UploadImageTrait;
     public function index()
     {
         return Category::all();
@@ -27,7 +29,10 @@ class CategoryController extends Controller
             'status' => 'required|in:Enabled,Disabled,Deleted',
         ]);
 
-        $category = Category::create($request->all());
+        $data = $request->except('cover', '_token', '_method');
+        $data['cover'] = $this->uploadImage($request, 'cover', 'categories');
+
+        $category = Category::create($data);
 
         return response()->json($category, 201);
     }
@@ -37,7 +42,7 @@ class CategoryController extends Controller
         return $category;
     }
 
-   
+
     public function update(Request $request, Category $category)
     {
         $request->validate([
