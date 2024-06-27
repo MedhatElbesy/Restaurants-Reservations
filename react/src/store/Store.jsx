@@ -11,6 +11,16 @@ import menuReducer from '../slices/restaurant/menuItem/addMenuItem';
 import menuCategoryUpdateReducer from '../slices/restaurant/menuCategory/updateMenuCategory'; 
 import deleteMenuCategoryReducer from '../slices/restaurant/menuCategory/deleteMenuCategorySlice';
 import deleteMenuItemReducer from '../slices/restaurant/menuItem/deleteMenuItemSlice';
+import locationReducer from '../slices/restaurant/location/locationSlice';
+import countriesReducer from '../slices/address/countrySlice';
+import governorateReducer from '../slices/address/governorateSlice';
+import cityReducer from '../slices/address/citySlice';
+import stateReducer from '../slices/address/stateSlice';
+import deleteLocationReducer from '../slices/restaurant/location/deleteSlice';
+import addTableReducer from '../slices/restaurant/table/addTableSlice';
+import fetchTableByIdReducer from '../slices/restaurant/table/getTableSlice';
+import updateTableReducer from '../slices/restaurant/table/updateTableSlice';
+import deleteTableReducer from '../slices/restaurant/table/deleteTableSlice';
 
 
 const store = configureStore({
@@ -26,8 +36,17 @@ const store = configureStore({
     menu: menuReducer,
     menuCategoryUpdate: menuCategoryUpdateReducer,
     deleteMenuCategory: deleteMenuCategoryReducer,
-    deleteMenuItem:deleteMenuItemReducer
-  
+    deleteMenuItem: deleteMenuItemReducer,
+    location: locationReducer, 
+    countries:countriesReducer,
+    governorate:governorateReducer,
+    city: cityReducer,
+    state:stateReducer,
+    deleteLocation:deleteLocationReducer,
+    addTable: addTableReducer,
+    fetchTableById: fetchTableByIdReducer,
+    updateTable: updateTableReducer,
+    deleteTable: deleteTableReducer,
   },
 });
 

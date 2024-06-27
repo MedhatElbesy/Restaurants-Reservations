@@ -63,7 +63,7 @@ class TableController extends Controller
             'number_of_extra_chairs' => 'nullable|integer',
             'extra_number_of_childs_chairs' => 'nullable|integer',
             'number_of_extra_childs_chairs' => 'nullable|integer',
-            'status' => 'nullable|in:Enabled,Disabled,Deleted',
+            'status' => 'nullable|in:Available,Unavailable',
         ]);
 
         $data = $request->all();

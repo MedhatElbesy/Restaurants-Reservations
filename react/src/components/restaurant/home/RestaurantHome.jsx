@@ -30,7 +30,7 @@ export default function Home() {
           <p className="text-sec fs-4">{restaurant.summary}</p>
         </div>
         <div>
-          <NavLink to={`/restaurant/${restaurantId}/reservation`}>
+          <NavLink to={`/restaurant/${restaurantId}/branches`}>
             <button className="reserver-button px-3 py-2 fs-6 mt-3">
               Reserve Table Now
             </button>

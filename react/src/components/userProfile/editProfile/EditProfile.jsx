@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUserDataAsync } from '../../../slices/user/updateUserSlice';
+import {updateUserAsync } from '../../../slices/user/updateUserSlice';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 
 export default function EditProfile() {
@@ -11,7 +11,11 @@ export default function EditProfile() {
     firstName: '',
     lastName: '',
     email: '',
-    mobile: ''
+    mobile: '',
+    profile_image_url: '',
+    gender: '',
+    birth_date: '',
+    profile_image: null, 
   });
 
   useEffect(() => {
@@ -26,128 +30,179 @@ export default function EditProfile() {
         firstName: userData.first_name || '',
         lastName: userData.last_name || '',
         email: userData.email || '',
-        mobile: userData.mobile_number || ''
+        mobile: userData.mobile_number || '',
+        profile_image_url: userData.profile_image_url || '',
+        gender: userData.gender || '',
+        birth_date: userData.birth_date || '',
       });
     }
   }, [userData]);
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(updateUserDataAsync({ userId, data: formData }));
+    const dataToUpdate = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      mobile_number: formData.mobile,
+      profile_image_url: formData.profile_image_url,
+      gender: formData.gender,
+      birth_date: formData.birth_date,
+    };
+
+  
+    const formDataToUpdate = new FormData();
+    Object.entries(dataToUpdate).forEach(([key, value]) => {
+      formDataToUpdate.append(key, value);
+    });
+    if (formData.profile_image) {
+      formDataToUpdate.append('profile_image', formData.profile_image);
+    }
+
+    dispatch(updateUserAsync({ userId, data: formDataToUpdate }));
   };
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    const { name, value, files } = event.target;
+    if (name === 'profile_image') {
+      setFormData({ ...formData, profile_image: files[0] });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
-  return (
 
+  return (
     <main className="container mt-5">
 
       <section className="row justify-content-center">
 
         <div className="card col-12">
 
-            <h5 className="card-header">Edit Profile</h5>
+          <h5 className="card-header">Edit Profile</h5>
 
-            <div className="card-body">
+          <div className="card-body">
 
-              <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-                <div className="mb-3">
+              <div className="mb-3">
+                <label htmlFor="firstName" className="form-label">
+                  First Name:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
-                  <label
-                   htmlFor="firstName"
-                   className="form-label">
-                    First Name:
-                  </label>
+              <div className="mb-3">
+                <label htmlFor="lastName" className="form-label">
+                  Last Name:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
-                <div className="mb-3">
+              <div className="mb-3">
+                <label htmlFor="mobile" className="form-label">
+                  Mobile Number:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="mobile"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
-                  <label
-                   htmlFor="lastName"
-                   className="form-label">
-                    Last Name:
-                  </label>
+              <div className="mb-3">
+                <label htmlFor="profile_image" className="form-label">
+                  Profile Image:
+                </label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="profile_image"
+                  name="profile_image"
+                  onChange={handleInputChange}
+                  accept="image/*"
+                />
+              </div>
 
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                  />
+              <div className="mb-3">
+                <label htmlFor="gender" className="form-label">
+                  Gender:
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-                </div>
+              <div className="mb-3">
+                <label htmlFor="birth_date" className="form-label">
+                  Birth Date:
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="birth_date"
+                  name="birth_date"
+                  value={formData.birth_date}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-                <div className="mb-3">
+              <button type="submit" className="btn btn-primary">
+                Update
+              </button>
 
-                  <label
-                   htmlFor="email"
-                   className="form-label">
-                    Email:
-                  </label>
+            </form>
 
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-
-                </div>
-
-                <div className="mb-3">
-
-                  <label
-                   htmlFor="mobile"
-                   className="form-label">
-                    Mobile Number:
-                  </label>
-
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="mobile"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    required
-                  />
-
-                </div>
-
-                <button type="submit" className="btn btn-primary">Update</button>
-
-              </form>
-
-            </div>
-            
           </div>
 
-      </section>
+        </div>
 
+      </section>
+      
     </main>
   );
 }
-

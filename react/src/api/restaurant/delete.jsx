@@ -13,7 +13,7 @@ export const deleteRestaurant = async (restaurantId) => {
 
 export const deleteRestaurantLocation = async (locationId) => {
     try {
-        const response = await axios.delete(`/restaurant-location/${locationId}`);
+        const response = await axios.delete(`/restaurantslocations/${locationId}`);
         return response.data;
     } catch (error) {
         console.error("An error occurred while deleting restaurant location", error);
@@ -97,3 +97,4 @@ export const deleteTableImages = async (imageId) => {
         throw error;
     }
 };
+

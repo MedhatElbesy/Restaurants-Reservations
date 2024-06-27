@@ -61,9 +61,9 @@ const UserProfile = () => {
           </div>
 
           <aside className="col-12 position-absolute top-0 start-50 translate-middle-x">
-            <button className="btn">
+          <Link to={`/user-dashboard/edit-profile/${userId}`}>
               <FontAwesomeIcon icon={faEdit} className="edit-icon text-warning" />
-            </button>
+              </Link>
           </aside>
 
         </section>
@@ -127,7 +127,7 @@ const UserProfile = () => {
 
             </section>
 
-            {role === 'restaurant' && (
+            {role === 'owner' && (
             <section>
               <h2>Restaurants
                  <span>
