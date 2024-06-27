@@ -1,19 +1,77 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, registerUser } from './authActions';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { loginUser, registerUser } from "../../api/auth/auth";
+// import axios from "../../axios";
 
-const initialState = {
-  user: null,
-  userId: localStorage.getItem('userId') || null,
-  token: localStorage.getItem('token') || null,
-  loggedIn: !!localStorage.getItem('token'),
-  status: 'idle',
-  error: null,
-  role: localStorage.getItem('role') || null,
-};
+// const loginUser = createAsyncThunk(
+//   "auth/login",
+//   async ({ email, password }, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.post("/login", { email, password });
+//       console.log("Login response:", response);
+//       console.log("user data");
+//       console.log(response.data);
+//       if (response && response.data.user) {
+//         localStorage.setItem("token", response.data.token);
+//         localStorage.setItem("userId", response.data.user.id);
+//         localStorage.setItem("role", response.data.user.roles_name[0]);
+//         return response;
+//       } else {
+//         throw new Error("Invalid response structure from login API");
+//       }
+//     } catch (error) {
+//       // console.error('Login error:', error.response ? error.response.data : error.message);
+//       return rejectWithValue(
+//         error.response ? error.response.data : error.message
+//       );
+//     }
+//   }
+// );
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async ({email, password},{ rejectWithValue }) => {
+    try {
+      const data = await loginUser(email, password);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  "auth/register",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const data = await registerUser(userData);
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState,
+  name: "auth",
+  initialState: {
+    user: null,
+    userId: localStorage.getItem("userId") || null,
+    token: localStorage.getItem("token") || null,
+    loggedIn: !!localStorage.getItem("token"),
+    status: "idle",
+    loading: false,
+    error: null,
+    role: localStorage.getItem("role") || null,
+  },
   reducers: {
     logout: (state) => {
       state.user = null;
@@ -21,70 +79,52 @@ const authSlice = createSlice({
       state.token = null;
       state.loggedIn = false;
       state.role = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('role');
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("role");
     },
   },
   extraReducers: (builder) => {
     builder
-      //login 
-      .addCase(loginUser.fulfilled, (state, action) => {
-        const { data } = action.payload;
-        console.log('from action fulfilled')
-
+      //login
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        const data = action.payload;
         if (data && data.user) {
-
           console.log("authed");
           state.user = data.user;
           state.userId = data.user.id;
           state.token = data.token;
           state.loggedIn = true;
           state.role = data.user.roles_name[0];
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userId', data.user.id);
-          localStorage.setItem('role', data.user.roles_name[0]);
-          state.status = 'succeeded';
-          state.error = null;
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.user.id);
+          localStorage.setItem("role", data.user.roles_name[0]);
+          state.status = "succeeded";
         } else {
-          state.status = 'failed';
-          state.error = 'Unexpected response structure';
+          state.status = "failed";
+          state.error = "Unexpected response structure";
         }
       })
-      .addCase(loginUser.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload || action.error.message;
-      })
-
       // register
-      .addCase(registerUser.fulfilled, (state, action) => {
-        const { data } = action.payload;
-        if (data && data.user) {
-          state.user = data.user;
-          state.userId = data.user.id;
-          state.token = data.token;
-          state.loggedIn = true;
-          state.role = data.user.roles_name[0];
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('userId', data.user.id);
-          localStorage.setItem('role', data.user.roles_name[0]);
-          state.status = 'succeeded';
-          state.error = null;
-        } else {
-          state.status = 'failed';
-          state.error = 'Unexpected response structure';
+      .addCase(register.fulfilled, (state, action) => {
+        state.loading= false;
+      })
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.loading = true;
+          state.status = "loading";
         }
-      })
-      .addCase(registerUser.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload || action.error.message;
-      });
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.loading = false;
+          state.status = "failed";
+          state.error = action.payload;
+        }
+      );
   },
 });
 

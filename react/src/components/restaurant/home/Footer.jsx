@@ -41,7 +41,10 @@ export default function Footer({ restaurant }) {
           <p>email@email.com</p>
         </div>
       </div>
-      <p className="text-color mb-2">&copy; {restaurant.name} - All Rights Reserver</p>
+      <p className="text-color mb-2">
+        {restaurant.name} &copy; {new Date().getFullYear()} - All Rights
+        Reserved
+      </p>
     </div>
   );
 }
