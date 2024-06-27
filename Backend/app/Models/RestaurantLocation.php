@@ -60,7 +60,9 @@ class RestaurantLocation extends Model
         return $this->belongsToMany(Rating::class, 'restaurant_location_rating');
     }
 
-
+    public function comments() {
+        return $this->belongsToMany(Comment::class, 'restaurant_location_comments', 'restaurant_location_id', 'comment_id');
+    }
     // const OPENED = 'Opened';
     // const CLOSED = 'Closed';
     // const REPORTED = 'Reported';
