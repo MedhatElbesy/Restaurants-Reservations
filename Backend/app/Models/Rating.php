@@ -9,10 +9,15 @@ class Rating extends Model
 {
     use HasFactory;
 
-protected $fillable = ['rate'];
+        public $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function restaurantLocations()
-    {
-        return $this->belongsToMany(RestaurantLocation::class, 'restaurant_location_rating');
-    }
+        public function restaurantLocation()
+        {
+            return $this->belongsTo(RestaurantLocation::class);
+        }
+
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
 }

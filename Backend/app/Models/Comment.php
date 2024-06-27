@@ -12,10 +12,9 @@ class Comment extends Model
         public $guarded = ['id', 'created_at', 'updated_at'];
 
 
-
-        public function restaurant()
+        public function restaurantLocation()
         {
-            return $this->belongsTo(Restaurant::class);
+            return $this->belongsTo(RestaurantLocation::class);
         }
 
         public function user()

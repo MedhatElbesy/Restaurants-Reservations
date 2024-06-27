@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->enum('rate', [0, 1, 2, 3, 4, 5])->default(0);
+            $table->foreignId('restaurant_location_id')->constrained('restaurant_locations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('rate', [ 1, 2, 3, 4, 5])->nullable();
             $table->timestamps();
         });
     }
