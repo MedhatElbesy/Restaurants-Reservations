@@ -8,6 +8,7 @@ abstract class ItemStatus
     const Success   = 'success';
     const Failed   = 'failed';
 
+    const Reported = 'Reported';
     const Enabled   = 'enabled';
     const Disabled  = 'disabled';
     const Deleted   = 'deleted';

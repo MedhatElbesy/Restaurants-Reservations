@@ -54,4 +54,8 @@ class RestaurantLocation extends Model
     }
 
 
+    const OPENED = 'Opened';
+    const CLOSED = 'Closed';
+    const REPORTED = 'Reported';
+
 }

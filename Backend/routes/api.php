@@ -27,6 +27,7 @@ use App\Http\Controllers\MenuItemController;
 
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
+use App\Http\Controllers\ReportController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -107,6 +108,8 @@ Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
 Route::resource('/comments',CommentController::class);
+Route::post('/reports', [ReportController::class, 'store']);
+Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
 
 
 Route::apiResource('table-images',TableImageController::class);
