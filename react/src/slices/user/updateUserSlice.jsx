@@ -1,37 +1,44 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { updateUserData } from '../../api/user/updateUserData';
 
-export const updateUserDataAsync = createAsyncThunk(
-  'user/updateUserData',
+const initialState = {
+  status: 'idle',
+  error: null,
+};
+
+export const updateUserAsync = createAsyncThunk(
+  'user/updateUser',
   async ({ userId, data }) => {
-    const response = await updateUserData(userId, data);
+    try {
+      const response = await updateUserData(userId, data);
       return response;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    user: null,
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(updateUserDataAsync.pending, (state) => {
+      .addCase(updateUserAsync.pending, (state) => {
         state.status = 'loading';
-      })
-      .addCase(updateUserDataAsync.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.user = action.payload;
         state.error = null;
       })
-      .addCase(updateUserDataAsync.rejected, (state, action) => {
+      .addCase(updateUserAsync.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(updateUserAsync.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload;
+        state.error = action.error.message;
       });
   },
 });
+
+export const selectUpdateUserStatus = (state) => state.user.status;
+export const selectUpdateUserError = (state) => state.user.error;
 
 export default userSlice.reducer;

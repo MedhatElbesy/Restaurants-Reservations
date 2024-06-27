@@ -29,11 +29,11 @@ return new class extends Migration
             $table->integer('longitude')->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closed_time')->nullable();
-            $table->text('closed_days')->nullable(); //array
+            $table->text('closed_days')->nullable(); 
             $table->integer('number_of_tables')->default(0);
             $table->string('phone_number')->nullable()->unique();
             $table->string('mobile_number')->nullable()->unique();
-            $table->enum('status', [ItemStatus::Opened, ItemStatus::Closed])->default(ItemStatus::Opened);
+            $table->enum('status', [ItemStatus::Opened, ItemStatus::Closed,ItemStatus::Reported])->default(ItemStatus::Opened);
 
             $table->foreign('country_id')->references('id')->on('countries')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnDelete()->cascadeOnDelete();

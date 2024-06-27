@@ -38,7 +38,7 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',
             'mobile_number' => 'nullable|string',
-            'status' => 'nullable|in:Opened,Closed',
+            'status' => 'nullable|in:Opened,Closed,Reported',
         ];
     }
 }

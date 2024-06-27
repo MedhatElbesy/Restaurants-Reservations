@@ -27,3 +27,28 @@ export const addMenuItem = async (data) => {
     }
   };
   
+  export const addLocation= async (data) => {
+    try {
+  
+      const response = await axios.post(`/restaurantslocations`, data);
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding location", error);
+      throw error;
+    }
+  };
+
+
+  export const addTable= async (data) => {
+    try {
+  
+      const response = await axios.post(`/tables`, data);
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding table", error);
+      throw error;
+    }
+  };
+  
+
+  
