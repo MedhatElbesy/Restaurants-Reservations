@@ -38,6 +38,8 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'phone_number' => 'nullable|string',
             'mobile_number' => 'nullable|string',
             'status' => 'nullable|in:Opened,Closed,Reported',
+            'images' => 'nullable|array|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }
