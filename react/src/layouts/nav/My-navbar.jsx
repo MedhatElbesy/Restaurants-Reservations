@@ -17,7 +17,7 @@ export default function MyNavbar() {
 
   return (
     <Navbar bg={bodyColor} expand="lg" className="sticky-top">
-      <Navbar.Brand href="#home" className="d-flex align-items-center">
+      <Navbar.Brand href="/userprofile" className="d-flex align-items-center">
         <Image
           src="https://via.placeholder.com/50"
           roundedCircle

@@ -3,10 +3,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faEdit, faPlus, faRemove} from '@fortawesome/free-solid-svg-icons';
+import {  faEdit, faPlus, faRemove, faTrash} from '@fortawesome/free-solid-svg-icons';
 import Loader from '../../layouts/loader/loader';
 import { deleteMenuCategoryThunk } from '../../slices/restaurant/menuCategory/deleteMenuCategorySlice';
 import { deleteMenuItemThunk } from '../../slices/restaurant/menuItem/deleteMenuItemSlice';
+import { deleteLocationAsync } from '../../slices/restaurant/location/deleteSlice';
 
 const Restaurant = () => {
 
@@ -23,7 +24,9 @@ const Restaurant = () => {
   const handleDeleteItem = (menuItemId) => {
     dispatch(deleteMenuItemThunk(menuItemId));
   };
-
+const handleDeleteLocation = (locationId) =>{
+  dispatch(deleteLocationAsync(locationId))
+}
 
   useEffect(() => {
     if (restaurantId) {
@@ -89,6 +92,11 @@ const Restaurant = () => {
               </tr>
 
               <tr>
+                <th>Hot Line</th>
+                <td>{restaurant.hot_line}</td>
+              </tr>
+
+              <tr>
                 <th>Description</th>
                 <td>{restaurant.description}</td>
               </tr>
@@ -114,7 +122,13 @@ const Restaurant = () => {
 
           {restaurant.locations && restaurant.locations.length > 0 && (
             <div>
-              <h2 className='text-light'>Locations</h2>
+              <h2 className='text-light'>Locations
+              <span>
+                  <Link to={`/user-dashboard/add-location/${restaurantId}`}>
+                         <FontAwesomeIcon icon={faPlus} className="text-warning mx-3" />
+                   </Link>
+                </span>
+              </h2>
               <table className="table table-bordered">
                 <thead>
                   <tr>
@@ -128,7 +142,6 @@ const Restaurant = () => {
                     <th>Longitude</th>
                     <th>Phone Number</th>
                     <th>Mobile Number</th>
-                    <th>Hot Line</th>
                     <th>Opening Time</th>
                     <th>Closing Time</th>
                     <th>Closed Days</th>
@@ -150,7 +163,6 @@ const Restaurant = () => {
                       <td>{location.longitude}</td>
                       <td>{location.phone_number}</td>
                       <td>{location.mobile_number}</td>
-                      <td>{location.hot_line}</td>
                       <td>{location.opening_time}</td>
                       <td>{location.closed_time}</td>
                       <td>{location.closed_days}</td>
@@ -160,6 +172,12 @@ const Restaurant = () => {
                         <Link to={`/user-dashboard/edit-location/${location.id}`}>
                           <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
                         </Link>
+
+                        <FontAwesomeIcon 
+                             icon={faTrash} 
+                             onClick={() => handleDeleteLocation(location.id)} 
+                             className="text-danger " 
+                        />
                       </td>
                     </tr>
                   ))}
@@ -169,7 +187,118 @@ const Restaurant = () => {
           )}
 
 
-          {restaurant.categories && restaurant.categories.length > 0 && (
+
+{restaurant.locations && restaurant.locations.length > 0 && (
+  <div>
+    <h2 className='text-light'>LocationsTables
+    <span>
+         <Link to={`/user-dashboard/add-table/${location.id}`}>
+            <FontAwesomeIcon icon={faPlus} className="text-warning mx-3" />
+         </Link>
+    </span>
+    </h2>
+    <table className="table table-bordered">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Tables</th>
+        </tr>
+      </thead>
+      <tbody>
+        {restaurant.locations.map((location) => (
+          <tr key={location.id}>
+            <td>{location.address}</td>
+            <td>
+              {location.tables && location.tables.length > 0 && (
+                <table className="table table-bordered mt-2">
+                  <thead>
+                    <tr>
+                      <th>Number of Chairs</th>
+                      <th>Cover</th>
+                      <th>Max Number Of Persons</th>
+                      <th>Price</th>
+                      <th>Sale Price</th>
+                      <th>Extra number of chairs</th>
+                      <th>Extra childs chairs</th>
+                      <th>Number childs chairs</th>
+                      <th>Status</th>
+                      <th>Table images</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {location.tables.map((table) => (
+                      <tr key={table.id}>
+                        <td>{table.number_of_chairs}</td>
+                        <td>{table.cover ? <img src={table.cover} alt="Table Cover" width="100" /> : 'N/A'}</td>
+                        <td>{table.max_number_of_persons}</td>
+                        <td>{table.price}</td>
+                        <td>{table.sale_price}</td>
+                        <td>{table.extra_number_of_chairs}</td>
+                        <td>{table.extra_number_of_childs_chairs}</td>
+                        <td>{table.number_of_extra_childs_chairs}</td>
+                        <td>{table.status}</td>
+                        <td>
+                          {table.images && table.images.length > 0 ? (
+                            <div>
+                              <table className="table table-bordered">
+                                <thead>
+                                  <th>images</th>
+                                  <th>Action</th>
+                                </thead>
+                                <tbody>
+                                  {table.images.map((image) => (
+                                    <tr key={image.id}>
+                                      <td>
+                                        <img src={image.image} alt="Table Image" style={{ marginRight: '10px' }} width="80" />
+                                      </td>
+
+                                      <td>
+                                        <Link to={`/user-dashboard/edit-table-image/${image.id}`}>
+                                            <FontAwesomeIcon icon={faEdit} className="text-success" />
+                                        </Link>
+
+                                            <FontAwesomeIcon 
+                                             icon={faRemove} 
+                                             className="text-danger mx-5" 
+                                            />
+                                      </td>
+
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          ) : (
+                            'N/A'
+                          )}
+                        </td>
+
+                        <td>
+                        <Link to={`/user-dashboard/edit-table/${table.id}`}>
+                          <FontAwesomeIcon icon={faEdit} className="text-success" />
+                        </Link>
+
+                        <FontAwesomeIcon 
+                        icon={faTrash} 
+                      
+                        className="text-danger mx-5" 
+                        />
+                      </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+ {restaurant.categories && restaurant.categories.length > 0 && (
             <div>
               <h2 className='text-light'>Categories</h2>
               <table className="table table-bordered">
@@ -204,6 +333,7 @@ const Restaurant = () => {
           )}
 
 
+
           {restaurant.menu_categories && restaurant.menu_categories.length > 0 && (
             <div>
 
@@ -221,7 +351,6 @@ const Restaurant = () => {
                   <tr>
                     <th>Name</th>
                     <th>Action</th>
-                    
                     <th>Menu Items</th>
                   </tr>
                 </thead>
@@ -237,9 +366,9 @@ const Restaurant = () => {
                         </Link>
 
                         <FontAwesomeIcon 
-                        icon={faRemove} 
-                        onClick={() => handleDelete(menuCategory.id)} 
-                        className="text-danger mx-5" 
+                          icon={faTrash} 
+                          onClick={() => handleDelete(menuCategory.id)} 
+                          className="text-danger mx-5" 
                         />
                       </td>
                     
@@ -281,7 +410,7 @@ const Restaurant = () => {
                                   </Link>
                          
                                   <FontAwesomeIcon 
-                                  icon={faRemove} 
+                                  icon={faTrash} 
                                   onClick={() => handleDeleteItem(menuItem.id)} 
                                   className="text-danger mx-5" 
                                   />

@@ -23,7 +23,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
-use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\Api\MenuItemController;
 
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;

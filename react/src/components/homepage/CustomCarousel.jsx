@@ -3,7 +3,7 @@ import './CustomCarousel.css';
 
 const CustomCarousel = () => {
     const [titleIndex, setTitleIndex] = useState(0);
-    const titles = ['Restaurant Name 1', 'Restaurant Name 2', 'Restaurant Name 3'];
+    const titles = ['Taste the Diversity of Cuisine', 'Discover a World of Flavor', 'Every Meal Tells a Story'];
 
     useEffect(() => {
         const titleInterval = setInterval(() => {

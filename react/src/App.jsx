@@ -41,6 +41,10 @@ import Menu from "./components/restaurant/menu/Menu.jsx";
 import Tables from "./components/restaurant/tables/Tables.jsx";
 
 import Dashboard from "./components/AdminDashboard/dashboard.jsx";
+import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
+import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
+import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
+
 
 function App() {
   const routes = createRoutesFromElements(
@@ -99,8 +103,22 @@ function App() {
         element={<AddMenuCategory />}
       />
 
+      <Route
+        path="/user-dashboard/add-location/:restaurantId" 
+        element={<AddLocation />} 
+      />
+
+        <Route 
+        path="/user-dashboard/add-table/:locationId" 
+        element={<AddTableForm />} 
+        />
+        <Route 
+        path="/user-dashboard/edit-table/:tableId" 
+        element={<EditTableForm />} 
+        />
+
       {/* AdminDashboard */}
-      <Route path="/admin" element={<Dashboard />} />
+      <Route path="/admin" element={<Dashboard/>} />
     </>
   );
 

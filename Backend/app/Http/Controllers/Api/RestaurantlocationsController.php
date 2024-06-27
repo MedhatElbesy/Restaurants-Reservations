@@ -38,10 +38,12 @@ class RestaurantlocationsController extends Controller
     public function store(StoreRestaurantLocationRequest $request)
     {
         try {
+          
             $validatedData = $request->validated();
             $validatedData['closed_days'] = json_encode($validatedData['closed_days']);
             $restaurantLocation = RestaurantLocation::create($validatedData);
 
+            // Upload multiple images using the trait
             if ($images = $request->file('images')) {
                 $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
 
@@ -52,12 +54,15 @@ class RestaurantlocationsController extends Controller
                     ]);
                 }
             }
-
-            return ApiResponse::sendResponse(201,"Restaurant location created successfully",$restaurantLocation);
-        } catch (Exception $e) {
+    
+            
+            return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
+        } catch (\Exception $e) {
+           
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);
         }
     }
+    
 
 
     /**
@@ -100,7 +105,6 @@ class RestaurantlocationsController extends Controller
             'number_of_tables' => $validatedData['number_of_tables'] ?? 0,
             'phone_number' => $validatedData['phone_number'] ?? null,
             'mobile_number' => $validatedData['mobile_number'] ?? null,
-            'hot_line' => $validatedData['hot_line'] ?? null,
             'status' => $validatedData['status'] ?? 'Opened',
         ]);
 
