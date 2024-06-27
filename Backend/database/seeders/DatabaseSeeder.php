@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             TableImagesSeeder::class,
             PaymentsSeeder::class,
             UserActivationSeeder::class,
-              RestaurantImagesSeeder::class
+            RestaurantImagesSeeder::class,
+            CommentsSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

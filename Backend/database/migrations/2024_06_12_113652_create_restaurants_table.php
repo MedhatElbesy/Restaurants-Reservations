@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('summary')->nullable();
             $table->text('description')->nullable();
+            $table->enum('rating',[0,1,2,3,4,5])->default(0);
             $table->string('hot_line')->nullable()->unique();
             $table->enum('status', [UserStatus::Active, UserStatus::InActive, UserStatus::Deleted])->default(UserStatus::Active);
             $table->softDeletes();

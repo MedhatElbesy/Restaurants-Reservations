@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\LocationController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\MenuItemController;
 
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -104,7 +106,7 @@ Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsControl
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
-
+Route::resource('/comments',CommentController::class);
 
 
 Route::apiResource('table-images',TableImageController::class);
