@@ -24,7 +24,7 @@ use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\Api\MenuItemController;
-
+use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
 use App\Http\Controllers\ReportController;
@@ -110,6 +110,9 @@ Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 
 Route::resource('/comments',CommentController::class);
 Route::post('/reports', [ReportController::class, 'store']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
+Route::post('/ratings', [RatingController::class, 'store']);
+Route::put('/ratings/{id}', [RatingController::class, 'update']);
+Route::get('/ratings/average/{restaurant_location_id}', [RatingController::class, 'averageRating']); 
 
 
 Route::apiResource('table-images',TableImageController::class);
