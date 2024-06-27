@@ -33,13 +33,12 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'opening_time' => 'nullable|string',
             'closed_time' => 'nullable|string',
             'closed_days' => 'nullable|array',
-            'closed_days.*' => 'integer',
+            'closed_days.*' => 'string',
+            'hot_line' => 'nullable|string',
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',
             'mobile_number' => 'nullable|string',
             'status' => 'nullable|in:Opened,Closed',
-            'images' => 'required|array|max:2048',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

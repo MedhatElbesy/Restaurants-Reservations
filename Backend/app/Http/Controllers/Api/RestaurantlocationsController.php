@@ -106,7 +106,7 @@ class RestaurantlocationsController extends Controller
 
         DB::commit();
 
-        return ApiResponse::sendResponse(200, 'Location Updated Successfully');
+        return ApiResponse::sendResponse(200, 'Location Updated Successfully',$location);
     } catch (\Throwable $e) {
         DB::rollback();
         return ApiResponse::sendResponse(500, 'Failed to update location', ['error' => $e->getMessage()]);
