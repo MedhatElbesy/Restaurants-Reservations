@@ -19,6 +19,7 @@ return new class extends Migration
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->string('description')->nullable(0);
             $table->integer('number_of_chairs')->default(0);
             $table->integer('max_number_of_persons')->nullable(0);
             $table->string('cover')->nullable();

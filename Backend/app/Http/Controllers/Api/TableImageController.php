@@ -30,7 +30,7 @@ class TableImageController extends Controller
 
         DB::beginTransaction();
         try {
-            $uploadedImages = $this->uploadMultipleImages($request->file('images'), 'table_cover_images');
+            $uploadedImages = $this->uploadMultipleImages($request->file('images'), 'table_images');
             $images = [];
 
             foreach ($uploadedImages as $imageName) {
@@ -66,7 +66,7 @@ class TableImageController extends Controller
 
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('table_cover_images/' . $tableImage->image);
+            Storage::disk('public')->delete('table_images/' . $tableImage->image);
 
             $imagePath = $this->uploadImage($request, 'image', 'table_cover_images');
             $tableImage->image = basename($imagePath);
@@ -86,7 +86,7 @@ class TableImageController extends Controller
 
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('table_cover_images/' . $tableImage->image);
+            Storage::disk('public')->delete('table_images/' . $tableImage->image);
             $tableImage->delete();
 
             DB::commit();
