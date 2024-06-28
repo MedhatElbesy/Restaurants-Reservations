@@ -38,7 +38,7 @@ class TableController extends Controller
 
         if ($request->hasFile('cover')) {
             $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
-            $data['cover'] = basename($coverPath);
+            $data['cover'] = $coverPath;
         }
 
         $table = Table::create($data);
@@ -72,7 +72,7 @@ class TableController extends Controller
             if ($request->hasFile('cover')) {
                 Storage::disk('public')->delete('table_cover_images/' . $table->cover);
                 $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
-                $data['cover'] = basename($coverPath);
+                $data['cover'] = $coverPath;
             }
 
             $table->update($data);
