@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTable;
+use App\Http\Requests\UpdateTable;
 use App\Models\Table;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
@@ -20,19 +22,8 @@ class TableController extends Controller
         return TableResource::collection(Table::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreTable $request)
     {
-        $request->validate([
-            'restaurant_location_id' => 'required|integer',
-            'number_of_chairs' => 'required|integer',
-            'max_number_of_persons' => 'required|integer',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
-            'extra_number_of_chairs' => 'nullable|integer',
-            'extra_number_of_childs_chairs' => 'nullable|integer',
-            'status' => 'required|in:Available,Unavailable',
-        ]);
 
         $data = $request->all();
 
@@ -51,20 +42,8 @@ class TableController extends Controller
         return new TableResource($table);
     }
 
-    public function update(Request $request, Table $table)
+    public function update(UpdateTable $request, Table $table)
     {
-        $request->validate([
-            'restaurant_location_id' => 'nullable|integer',
-            'number_of_chairs' => 'nullable|integer',
-            'max_number_of_persons' => 'nullable|integer',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'nullable|numeric',
-            'sale_price' => 'nullable|numeric',
-            'extra_number_of_chairs' => 'nullable|integer',
-            'extra_number_of_childs_chairs' => 'nullable|integer',
-            'status' => 'nullable|in:Available,Unavailable',
-        ]);
-
         $data = $request->all();
 
         DB::beginTransaction();

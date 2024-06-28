@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Enums\ItemStatus;
 use Faker\Factory as Faker;
+
 class TablesSeeder extends Seeder
 {
     /**
@@ -19,7 +20,7 @@ class TablesSeeder extends Seeder
                 'restaurant_location_id' => 1,
                 'number_of_chairs' => 4,
                 'max_number_of_persons' => 8,
-                'cover' => 'https://tinyurl.com/bdfs3kn2',
+                'cover' => 'path/to/your/image1.jpg',
                 'price' => 120.00,
                 'sale_price' => 100.00,
                 'extra_number_of_chairs' => 2,
@@ -67,7 +68,7 @@ class TablesSeeder extends Seeder
                 'restaurant_location_id' => 2,
                 'number_of_chairs' => 6,
                 'max_number_of_persons' => 12,
-                'cover' => 'https://tinyurl.com/3zbswr9p',
+                'cover' => 'path/to/your/image2.jpg',
                 'price' => 150.00,
                 'sale_price' => 130.00,
                 'extra_number_of_chairs' => 0,
@@ -75,9 +76,21 @@ class TablesSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'restaurant_location_id' => 3,
+                'number_of_chairs' => 8,
+                'max_number_of_persons' => 16,
+                'cover' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4VuYowKNWwiHdc7JB0THZe7G1qV2tHS9OYw&s',
+                'description' => 'Newly added table',
+                'price' => 200.00,
+                'sale_price' => 180.00,
+                'extra_number_of_chairs' => 2,
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('tables')->insert($tables);
-
     }
 }
