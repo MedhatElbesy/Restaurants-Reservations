@@ -16,17 +16,58 @@ class TableImagesSeeder extends Seeder
         $images = [
             [
                 'table_id' => 1,
-                'image' => 'image1.jpg',
+                'image' => 'https://tinyurl.com/344r9u35',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'image' => 'https://tinyurl.com/mphexb9b',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'image' => 'https://tinyurl.com/y4ty8acw',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 1,
+                'image' => 'https://tinyurl.com/39ywyfed',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'table_id' => 2,
-                'image' => 'image2.jpg',
+                'image' => 'https://tinyurl.com/bdhj2z9y',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            
+            [
+                'table_id' => 2,
+                'image' => 'https://tinyurl.com/2eye84mw',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 2,
+                'image' => 'https://tinyurl.com/jb2f4fxr',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 3,
+                'image' => 'https://tinyurl.com/5n7nrhkp',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'table_id' => 3,
+                'image' => 'https://tinyurl.com/579mmhx6',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('table_images')->insert($images);

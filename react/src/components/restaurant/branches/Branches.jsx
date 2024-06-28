@@ -38,7 +38,7 @@ export default function Branches() {
                   {branch.city.name} Branch
                 </h2>
                 {showTables ? (
-                  <Tables branch={branch} />
+                  <Tables tables={branch.tables} />
                 ) : (
                   <BranchDetails
                     onShowTables={handelShowTables}

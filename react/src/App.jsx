@@ -46,7 +46,6 @@ import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
 import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
 import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
 
-
 function App() {
   const routes = createRoutesFromElements(
     <>
@@ -115,12 +114,12 @@ function App() {
       />
 
       <Route 
-        path="/user-dashboard/edit-table/:tableId" 
+        path="/user-dashboard/edit-table/:tableId"
         element={<EditTableForm />} 
       />
 
       <Route 
-        path="/user-dashboard/add-restaurant/:userId" 
+        path="/user-dashboard/add-restaurant/:userId"
         element={<AddRestaurant />} 
       />
 
