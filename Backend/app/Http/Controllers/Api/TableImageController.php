@@ -15,10 +15,9 @@ class TableImageController extends Controller
 {
     use UploadImageTrait;
 
-    public function index($tableId)
+    public function index()
     {
-        $images = TableImage::where('table_id', $tableId)->get();
-        return TableImageResource::collection($images);
+        return TableImageResource::collection(TableImage::all());
     }
 
     public function store(Request $request, $tableId)
