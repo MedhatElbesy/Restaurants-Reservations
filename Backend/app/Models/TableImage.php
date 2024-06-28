@@ -13,10 +13,10 @@ class TableImage extends Model
     public $guarded = ['id', 'created_at', 'updated_at'];
 
 
-    public function getTableUrlAttribute()
+    public function getImageUrlAttribute()
     {
         if (!$this->image) {
-            return 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0=';
+            return 'https://img.freepik.com/free-psd/cafe-table-isolated-transparent-background_191095-13805.jpg';
         }
         if (Str::startsWith($this->image, ['http://', 'https://'])) {
             return $this->image;
