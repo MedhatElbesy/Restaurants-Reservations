@@ -112,7 +112,7 @@ Route::post('/reports', [ReportController::class, 'store']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
 Route::post('/ratings', [RatingController::class, 'store']);
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
-Route::get('/ratings/average/{restaurant_location_id}', [RatingController::class, 'averageRating']); 
+Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
 
 Route::apiResource('table-images',TableImageController::class);

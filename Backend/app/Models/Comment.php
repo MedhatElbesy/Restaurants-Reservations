@@ -12,8 +12,13 @@ class Comment extends Model
         public $guarded = ['id', 'created_at', 'updated_at'];
 
 
+        public function restaurantLocation()
+        {
+            return $this->belongsTo(RestaurantLocation::class);
+        }
 
-        public function restaurantLocations() {
-        return $this->belongsToMany(RestaurantLocation::class, 'restaurant_location_comments', 'comment_id', 'restaurant_location_id');
-    }
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
 }

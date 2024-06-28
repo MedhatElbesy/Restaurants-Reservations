@@ -29,13 +29,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         try {
-            $validatedData = $request->validated();
-            $restaurantLocation = RestaurantLocation::findOrFail($validatedData['restaurant_location_id']);
-            $comment = Comment::create([
-            'comment' => $validatedData['comment'],
-        ]);
-
-        $restaurantLocation->comments()->attach($comment->id);
+            $comment = Comment::create($request->validated());
             return ApiResponse::sendResponse(201,"created successfully",$comment);
         }catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create comment', ['error' => $e->getMessage()]);
@@ -45,14 +39,14 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $restaurant_location_id)
+    public function show(string $restaurantId)
     {
         try {
-            $restaurantLocation = RestaurantLocation::findOrFail($restaurant_location_id);
-            $comments = $restaurantLocation->comments()->get();
-            return ApiResponse::sendResponse(200, 'Comments retrieved successfully', $comments);
+            $restaurant = Restaurant::findOrFail($restaurantId);
+            $comments = $restaurant->comments()->get();
+            return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
         } catch (Exception $e) {
-            return ApiResponse::sendResponse(500, 'Failed to retrieve comments', ['error' => $e->getMessage()]);
+            return ApiResponse::sendResponse(500, 'Failed to get comments', ['error' => $e->getMessage()]);
         }
     }
 
@@ -63,11 +57,8 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, $id)
     {
         try {
-            $validatedData = $request->validated();
             $comment = Comment::findOrFail($id);
-            $comment->update([
-                'comment' => $validatedData['comment'],
-            ]);
+            $comment->update($request->validated());
             return ApiResponse::sendResponse(200, 'comment updated successfully',new CommentResource($comment));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Fail to update comment', ['error' => $e->getMessage()]);
@@ -77,15 +68,14 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         try {
             $comment = Comment::findOrFail($id);
-            $comment->restaurantLocations()->detach();
             $comment->delete();
-            return ApiResponse::sendResponse(200, 'Comment deleted successfully');
-        } catch (Exception $e) {
-            return ApiResponse::sendResponse(500, 'Failed to delete comment', ['error' => $e->getMessage()]);
+            return ApiResponse::sendResponse(200, 'comment deleted successfully');
+        }catch (Exception $e) {
+            return ApiResponse::sendResponse(500, 'Fail to delete comment', ['error' => $e->getMessage()]);
         }
     }
 }
