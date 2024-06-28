@@ -34,7 +34,7 @@ class ChangePasswordController extends Controller
 
         if($user) {
             $user->update([
-                'password' => $request->password
+                'password' => $request->new_password
             ]);
 
             return ApiResponse::sendResponse(200,'Your password has been changed successfully');
