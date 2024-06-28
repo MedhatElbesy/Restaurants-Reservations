@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -29,7 +30,8 @@ class RegisterController extends Controller
             $user = User::create($data);
 
             /* send unique code to verify email when created new account */
-            $token = rand(000000, 999999);
+//            $token = rand(000000, 999999);
+            $token = 123456;
             DB::table('user_activations')->insert([
                 'user_id' => $user->id,
                 'token' => $token,
@@ -45,7 +47,7 @@ class RegisterController extends Controller
             DB::commit();
 
             return ApiResponse::sendResponse(201,
-                'Account created successfully! A verification code has been sent to your email', $user);
+                'Account created successfully! A verification code has been sent to your email', new UserResource($user));
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Error in RegisterController@register: '.$e->getMessage());

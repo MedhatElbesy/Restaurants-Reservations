@@ -26,4 +26,8 @@ class Table extends Model
     {
         return $this->hasMany(TableImage::class);
     }
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

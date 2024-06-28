@@ -63,8 +63,9 @@ Route::post('reset-password',[ResetPasswordController::class,'resetPassword']);
 // route of change password - (current_password, new_password, password_confirmation)
 Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth:sanctum');
 
-Route::apiResource('user-addresses', UserAddressController::class);
-Route::get('user/addresses/{user_id}', [UserAddressController::class, 'getUserAddressByUserId'])->middleware('auth:sanctum');
+Route::apiResource('user/{user}/addresses', UserAddressController::class)
+    ->parameters(['addresses' => 'userAddress'])
+    ->middleware('auth:sanctum');
 
 Route::get('countries', [CountryController::class, 'getAllCountries']);
 Route::get('countries/{id}', [CountryController::class, 'getCountryById']);
