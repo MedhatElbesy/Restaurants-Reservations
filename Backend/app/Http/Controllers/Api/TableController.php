@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Table;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\TableResource;
 use App\Helpers\ApiResponse;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 
 class TableController extends Controller
 {
+    use UploadImageTrait;
+
     public function index()
     {
         return TableResource::collection(Table::all());
@@ -27,16 +30,14 @@ class TableController extends Controller
             'price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'extra_number_of_chairs' => 'nullable|integer',
-            'number_of_extra_chairs' => 'nullable|integer',
             'extra_number_of_childs_chairs' => 'nullable|integer',
-            'number_of_extra_childs_chairs' => 'nullable|integer',
             'status' => 'required|in:Available,Unavailable',
         ]);
 
         $data = $request->all();
 
         if ($request->hasFile('cover')) {
-            $coverPath = $request->file('cover')->store('images/table_covers', 'public');
+            $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
             $data['cover'] = basename($coverPath);
         }
 
@@ -60,9 +61,7 @@ class TableController extends Controller
             'price' => 'nullable|numeric',
             'sale_price' => 'nullable|numeric',
             'extra_number_of_chairs' => 'nullable|integer',
-            'number_of_extra_chairs' => 'nullable|integer',
             'extra_number_of_childs_chairs' => 'nullable|integer',
-            'number_of_extra_childs_chairs' => 'nullable|integer',
             'status' => 'nullable|in:Available,Unavailable',
         ]);
 
@@ -71,8 +70,8 @@ class TableController extends Controller
         DB::beginTransaction();
         try {
             if ($request->hasFile('cover')) {
-                Storage::disk('public')->delete('images/table_covers/' . $table->cover);
-                $coverPath = $request->file('cover')->store('images/table_covers', 'public');
+                Storage::disk('public')->delete('table_cover_images/' . $table->cover);
+                $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
                 $data['cover'] = basename($coverPath);
             }
 
@@ -90,7 +89,7 @@ class TableController extends Controller
     {
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('images/table_covers/' . $table->cover);
+            Storage::disk('public')->delete('table_cover_images/' . $table->cover);
             $table->delete();
 
             DB::commit();
