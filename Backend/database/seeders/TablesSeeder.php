@@ -20,7 +20,12 @@ class TablesSeeder extends Seeder
                 'restaurant_location_id' => 1,
                 'number_of_chairs' => 4,
                 'max_number_of_persons' => 8,
-                'cover' => 'path/to/your/image1.jpg',
+<<<<<<< HEAD
+                'cover' => 'https://tinyurl.com/bdfs3kn2',
+=======
+                'description' => "khaled abdulbaset mohamed ahmed",
+                'cover' => 'https://theattic.co.in/wp-content/uploads/2023/05/3-9.png',
+>>>>>>> bc25ec3453e307a7ba71e6b04629a7aff3c3a8e3
                 'price' => 120.00,
                 'sale_price' => 100.00,
                 'extra_number_of_chairs' => 2,
@@ -56,6 +61,7 @@ class TablesSeeder extends Seeder
                 'restaurant_location_id' => 2,
                 'number_of_chairs' => 6,
                 'max_number_of_persons' => 12,
+<<<<<<< HEAD
                 'cover' => 'https://tinyurl.com/3zbswr9p',
                 'price' => 150.00,
                 'sale_price' => 130.00,
@@ -68,7 +74,11 @@ class TablesSeeder extends Seeder
                 'restaurant_location_id' => 2,
                 'number_of_chairs' => 6,
                 'max_number_of_persons' => 12,
-                'cover' => 'path/to/your/image2.jpg',
+                'cover' => 'https://tinyurl.com/3zbswr9p',
+=======
+                'cover' => 'https://www.ikea.com/eg/en/images/products/lack-coffee-table-black-brown__57540_pe163122_s5.jpg',
+                'description' => 'Medhat abdulhamed el pc',
+>>>>>>> bc25ec3453e307a7ba71e6b04629a7aff3c3a8e3
                 'price' => 150.00,
                 'sale_price' => 130.00,
                 'extra_number_of_chairs' => 0,
