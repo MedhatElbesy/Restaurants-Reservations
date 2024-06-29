@@ -1,31 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../../api/auth/auth";
-// import axios from "../../axios";
-
-// const loginUser = createAsyncThunk(
-//   "auth/login",
-//   async ({ email, password }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.post("/login", { email, password });
-//       console.log("Login response:", response);
-//       console.log("user data");
-//       console.log(response.data);
-//       if (response && response.data.user) {
-//         localStorage.setItem("token", response.data.token);
-//         localStorage.setItem("userId", response.data.user.id);
-//         localStorage.setItem("role", response.data.user.roles_name[0]);
-//         return response;
-//       } else {
-//         throw new Error("Invalid response structure from login API");
-//       }
-//     } catch (error) {
-//       // console.error('Login error:', error.response ? error.response.data : error.message);
-//       return rejectWithValue(
-//         error.response ? error.response.data : error.message
-//       );
-//     }
-//   }
-// );
 
 export const login = createAsyncThunk(
   "auth/login",

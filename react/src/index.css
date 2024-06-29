@@ -6,7 +6,8 @@
 :root {
   --mainColor: #f8f9fa;
   --secColor: #ffd28d;
-  --textColor: #a4a2a4;
+  --textColor: #8a888a;
+  --secFont: "Bad Script", cursive;
   ::-webkit-scrollbar {
     width: 8px;
     height: 0px;
@@ -32,6 +33,7 @@
 
 body {
   font-family: "Playfair Display", serif;
+  transition: .3s ease-in-out;
 }
 
 .restau {
@@ -51,7 +53,7 @@ body {
 }
 
 .sec-font {
-  font-family: "Bad Script", cursive;
+  font-family: var(--secFont)
 }
 
 a {

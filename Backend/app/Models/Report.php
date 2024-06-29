@@ -10,22 +10,22 @@ class Report extends Model
 {
     use HasFactory;
 
-        protected $fillable = ['restaurant_location_id', 'user_id', 'report', 'status'];
+    protected $fillable = ['restaurant_location_id', 'user_id', 'report', 'status'];
 
-        public static function updateRestaurantLocationStatus($restaurantLocationId)
-        {
-            $reportedCount = self::where('restaurant_location_id', $restaurantLocationId)
-                ->whereIn('status', ["1"])
-                ->count();
+    public static function updateRestaurantLocationStatus($restaurantLocationId)
+    {
+        $reportedCount = self::where('restaurant_location_id', $restaurantLocationId)
+            ->whereIn('status', ["1"])
+            ->count();
 
-            if ($reportedCount >= 3) {
-                $restaurantLocation = RestaurantLocation::find($restaurantLocationId);
-                if ($restaurantLocation) {
-                    $restaurantLocation->status = ItemStatus::Reported;
-                    $restaurantLocation->save();
-                }
+        if ($reportedCount >= 3) {
+            $restaurantLocation = RestaurantLocation::find($restaurantLocationId);
+            if ($restaurantLocation) {
+                $restaurantLocation->status = ItemStatus::Reported;
+                $restaurantLocation->save();
             }
         }
+    }
 
 
     protected static function booted()

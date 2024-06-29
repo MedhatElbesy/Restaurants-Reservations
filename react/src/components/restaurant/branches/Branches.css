@@ -38,11 +38,6 @@
   background-color: var(--secColor) !important;
 }
 
-.branches .tab-content {
-  padding-left: 2rem !important;
-  flex-grow: 1 !important;
-}
-
 .branches .img-thumbnail {
   background-color: var(--secColor) !important;
   padding: 0.15rem;
