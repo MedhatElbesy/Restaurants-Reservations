@@ -110,6 +110,8 @@ Route::post('/reports', [ReportController::class, 'store']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
 Route::post('/ratings', [RatingController::class, 'store']);
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
+Route::get('/restaurant/{restaurantId}/user/{userId}/rating', [RatingController::class, 'getUserRatingForRestaurant']);
+
 Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
 
