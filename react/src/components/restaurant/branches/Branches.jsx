@@ -8,7 +8,7 @@ import { BranchAddress } from "./BranchAddress";
 import { BranchOpening } from "./BranchOpening";
 import { BranchTables } from "./BranchTables";
 
-import Tables from "../tables/Tables";
+import Tables from "../tables/TablesCollection";
 import "./Branches.css";
 
 export default function Branches() {
