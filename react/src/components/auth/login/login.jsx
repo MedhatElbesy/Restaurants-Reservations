@@ -24,7 +24,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -47,7 +47,7 @@ const Login = () => {
   useEffect(() => {
     if (authStatus.isAuthenticated) {
       if (authStatus.role === 'admin') {
-        navigate('/exams');
+        navigate('/admin');
       } else {
         navigate('/');
       }
@@ -110,7 +110,7 @@ const Login = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor:'rgba(255,255,255,0.8)',
+            backgroundColor:'rgba(0,0,0,0.4)',
           }}
         >
           <Box
@@ -122,7 +122,7 @@ const Login = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: '#7B3C1E' }}>
+            <Avatar sx={{ m: 1, bgcolor: '#ffd28d', color:'white' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
