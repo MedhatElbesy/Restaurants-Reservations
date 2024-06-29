@@ -31,7 +31,6 @@ class RestaurantLocationResource extends JsonResource
             'number_of_tables' => $this->number_of_tables,
             'phone_number' => $this->phone_number,
             'mobile_number' => $this->mobile_number,
-            'hot_line' => $this->hot_line,
             'status' => $this->status,
             'images' => RestaurantLocationImageResource::collection($this->whenLoaded('images')),
             'tables' => TableResource::collection($this->whenLoaded('tables')),

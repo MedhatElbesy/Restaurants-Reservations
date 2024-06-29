@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\VerificationController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\LocationController;
@@ -22,10 +23,12 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
 use App\Http\Controllers\Api\RestaurantlocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
-use App\Http\Controllers\MenuItemController;
-
+use App\Http\Controllers\Api\MenuItemController;
+use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
+use App\Http\Controllers\ReportController;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,8 +63,9 @@ Route::post('reset-password',[ResetPasswordController::class,'resetPassword']);
 // route of change password - (current_password, new_password, password_confirmation)
 Route::post('change-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth:sanctum');
 
-Route::apiResource('user-addresses', UserAddressController::class);
-Route::get('user/addresses/{user_id}', [UserAddressController::class, 'getUserAddressByUserId'])->middleware('auth:sanctum');
+Route::apiResource('user/{user}/addresses', UserAddressController::class)
+    ->parameters(['addresses' => 'userAddress'])
+    ->middleware('auth:sanctum');
 
 Route::get('countries', [CountryController::class, 'getAllCountries']);
 Route::get('countries/{id}', [CountryController::class, 'getCountryById']);
@@ -104,7 +108,12 @@ Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsControl
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
-
+Route::resource('/comments',CommentController::class);
+Route::post('/reports', [ReportController::class, 'store']);
+Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
+Route::post('/ratings', [RatingController::class, 'store']);
+Route::put('/ratings/{id}', [RatingController::class, 'update']);
+Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
 
 Route::apiResource('table-images',TableImageController::class);

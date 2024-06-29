@@ -2,6 +2,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 trait UploadImageTrait {
     public function uploadImage(Request $request, $field_name = 'image', $folder = 'images') : ?string {
@@ -21,5 +22,20 @@ trait UploadImageTrait {
         }
 
         return null;
+    }
+
+    public function uploadMultipleImages(array $images, string $directory): array
+    {
+        $uploadedImages = [];
+
+        foreach ($images as $image) {
+            if ($image instanceof UploadedFile) {
+                $imageName = time() . rand(0, 999) . '.' . $image->getClientOriginalExtension();
+                $image->storeAs($directory, $imageName, 'public');
+                $uploadedImages[] = $imageName;
+            }
+        }
+
+        return $uploadedImages;
     }
 }

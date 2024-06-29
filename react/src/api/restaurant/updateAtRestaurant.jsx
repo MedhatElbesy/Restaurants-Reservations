@@ -77,11 +77,33 @@ export const updateRestaurantCategory = async (categoryId, data) => {
   export const updateLocation = async (locationId, data) => {
     try {
   
-      const response = await axios.put(`/locations/${locationId}`, data);
+      const response = await axios.post(`/restaurantslocations/${locationId}?_method=PUT`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       
       return response.data; 
     } catch (error) {
       console.error("An error occurred while updating location", error);
+      throw error;
+    }
+  };
+  
+
+ 
+  export const updateTable = async (tableId, data) => {
+    try {
+  
+      const response = await axios.post(`/tables/${tableId}?_method=PATCH`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while updating table", error);
       throw error;
     }
   };

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRestaurantCategory;
+use App\Http\Requests\UpdateRestaurantCategory;
+use App\Models\Category;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,15 +24,10 @@ class RestaurantCategoryController extends Controller
         return response()->json($restaurantCategories);
     }
 
-    public function store(Request $request)
+    public function store(StoreRestaurantCategory $request)
     {
-        $validatedData = $request->validate([
-            'restaurant_id' => 'required|exists:restaurants,id',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:enabled,disabled,deleted',
-        ]);
 
-        $restaurantCategory = RestaurantCategory::create($validatedData);
+        $restaurantCategory = RestaurantCategory::create($request);
         return response()->json($restaurantCategory, 201);
     }
 
@@ -39,22 +37,16 @@ class RestaurantCategoryController extends Controller
         return response()->json($restaurantCategory);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRestaurantCategory $request, $id)
    {
     try {
 
         $restaurantCategory = RestaurantCategory::findOrFail($id);
 
 
-        $validatedData = $request->validate([
-            'restaurant_id' => 'required|exists:restaurants,id',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:enabled,disabled,deleted',
-        ]);
+        $restaurantCategory->update($request);
 
-        $restaurantCategory->update($validatedData);
-
-        $category = Category::findOrFail($validatedData['category_id']);
+        $category = Category::findOrFail($request['category_id']);
 
         return response()->json([
             'restaurant_category' => $restaurantCategory,

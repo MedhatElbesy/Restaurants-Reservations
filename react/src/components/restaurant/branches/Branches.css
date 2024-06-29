@@ -1,48 +1,87 @@
-.br-tabs {
+.branches .br-tabs {
   width: fit-content;
-  margin-right: 1rem !important;
-  flex-direction: column !important;
-  position: sticky !important;
+  margin: 0 auto 3rem !important;
 }
 
-.br-tabs .nav-link {
+.branches .br-tabs .nav-link {
   color: var(--mainColor) !important;
   height: fit-content;
-  padding: 1rem .3rem;
+  padding: 0.3rem 1rem;
   border-radius: 1rem !important;
   white-space: nowrap !important;
-  border: 1px solid var(--mainColor) !important;
-  writing-mode: vertical-lr;
+  border: 1px solid var(--textColor) !important;
   position: relative;
-  
 }
 
-.br-tabs .nav-item:not(:first-child) .nav-link {
-  margin-top: 40px;
+.branches .br-tabs .nav-item:not(:last-child) .nav-link {
+  margin-right: 60px;
 }
 
-.br-tabs .nav-item:not(:first-child) .nav-link::before {
+.branches .br-tabs .nav-item:not(:last-child) .nav-link::before {
   content: "";
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translate(-50%);
-  width: 1px;
-  height: 40px;
-  background-color: var(--mainColor);
+  bottom: 50%;
+  left: calc(100% + 1px);
+  transform: translateY(-50%);
+  width: 60px;
+  height: 1px;
+  background-color: var(--textColor);
 }
 
-.br-tabs .nav-link:hover {
+.branches .br-tabs .nav-link:hover {
   color: var(--secColor) !important;
 }
 
-.br-tabs .nav-link.active {
+.branches .br-tabs .nav-link.active {
   font-weight: bold;
   color: #000 !important;
   background-color: var(--secColor) !important;
 }
 
-.branches .tab-content {
-  padding-left: 2rem !important;
-  flex-grow: 1 !important;
+.branches .img-thumbnail {
+  background-color: var(--secColor) !important;
+  padding: 0.15rem;
+  border: none !important;
+}
+
+.branches .leaflet-container {
+  width: 100%;
+  height: 300px;
+  border: 0.15rem solid var(--secColor);
+  border-radius: var(--bs-border-radius);
+}
+
+.branches svg {
+  color: var(--secColor);
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
+.address .phone a {
+  color: var(--mainColor) !important;
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
+.address .location {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.address .phone {
+  h4 {
+    font-size: 1.2rem;
+  }
+}
+.address .location::before {
+  content: "";
+  position: absolute;
+  bottom: -1.5rem;
+  left: 10%;
+  transform: translateY(-50%, -50%);
+  width: 80%;
+  height: 1px;
+  background-color: var(--textColor);
 }

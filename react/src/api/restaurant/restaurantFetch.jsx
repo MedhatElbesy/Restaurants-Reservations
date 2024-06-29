@@ -55,3 +55,24 @@ export const menuItemById = async (menuItemId) => {
     throw error;
   }
 };
+
+
+export const locationById = async (locationId) => {
+    try {
+        const response = await axios.get(`/location/${locationId}`);
+        return response.data;
+    } catch (error) {
+        console.error("An error occurred during fetching location data", error);
+        throw error;
+    }
+};
+
+export const tableById = async (tableId) => {
+  try {
+      const response = await axios.get(`/tables/${tableId}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching table data", error);
+      throw error;
+  }
+};

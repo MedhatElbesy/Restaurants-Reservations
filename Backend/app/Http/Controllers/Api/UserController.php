@@ -44,6 +44,7 @@ class UserController extends Controller
 
         if (!$request->hasFile('profile_image')) {
             unset($data['profile_image']);
+        
         }
 
         $user->update($data);

@@ -3,7 +3,7 @@ import './Card.css';
 
 export default function Card() {
   return (
-    <main className='flex-card restau'>
+    <main className='flex-card restau my-5'>
       <section>
         <div className="image-container">
           <img src="/images/image_slide3.jpg" alt="Restaurant" />

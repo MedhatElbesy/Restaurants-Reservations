@@ -12,7 +12,9 @@ class RestaurantLocation extends Model
     use HasFactory;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
-
+    protected $casts = [
+        'closed_days' => 'array',
+    ];
 
 
     public function country()
@@ -53,5 +55,14 @@ class RestaurantLocation extends Model
         return $this->hasMany(RestaurantLocationImage::class, 'restaurant_location_id', 'id');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+
+    // const OPENED = 'Opened';
+    // const CLOSED = 'Closed';
+    // const REPORTED = 'Reported';
 
 }
