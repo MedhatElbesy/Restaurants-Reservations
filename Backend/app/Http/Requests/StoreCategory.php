@@ -22,7 +22,7 @@ class StoreCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' =>'required|exits:users,id',
+            'user_id' =>'required|exists:users,id',
             'name' => 'required|unique:categories,name',
             'slug' => 'required|unique:categories,slug',
             'cover' => 'nullable|string',
