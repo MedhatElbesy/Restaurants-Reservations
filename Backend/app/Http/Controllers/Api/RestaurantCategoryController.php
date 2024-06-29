@@ -27,7 +27,7 @@ class RestaurantCategoryController extends Controller
     public function store(StoreRestaurantCategory $request)
     {
 
-        $restaurantCategory = RestaurantCategory::create($request);
+        $restaurantCategory = RestaurantCategory::create($request->validated());
         return response()->json($restaurantCategory, 201);
     }
 
