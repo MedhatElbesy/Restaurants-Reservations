@@ -55,11 +55,16 @@ class RestaurantLocation extends Model
         return $this->hasMany(RestaurantLocationImage::class, 'restaurant_location_id', 'id');
     }
 
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     // const OPENED = 'Opened';
     // const CLOSED = 'Closed';

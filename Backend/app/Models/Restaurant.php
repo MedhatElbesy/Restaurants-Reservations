@@ -43,12 +43,7 @@ class Restaurant extends Model
         return $this->hasMany(MenuCategory::class, 'restaurant_id', 'id');
     }
 
-    // public function comments(){
-    //     return $this->hasMany(Comment::class,'restaurant_id', 'id');
-    // }
+    
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+
 }

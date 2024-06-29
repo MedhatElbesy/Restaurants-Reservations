@@ -84,10 +84,7 @@ Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRest
 Route::apiResource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('restaurant-categories', RestaurantCategoryController::class)
-        ->middleware('check.restaurant.owner')->only(['store', 'update', 'destroy']);
-});
+Route::apiResource('restaurant-categories', RestaurantCategoryController::class);
 
 
 Route::post('/restaurant-location-images', [RestaurantLocationImageController::class,'store']);
@@ -113,6 +110,8 @@ Route::post('/reports', [ReportController::class, 'store']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
 Route::post('/ratings', [RatingController::class, 'store']);
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
+Route::get('/restaurant/{restaurantId}/user/{userId}/rating', [RatingController::class, 'getUserRatingForRestaurant']);
+
 Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
 
