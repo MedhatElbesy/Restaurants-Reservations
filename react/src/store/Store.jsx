@@ -21,6 +21,9 @@ import addTableReducer from '../slices/restaurant/table/addTableSlice';
 import fetchTableByIdReducer from '../slices/restaurant/table/getTableSlice';
 import updateTableReducer from '../slices/restaurant/table/updateTableSlice';
 import deleteTableReducer from '../slices/restaurant/table/deleteTableSlice';
+import changePasswordReducer from '../slices/user/changePasswordSlice';
+import restaurantCategoryReducer from '../slices/restaurant/restaurantCategory/restaurantCategory';
+
 
 
 const store = configureStore({
@@ -47,6 +50,8 @@ const store = configureStore({
     fetchTableById: fetchTableByIdReducer,
     updateTable: updateTableReducer,
     deleteTable: deleteTableReducer,
+    changePassword:changePasswordReducer,
+    restaurantCategory: restaurantCategoryReducer,
   },
 });
 

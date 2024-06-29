@@ -24,7 +24,7 @@ export const deleteRestaurantLocation = async (locationId) => {
 
 export const deleteRestaurantCategory = async (categoryId) => {
     try {
-        const response = await axios.delete(`/restaurant-category/${categoryId}`);
+        const response = await axios.delete(`/categories/${categoryId}`);
         return response.data;
     } catch (error) {
         console.error("An error occurred while deleting restaurant category", error);

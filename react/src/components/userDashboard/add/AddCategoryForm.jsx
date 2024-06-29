@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
-import { useParams } from 'react-router-dom';
+import { addCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { Form, Button, Alert } from 'react-bootstrap';
-import Loader from '../../../layouts/loader/loader';
 
-const EditCategoryForm = () => {
-  const { categoryId } = useParams();
+const AddCategoryForm = () => {
   const dispatch = useDispatch();
-  const { category, status, error } = useSelector(state => state.category);
+  const { status, error } = useSelector(state => state.category);
+  const userId = useSelector(state => state.auth.userId);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -17,24 +15,6 @@ const EditCategoryForm = () => {
     description: '',
     status: 'Enabled',
   });
-
-  useEffect(() => {
-    if (categoryId) {
-      dispatch(fetchCategoryByIdAsync(categoryId));
-    }
-  }, [categoryId]);
-
-  useEffect(() => {
-    if (category) {
-      setFormData({
-        name: category.name,
-        slug: category.slug,
-        cover: null, 
-        description: category.description,
-        status: category.status,
-      });
-    }
-  }, [category]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +37,6 @@ const EditCategoryForm = () => {
   };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     const formDataForSubmission = new FormData();
@@ -65,24 +44,21 @@ const EditCategoryForm = () => {
     formDataForSubmission.append('slug', formData.slug);
     formDataForSubmission.append('description', formData.description);
     formDataForSubmission.append('status', capitalizeStatus(formData.status));
+    formDataForSubmission.append('user_id', userId);
 
     if (formData.cover) {
       formDataForSubmission.append('cover', formData.cover);
     }
 
-    dispatch(updateCategoryAsync({ categoryId, formData: formDataForSubmission }));
+    dispatch(addCategoryAsync(formDataForSubmission));
   };
 
-  if (status === 'loading' || !category) {
-    return (
-      <Loader></Loader>
-    );
-  }
+
 
   if (status === 'failed') {
     return (
       <Alert variant="danger">
-       <p>Failed to load category. Please try again later</p>
+        <p>Failed to add category. Please try again later.</p>
       </Alert>
     );
   }
@@ -90,7 +66,7 @@ const EditCategoryForm = () => {
   return (
     <main>
 
-      <h2>Edit Category</h2>
+      <h2>Add Category</h2>
 
       <Form onSubmit={handleSubmit}>
 
@@ -100,37 +76,38 @@ const EditCategoryForm = () => {
            type="text"
            id="name"
            name="name"
-           value={formData.name} 
+           value={formData.name}
            onChange={handleChange} />
         </div>
 
         <div className="mb-3">
-          <Form.Control 
-          type="hidden"  
-          name="slug" 
-          value={formData.slug} 
-          onChange={handleChange} />
+          <Form.Label htmlFor="slug">Slug:</Form.Label>
+          <Form.Control
+           type="text"
+           id="slug"
+           name="slug"
+           value={formData.slug}
+           onChange={handleChange} />
         </div>
 
         <div className="mb-3">
           <Form.Label htmlFor="cover">Cover:</Form.Label>
-          <Form.Control 
-          type="file" 
-          id="cover" 
-          name="cover" 
-          onChange={handleFileChange} />
-          {category.cover && 
-          <p className="text-muted">Current Cover: {category.cover}</p>}
+          <Form.Control
+           type="file"
+           id="cover"
+           name="cover"
+           onChange={handleFileChange} />
         </div>
 
         <div className="mb-3">
           <Form.Label htmlFor="description">Description:</Form.Label>
-          <Form.Control 
-          as="textarea" 
-          id="description" 
-          rows={3} name="description" 
-          value={formData.description} 
-          onChange={handleChange} />
+          <Form.Control
+           as="textarea"
+           id="description"
+           rows={3}
+           name="description"
+           value={formData.description}
+           onChange={handleChange} />
         </div>
 
         <div className="mb-3">
@@ -141,32 +118,28 @@ const EditCategoryForm = () => {
             name="status"
             label="Enabled"
             value="Enabled"
-            checked={formData.status === 'enabled'}
+            checked={formData.status === 'Enabled'}
             onChange={handleChange}
           />
-
           <Form.Check
             type="radio"
             id="disabled"
             name="status"
             label="Disabled"
             value="Disabled"
-            checked={formData.status === 'disabled'}
+            checked={formData.status === 'Disabled'}
             onChange={handleChange}
           />
-
         </div>
 
-        <Button 
-        variant="primary"
-        type="submit">
-          Update Category
+        <Button variant="primary" type="submit">
+          Add Category
         </Button>
 
       </Form>
-
+      
     </main>
   );
 };
 
-export default EditCategoryForm;
+export default AddCategoryForm;

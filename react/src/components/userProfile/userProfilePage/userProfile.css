@@ -9,9 +9,6 @@ img[alt="Profile"] {
   border-radius: 50%; 
 }
 
-.edit-icon {
-  font-size: 2em;
-}
 
 .userProfile{
   overflow-x: hidden;
@@ -23,11 +20,11 @@ img[alt="Profile"] {
 }
 
 .userProfile h2 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Playfair Display", serif;
   border-radius: 5px;
   padding-left: 15px;
   box-shadow: 3px 3px 10px rgba(234, 129, 9, 0.708);
-  height: 8vh;
+  min-height: 15vh;
   display: flex;
   align-items: center;
 
@@ -57,5 +54,11 @@ img[alt="side image"]{
   height:100%;
   border-radius: 8px;
   object-fit:50% 50%;
+}
+
+
+.icon-wrapper{
+  font-family: 'Times New Roman', Times, serif;
+  font-size: larger;
 }
 
