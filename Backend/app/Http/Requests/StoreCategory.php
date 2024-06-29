@@ -22,10 +22,10 @@ class StoreCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' =>'required|exits:users,id',
+            'user_id' =>'required|exists:users,id',
             'name' => 'required|unique:categories,name',
             'slug' => 'required|unique:categories,slug',
-            'cover' => 'nullable|string',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|in:Enabled,Disabled,Deleted',
         ];
