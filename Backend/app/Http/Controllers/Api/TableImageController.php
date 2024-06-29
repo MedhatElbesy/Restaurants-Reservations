@@ -20,7 +20,7 @@ class TableImageController extends Controller
         return TableImageResource::collection(TableImage::all());
     }
 
-    public function store(Request $request, $tableId)
+    public function store(Request $request)
     {
         $request->validate([
             'images' => 'required|array',
@@ -34,7 +34,6 @@ class TableImageController extends Controller
 
             foreach ($uploadedImages as $imageName) {
                 $tableImage = new TableImage([
-                    'table_id' => $tableId,
                     'image' => $imageName,
                 ]);
                 $tableImage->save();
@@ -55,19 +54,19 @@ class TableImageController extends Controller
         return new TableImageResource($tableImage);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $tableImage = TableImage::findOrFail($id);
+        $tableImage = TableImage::findOrFail($request->id);
 
         DB::beginTransaction();
         try {
             Storage::disk('public')->delete('table_images/' . $tableImage->image);
 
-            $imagePath = $this->uploadImage($request, 'image', 'table_cover_images');
+            $imagePath = $this->uploadImage($request, 'image', 'table_images');
             $tableImage->image = basename($imagePath);
             $tableImage->save();
 
