@@ -25,7 +25,7 @@ class StoreCategory extends FormRequest
             'user_id' =>'required|exists:users,id',
             'name' => 'required|unique:categories,name',
             'slug' => 'required|unique:categories,slug',
-            'cover' => 'nullable|string',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|in:Enabled,Disabled,Deleted',
         ];
