@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTable;
+use App\Http\Requests\UpdateTable;
 use App\Models\Table;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use App\Http\Resources\TableResource;
 use App\Helpers\ApiResponse;
@@ -12,32 +15,21 @@ use Illuminate\Support\Facades\Storage;
 
 class TableController extends Controller
 {
+    use UploadImageTrait;
+
     public function index()
     {
         return TableResource::collection(Table::all());
     }
 
-    public function store(Request $request)
+    public function store(StoreTable $request)
     {
-        $request->validate([
-            'restaurant_location_id' => 'required|integer',
-            'number_of_chairs' => 'required|integer',
-            'max_number_of_persons' => 'required|integer',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
-            'extra_number_of_chairs' => 'nullable|integer',
-            'number_of_extra_chairs' => 'nullable|integer',
-            'extra_number_of_childs_chairs' => 'nullable|integer',
-            'number_of_extra_childs_chairs' => 'nullable|integer',
-            'status' => 'required|in:Available,Unavailable',
-        ]);
 
         $data = $request->all();
 
         if ($request->hasFile('cover')) {
-            $coverPath = $request->file('cover')->store('images/table_covers', 'public');
-            $data['cover'] = basename($coverPath);
+            $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
+            $data['cover'] = $coverPath;
         }
 
         $table = Table::create($data);
@@ -50,30 +42,16 @@ class TableController extends Controller
         return new TableResource($table);
     }
 
-    public function update(Request $request, Table $table)
+    public function update(UpdateTable $request, Table $table)
     {
-        $request->validate([
-            'restaurant_location_id' => 'nullable|integer',
-            'number_of_chairs' => 'nullable|integer',
-            'max_number_of_persons' => 'nullable|integer',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'nullable|numeric',
-            'sale_price' => 'nullable|numeric',
-            'extra_number_of_chairs' => 'nullable|integer',
-            'number_of_extra_chairs' => 'nullable|integer',
-            'extra_number_of_childs_chairs' => 'nullable|integer',
-            'number_of_extra_childs_chairs' => 'nullable|integer',
-            'status' => 'nullable|in:Available,Unavailable',
-        ]);
-
         $data = $request->all();
 
         DB::beginTransaction();
         try {
             if ($request->hasFile('cover')) {
-                Storage::disk('public')->delete('images/table_covers/' . $table->cover);
-                $coverPath = $request->file('cover')->store('images/table_covers', 'public');
-                $data['cover'] = basename($coverPath);
+                Storage::disk('public')->delete('table_cover_images/' . $table->cover);
+                $coverPath = $this->uploadImage($request, 'cover', 'table_cover_images');
+                $data['cover'] = $coverPath;
             }
 
             $table->update($data);
@@ -90,7 +68,7 @@ class TableController extends Controller
     {
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('images/table_covers/' . $table->cover);
+            Storage::disk('public')->delete('table_cover_images/' . $table->cover);
             $table->delete();
 
             DB::commit();

@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\ItemStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,21 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restaurant_categories', function (Blueprint $table) {
+        Schema::create('reservation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')
-                ->constrained('restaurants')
+            $table->timestamps();
+            //user id
+            $table->foreignId('user_id')
+                ->constrained('users')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('category_id')
-                ->constrained('categories')
+            //table id
+            $table->foreignId('table_id')
+                ->constrained('tables')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->enum('status', [ItemStatus::Enabled, ItemStatus::Disabled, ItemStatus::Deleted])->default(ItemStatus::Enabled);
-            $table->timestamps();
+            // time for reservation
+            $table->time('reservation_time');
+
         });
     }
 
@@ -35,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('restaurant_categories');
+        Schema::dropIfExists('reservation');
     }
 };

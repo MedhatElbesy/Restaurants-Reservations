@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\TableImage;
+use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,31 +13,33 @@ use App\Helpers\ApiResponse;
 
 class TableImageController extends Controller
 {
-    public function index($tableId)
+    use UploadImageTrait;
+
+    public function index()
     {
-        $images = TableImage::where('table_id', $tableId)->get();
-        return TableImageResource::collection($images);
+        return TableImageResource::collection(TableImage::all());
     }
 
-    public function store(Request $request, $tableId)
+    public function store(Request $request)
     {
         $request->validate([
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $images = [];
         DB::beginTransaction();
         try {
-            foreach ($request->file('images') as $image) {
-                $imagePath = $image->store('images/table_images', 'public');
+            $uploadedImages = $this->uploadMultipleImages($request->file('images'), 'table_images');
+            $images = [];
+
+            foreach ($uploadedImages as $imageName) {
                 $tableImage = new TableImage([
-                    'table_id' => $tableId,
-                    'image' => basename($imagePath),
+                    'image' => $imageName,
                 ]);
                 $tableImage->save();
                 $images[] = $tableImage;
             }
+
             DB::commit();
             return ApiResponse::sendResponse(201, 'Images uploaded successfully', TableImageResource::collection($images));
         } catch (\Throwable $e) {
@@ -51,19 +54,19 @@ class TableImageController extends Controller
         return new TableImageResource($tableImage);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $tableImage = TableImage::findOrFail($id);
+        $tableImage = TableImage::findOrFail($request->id);
 
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('images/table_images/' . $tableImage->image);
+            Storage::disk('public')->delete('table_images/' . $tableImage->image);
 
-            $imagePath = $request->file('image')->store('images/table_images', 'public');
+            $imagePath = $this->uploadImage($request, 'image', 'table_images');
             $tableImage->image = basename($imagePath);
             $tableImage->save();
 
@@ -81,7 +84,7 @@ class TableImageController extends Controller
 
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('images/table_images/' . $tableImage->image);
+            Storage::disk('public')->delete('table_images/' . $tableImage->image);
             $tableImage->delete();
 
             DB::commit();
