@@ -14,6 +14,10 @@ import {
   MenuItem,
   InputAdornment,
   IconButton,
+  FormGroup,
+  FormControlLabel,
+  Radio,
+  RadioGroup
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -24,8 +28,13 @@ import Swal from "sweetalert2";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="/">
         Your Website
       </Link>{" "}
@@ -48,6 +57,7 @@ const Register = () => {
     gender: "",
     profile_image: "",
     birth_date: "",
+    roles_name:""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -66,12 +76,19 @@ const Register = () => {
     }));
   };
 
+  const handleRole = (e) =>{
+    const {value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      roles_name:value,
+    }));
+  }
   // Validate first name and last name
   const validateName = (name) => {
-    const regex = /^[a-zA-Z]{4,}$/;
+    const regex = /^[a-zA-Z]{3,}$/;
     return regex.test(name)
       ? null
-      : "Name should be at least 4 characters and contain only letters.";
+      : "Name should be at least 3 characters and contain only letters.";
   };
 
   // Validate password
@@ -124,11 +141,11 @@ const Register = () => {
     ].filter((error) => error !== null);
 
     if (errorMessages.length > 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: errorMessages.join("\n"),
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Oops...",
+      //   text: errorMessages.join("\n"),
+      // });
       setError(errorMessages.join("\n"));
       return;
     }
@@ -143,17 +160,37 @@ const Register = () => {
       return;
     }
 
+    if (!formData.roles_name) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please select you want to register as a user or an admin.",
+      });s
+      setError("Please select you want to register as a user or an admin.");
+      return;
+    }
+
     try {
       const data = await dispatch(register(formData)).unwrap();
       localStorage.setItem("token", data.token);
-      navigate("/");
+      // if(formData.roles_name === "administrator"){
+      //   navigate("/admin");
+      // }else{
+      //   navigate("/");
+      // }
+      Swal.fire({
+        icon: "success",
+        title: "Registration successful!",
+        text: "A verification email has been sent to your email address.",
+      });
+      navigate('/verify/:token');
     } catch (err) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: authError || "Registration failed.",
       });
-      setError(authError || "Registration failed.");
+      setError(authError || "Registration failed. Try Again!");
     }
   };
 
@@ -428,8 +465,31 @@ const Register = () => {
                       }}
                     />
                   </Grid>
+                  <Grid item xs={12}>
+                    <FormGroup>
+                      <RadioGroup 
+                        name="roles_name"
+                        value={formData.roles_name}
+                        onChange={handleRole}
+                      >
+                        <FormControlLabel
+                          value="user"
+                          control={<Radio />}
+                          label="User"
+                        />
+                        <FormControlLabel
+                          value="admin"
+                          control={<Radio />}
+                          label="Admin"
+                        />
+                      </RadioGroup>
+                    </FormGroup>
+                  </Grid>
+                  
                 </Grid>
                 <Button
+                  // component={Link}
+                  // to="/verify"
                   type="submit"
                   fullWidth
                   variant="contained"

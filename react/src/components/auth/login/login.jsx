@@ -112,11 +112,7 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "rgba(255,255,255,0.8)",
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor:'rgba(0,0,0,0.4)',
+            
           }}
         >
           <Box
@@ -129,7 +125,6 @@ const Login = () => {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "#7B3C1E" }}>
-            <Avatar sx={{ m: 1, bgcolor: '#ffd28d', color:'white' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -179,7 +174,7 @@ const Login = () => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2" sx={{ color: "#7B3C1E" }}>
+                  <Link href="/forget-password" variant="body2" sx={{ color: "#7B3C1E" }}>
                     Forgot password?
                   </Link>
                 </Grid>

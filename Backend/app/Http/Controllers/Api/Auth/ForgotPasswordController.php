@@ -45,7 +45,7 @@ class ForgotPasswordController extends Controller
             DB::rollBack();
             Log::error('Error in sendResetToken: ' . $e->getMessage());
 
-            return ApiResponse::sendResponse(500, 'Failed to create account. Please try again later.');
+            return ApiResponse::sendResponse(500, 'Failed to send email. Please try again later.');
         }
     }
 }

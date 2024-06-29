@@ -13,6 +13,8 @@ import store from "./store/Store.jsx";
 // Authentication
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register.jsx";
+import ForgetPassword from "./components/auth/login/forgetPassword.jsx";
+import ResetPassword from "./components/auth/login/resetpassword.jsx";
 
 // Home
 import Home from "./components/homepage/Home.jsx";
@@ -40,11 +42,18 @@ import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
 // import Tables from "./components/restaurant/tables/Tables.jsx";
 
-import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
 import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
 import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
+
+// Admin Dashboard
+import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
+import { Ratings } from "./components/AdminDashboard/ratings.jsx";
+import { Reports } from "./components/AdminDashboard/reports.jsx";
+import { Category } from "./components/AdminDashboard/Category.jsx";
+import About from "./components/AdminDashboard/About.jsx";
+import Verify from "./components/auth/register/verifyPage.jsx";
 
 function App() {
   const routes = createRoutesFromElements(
@@ -52,6 +61,9 @@ function App() {
       {/* Auth Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify" element={<Verify />} />
+      <Route path="/forget-password" element={<ForgetPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/" element={<Home />} />
 
       {/* User Routes */}
@@ -124,7 +136,11 @@ function App() {
       />
 
       {/* AdminDashboard */}
-      <Route path="/admin" element={<Dashboard/>} />
+      <Route path="/admin" element={<AdminDashboard/>} />
+      <Route path="/admin/rating" element={<Ratings/>} />
+      <Route path="/admin/report" element={<Reports/>} />
+      <Route path="/admin/category" element={<Category/>} />
+      <Route path="/admin/about" element={<About/>} />
     </>
   );
 
