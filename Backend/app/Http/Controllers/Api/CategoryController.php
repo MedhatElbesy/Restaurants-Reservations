@@ -28,16 +28,16 @@ class CategoryController extends Controller
         $data = $request->except('cover', '_token', '_method');
         $data['cover'] = $this->uploadImage($request, 'cover', 'categories');
 
-        $data['user_id'] = Auth::id(); //owner of the category
-
-
-        //specify category scope
-        $user = User::when('id',Auth::id())->get();
-        if($user->role_name == "admin"){
-           $data['category_scope']='general';
-        }else{
-            $data['category_scope']='specific';
-        }
+//        $data['user_id'] = Auth::id(); //owner of the category
+//
+//
+//        //specify category scope
+//        $user = User::when('id',Auth::id())->get();
+//        if($user->role_name == "admin"){
+//           $data['category_scope']='general';
+//        }else{
+//            $data['category_scope']='specific';
+//        }
 
         $category = Category::create($data);
 
@@ -67,12 +67,12 @@ class CategoryController extends Controller
         ]);
 
         try {
-            //validate user
-            $user = User::where('id',Auth::id())->get();
-            if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
-                 throw new \Exception("can't update this category");
-            }
-
+//            //validate user
+//            $user = User::where('id',Auth::id())->get();
+//            if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
+//                 throw new \Exception("can't update this category");
+//            }
+//
 
             $category->fill($request->all());
             if ($request->hasFile('cover')) {

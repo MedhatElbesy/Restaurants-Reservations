@@ -76,10 +76,20 @@ Route::get('cities', [CityController::class, 'getAllCities']);
 Route::get('cities/{id}', [CityController::class, 'getCityByGovernorateId']);
 Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
-Route::middleware('auth:sanctum')->group(function (){
-    Route::apiResource('categories', CategoryController::class)->middleware('category.owner')->only(['store','update','delete']);
-    Route::get('/category/cur-user',[CategoryController::class,'getOwnerCategories']); 
-});
+
+//// Categories route with conditional middleware
+//Route::get('categories', [CategoryController::class, 'index']);
+//Route::middleware(['auth:sanctum', 'category.owner'])->group(function () {
+//    Route::post('categories', [CategoryController::class, 'store']);
+//    Route::put('categories/{category}', [CategoryController::class, 'update']);
+//    Route::delete('categories/{category}', [CategoryController::class, 'destroy']);
+//});
+//Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories'])->middleware('auth:sanctum');
+
+Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories']);
+
+Route::apiResource('categories',CategoryController::class);
+
 
 Route::resource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
