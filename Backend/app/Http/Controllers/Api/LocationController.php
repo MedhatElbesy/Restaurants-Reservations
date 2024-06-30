@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class LocationController extends Controller
                         ->first(['latitude', 'longitude']);
 
         if (!$userAddress) {
-            return response()->json(['error' => 'User address not found'], 404);
+            return ApiResponse::sendResponse(404,'User address not found');
         }
 
         $latitude = $userAddress->latitude;
@@ -24,12 +25,12 @@ class LocationController extends Controller
         $haversine = "(6371 * acos(cos(radians($latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians($longitude)) + sin(radians($latitude)) * sin(radians(latitude))))";
 
         $nearestLocations = DB::table('restaurant_locations')
-                                ->select('*')
-                                ->selectRaw("$haversine AS distance")
-                                ->having('distance', '<', $radius)
-                                ->orderBy('distance')
-                                ->get();
-
-        return response()->json($nearestLocations);
+                            ->select('restaurant_locations.*', 'restaurant_location_images.image')
+                            ->selectRaw("$haversine AS distance")
+                            ->leftJoin('restaurant_location_images', 'restaurant_locations.id', '=', 'restaurant_location_images.restaurant_location_id')
+                            ->having('distance', '<', $radius)
+                            ->orderBy('distance')
+                            ->get();
+        return ApiResponse::sendResponse(200,"Nearest",$nearestLocations );
     }
 }
