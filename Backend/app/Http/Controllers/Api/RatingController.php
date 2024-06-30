@@ -25,7 +25,7 @@ class RatingController extends Controller
         }
         return ApiResponse::sendResponse(200,'Rating',$rating);
     }
-    
+
     public function store(StoreRatingRequest $request)
     {
         try {
@@ -59,6 +59,23 @@ class RatingController extends Controller
             return ApiResponse::sendResponse(200, 'Average rating', $averageRating);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to calculate average rating', $e->getMessage());
+        }
+    }
+
+
+    public function topRatedRestaurants($limit = 10)
+    {
+        try {
+            $topRatedRestaurants = DB::table('ratings')
+                ->select('restaurant_location_id', DB::raw('AVG(rate) as average_rating'))
+                ->groupBy('restaurant_location_id')
+                ->orderByDesc('average_rating')
+                ->limit($limit)
+                ->get();
+
+            return ApiResponse::sendResponse(200, 'Top rated restaurants', $topRatedRestaurants);
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to fetch top rated restaurants', ['error' => $e->getMessage()]);
         }
     }
 }
