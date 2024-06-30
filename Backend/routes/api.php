@@ -76,8 +76,10 @@ Route::get('cities', [CityController::class, 'getAllCities']);
 Route::get('cities/{id}', [CityController::class, 'getCityByGovernorateId']);
 Route::get('states', [StateController::class, 'getAllStates']);
 Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
-
-Route::apiResource('categories', CategoryController::class);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::apiResource('categories', CategoryController::class)->middleware('category.owner')->only(['store','update','delete']);
+    Route::get('/category/cur-user',[CategoryController::class,'getOwnerCategories']); 
+});
 
 Route::resource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
@@ -123,3 +125,4 @@ Route::apiResource('restaurant-images',ResturantImagesController::class);
 Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
+
