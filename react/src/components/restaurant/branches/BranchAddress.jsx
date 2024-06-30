@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import MapContainer from "./Map";
+import { useBranch } from "./BranchContext";
+import MapContainer from "../../Map/Map";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
@@ -7,9 +8,9 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function BranchAddress({ branch }) {
+export function BranchAddress() {
   const { restaurant } = useSelector((state) => state.restaurant);
-
+  const { branch } = useBranch();
   return (
     <article className="address mx-0 d-flex py-5 border-bottom">
       <div className="col-6">
@@ -38,7 +39,7 @@ export function BranchAddress({ branch }) {
             <a href={`tel:${branch.mobile_number}`}>
               <FontAwesomeIcon icon={faPhone} /> {branch.mobile_number}
             </a>
-            <a href={`tel:${branch.mobile_number}`}>
+            <a href={`tel:${branch.phone_number}`}>
               <FontAwesomeIcon icon={faHome} /> {branch.phone_number}
             </a>
           </div>

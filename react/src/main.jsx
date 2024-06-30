@@ -12,13 +12,16 @@ library.add(faCoffee, faCheckSquare);
 
 
 import { BodyColorProvider } from './BodyColorContext';
+import { BranchProvider } from "./components/restaurant/branches/BranchContext.jsx";
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 <React.StrictMode>
     <BodyColorProvider>
+      <BranchProvider>
       <App />
+      </BranchProvider>
     </BodyColorProvider>
 </React.StrictMode>
 )

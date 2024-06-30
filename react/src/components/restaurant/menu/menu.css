@@ -2,8 +2,8 @@
   overflow-x: auto;
   width: 90%;
   margin: auto;
+  padding: 0 !important; /* temp */
   flex-wrap: nowrap !important;
-
   .nav-link {
     color: var(--mainColor) !important;
     height: 100%;
@@ -16,7 +16,7 @@
 
     &.active {
       font-weight: bold;
-      color: #000 !important;
+      color: var(--backgroundColor) !important;
       background-color: var(--secColor) !important;
     }
   }
@@ -71,8 +71,8 @@ h2 {
     display: flex;
     justify-content: center;
     color: #868686;
-    background-color: #000000b2;
-    letter-spacing: .4rem;
+    background-color: #04080eb2;
+    letter-spacing: 0.4rem;
     font-size: 2rem;
     z-index: 9;
   }

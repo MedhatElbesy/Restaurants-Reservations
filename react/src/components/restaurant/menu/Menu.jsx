@@ -6,7 +6,6 @@ import "./menu.css"
 
 export default function Menu() {
   const { menuCategories } = useSelector((state) => state.restaurant);
-  console.log(menuCategories);
 
   return (
     <section className="">

@@ -2,13 +2,15 @@ import { openingDays } from "../../../utils";
 import { useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import Image from "react-bootstrap/Image";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { useBranch } from "./BranchContext"; // Import the useBranch hook
 
-export function BranchOpening({ branch }) {
+export const BranchOpening = () => {
   const { restaurant } = useSelector((state) => state.restaurant);
   const { restaurantId } = useParams();
+  const { branch } = useBranch();
+
   const { fromTo, open, close, isClosed } = openingDays(
     branch.closed_days,
     branch.opening_time,
@@ -54,4 +56,4 @@ export function BranchOpening({ branch }) {
       </div>
     </article>
   );
-}
+};
