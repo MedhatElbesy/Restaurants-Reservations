@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ReservationCreated;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantLocationRequest;
@@ -9,11 +10,15 @@ use App\Http\Requests\UpdateRestaurantLocationsRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantLocation;
 use App\Models\RestaurantLocationImage;
+use App\Models\User;
+use App\Notifications\RestaurantLocationCreated;
 use App\Traits\UploadImageTrait;
 use Exception;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantlocationsController extends Controller
 {
@@ -52,7 +57,13 @@ class RestaurantlocationsController extends Controller
                     ]);
                 }
             }
-
+            // $user = Auth::user();
+            // $user = auth()->user();
+            // if ($user) {
+            //     $user->notify(new RestaurantLocationCreated($restaurantLocation));
+            // }
+            // event(new ReservationCreated($restaurantLocation));
+            // event(new ReservationCreated($restaurantLocation));
             return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);
@@ -89,7 +100,7 @@ class RestaurantlocationsController extends Controller
 
             $closedDays = is_array($validatedData['closed_days']) ? $validatedData['closed_days'] : explode(',', $validatedData['closed_days']);
             $location->update($request->validated());
-            
+
             if ($images = $request->file('images')) {
             $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
 

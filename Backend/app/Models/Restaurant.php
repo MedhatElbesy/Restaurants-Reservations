@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ReservationCreatedNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,7 +44,7 @@ class Restaurant extends Model
         return $this->hasMany(MenuCategory::class, 'restaurant_id', 'id');
     }
 
-    
+
 
 
 }

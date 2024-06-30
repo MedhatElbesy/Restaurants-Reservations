@@ -99,7 +99,7 @@ Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 
 // Route::apiResource('restaurant-locations', RestaurantlocationsController::class);
 Route::get('/restaurantslocations/{restaurantId}', [RestaurantLocationsController::class, 'getLocationsByRestaurant']);
-Route::post('/restaurantslocations',[RestaurantLocationsController::class,'store']);
+Route::post('/restaurantslocations',[RestaurantLocationsController::class,'store'])->middleware('auth:sanctum');
 Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);

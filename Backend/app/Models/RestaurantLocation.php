@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class RestaurantLocation extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
@@ -66,8 +68,9 @@ class RestaurantLocation extends Model
         return $this->hasMany(Comment::class);
     }
 
-    // const OPENED = 'Opened';
-    // const CLOSED = 'Closed';
-    // const REPORTED = 'Reported';
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
