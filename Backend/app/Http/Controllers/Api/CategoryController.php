@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Helpers\ApiResponse;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
+use App\Models\User;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Exception;
 
 
 class CategoryController extends Controller
@@ -25,8 +28,16 @@ class CategoryController extends Controller
         $data = $request->except('cover', '_token', '_method');
         $data['cover'] = $this->uploadImage($request, 'cover', 'categories');
 
-        //
+        $data['user_id'] = Auth::id(); //owner of the category
 
+
+        //specify category scope
+        $user = User::when('id',Auth::id())->get();
+        if($user->role_name == "admin"){
+           $data['category_scope']='general';
+        }else{
+            $data['category_scope']='specific';
+        }
 
         $category = Category::create($data);
 
@@ -56,6 +67,13 @@ class CategoryController extends Controller
         ]);
 
         try {
+            //validate user
+            $user = User::where('id',Auth::id())->get();
+            if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
+                 throw new \Exception("can't update this category");
+            }
+
+
             $category->fill($request->all());
             if ($request->hasFile('cover')) {
                 $cover = $request->file('cover');
@@ -82,6 +100,10 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json(null, 204);
+    }
+    public function getOwnerCategories(){
+        $category = Category::where('user_id',Auth::id())->get();
+        return ApiResponse::sendResponse(201,"",$category);
     }
 }
 
