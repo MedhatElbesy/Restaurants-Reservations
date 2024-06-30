@@ -7,6 +7,9 @@ abstract class ItemStatus
     const Pending   = 'pending';
     const Success   = 'success';
     const Failed   = 'failed';
+    const Rejected = 'rejected';
+    const Confirmed = 'confirmed';
+    const Cancelled = 'cancelled';
 
     const Reported = 'Reported';
     const Enabled   = 'enabled';

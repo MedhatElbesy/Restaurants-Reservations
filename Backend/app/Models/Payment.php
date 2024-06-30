@@ -15,4 +15,9 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
 }
