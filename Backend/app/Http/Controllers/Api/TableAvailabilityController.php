@@ -21,11 +21,12 @@ class TableAvailabilityController extends Controller
         if (!$availability) {
             return ApiResponse::sendResponse(404, 'Table availability not found for the given table_id.');
         }
+        return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.',$availability );
 
-        return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.', [
-            'table_id' => $table_id,
-            'status' => $availability->status
-        ]);
+        // return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.', [
+        //     'table_id' => $table_id,
+        //     'status' => $availability->status
+        // ]);
     }
 
     /**
