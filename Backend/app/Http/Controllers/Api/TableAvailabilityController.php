@@ -16,7 +16,7 @@ class TableAvailabilityController extends Controller
 
 
     function show($table_id){
-        $availability = TableAvailability::where('table_id', $table_id)->first();
+        $availability = TableAvailability::where('table_id', $table_id)->get();
 
         if (!$availability) {
             return ApiResponse::sendResponse(404, 'Table availability not found for the given table_id.');
