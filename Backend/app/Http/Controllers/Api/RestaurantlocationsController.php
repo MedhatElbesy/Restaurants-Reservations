@@ -63,6 +63,8 @@ class RestaurantlocationsController extends Controller
             //     $user->notify(new RestaurantLocationCreated($restaurantLocation));
             // }
             // event(new ReservationCreated($restaurantLocation));
+            Notification::send(auth()->user(), new RestaurantLocationCreated($restaurantLocation));
+
             // event(new ReservationCreated($restaurantLocation));
             return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
         } catch (Exception $e) {

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\RestaurantLocation;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,13 +16,16 @@ class ReservationCreated implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
 
-    public $reservation;
+    public $restaurantLocation;
+
     /**
      * Create a new event instance.
+     *
+     * @param RestaurantLocation $restaurantLocation
      */
-    public function __construct($reservation)
+    public function __construct(RestaurantLocation $restaurantLocation)
     {
-        $this->reservation = $reservation;
+        $this->restaurantLocation = $restaurantLocation;
     }
 
     /**
@@ -32,12 +36,18 @@ class ReservationCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('reservation.' . $this->reservation->id),
+            new PrivateChannel('my-channel'),
         ];
     }
 
-    public function broadcastAs()
+    public function broadcastWith(): array
     {
-        return 'reservation.created';
+        return [
+            'restaurantLocation' => $this->restaurantLocation,
+        ];
+    }
+    public function broadcastAs(): string
+    {
+        return 'RestaurantLocationCreated';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\RestaurantLocation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -19,7 +20,7 @@ class RestaurantLocationCreated extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($restaurantLocation)
+    public function __construct( RestaurantLocation $restaurantLocation)
     {
         $this->restaurantLocation = $restaurantLocation;
     }
@@ -32,7 +33,7 @@ class RestaurantLocationCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'broadcast'];
+        return [ 'broadcast'];
     }
 
     /**
@@ -55,6 +56,8 @@ class RestaurantLocationCreated extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\BroadcastMessage
      */
+
+
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
