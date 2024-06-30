@@ -5,22 +5,20 @@ import { TableDetails } from "./TableDetails";
 export function Table({ table }) {
   const [showTable, setShowTable] = useState(false);
 
+  function handelCloseTable(show) {
+    setShowTable(() => show);
+  }
+
   return (
-    <article className="d-flex flex-wrap justify-content-center my-5">
-        <figure className="table-cover col-12" onClick={() => setShowTable(true)}>
-          <Image
-            src={table.cover}
-            rounded
-            fluid
-            style={{ maxHeight: "100%", objectFit: "cover", width: "100%" }}
-          />
-        </figure>
-        {showTable && (
-          <div className="table-details">
-            <div className="text-danger close" onClick={() => setShowTable(false)}>X</div>
-            <TableDetails table={table} />
-          </div>
-        )}
-    </article>
+    <div className="branch-table col-4 px-4 py-4">
+      <figure className="table-cover">
+        <span className="table-id text-danger">#{table.id}</span>
+        <Image src={table.cover} fluid />
+        <figcaption>
+          {table.description} <span onClick={() => setShowTable(true)} className="d-block">show table</span>
+        </figcaption>
+      </figure>
+      {showTable && <TableDetails table={table} onClose={handelCloseTable} />}
+    </div>
   );
 }

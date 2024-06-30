@@ -7,14 +7,13 @@
 
 .more {
   background-color: var(--secColor);
-  border: 1px solid #363636;
-  color: black !important;
+  border: 1px solid var(--secColor);
+  color: var(--backgroundColor) !important;
 }
 
 .more:active {
   background-color: #e0b370;
-  border: 1px solid #363636;
-  color: black !important;
+  border: 1px solid #e0b370;
 }
 
 .reserve {

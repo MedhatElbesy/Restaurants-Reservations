@@ -1,0 +1,60 @@
+/* CustomCalendar.css */
+
+/* Change the overall calendar container */
+.react-calendar {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Change the navigation bar (arrows and month/year) */
+.react-calendar__navigation {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.react-calendar__navigation button {
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Change the day cells */
+.react-calendar__tile {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6f7ff;
+  border-color: #007bff;
+}
+
+/* Change the selected day */
+.react-calendar__tile--active {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-calendar__tile--active:hover,
+.react-calendar__tile--active:focus {
+  background-color: #0056b3;
+}
+
+/* Change the weekend days */
+.react-calendar__month-view__days__day--weekend {
+  color: #d9534f;
+}
+
+/* Change the week numbers */
+.react-calendar__tile--now {
+  background: #ffeb3b;
+  border-radius: 50%;
+}
+
+/* Change the disabled days */
+.react-calendar__tile--disabled {
+  color: #dcdcdc;
+}

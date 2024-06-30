@@ -1,8 +1,6 @@
 import Image from "react-bootstrap/Image";
 
 export function BranchTables({ onShowTables, branch }) {
-  // const { restaurantId } = useParams();
-
   return (
     <article className=" py-5 border-bottom">
       <div className="opening mx-0 d-flex justify-content-between">
