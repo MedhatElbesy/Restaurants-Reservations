@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\DB;
 class TableAvailabilityController extends Controller
 {
 
+
+    function show($table_id){
+        $availability = TableAvailability::where('table_id', $table_id)->first();
+
+        if (!$availability) {
+            return ApiResponse::sendResponse(404, 'Table availability not found for the given table_id.');
+        }
+
+        return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.', [
+            'table_id' => $table_id,
+            'status' => $availability->status
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
