@@ -1,6 +1,7 @@
+import { useBranch } from "./BranchContext";
 import Image from "react-bootstrap/Image";
-
-export function BranchTables({ onShowTables, branch }) {
+export function BranchTables({ onShowTables }) {
+  const { branch } = useBranch();
   return (
     <article className=" py-5 border-bottom">
       <div className="opening mx-0 d-flex justify-content-between">

@@ -6,7 +6,6 @@ export const addMenuItem = async (data) => {
     try {
   
       const response = await axios.post(`/menu-items`, data);
-      
       return response.data; 
     } catch (error) {
       console.error("An error occurred while adding menu item", error);

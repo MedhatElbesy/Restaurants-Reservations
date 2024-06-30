@@ -8,7 +8,7 @@ export function TableGallery({ gallery }) {
       <div className="expanded col-10">
         <Image src={expandedImage.image} fluid />;
       </div>
-      <div className="images col-2 d-flex justify-content-around align-items-center flex-column">
+      <div className="images col-2 d-flex justify-content-evenly align-items-center flex-column">
         {gallery.map((image) => (
           <div
             className={`image ${
