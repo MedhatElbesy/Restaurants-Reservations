@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
@@ -118,3 +119,6 @@ Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class
 Route::apiResource('table-images',TableImageController::class);
 
 Route::apiResource('restaurant-images',ResturantImagesController::class);
+
+Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
+

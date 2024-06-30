@@ -42,7 +42,12 @@ export const addMenuItem = async (data) => {
   export const addTable= async (data) => {
     try {
   
-      const response = await axios.post(`/tables`, data);
+      const response = await axios.post(`/tables`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
       return response.data; 
     } catch (error) {
       console.error("An error occurred while adding table", error);
@@ -65,5 +70,38 @@ export const addMenuItem = async (data) => {
       throw error;
     }
   };
+
+
+  export const addCategory= async (data) => {
+    try {
+  
+      const response = await axios.post(`/categories`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding category", error);
+      throw error;
+    }
+  };
+
+  export const addRestaurantCategory= async (data) => {
+    try {
+  
+      const response = await axios.post(`/restaurant-categories`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding restaurant category", error);
+      throw error;
+    }
+  };
+
+
 
   

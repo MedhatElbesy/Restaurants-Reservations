@@ -21,14 +21,9 @@ import { login } from "../../../slices/auth//authSlice";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="/">
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -50,8 +45,8 @@ const Login = () => {
 
   useEffect(() => {
     if (authStatus.isAuthenticated) {
-      if (authStatus.role === "admin") {
-        navigate("/exams");
+      if (authStatus.role === 'admin') {
+        navigate('/admin');
       } else {
         navigate("/");
       }
@@ -117,6 +112,7 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "rgba(255,255,255,0.8)",
+            
           }}
         >
           <Box
@@ -178,7 +174,7 @@ const Login = () => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2" sx={{ color: "#7B3C1E" }}>
+                  <Link href="/forget-password" variant="body2" sx={{ color: "#7B3C1E" }}>
                     Forgot password?
                   </Link>
                 </Grid>

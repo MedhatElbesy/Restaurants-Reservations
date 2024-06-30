@@ -23,7 +23,8 @@ const EditTableForm = () => {
     sale_price: '',
     extra_number_of_chairs: '',
     status: 'Available',
-    number_of_extra_childs_chairs: '', 
+    extra_number_of_childs_chairs: '',
+    description: '', 
   });
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const EditTableForm = () => {
       dispatch(fetchTableByIdAsync(tableId));
     }
   }, [ tableId]);
+
 
   useEffect(() => {
     if (table) {
@@ -41,11 +43,13 @@ const EditTableForm = () => {
         price: table.price || '',
         sale_price: table.sale_price || '',
         extra_number_of_chairs: table.extra_number_of_chairs || '',
-        status: table.status ? capitalizeFirstLetter(table.status) : 'Available', 
-        number_of_extra_childs_chairs: table.number_of_extra_childs_chairs || '', 
+        status: table.status ? capitalizeFirstLetter(table.status) : 'Available',
+        extra_number_of_childs_chairs: table.extra_number_of_childs_chairs || '',
+        description: table.description || '',
       });
     }
   }, [table]);
+
 
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -69,10 +73,11 @@ const EditTableForm = () => {
     formDataToUpdate.append('price', formData.price);
     formDataToUpdate.append('sale_price', formData.sale_price);
     formDataToUpdate.append('extra_number_of_chairs', formData.extra_number_of_chairs);
-    formDataToUpdate.append('status', formData.status); 
+    formDataToUpdate.append('status', formData.status);
     formDataToUpdate.append('restaurant_location_id', table.restaurant_location_id);
-    formDataToUpdate.append('number_of_extra_childs_chairs', formData.number_of_extra_childs_chairs); 
-  
+    formDataToUpdate.append('extra_number_of_childs_chairs', formData.extra_number_of_childs_chairs);
+    formDataToUpdate.append('description', formData.description); 
+
     if (formData.cover) {
       formDataToUpdate.append('cover', formData.cover);
     }
@@ -91,7 +96,7 @@ const EditTableForm = () => {
 
       <h2>Update Table</h2>
 
-      {updateTableStatus === 'failed' && <p className="text-danger">{updateTableError}</p>}
+      {updateTableStatus === 'failed' && <p className="text-danger">An error occur</p>}
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
 
@@ -171,13 +176,13 @@ const EditTableForm = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="number_of_extra_childs_chairs">Number of Extra Child Chairs</label>
+          <label htmlFor="extra_number_of_childs_chairs"> Extra Child Chairs</label>
           <input
             type="number"
-            id="number_of_extra_childs_chairs"
-            name="number_of_extra_childs_chairs"
+            id="extra_number_of_childs_chairs"
+            name="extra_number_of_childs_chairs"
             className="form-control"
-            value={formData.number_of_extra_childs_chairs}
+            value={formData.extra_number_of_childs_chairs}
             onChange={handleChange}
           />
         </div>
@@ -195,6 +200,18 @@ const EditTableForm = () => {
             <option value="Available">Available</option>
             <option value="Unavailable">Unavailable</option>
           </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            className="form-control"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <button type="submit" className="btn btn-primary mt-3">

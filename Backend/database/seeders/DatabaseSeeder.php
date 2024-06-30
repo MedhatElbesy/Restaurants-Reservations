@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             TablesSeeder::class,
             TableAvailabilitiesSeeder::class,
             TableImagesSeeder::class,
-            PaymentsSeeder::class,
+            //PaymentsSeeder::class,
             UserActivationSeeder::class,
             RestaurantImagesSeeder::class,
             CommentsSeeder::class

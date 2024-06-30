@@ -13,6 +13,7 @@ import {
   Dropdown,
   Button,
 } from "reactstrap";
+import '../../index.css'
 // import { ReactComponent as LogoWhite } from "../assets/images/logos/xtremelogowhite.svg";
 // import user1 from "../assets/images/users/user1.jpg";
 
@@ -28,7 +29,7 @@ const Header = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
   return (
-    <Navbar color="warning" dark expand="md">
+    <Navbar color="" dark expand="md">
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
           {/* <LogoWhite /> */}

@@ -109,3 +109,12 @@ export const updateRestaurantCategory = async (categoryId, data) => {
   };
   
 
+  export const editRestaurantCategory= async (categoryId, data) => {
+    try {
+        const response = await axios.put(`/restaurant-categories/${categoryId}`, data);
+        return response.data;
+    } catch (error) {
+        console.error("An error occurred while updating Category", error);
+        throw error;
+    }
+  };

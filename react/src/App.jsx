@@ -13,6 +13,8 @@ import store from "./store/Store.jsx";
 // Authentication
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register.jsx";
+import ForgetPassword from "./components/auth/login/forgetPassword.jsx";
+import ResetPassword from "./components/auth/login/resetpassword.jsx";
 
 // Home
 import Home from "./components/homepage/Home.jsx";
@@ -40,11 +42,27 @@ import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
 // import Tables from "./components/restaurant/tables/Tables.jsx";
 
-import Dashboard from "./components/AdminDashboard/dashboard.jsx";
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
 import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
 import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
+import DetailsTable from "./components/userDashboard/show/DetailsTable.jsx";
+import LocationsTable from "./components/userDashboard/show/LocationsTable.jsx";
+import LocationTablesTable from "./components/userDashboard/show/LocationTablesTable.jsx";
+import CategoriesTable from "./components/userDashboard/show/CategoriesTable.jsx";
+import MenuCategoriesTable from "./components/userDashboard/show/MenuCategoriesTable.jsx";
+import ChangePassword from "./components/userProfile/changePassword/ChangePassword.jsx";
+import AddCategoryForm from "./components/userDashboard/add/AddCategoryForm.jsx";
+import AddRestaurantCategory from "./components/userDashboard/add/AddRestaurantCategory.jsx";
+import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaurantCategory.jsx";
+
+// Admin Dashboard
+import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
+import { Ratings } from "./components/AdminDashboard/ratings.jsx";
+import { Reports } from "./components/AdminDashboard/reports.jsx";
+import { Category } from "./components/AdminDashboard/Category.jsx";
+import About from "./components/AdminDashboard/About.jsx";
+import Verify from "./components/auth/register/verifyPage.jsx";
 
 function App() {
   const routes = createRoutesFromElements(
@@ -52,6 +70,9 @@ function App() {
       {/* Auth Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/verify" element={<Verify />} />
+      <Route path="/forget-password" element={<ForgetPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/" element={<Home />} />
 
       {/* User Routes */}
@@ -69,6 +90,8 @@ function App() {
 
       {/* Restaurant Owner Routes */}
       <Route path="/userprofile" element={<UserProfile />} />
+      <Route path="/edit-profile/:userId" element={<EditProfile />} />
+      <Route path="/change-password/:userId" element={<ChangePassword />} />
       <Route
         path="/user-dashboard/restaurant/:restaurantId"
         element={<Restaurant />}
@@ -85,7 +108,7 @@ function App() {
         path="/user-dashboard/edit-location/:locationId"
         element={<EditLocation />}
       />
-      <Route path="/user-dashboard/edit-profile" element={<EditProfile />} />
+    
       <Route
         path="/user-dashboard/edit-menu-category/:menuCategoryId"
         element={<MenuCategory />}
@@ -123,8 +146,52 @@ function App() {
         element={<AddRestaurant />} 
       />
 
+     <Route 
+        path="/user-dashboard/details" 
+        element={<DetailsTable />} 
+      />
+
+     <Route 
+        path="/user-dashboard/location" 
+        element={<LocationsTable />} 
+      />
+
+     <Route 
+        path="/user-dashboard/location-tables" 
+        element={<LocationTablesTable />} 
+      />
+
+     <Route 
+        path="/user-dashboard/category" 
+        element={<CategoriesTable />} 
+      />
+
+     <Route 
+        path="/user-dashboard/menu-category" 
+        element={<MenuCategoriesTable />} 
+      />
+
+     <Route 
+        path="/user-dashboard/add-special-category" 
+        element={<AddCategoryForm />} 
+      />
+
+    <Route 
+        path="/user-dashboard/add-restaurant-category/:restaurantId" 
+        element={<AddRestaurantCategory />} 
+      />
+
+     <Route 
+        path="/user-dashboard/edit-restaurant-category/:categoryId" 
+        element={<EditRestaurantCategory />} 
+      />  
+
       {/* AdminDashboard */}
-      <Route path="/admin" element={<Dashboard/>} />
+      <Route path="/admin" element={<AdminDashboard/>} />
+      <Route path="/admin/rating" element={<Ratings/>} />
+      <Route path="/admin/report" element={<Reports/>} />
+      <Route path="/admin/category" element={<Category/>} />
+      <Route path="/admin/about" element={<About/>} />
     </>
   );
 

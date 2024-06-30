@@ -22,10 +22,36 @@ export const registerUser = async (userData) => {
       gender: userData.gender,
       profile_image: userData.profile_image,
       birth_date: userData.birth_date,
+      roles_name:userData.roles_name
     });
     return response.data;
   } catch (error) {
     console.error("An error occurred during register in", error);
+    throw error;
+  }
+};
+
+
+export const forgetPasswordUser = async (email) => {
+  try {
+    const response = await axios.post("/forget-password", { email });
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred during forget password", error);
+    throw error;
+  }
+};
+
+export const resetPasswordUser = async (token, password, password_confirmation) => {
+  try {
+    const response = await axios.post("/reset-password", {
+      token,
+      password,
+      password_confirmation,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred during reset password", error);
     throw error;
   }
 };
