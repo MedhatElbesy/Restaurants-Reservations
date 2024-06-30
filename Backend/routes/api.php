@@ -122,3 +122,4 @@ Route::apiResource('restaurant-images',ResturantImagesController::class);
 
 Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
 
+Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);

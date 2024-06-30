@@ -299,6 +299,15 @@ public function getLocation($locationId)
     }
 }
 
+public function getcategory($id){
+    try{
+        $category = RestaurantCategory::where('restaurant_id',$id)->get();
+        return ApiResponse::sendResponse(201,"",$category);
+    }catch(\Throwable $e){
+        return ApiResponse::sendResponse(404, "category not found ");
+    }
+}
+
 
 
 }
