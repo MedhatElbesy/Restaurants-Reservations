@@ -16,3 +16,18 @@ export const updateUserData = async (userId, formData) => {
     throw error;
   }
 };
+
+
+export const changePassword= async (formData) => {
+  try {
+    const response = await axios.post(`/change-password`, formData);
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred change password", error);
+    if (error.response) {
+      console.error("Response data:", error.response.data);
+    }
+    throw error;
+  }
+};
+

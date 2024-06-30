@@ -76,3 +76,25 @@ export const tableById = async (tableId) => {
       throw error;
   }
 };
+
+
+export const fetchAllCategory = async () => {
+  try {
+      const response = await axios.get(`/categories`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching categories", error);
+      throw error;
+  }
+};
+
+
+export const fetchAllRestaurantCategoryById = async (categoryId) => {
+  try {
+      const response = await axios.get(`/restaurant-categories/${categoryId}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching restaurant category data", error);
+      throw error;
+  }
+};

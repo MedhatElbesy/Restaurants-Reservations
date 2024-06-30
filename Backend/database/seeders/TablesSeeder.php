@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Enums\ItemStatus;
 use Faker\Factory as Faker;
+
 class TablesSeeder extends Seeder
 {
     /**
@@ -14,34 +15,53 @@ class TablesSeeder extends Seeder
      */
     public function run(): void
     {
-        $tables = [
+        $tables =
+        [
             [
                 'restaurant_location_id' => 1,
                 'number_of_chairs' => 4,
                 'max_number_of_persons' => 8,
-                'cover' => 'path/to/your/image1.jpg',
+                'description' => "A comfortable table set for small gatherings.",
+                'cover' => 'https://theattic.co.in/wp-content/uploads/2023/05/3-9.png',
                 'price' => 120.00,
                 'sale_price' => 100.00,
                 'extra_number_of_chairs' => 1,
+                'extra_number_of_childs_chairs' => 1,
                 'status' => ItemStatus::Available,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'restaurant_location_id' => 2,
+                'restaurant_location_id' => 1,
                 'number_of_chairs' => 6,
                 'max_number_of_persons' => 12,
-                'cover' => 'path/to/your/image2.jpg',
+                'description' => "This spacious table set is perfect for larger groups",
+                'cover' => 'https://www.ikea.com/eg/en/images/products/lack-coffee-table-black-brown__57540_pe163122_s5.jpg',
                 'price' => 150.00,
                 'sale_price' => 130.00,
                 'extra_number_of_chairs' => 0,
+                'extra_number_of_childs_chairs' => 2,
+                'status' => ItemStatus::Available,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'restaurant_location_id' => 3,
+                'number_of_chairs' => 8,
+                'max_number_of_persons' => 16,
+                'description' => "Newly added to our collection.",
+                'cover' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4VuYowKNWwiHdc7JB0THZe7G1qV2tHS9OYw&s',
+                'price' => 200.00,
+                'sale_price' => 180.00,
+                'extra_number_of_chairs' => 2,
+                'extra_number_of_childs_chairs' => 0,
                 'status' => ItemStatus::Available,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
         ];
 
-        DB::table('tables')->insert($tables);
 
+        DB::table('tables')->insert($tables);
     }
 }

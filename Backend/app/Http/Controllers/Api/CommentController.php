@@ -42,7 +42,7 @@ class CommentController extends Controller
     public function show(string $restaurantId)
     {
         try {
-            $restaurant = Restaurant::findOrFail($restaurantId);
+            $restaurant = RestaurantLocation::findOrFail($restaurantId);
             $comments = $restaurant->comments()->get();
             return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
         } catch (Exception $e) {

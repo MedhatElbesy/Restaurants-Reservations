@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faKey, faLock, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
 import { deleteRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
@@ -102,12 +102,6 @@ const UserProfile = () => {
             />
           </div>
 
-          <aside className="col-12 position-absolute top-0 start-50 translate-middle-x">
-            <Link to={`/user-dashboard/edit-profile/${userId}`}>
-              <FontAwesomeIcon icon={faEdit} className="edit-icon text-warning" />
-            </Link>
-          </aside>
-
         </section>
 
         <section className="row my-5">
@@ -115,25 +109,59 @@ const UserProfile = () => {
           <aside className="col-8 my-5">
 
             <section className="my-5">
+
               <h2 className='my-5'>Personal Information</h2>
-              <div className='info'>
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                  <strong>Name:</strong> {userData.first_name} {userData.last_name}
-                </p>
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                  <strong>Email:</strong> {userData.email}
-                </p>
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                  <strong>Mobile Number:</strong> {userData.mobile_number || 'N/A'}
-                </p>
+              <section className='info'>
+              <div className="icon-wrapper">
+                <Link to={`/change-password/${userId}`} className="text-warning text-decoration-none">
+                  <FontAwesomeIcon icon={faLock} className="text-warning" />
+                  <span>Change Password</span>
+                </Link>
               </div>
+
+              <div className="icon-wrapper">
+                <Link to={`/edit-profile/${userId}`} className="text-warning text-decoration-none">
+                  <FontAwesomeIcon icon={faEdit} className=" text-warning" />
+                  <span >Edit Profile</span>
+                </Link>
+                </div>
+              </section>
+
+              <section className='info'>
+
+              <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-3`}>
+                  <strong>Name:</strong> {userData.first_name} {userData.last_name}
+              </p>
+
+              <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                  <strong>Email:</strong> {userData.email}
+              </p>
+
+              <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                  <strong>Mobile Number:</strong> {userData.mobile_number || 'N/A'}
+              </p>
+
+              </section>
+
             </section>
 
             <section>
-              <h2>Address Information</h2>
+              <h2>Address Information
+              <span>
+                    <Link to={`/add-address/${userId}`}>
+                      <FontAwesomeIcon
+                        icon={faPlus}
+                        className="text-warning mx-5" />
+                    </Link>
+
+                </span>
+              </h2>
               {userData.addresses && userData.addresses.length > 0 ? (
                 userData.addresses.map((address) => (
                   <div key={address.id} className="info my-5">
+                    <Link to={`/edit-address/${userId}`} className="text-warning text-decoration-none">
+                  <FontAwesomeIcon icon={faEdit} className=" text-warning" />
+                   </Link>
                     <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
                       <strong>Country:</strong> {address.country}
                     </p>
@@ -156,7 +184,8 @@ const UserProfile = () => {
             {role === 'owner' && (
               <section>
 
-                <h2>Restaurants
+                <h2>
+                  Restaurants
                   <span>
                     <Link to={`/user-dashboard/add-restaurant/${userId}`}>
                       <FontAwesomeIcon

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { useParams } from 'react-router-dom';
-import { Form, Button, Spinner, Alert } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
+import Loader from '../../../layouts/loader/loader';
 
 const EditCategoryForm = () => {
   const { categoryId } = useParams();
@@ -74,16 +75,14 @@ const EditCategoryForm = () => {
 
   if (status === 'loading' || !category) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Loader></Loader>
     );
   }
 
   if (status === 'failed') {
     return (
       <Alert variant="danger">
-        {error.message || 'Failed to load category. Please try again later.'}
+       <p>Failed to load category. Please try again later</p>
       </Alert>
     );
   }
@@ -106,10 +105,8 @@ const EditCategoryForm = () => {
         </div>
 
         <div className="mb-3">
-          <Form.Label htmlFor="slug">Slug:</Form.Label>
           <Form.Control 
-          type="text" 
-          id="slug" 
+          type="hidden"  
           name="slug" 
           value={formData.slug} 
           onChange={handleChange} />

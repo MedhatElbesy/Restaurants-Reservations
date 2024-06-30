@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Helpers\ApiResponse;
+use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
@@ -19,18 +20,13 @@ class CategoryController extends Controller
         return Category::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        $request->validate([
-            'name' => 'required|unique:categories,name',
-            'slug' => 'required|unique:categories,slug',
-            'cover' => 'nullable|string',
-            'description' => 'nullable|string',
-            'status' => 'required|in:Enabled,Disabled,Deleted',
-        ]);
-
         $data = $request->except('cover', '_token', '_method');
         $data['cover'] = $this->uploadImage($request, 'cover', 'categories');
+
+        //
+
 
         $category = Category::create($data);
 

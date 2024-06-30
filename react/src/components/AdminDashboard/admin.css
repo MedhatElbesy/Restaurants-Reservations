@@ -5,3 +5,28 @@ h2{
     font-family: "Fugaz One", sans-serif;
     color: rgb(255, 152, 27);
 }
+.bg{
+    background-color: #ffd28d;
+}
+h3{
+    
+    font-family: "Bad Script", cursive;
+    font-weight: bolder;
+    text-align:  center;
+    padding-left: 40px;
+    padding-top: 15px;
+    font-size: 50px;
+}
+.side{
+    background-color: #ffd28d;
+    min-height: 100vh;
+}
+
+.menu{
+    font-family: "Bad Script", cursive;
+    padding: 50px 0;
+    
+}
+.menu span{
+    font-size: 40px;
+}

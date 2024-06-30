@@ -20,12 +20,11 @@ class TableResource extends JsonResource
             'number_of_chairs' => $this->number_of_chairs,
             'max_number_of_persons' => $this->max_number_of_persons,
             'cover' => $this->cover_url,
+            'description'=>$this->description,
             'price' => $this->price,
             'sale_price' => $this->sale_price,
             'extra_number_of_chairs' => $this->extra_number_of_chairs,
-            'number_of_extra_chairs'  => $this->number_of_extra_chairs,
             'extra_number_of_childs_chairs'   => $this->extra_number_of_childs_chairs,
-            'number_of_extra_childs_chairs'   => $this->number_of_extra_childs_chairs,
             'status' => $this->status,
             'images' => TableImageResource::collection($this->whenLoaded('images')),
         ];

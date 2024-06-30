@@ -1,0 +1,138 @@
+.tables-caption {
+  padding: 1rem;
+  text-align: center;
+  margin: 2rem auto;
+  color: var(--mainColor);
+  border-top: 1px solid var(--secColor);
+  border-bottom: 1px solid var(--secColor);
+}
+.table-cover {
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.table-cover::before {
+  content: "check this table";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0%;
+  height: 0%;
+  transition: 0.3s ease-in-out;
+  color: transparent;
+  background-color: transparent;
+  font-family: var(--secFont);
+  font-weight: bold;
+  font-size: 4rem;
+  z-index: 10;
+}
+
+.table-cover:hover::before {
+  width: 150%;
+  height: 150%;
+  color: var(--secColor);
+  background-color: #2b2b2b7e;
+}
+
+.table-details {
+  position: fixed;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000ee;
+  z-index: 9999;
+}
+
+.table-details .details {
+  p {
+    width: 400px;
+    color: var(--mainColor);
+    font-size: 1.2rem;
+    margin: 1rem auto;
+    svg {
+      padding: .7rem;
+      color: var(--secColor);
+    }
+  }
+}
+
+.table-details .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #3b3b3b;
+  border-radius: 50%;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.table-details .gallery {
+  width: 100%;
+  top:  80%;
+}
+
+.gallery .image {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  text-align: center;
+  transition: .3s ease-in-out;
+  img {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: inline-block;
+  }
+}
+
+.gallery .image:not(.expanded):hover {
+  transform: scale(1.1);
+}
+
+.gallery .image:not(:first-child){
+  margin-left: 25px;
+}
+
+.gallery .expanded::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 115%;
+  height: 115%;
+  border: 2px solid var(--secColor);
+  z-index: -1;
+}
+
+.gallery .expanded-image {
+  position: fixed;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  z-index: 999;
+}
+
+.gallery .expanded-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}

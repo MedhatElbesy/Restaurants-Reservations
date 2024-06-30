@@ -12,7 +12,7 @@ export function BranchAddress({ branch }) {
 
   return (
     <article className="address mx-0 d-flex py-5 border-bottom">
-      <div className="col-7">
+      <div className="col-6">
         <MapContainer
           latitude={branch.latitude}
           longitude={branch.longitude}

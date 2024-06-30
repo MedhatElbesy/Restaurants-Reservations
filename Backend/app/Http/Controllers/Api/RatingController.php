@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\DB;
 class RatingController extends Controller
 {
 
+    public function getUserRatingForRestaurant($restaurantLocationId, $userId)
+    {
+        $rating = Rating::where('restaurant_location_id', $restaurantLocationId)
+                        ->where('user_id', $userId)
+                        ->first();
+        if (!$rating) {
+            return ApiResponse::sendResponse(404,'Rating not found');
+        }
+        return ApiResponse::sendResponse(200,'Rating',$rating);
+    }
+    
     public function store(StoreRatingRequest $request)
     {
         try {
