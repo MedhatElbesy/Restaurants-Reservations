@@ -23,6 +23,7 @@ class TableImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'table_id' => 'required|exists:tables,id',
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -34,6 +35,7 @@ class TableImageController extends Controller
 
             foreach ($uploadedImages as $imageName) {
                 $tableImage = new TableImage([
+                    'table_id' => $request->table_id,
                     'image' => $imageName,
                 ]);
                 $tableImage->save();
@@ -57,6 +59,7 @@ class TableImageController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            'id' => 'required|exists:table_images,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
