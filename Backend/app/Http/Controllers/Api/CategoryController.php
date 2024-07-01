@@ -18,6 +18,7 @@ use mysql_xdevapi\Exception;
 class CategoryController extends Controller
 {
     use UploadImageTrait;
+
     public function index()
     {
         return Category::all();
@@ -27,18 +28,18 @@ class CategoryController extends Controller
     {
         $data = $request->except('cover', '_token', '_method');
         $data['cover'] = $this->uploadImage($request, 'cover', 'categories');
-
-//        $data['user_id'] = Auth::id(); //owner of the category
 //
-//
-//        //specify category scope
-//        $user = User::when('id',Auth::id())->get();
-//        if($user->role_name == "admin"){
-//           $data['category_scope']='general';
-//        }else{
-//            $data['category_scope']='specific';
-//        }
+//       return ApiResponse::sendResponse(200,"data",Auth::guard('sanctum')->user());
 
+        //specify category scope
+        $user = Auth::guard('sanctum')->user();
+        if($user->role_name == "admin"){
+           $data['category_scope']='general';
+        }else{
+            $data['category_scope']='specific';
+        }
+
+        $data['user_id'] = $user->id;
         $category = Category::create($data);
 
         return response()->json($category, 201);
@@ -52,6 +53,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
+
         $request->validate([
             'name' => [
                 'sometimes',
@@ -63,16 +65,16 @@ class CategoryController extends Controller
             ],
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
-            'status' => 'required|in:Enabled,Disabled,Deleted',
+            'status' => 'sometimes|in:Enabled,Disabled,Deleted',
         ]);
 
         try {
-//            //validate user
-//            $user = User::where('id',Auth::id())->get();
-//            if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
-//                 throw new \Exception("can't update this category");
-//            }
-//
+            //validate user
+            $user = Auth::guard('sanctum')->user();
+
+            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+                throw new \Exception("You can't update this category");
+            }
 
             $category->fill($request->all());
             if ($request->hasFile('cover')) {
@@ -97,12 +99,18 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+//           //validate user
+//            $user = Auth::guard('sanctum')->user();
+//
+//            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+//                throw new \Exception("You can't update this category");
+//            }
         $category->delete();
 
         return response()->json(null, 204);
     }
     public function getOwnerCategories(){
-        $category = Category::where('user_id',Auth::id())->get();
+        $category = Category::where('user_id',Auth::guard('sanctum')->user()->id)->get();
         return ApiResponse::sendResponse(201,"",$category);
     }
 }

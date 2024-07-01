@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CategoryOwner
+class AutherizeCategoryOwner
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,14 @@ class CategoryOwner
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::guard('sanctum')->user();
-        if($user->role_name == "user"){
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+
+//        //validate user
+//        $user = User::where('id',Auth::id())->get();
+//        $category
+//        if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
+//
+//        }
+
         return $next($request);
     }
 }
