@@ -4,7 +4,7 @@ import {
   addAvailability,
   updateAvailability,
   deleteAvailability,
-} from "../../api/restaurant/updateAtRestaurant";
+} from "../../../api/restaurant/table-availability/tableAvailability";
 
 export const getTableAvailability = createAsyncThunk(
   "availability/getAvailability",
@@ -70,7 +70,7 @@ export const deleteTableAvailability = createAsyncThunk(
   }
 );
 
-const restaurantSlice = createSlice({
+const availabilitySlice = createSlice({
   name: "availability",
   initialState: {
     tableAvailability: null,
@@ -119,4 +119,4 @@ const restaurantSlice = createSlice({
   },
 });
 
-export default restaurantSlice.reducer;
+export default availabilitySlice.reducer;

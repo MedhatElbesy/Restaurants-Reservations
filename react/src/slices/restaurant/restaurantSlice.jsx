@@ -100,7 +100,7 @@ const restaurantSlice = createSlice({
         state.status = "succeeded";
         state.restaurant = action.payload.data;
       })
-      .addCase(deleteRestaurantAsync.fulfilled, (state) => {
+      .addCase(deleteRestaurantAsync.fulfilled, (state, action) => {
         state.restaurants = state.restaurants.filter(
           (restaurant) => restaurant.id !== action.payload
         );

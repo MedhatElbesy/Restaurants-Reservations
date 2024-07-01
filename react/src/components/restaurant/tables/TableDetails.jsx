@@ -5,7 +5,6 @@ import { faChair, faUsers, faChild } from "@fortawesome/free-solid-svg-icons";
 
 export function TableDetails({ table, onClose }) {
   const { restaurantId } = useParams();
-  console.log(table.id)
   return (
     <div className="table-details">
       <div className="close" onClick={() => onClose(false)}>
@@ -42,9 +41,7 @@ export function TableDetails({ table, onClose }) {
           )}
           <div className="text-center my-4">
             <NavLink to={`/restaurant/${restaurantId}/reservation/${table.id}`}>
-              <button className="reserve-table">
-                Reserve Now
-              </button>
+              <button className="reserve-table">Reserve Now</button>
             </NavLink>
           </div>
         </div>

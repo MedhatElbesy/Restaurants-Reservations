@@ -1,0 +1,48 @@
+.reservation {
+  .navigations {
+    text-align: right;
+    button {
+      border: 0;
+      border-radius: .4rem;
+      background-color: #8b6c33;
+      color: var(--mainColor);
+      font-weight: bold;
+      padding: .4rem .8rem;
+      margin: 0 .2rem;
+    }
+  }
+  .additional {
+    background-color: var(--mainColor);
+    padding: 0.5rem;
+    .time {
+      border: 1px solid #c9c9c9;
+      h4 {
+        color: #494949;
+      }
+      p {
+        /* flex-grow: 1; */
+        margin: 0.2rem;
+        padding: .5rem .8rem ;
+        text-align: center;
+        font-weight: bold;
+        width: fit-content;
+        font-size: .8rem;
+        color: #808080;
+        border: 1px solid #c9c9c9;
+        transition: .2s ease-in-out;
+        &:hover {
+          cursor: pointer;
+          color: var(--mainColor);
+          background-color: #8b6c33;
+        }
+      }
+      .selected {
+        color: var(--mainColor);
+        background-color: #8b6c33;
+      }
+    }
+    .extra-seats {
+      
+    }
+  }
+}
