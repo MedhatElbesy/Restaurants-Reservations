@@ -78,7 +78,7 @@ here you can navigate the Api Postman documentation : https://documenter.getpost
        <thead>
          <tr>
            <th>Contributor</th>
-           <th>Avatar</th>
+           <th></th>
            <th>Profile</th>
          </tr>
        </thead>
