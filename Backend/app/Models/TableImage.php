@@ -12,7 +12,6 @@ class TableImage extends Model
     use HasFactory;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
-
     public function getImageUrlAttribute()
     {
         if (!$this->image) {

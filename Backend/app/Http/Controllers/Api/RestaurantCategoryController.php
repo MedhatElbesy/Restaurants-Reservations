@@ -62,4 +62,5 @@ class RestaurantCategoryController extends Controller
         $restaurantCategory->delete();
         return response()->json(null, 204);
     }
+
 }
