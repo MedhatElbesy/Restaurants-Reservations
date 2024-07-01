@@ -23,6 +23,8 @@ class TableResource extends JsonResource
             'description'=>$this->description,
             'price' => $this->price,
             'sale_price' => $this->sale_price,
+            'extra_chair_price'=>$this->extra_chair_price,
+            'extra_child_chair_price'=>$this->extra_child_chair_price,
             'extra_number_of_chairs' => $this->extra_number_of_chairs,
             'extra_number_of_childs_chairs'   => $this->extra_number_of_childs_chairs,
             'status' => $this->status,
