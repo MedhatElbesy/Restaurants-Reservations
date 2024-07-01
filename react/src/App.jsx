@@ -42,6 +42,10 @@ import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
 // import Tables from "./components/restaurant/tables/Tables.jsx";
 
+// Checkout Details
+import Checkout from "./components/checkout/Checkout.jsx";
+
+
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
 import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
@@ -87,6 +91,10 @@ function App() {
         <Route path="reservation/:tableId" element={<Reservation />} />
         {/* <Route path="tables" element={<Tables />} /> */}
       </Route>
+
+      {/* Reservation Checkout */}
+      <Route path="/reservation/checkout" element={<Checkout />} />
+
 
       {/* Restaurant Owner Routes */}
       <Route path="/userprofile" element={<UserProfile />} />

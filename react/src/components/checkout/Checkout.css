@@ -1,0 +1,63 @@
+.checkout {
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .step-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .step {
+        position: relative;
+        flex: 1;
+        .step-label {
+          color: var(--secColor);
+          margin-bottom: 10px;
+        }
+        .bar {
+          height: .8rem;
+          width: 100%;
+          background-color: #023c499c;
+        }
+        .bar.visited {
+          background-color:  var(--secColor);
+        }
+        &:not(:last-child) {
+          margin-right: .2rem;
+        }
+      }
+    }
+  }
+  .restaurant-checkout-details,
+  .table-checkout-details {
+    .details {
+      padding: 0rem 1.8rem;
+      p {
+        color: var(--mainColor);
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.8rem;
+        font-family: "'Margarine', cursive";
+        span {
+          color: var(--secColor);
+          letter-spacing: 2px;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--textColor);
+        }
+      }
+    }
+  }
+  .navigation-buttons {
+    text-align: right;
+    button {
+      border: 0;
+      margin: 0 0.2rem;
+      font-weight: bold;
+      padding: 0.3rem 1rem;
+      /* border-radius: 0.2rem; */
+      color: var(--backgroundColor);
+      background-color: var(--secColor);
+    }
+  }
+}
