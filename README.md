@@ -73,48 +73,49 @@ here you can navigate the Api Postman documentation : https://documenter.getpost
 ```
 ## Contributors
 
-<div style="width: 100% align-items:center">
-  <table style="width: 100%;">
-    <thead>
-      <tr>
-        <th>Contributor</th>
-        <th>Avatar</th>
-        <th>Profile</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Medhat Elbesy</td>
-        <td><img src="https://avatars.githubusercontent.com/u/152287116?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/MedhatElbesy">Medhat Elbesy</a></td>
-      </tr>
-      <tr>
-        <td>Khaled Abdulbaset</td>
-        <td><img src="https://avatars.githubusercontent.com/u/69148186?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/Khaled-Abdelbaset">Khaled Abdulbaset</a></td>
-      </tr>
-      <tr>
-        <td>Mona Ali</td>
-        <td><img src="https://avatars.githubusercontent.com/u/96702708?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/Mona-Ali-Mostafa98">Mona Ali</a></td>
-      </tr>
-      <tr>
-        <td>Aya Adel</td>
-        <td><img src="https://avatars.githubusercontent.com/u/156436119?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/ayaadel1346">Aya Adel</a></td>
-      </tr>
-      <tr>
-        <td>Rehab Elsaied</td>
-        <td><img src="https://avatars.githubusercontent.com/u/69490304?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/Rehab5">Rehab Elsaied</a></td>
-      </tr>
-      <tr>
-        <td>Ahmed Nagy</td>
-        <td><img src="https://avatars.githubusercontent.com/u/116142339?v=4" width="100" height="100"></td>
-        <td><a href="https://github.com/Blitz576">Ahmed Nagy</a></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+   <div style="display: flex; justify-content: center; width: 100%;">
+     <table style="width: 100%; max-width: 800px; text-align: center;">
+       <thead>
+         <tr>
+           <th>Contributor</th>
+           <th>Avatar</th>
+           <th>Profile</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td>Medhat Elbesy</td>
+           <td><img src="https://avatars.githubusercontent.com/u/152287116?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/MedhatElbesy">Medhat Elbesy</a></td>
+         </tr>
+         <tr>
+           <td>Khaled Abdulbaset</td>
+           <td><img src="https://avatars.githubusercontent.com/u/69148186?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/Khaled-Abdelbaset">Khaled Abdulbaset</a></td>
+         </tr>
+         <tr>
+           <td>Mona Ali</td>
+           <td><img src="https://avatars.githubusercontent.com/u/96702708?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/Mona-Ali-Mostafa98">Mona Ali</a></td>
+         </tr>
+         <tr>
+           <td>Aya Adel</td>
+           <td><img src="https://avatars.githubusercontent.com/u/156436119?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/ayaadel1346">Aya Adel</a></td>
+         </tr>
+         <tr>
+           <td>Rehab Elsaied</td>
+           <td><img src="https://avatars.githubusercontent.com/u/69490304?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/Rehab5">Rehab Elsaied</a></td>
+         </tr>
+         <tr>
+           <td>Ahmed Nagy</td>
+           <td><img src="https://avatars.githubusercontent.com/u/116142339?v=4" width="100" height="100"></td>
+           <td><a href="https://github.com/Blitz576">Ahmed Nagy</a></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+   
 
 
