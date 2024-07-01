@@ -62,18 +62,18 @@ here you can navigate the Api Postman documentation : https://documenter.getpost
         php artisan serve
 
 3. Install frontend dependencies     
-  ```bash
-     cd frontend
-  # Install Dependancies
-    npm install
-```
+    ```bash
+       cd frontend
+    # Install Dependancies
+      npm install
+   ```
 4. Run the project
 ```bash
    npm run start
 ```
 ## Contributors
 
-<div style="width: 100%">
+<div style="width: 100% align-items:center">
   <table style="width: 100%;">
     <thead>
       <tr>
