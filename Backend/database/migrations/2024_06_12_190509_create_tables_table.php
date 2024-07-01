@@ -26,7 +26,9 @@ return new class extends Migration
             $table->string('price', 10, 2)->default(0.00);
             $table->string('sale_price', 10, 2)->default(0.00);
             $table->integer('extra_number_of_chairs')->default(0);
+            $table->string('extra_chair_price', 10, 2)->default(0.00);
             $table->integer('extra_number_of_childs_chairs')->default(0);
+            $table->string('extra_child_chair_price', 10, 2)->default(0.00);
             $table->enum('status', [ItemStatus::Available, ItemStatus::Unavailable])->default(ItemStatus::Available)->index();
             $table->timestamps();
         });

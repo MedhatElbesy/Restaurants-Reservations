@@ -129,6 +129,7 @@ Route::post('/ratings', [RatingController::class, 'store']);
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
 Route::get('/top-rated/{limit?}', [RatingController::class, 'topRatedRestaurants']);
 Route::get('/restaurant/{restaurantId}/user/{userId}/rating', [RatingController::class, 'getUserRatingForRestaurant']);
+Route::get('/table-availability/{id}', [TableAvailabilityController::class, 'showByTableAvailabilities']);
 
 Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
