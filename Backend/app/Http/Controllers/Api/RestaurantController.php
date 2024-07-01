@@ -9,7 +9,9 @@ use App\Http\Requests\UpdateRestaurantLocationsRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
 use App\Http\Resources\MenuCategoryResource;
+use App\Models\Category;
 use App\Models\Restaurant;
+use App\Models\RestaurantCategory;
 use App\Models\RestaurantLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -302,9 +304,11 @@ public function getLocation($locationId)
 public function getcategory($id){
     try{
         $category = RestaurantCategory::where('restaurant_id',$id)->get();
+//        $category_name =Category::where('id',$category->category_id)->first();
+//        $category['category_name'] = $category_name->name;
         return ApiResponse::sendResponse(201,"",$category);
     }catch(\Throwable $e){
-        return ApiResponse::sendResponse(404, "category not found ");
+        return ApiResponse::sendResponse(404, "category not found ",$e);
     }
 }
 
