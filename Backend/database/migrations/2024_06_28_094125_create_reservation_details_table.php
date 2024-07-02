@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('reservation_date');
             $table->time('reservation_time')->nullable();
             $table->decimal('amount', 10, 2);
-            $table->decimal('tax', 10, 2);
             $table->integer('number_of_extra_chairs')->default(0);
             $table->integer('number_of_extra_childs_chairs')->default(0);
             $table->timestamps();

@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('reservation_id')->constrained('reservations')->references('id')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
-            $table->enum('payment_method', ['credit_card', 'cash', 'paypal', 'gateway']);
             $table->foreignId('gateway_id')->nullable()->constrained('gateways')->references('id')->on('gateways')->onDelete('cascade');
             $table->string('transaction_image')->nullable();
+            $table->string('transaction_phone_number')->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('customer_name');
             $table->string('customer_email');

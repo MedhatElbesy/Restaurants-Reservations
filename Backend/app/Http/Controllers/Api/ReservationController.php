@@ -49,7 +49,6 @@ class ReservationController extends Controller
                     'reservation_date' => $detail['reservation_date'],
                     'reservation_time' => $detail['reservation_time'],
                     'amount' => $detail['amount'],
-                    'tax' => $detail['tax'],
                     'number_of_extra_chairs' => $detail['number_of_extra_chairs'],
                     'number_of_extra_childs_chairs' => $detail['number_of_extra_childs_chairs'],
                 ]);
@@ -61,14 +60,13 @@ class ReservationController extends Controller
                 'reservation_id' => $reservation->id,
                 'user_id' => $auth_user->id,
                 'amount' => $validated['amount'],
-                'payment_method' => $validated['payment_method'],
-                'gateway_id' => $validated['gateway_id'] ?? null,
+                'gateway_id' => $validated['gateway_id'] || null,
                 'transaction_image' => $validated['transaction_image'],
+                'transaction_phone_number' => $validated['transaction_phone_number'],
                 'transaction_id' => $validated['transaction_id'] ?? null,
                 'customer_name' => $validated['customer_name'],
                 'customer_email' => $validated['customer_email'],
                 'customer_phone' => $validated['customer_phone'] ?? null,
-                'status' => $validated['status'],
             ]);
 
             DB::commit();

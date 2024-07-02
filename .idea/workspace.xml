@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/Gateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Models/GatewayDate.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094122_create_gateways_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094123_create_gateway_dates_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094124_create_reservations_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094125_create_reservation_details_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/GatewayController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/database/seeders/GatewaySeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Enums/ItemStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Enums/ItemStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/Payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/Payment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/Reservation.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/Reservation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190945_create_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_29_073947_create_payments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094124_create_reservation_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110421_create_user_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110421_create_user_addresses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094122_create_gateways_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094122_create_gateways_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094125_create_reservation_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094125_create_reservation_details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_29_073947_create_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_29_073947_create_payments_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/PaymentsSeeder.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,6 +190,10 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
+      <option name="pathToComposerJson" value="$PROJECT_DIR$/Backend/composer.json" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/Backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />

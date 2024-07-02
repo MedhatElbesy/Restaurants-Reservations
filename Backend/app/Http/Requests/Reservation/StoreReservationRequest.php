@@ -32,19 +32,17 @@ class StoreReservationRequest extends FormRequest
             'details.*.reservation_date' => 'required|date',
             'details.*.reservation_time' => 'nullable|date_format:H:i',
             'details.*.amount' => 'required|numeric|min:0',
-            'details.*.tax' => 'required|numeric|min:0',
             'details.*.number_of_extra_chairs' => 'required|integer|min:0',
             'details.*.number_of_extra_childs_chairs' => 'required|integer|min:0',
 
-            'amount' => 'required|numeric|min:0',
-            'payment_method' => 'required|in:credit_card,cash,paypal,gateway',
-            'gateway_id' => 'nullable|exists:gateways,id',
+            'amount'            => 'required|numeric|min:0',
+            'gateway_id'        => 'nullable|exists:gateways,id',
             'transaction_image' => 'nullable|string|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'transaction_phone_number' => 'nullable|string|max:20',
             'transaction_id' => 'nullable|string',
-            'customer_name' => 'required|string|max:255',
+            'customer_name'  => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'nullable|string|max:20',
-            'status' => 'required|in:pending,success,failed,rejected,confirmed,cancelled',
         ];
     }
 }
