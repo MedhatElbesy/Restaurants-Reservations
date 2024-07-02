@@ -23,7 +23,23 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.193);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 1; 
+}
+
+.restaurants-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.482);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,7 +91,6 @@
 
 
 
-
 .locations {
   background-color: white;
   text-align: center;
@@ -110,3 +125,61 @@
 font-weight: 500;
 
 }
+
+
+
+.formUserDashboard{
+  margin-top: 3%;
+  background: #FFA17F; 
+  background: -webkit-linear-gradient(to right, #00223E, #FFA17F);  
+  background: linear-gradient(to right, #00223E, #FFA17F); 
+ padding: 20px;
+ border: 1px saddlebrown solid;
+ border-radius: 20px;
+}
+
+.formUserDashboard button{
+  background: #a14422; 
+  background: -webkit-linear-gradient(to right, #02192b, #bb4920);  
+  background: linear-gradient(to right, #020f1a, #ac5130); 
+}
+
+.formUserDashboard button:hover{
+  background: #b15a3b; 
+  background: -webkit-linear-gradient(to right, #13456c, #bb4920);  
+  background: linear-gradient(to right, #223d53, #6b2f17); 
+}
+
+
+.formUserDashboard label{
+  color: white;
+}
+
+.table-card{
+  background: #FFA17F; 
+  background: -webkit-linear-gradient(to right, #00223E, #FFA17F);  
+  background: linear-gradient(to right, #00223E, #FFA17F); 
+  border: 1px saddlebrown solid;
+  border-radius: 20px;
+}
+
+.table-card label 
+{
+ padding:1%;
+  color: white;
+}
+
+
+.table-card button{
+  background: #a14422; 
+  background: -webkit-linear-gradient(to right, #02192b, #bb4920);  
+  background: linear-gradient(to right, #020f1a, #ac5130); 
+}
+
+.table-card button:hover{
+  background: #b15a3b; 
+  background: -webkit-linear-gradient(to right, #13456c, #bb4920);  
+  background: linear-gradient(to right, #223d53, #6b2f17); 
+}
+
+

@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { changePasswordAsync } from '../../../slices/user/changePasswordSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     current_password: '',
     new_password: '',
@@ -23,7 +25,12 @@ const ChangePassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(changePasswordAsync(formData));
+      await dispatch(changePasswordAsync(formData))
+      .then((result) => {
+        if (result.meta.requestStatus === 'fulfilled') {
+          navigate(-1); 
+        }
+      });
       setErrorMessage('');
       console.log('Password changed successfully');
     } catch (error) {
@@ -54,9 +61,9 @@ const ChangePassword = () => {
 
           <div className="card">
 
-            <div className="card-body">
+            <div className="card-body table-card">
 
-              <h2 className="card-title text-center mb-4">Change Password</h2>
+              <h2 className="card-title text-center mb-4 text-light">Change Password</h2>
 
               {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
@@ -152,7 +159,7 @@ const ChangePassword = () => {
 
                 </section>
 
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary col-12 my-2">
                   Change Password
                 </button>
 

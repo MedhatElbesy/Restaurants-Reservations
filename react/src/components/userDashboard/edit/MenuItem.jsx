@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../../layouts/loader/loader';
 import { fetchMenuItemById } from '../../../slices/restaurant/menuItem/fetchMenuItemById';
 import { updateMenuItemThunk } from '../../../slices/restaurant/menuItem/updateMenuItem';
@@ -9,6 +9,7 @@ const MenuItem = () => {
 
   const { menuItemId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menuItem = useSelector((state) => state.menuItem.menuItem);
   const status = useSelector((state) => state.menuItem.status);
   const error = useSelector((state) => state.menuItem.error);
@@ -60,7 +61,12 @@ const MenuItem = () => {
       console.error('Menu Category ID is required.');
       return;
     }
-    dispatch(updateMenuItemThunk({ menuItemId, data: { ...formData,menu_category_id: menuItem.menu_category_id } }));
+    dispatch(updateMenuItemThunk({ menuItemId, data: { ...formData,menu_category_id: menuItem.menu_category_id } }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
 
@@ -74,7 +80,11 @@ const MenuItem = () => {
 
   return (
     <main className="container">
-      <h2 className='text-light'>Edit Menu Item</h2>
+
+      <section className='formUserDashboard'>
+
+    
+      <h2 className='text-light text-center my-4'>Edit Menu Item</h2>
 
       <form onSubmit={handleSubmit}>
 
@@ -147,8 +157,10 @@ const MenuItem = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary">Update</button>
+        <button type="submit" className="btn btn-primary col-12">Update</button>
       </form>
+
+      </section>
 
     </main>
   );

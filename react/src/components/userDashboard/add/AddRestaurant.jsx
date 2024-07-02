@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import Loader from '../../../layouts/loader/loader';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const AddRestaurant = () => {
   const dispatch = useDispatch();
   const { userId } = useParams(); 
+  const navigate = useNavigate();
   const status = useSelector((state) => state.restaurant.status);
   const error = useSelector((state) => state.restaurant.error);
 
@@ -71,9 +72,7 @@ const AddRestaurant = () => {
         showConfirmButton: true,
         timer: 9000,
       }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = `/userprofile`;
-        }
+          navigate(-1); 
       });
     } catch (error) {
       console.error('Error adding restaurant:', error);
@@ -85,9 +84,7 @@ const AddRestaurant = () => {
     }
   };
 
-  if (status === 'loading') {
-    return <Loader />;
-  }
+ 
 
   if (status === 'failed') {
     return (
@@ -102,17 +99,21 @@ const AddRestaurant = () => {
   return (
     <main className="container">
 
-      <h2>Add New Restaurant</h2>
+    <section className='formUserDashboard'>
 
-      <form onSubmit={handleSubmit} className="text-light" encType="multipart/form-data">
+       <h2 className='text-center my-5 text-light'>Add New Restaurant</h2>
 
-        <input type="hidden" name="user_id" value={userId} />
+        <form onSubmit={handleSubmit} className="text-light" encType="multipart/form-data">
+ 
+         <input type="hidden" name="user_id" value={userId} />
 
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
+          <div className="mb-3">
+
+           <label htmlFor="name" className="form-label">
+             Name
+           </label>
+
+         <input
             type="text"
             className="form-control"
             id="name"
@@ -121,12 +122,15 @@ const AddRestaurant = () => {
             onChange={handleChange}
             required
           />
+
         </div>
 
         <div className="mb-3">
+
           <label htmlFor="slug" className="form-label">
             Slug
           </label>
+
           <input
             type="text"
             className="form-control"
@@ -136,12 +140,15 @@ const AddRestaurant = () => {
             onChange={handleChange}
             required
           />
+
         </div>
 
         <div className="mb-3">
+
           <label htmlFor="title" className="form-label">
             Title
           </label>
+
           <input
             type="text"
             className="form-control"
@@ -151,12 +158,15 @@ const AddRestaurant = () => {
             onChange={handleChange}
             required
           />
+
         </div>
 
         <div className="mb-3">
+
           <label htmlFor="summary" className="form-label">
             Summary
           </label>
+
           <textarea
             className="form-control"
             id="summary"
@@ -166,12 +176,15 @@ const AddRestaurant = () => {
             rows="3"
             required
           />
+
         </div>
 
         <div className="mb-3">
+
           <label htmlFor="description" className="form-label">
             Description
           </label>
+
           <textarea
             className="form-control"
             id="description"
@@ -181,14 +194,17 @@ const AddRestaurant = () => {
             rows="5"
             required
           />
+
         </div>
 
         <section className="mb-3">
 
           <label className="form-label">Status</label>
 
-          <div>
+          <section>
+
             <div className="form-check form-check-inline">
+
               <input
                 className="form-check-input"
                 type="radio"
@@ -198,12 +214,15 @@ const AddRestaurant = () => {
                 checked={formData.status.toLowerCase() === 'active'}
                 onChange={handleChange}
               />
+
               <label className="form-check-label" htmlFor="active">
                 Active
               </label>
+
             </div>
 
             <div className="form-check form-check-inline">
+
               <input
                 className="form-check-input"
                 type="radio"
@@ -213,12 +232,15 @@ const AddRestaurant = () => {
                 checked={formData.status.toLowerCase() === 'inactive'}
                 onChange={handleChange}
               />
+
               <label className="form-check-label" htmlFor="inactive">
                 Inactive
               </label>
+
             </div>
 
             <div className="form-check form-check-inline">
+
               <input
                 className="form-check-input"
                 type="radio"
@@ -235,29 +257,44 @@ const AddRestaurant = () => {
 
             </div>
             
-          </div>
+          </section>
 
         </section>
 
 
         <div className="mb-3">
+
           <label htmlFor="logo" className="form-label">
             Logo
           </label>
-          <input type="file" className="form-control" id="logo" name="logo" onChange={handleFileChange} />
+
+          <input 
+           type="file" 
+           className="form-control" 
+           id="logo" 
+           name="logo" 
+           onChange={handleFileChange} />
         </div>
 
         <div className="mb-3">
+
           <label htmlFor="cover" className="form-label">
             Cover
           </label>
-          <input type="file" className="form-control" id="cover" name="cover" onChange={handleFileChange} />
+
+          <input 
+           type="file" 
+           className="form-control" 
+           id="cover" 
+           name="cover" 
+           onChange={handleFileChange} />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary col-12">
           Submit
         </button>
       </form>
+      </section>
     </main>
   );
 };

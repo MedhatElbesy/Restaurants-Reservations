@@ -30,7 +30,7 @@ const AddMenuCategory = () => {
     dispatch(addMenuCategoryThunk({ ...formData, restaurant_id: restaurantId }))
       .unwrap()
       .then(() => {
-        navigate(`/restaurant`); 
+        navigate(-1); 
       })
       .catch((error) => {
         console.error('Failed to add menu item:', error);
@@ -42,7 +42,9 @@ const AddMenuCategory = () => {
     
     <main className="container">
 
-      <h2 className='text-light'>Add Menu Item</h2>
+    <section className='formUserDashboard'>
+
+      <h2 className='text-light text-center my-5'>Add Menu Item</h2>
 
       <form onSubmit={handleSubmit}>
 
@@ -96,8 +98,9 @@ const AddMenuCategory = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary">Add Menu Category</button>
+        <button type="submit" className="btn btn-primary col-12">Add Menu Category</button>
       </form>
+      </section>
     </main>
   );
 };

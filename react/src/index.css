@@ -35,7 +35,7 @@
 }
 
 body {
-  background-color: var(--backgroundColor) !important;
+ 
   font-family: "Playfair Display", serif;
   transition: .3s ease-in-out;
 }

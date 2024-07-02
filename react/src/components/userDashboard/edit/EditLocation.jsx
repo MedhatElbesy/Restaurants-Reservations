@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchLocationByIdAsync, updateLocationAsync } from '../../../slices/restaurant/location/locationSlice';
 import Loader from '../../../layouts/loader/loader';
 import DatePicker from 'react-datepicker';
@@ -34,6 +34,7 @@ const capitalizeFirstLetter = (string) => {
 const EditLocation = () => {
   const { locationId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useSelector((state) => state.location.location);
   const status = useSelector((state) => state.location.status);
   const error = useSelector((state) => state.location.error);
@@ -193,12 +194,11 @@ const EditLocation = () => {
     formDataWithImages.append('status', capitalizeFirstLetter(formData.status));
 
     dispatch(updateLocationAsync({ locationId, data: formDataWithImages }))
-      .then((result) => {
-        console.log('Location updated:', result);
-      })
-      .catch((error) => {
-        console.error('Error updating location:', error);
-      });
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
 
@@ -213,9 +213,11 @@ const EditLocation = () => {
 
 
   return location ? (
-    <main className="container">
+  <main className="container">
 
-      <h2>Edit Location</h2>
+   <section className='formUserDashboard'>
+
+      <h2  className='text-light text-center my-4'>Edit Location</h2>
 
       <form onSubmit={handleSubmit}>
 
@@ -271,7 +273,7 @@ const EditLocation = () => {
 
         </section>
 
-        <div className="row mb-3">
+        <section className="row mb-3">
           <div className="col">
             <MapContainer center={position || [51.505, -0.09]} zoom={13} style={{ height: '200px' }}>
               <TileLayer
@@ -281,7 +283,7 @@ const EditLocation = () => {
               <LocationMarker position={position} setPosition={setPosition} setFormData={setFormData} />
             </MapContainer>
           </div>
-        </div>
+        </section>
         
         <div className="mb-3">
           <label htmlFor="images" className="form-label">Images</label>
@@ -396,10 +398,10 @@ const EditLocation = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary">Update</button>
+        <button type="submit" className="btn btn-primary col-12">Update</button>
 
       </form>
-      
+      </section>
     </main>
   ) : (
     <Loader />

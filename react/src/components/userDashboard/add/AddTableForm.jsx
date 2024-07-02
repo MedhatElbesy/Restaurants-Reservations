@@ -56,9 +56,13 @@ const AddTableForm = () => {
       formDataToSubmit.append('cover', formData.cover);
     }
 
-    await dispatch(addTableAsync(formDataToSubmit));
-    
-    navigate(`/`);
+    await dispatch(addTableAsync(formDataToSubmit))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
+   
   };
 
   if (addTableStatus === 'loading') {
@@ -72,11 +76,11 @@ const AddTableForm = () => {
 
         <div className="col-md-6">
 
-          <div className="card">
+          <div className="card table-card">
 
             <div className="card-body">
 
-              <h2 className="card-title text-center mb-4">Add Table</h2>
+              <h2 className="card-title text-center mb-4 text-light">Add Table</h2>
 
               {addTableError && (
                 <div className="alert alert-danger">
@@ -203,7 +207,7 @@ const AddTableForm = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary mt-3">
+                <button type="submit" className="btn btn-primary col-12 my-3">
                   Add Table
                 </button>
 

@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { bodyColor } = useContext(BodyColorContext);
 
   const handleScroll = (e, targetId) => {
-    
+
     e.preventDefault();
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
@@ -23,9 +23,9 @@ const Sidebar = () => {
         <li><Link  onClick={(e) => handleScroll(e, 'details')}>Details</Link></li>
         <li><Link  onClick={(e) => handleScroll(e, 'locations')}>Locations</Link></li>
         <li><Link  onClick={(e) => handleScroll(e, 'location-tables')}>Location Tables</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'categories')}>Categories</Link></li>
         <li><Link  onClick={(e) => handleScroll(e, 'menu-categories')}>Menu Categories</Link></li>
         <li><Link  onClick={(e) => handleScroll(e, 'specific-category')}>Specific Category</Link></li>
+        <li><Link  onClick={(e) => handleScroll(e, 'images')}>Restaurant Images</Link></li>
       </ul>
     </nav>
   );

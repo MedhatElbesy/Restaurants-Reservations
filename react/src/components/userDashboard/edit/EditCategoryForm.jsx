@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Loader from '../../../layouts/loader/loader';
 
 const EditCategoryForm = () => {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { category, status, error } = useSelector(state => state.category);
 
   const [formData, setFormData] = useState({
@@ -56,8 +57,8 @@ const EditCategoryForm = () => {
     return statusValue.charAt(0).toUpperCase() + statusValue.slice(1).toLowerCase();
   };
 
-  const handleSubmit = (e) => {
 
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formDataForSubmission = new FormData();
@@ -70,8 +71,14 @@ const EditCategoryForm = () => {
       formDataForSubmission.append('cover', formData.cover);
     }
 
-    dispatch(updateCategoryAsync({ categoryId, formData: formDataForSubmission }));
+    dispatch(updateCategoryAsync({ categoryId, formData: formDataForSubmission }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
+
 
   if (status === 'loading' || !category) {
     return (
@@ -90,27 +97,29 @@ const EditCategoryForm = () => {
   return (
     <main>
 
-      <h2>Edit Category</h2>
+      <section className='formUserDashboard'>
 
-      <Form onSubmit={handleSubmit}>
+        <h2 className='text-light text-center my-4'>Edit Category</h2>
+ 
+        <Form onSubmit={handleSubmit}>
 
-        <div className="mb-3">
-          <Form.Label htmlFor="name">Name:</Form.Label>
-          <Form.Control
-           type="text"
-           id="name"
-           name="name"
-           value={formData.name} 
+          <div className="mb-3">
+           <Form.Label htmlFor="name">Name:</Form.Label>
+           <Form.Control
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name} 
+            onChange={handleChange} />
+          </div>
+
+         <div className="mb-3">
+           <Form.Control 
+           type="hidden"  
+           name="slug" 
+           value={formData.slug} 
            onChange={handleChange} />
-        </div>
-
-        <div className="mb-3">
-          <Form.Control 
-          type="hidden"  
-          name="slug" 
-          value={formData.slug} 
-          onChange={handleChange} />
-        </div>
+         </div>
 
         <div className="mb-3">
           <Form.Label htmlFor="cover">Cover:</Form.Label>
@@ -164,6 +173,7 @@ const EditCategoryForm = () => {
         </Button>
 
       </Form>
+      </section>
 
     </main>
   );

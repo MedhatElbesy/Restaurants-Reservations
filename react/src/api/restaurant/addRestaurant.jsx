@@ -102,5 +102,20 @@ export const addMenuItem = async (data) => {
   };
 
 
+  export const addTableImage= async (data) => {
+    try {
+  
+      const response = await axios.post(`/table-images`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while adding table images", error);
+      throw error;
+    }
+  };
+
 
   
