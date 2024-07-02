@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import  { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +18,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { login } from "../../../slices/auth//authSlice";
+import { login } from "../../../slices/auth/authSlice";
 
 function Copyright(props) {
   return (
@@ -35,13 +36,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
   const authStatus = useSelector((state) => state.auth.status);
-  // const authError = useSelector((state) => state.auth.error);
 
   useEffect(() => {
     if (authStatus.isAuthenticated) {
@@ -53,17 +51,16 @@ const Login = () => {
     }
   }, [authStatus.isAuthenticated, authStatus.role, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
-      await dispatch(login({ email, password })).unwrap();
+      await dispatch(login(data)).unwrap();
       navigate("/");
     } catch (err) {
       console.log(err);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error || "Invalid email or password",
+        text: "Invalid email or password",
       });
     }
   };
@@ -112,7 +109,6 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "rgba(255,255,255,0.8)",
-            
           }}
         >
           <Box
@@ -133,7 +129,7 @@ const Login = () => {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -145,8 +141,15 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: "Invalid email address",
+                  },
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
               />
               <TextField
                 margin="normal"
@@ -157,8 +160,11 @@ const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", {
+                  required: "Password is required",
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

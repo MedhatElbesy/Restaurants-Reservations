@@ -22,11 +22,14 @@ h3{
     min-height: 100vh;
 }
 
-.menu{
+.menuadmin{
     font-family: "Bad Script", cursive;
     padding: 50px 0;
     
 }
-.menu span{
-    font-size: 40px;
+.menuadmin span{
+    font-size: 35px;
+}
+.menuadmin span:hover{
+    color:black;
 }

@@ -69,7 +69,7 @@ here you can navigate the Api Postman documentation : https://documenter.getpost
    ```
 4. Run the project
 ```bash
-   npm run start
+   npm run dev
 ```
 ## Contributors
 
@@ -104,9 +104,9 @@ here you can navigate the Api Postman documentation : https://documenter.getpost
            <td><a href="https://github.com/ayaadel1346">Aya Adel</a></td>
          </tr>
          <tr>
-           <td>Rehab Elsaied</td>
+           <td>Rehab Elsaid</td>
            <td><img src="https://avatars.githubusercontent.com/u/69490304?v=4" width="100" height="100"></td>
-           <td><a href="https://github.com/Rehab5">Rehab Elsaied</a></td>
+           <td><a href="https://github.com/Rehab5">Rehab Elsaid</a></td>
          </tr>
          <tr>
            <td>Ahmed Nagy</td>
