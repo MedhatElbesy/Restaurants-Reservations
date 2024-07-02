@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addCategoryAsync, fetchAllCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 
 const AddRestaurantCategory = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories, status, error } = useSelector(state => state.restaurantCategory);
   const { restaurantId } = useParams(); 
 
@@ -30,8 +31,6 @@ const AddRestaurantCategory = () => {
   };
 
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const formDataForSubmission = new FormData();
@@ -39,7 +38,12 @@ const AddRestaurantCategory = () => {
     formDataForSubmission.append('restaurant_id', restaurantId); 
     formDataForSubmission.append('status', formData.status);
 
-    dispatch(addCategoryAsync(formDataForSubmission));
+    dispatch(addCategoryAsync(formDataForSubmission))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
   if (status === 'failed') {
@@ -52,20 +56,33 @@ const AddRestaurantCategory = () => {
 
   return (
     <main>
-      <h2>Add Category</h2>
 
-      <Form onSubmit={handleSubmit}>
+     <section className='formUserDashboard'>
+
+       <h2 className='text-center my-5'>Add Category</h2>
+
+       <Form onSubmit={handleSubmit}>
         
         <Form.Group className="mb-3">
+
           <Form.Label>Category:</Form.Label>
-          <Form.Select name="category_id" value={formData.category_id} onChange={handleChange}>
+
+          <Form.Select 
+           name="category_id" 
+           value={formData.category_id} 
+           onChange={handleChange}
+          >
             <option value="">Select Category</option>
+
             {categories.map(category => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
+
           </Form.Select>
+
+
         </Form.Group>
 
         <div className="mb-3">
@@ -96,10 +113,12 @@ const AddRestaurantCategory = () => {
           />
         </div>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary col-12" type="submit">
           Add Category
         </Button>
       </Form>
+
+      </section>
     </main>
   );
 };

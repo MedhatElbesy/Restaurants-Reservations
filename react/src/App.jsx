@@ -53,7 +53,6 @@ import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
 import DetailsTable from "./components/userDashboard/show/DetailsTable.jsx";
 import LocationsTable from "./components/userDashboard/show/LocationsTable.jsx";
 import LocationTablesTable from "./components/userDashboard/show/LocationTablesTable.jsx";
-import CategoriesTable from "./components/userDashboard/show/CategoriesTable.jsx";
 import MenuCategoriesTable from "./components/userDashboard/show/MenuCategoriesTable.jsx";
 import ChangePassword from "./components/userProfile/changePassword/ChangePassword.jsx";
 import AddCategoryForm from "./components/userDashboard/add/AddCategoryForm.jsx";
@@ -67,6 +66,15 @@ import { Reports } from "./components/AdminDashboard/reports.jsx";
 import { Category } from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
 import Verify from "./components/auth/register/verifyPage.jsx";
+import AddTableImage from "./components/userDashboard/add/AddTableImage.jsx";
+import EditTableImage from "./components/userDashboard/edit/EditTableImage.jsx";
+import AddUserAddress from "./components/userProfile/userAddress/AddUserAddress.jsx";
+import EditUserAddress from "./components/userProfile/userAddress/EditUserAddress.jsx";
+import SpecificCategories from "./components/userDashboard/show/SpecificCategories.jsx";
+import TableAvailability from "./components/userDashboard/show/TableAvailability.jsx";
+import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailability.jsx";
+import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
+import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
 
 function App() {
   const routes = createRoutesFromElements(
@@ -74,6 +82,7 @@ function App() {
       {/* Auth Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/specific" element={<SpecificCategories />} />
       <Route path="/verify" element={<Verify />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
@@ -100,6 +109,10 @@ function App() {
       <Route path="/userprofile" element={<UserProfile />} />
       <Route path="/edit-profile/:userId" element={<EditProfile />} />
       <Route path="/change-password/:userId" element={<ChangePassword />} />
+      <Route path="/add-address" element={<AddUserAddress />} />
+      <Route path="/edit-address/:addressId" element={<EditUserAddress />} />
+      <Route path="/availability/:tableId" element={<TableAvailability />} />
+      <Route path="/add-availability/:tableId" element={<AddAvailabilityForm />} />
       <Route
         path="/user-dashboard/restaurant/:restaurantId"
         element={<Restaurant />}
@@ -169,10 +182,7 @@ function App() {
         element={<LocationTablesTable />} 
       />
 
-     <Route 
-        path="/user-dashboard/category" 
-        element={<CategoriesTable />} 
-      />
+    
 
      <Route 
         path="/user-dashboard/menu-category" 
@@ -192,6 +202,26 @@ function App() {
      <Route 
         path="/user-dashboard/edit-restaurant-category/:categoryId" 
         element={<EditRestaurantCategory />} 
+      />
+
+     <Route 
+        path="/user-dashboard/restaurant-category/:restaurantId" 
+        element={<RestaurantCategory />} 
+      />
+
+      <Route 
+        path="/user-dashboard/add-table-image/:tableId" 
+        element={<AddTableImage />} 
+      /> 
+
+      <Route 
+        path="/user-dashboard/edit-table-image/:imageId" 
+        element={<EditTableImage />} 
+      />  
+
+     <Route 
+        path="/user-dashboard/edit-availability/:availableId" 
+        element={<EditTableAvailability />} 
       />  
 
       {/* AdminDashboard */}

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { Form, Button, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const AddCategoryForm = () => {
   const dispatch = useDispatch();
   const { status, error } = useSelector(state => state.category);
+  const navigate = useNavigate();
   const userId = useSelector(state => state.auth.userId);
 
   const [formData, setFormData] = useState({
@@ -50,7 +52,12 @@ const AddCategoryForm = () => {
       formDataForSubmission.append('cover', formData.cover);
     }
 
-    dispatch(addCategoryAsync(formDataForSubmission));
+    dispatch(addCategoryAsync(formDataForSubmission))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
 
@@ -63,10 +70,13 @@ const AddCategoryForm = () => {
     );
   }
 
+  
   return (
     <main>
 
-      <h2>Add Category</h2>
+    <section className='formUserDashboard'>
+      
+      <h2 className='text-center my-5'>Add Category</h2>
 
       <Form onSubmit={handleSubmit}>
 
@@ -132,12 +142,12 @@ const AddCategoryForm = () => {
           />
         </div>
 
-        <Button variant="primary" type="submit">
+        <Button className='col-12' variant="primary" type="submit">
           Add Category
         </Button>
 
       </Form>
-      
+      </section>
     </main>
   );
 };

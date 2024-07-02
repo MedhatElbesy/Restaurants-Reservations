@@ -34,13 +34,11 @@ img[alt="Profile"] {
 }
 
 .aside-data {
- 
- border-radius: 8px;
+  border-radius: 8px;
   border: 1px solid white;
-  padding: 20px;
-  box-shadow: 4px 8px 14px rgba(234, 129, 9, 0.708);
-  
+  height: 100%; 
 }
+
 
  .info {
   margin-bottom: 20px;
@@ -62,3 +60,44 @@ img[alt="side image"]{
   font-size: larger;
 }
 
+
+.userProfile h1{
+  font-family: 'Playfair Display', serif;
+  text-shadow: 8px 8px 14px rgba(96, 95, 95, 0.988);
+}
+
+
+
+
+.my-image-container {
+  position: relative;
+  object-fit: cover;
+}
+
+
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  color: white;
+  opacity: 1; 
+ 
+}
+
+
+.caption{
+  z-index: 10;
+  margin-top: 20%;
+}
+
+.caption p {
+  color: #ca8e46;
+  font-size: xx-large;
+  font-family:"Bad Script", cursive; 
+  text-shadow: 8px 8px 14px rgba(113, 77, 19, 0.988);
+  z-index:8;
+}

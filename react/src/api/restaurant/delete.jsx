@@ -98,3 +98,13 @@ export const deleteTableImages = async (imageId) => {
     }
 };
 
+
+export const deleteSpecificCategory = async () => {
+    try {
+        const response = await axios.delete(`/categories`);
+        return response.data;
+    } catch (error) {
+        console.error("An error occurred during deleting categories", error);
+        throw error;
+    }
+  };

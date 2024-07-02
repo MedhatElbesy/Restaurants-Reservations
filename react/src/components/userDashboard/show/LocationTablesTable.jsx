@@ -1,10 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTableAsync, selectDeleteTableStatus, selectDeleteTableError } from '../../../slices/restaurant/table/deleteTableSlice'; 
-import Swal from 'sweetalert2'; 
+import { deleteTableAsync, selectDeleteTableStatus, selectDeleteTableError } from '../../../slices/restaurant/table/deleteTableSlice';
+import { deleteTableImageAsync } from '../../../slices/restaurant/tableImage/tableImage'; 
+import Swal from 'sweetalert2';
 
 const LocationTablesTable = ({ restaurant }) => {
   const dispatch = useDispatch();
@@ -28,13 +29,27 @@ const LocationTablesTable = ({ restaurant }) => {
     });
   };
 
+  const handleImageDelete = (imageId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this image!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteTableImageAsync(imageId));
+        Swal.fire('Deleted!', 'The image has been deleted.', 'success');
+      }
+    });
+  };
+
   return (
     <section className='restaurant-details row my-5'>
-
       <h2 className='text-light text-center'>LocationsTables</h2>
-
       <table className="locations">
-
         <thead>
           <tr>
             <th>Address</th>
@@ -42,14 +57,12 @@ const LocationTablesTable = ({ restaurant }) => {
             <th>Add Table</th>
           </tr>
         </thead>
-
         <tbody>
-          {restaurant.locations.map((location) => (
+          {restaurant.locations && Array.isArray(restaurant.locations) && restaurant.locations.map((location) => (
             <tr key={location.id}>
               <td>{location.address}</td>
               <td>
-                {location.tables && location.tables.length > 0 && (
-
+                {location.tables && location.tables.length > 0 ? (
                   <table className="locations my-5">
                     <thead>
                       <tr>
@@ -62,7 +75,8 @@ const LocationTablesTable = ({ restaurant }) => {
                         <th>Extra childs chairs</th>
                         <th>Description</th>
                         <th>Status</th>
-                        <th>Table images</th>
+                        <th>images</th>
+                        <th>Availability</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -79,11 +93,14 @@ const LocationTablesTable = ({ restaurant }) => {
                           <td>{table.description}</td>
                           <td>{table.status}</td>
                           <td>
+                            <Link to={`/user-dashboard/add-table-image/${table.id}`}>
+                              <FontAwesomeIcon icon={faPlus} className="text-warning mx-3 h5 my-2" />
+                            </Link>
                             {table.images && table.images.length > 0 ? (
                               <div>
-
                                 <table className="locations my-5">
                                   <thead>
+                                    <tr></tr>
                                     <tr>
                                       <th>images</th>
                                       <th>Action</th>
@@ -102,21 +119,23 @@ const LocationTablesTable = ({ restaurant }) => {
                                           <FontAwesomeIcon
                                             icon={faTrash}
                                             className="text-danger mx-5"
-                                            onClick={() => handleDelete(table.id)}
+                                            onClick={() => handleImageDelete(image.id)}
                                           />
                                         </td>
                                       </tr>
                                     ))}
                                   </tbody>
                                 </table>
-
                               </div>
                             ) : (
-                              'N/A'
+                              <p>No Image</p>
                             )}
-
                           </td>
-
+                          <td>  
+                            <Link to={`/availability/${table.id}`}>
+                              <FontAwesomeIcon icon={faEye} className="text-warning h4" />
+                            </Link>
+                          </td>
                           <td>
                             <Link to={`/user-dashboard/edit-table/${table.id}`}>
                               <FontAwesomeIcon icon={faEdit} className="text-success" />
@@ -127,12 +146,12 @@ const LocationTablesTable = ({ restaurant }) => {
                               onClick={() => handleDelete(table.id)}
                             />
                           </td>
-
                         </tr>
                       ))}
                     </tbody>
                   </table>
-
+                ) : (
+                  <p>No tables available</p>
                 )}
               </td>
               <td>

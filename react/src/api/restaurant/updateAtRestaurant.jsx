@@ -118,3 +118,21 @@ export const updateRestaurantCategory = async (categoryId, data) => {
         throw error;
     }
   };
+
+
+
+  export const updateTableImage = async (imageId, data) => {
+    try {
+  
+      const response = await axios.post(`/table-images/${imageId}?_method=PATCH`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      return response.data; 
+    } catch (error) {
+      console.error("An error occurred while updating image", error);
+      throw error;
+    }
+  };

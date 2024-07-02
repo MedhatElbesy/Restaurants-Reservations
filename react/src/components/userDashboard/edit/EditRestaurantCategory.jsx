@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCategoryByIdAsync, fetchAllCategoryAsync, updateCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { Form, Button, Alert } from 'react-bootstrap';
 
@@ -8,7 +8,7 @@ const EditRestaurantCategory = () => {
   const dispatch = useDispatch();
   const { categoryId } = useParams(); 
   const { category, categories, status, error } = useSelector(state => state.restaurantCategory);
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     category_id: '',
     status: '',
@@ -46,7 +46,12 @@ const EditRestaurantCategory = () => {
       status: formData.status,
     };
 
-    dispatch(updateCategoryAsync({ categoryId, data: dataForSubmission }));
+    dispatch(updateCategoryAsync({ categoryId, data: dataForSubmission }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
   if (status === 'failed') {
@@ -58,15 +63,20 @@ const EditRestaurantCategory = () => {
   }
 
   return (
-    <main>
+  <main>
+    <section className='formUserDashboard'>
 
-      <h2>Update Category</h2>
+      <h2 className='text-light text-center my-4'>Update Category</h2>
 
       <Form onSubmit={handleSubmit}>
 
         <Form.Group className="mb-3">
           <Form.Label>Select Category:</Form.Label>
-          <Form.Select name="category_id" value={formData.category_id} onChange={handleChange}>
+          <Form.Select 
+           name="category_id" 
+           value={formData.category_id} 
+           onChange={handleChange}
+          >
             <option value="">Select Category</option>
             {categories.map(category => (
               <option key={category.id} value={category.id}>
@@ -107,12 +117,12 @@ const EditRestaurantCategory = () => {
           />
         </div>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary col-12" type="submit">
           Update Category
         </Button>
 
       </Form>
-      
+      </section>
     </main>
   );
 };
