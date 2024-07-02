@@ -92,7 +92,7 @@ Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories
 
 //Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories']);
 
-Route::apiResource('categories',CategoryController::class);
+//Route::apiResource('categories',CategoryController::class);
 
 
 Route::resource('restaurants', RestaurantController::class);
