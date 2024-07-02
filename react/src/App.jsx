@@ -61,8 +61,8 @@ import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaura
 
 // Admin Dashboard
 import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
-import { Ratings } from "./components/AdminDashboard/ratings.jsx";
-import { Reports } from "./components/AdminDashboard/reports.jsx";
+import  Ratings  from "./components/AdminDashboard/ratings.jsx";
+import ReportList from "./components/AdminDashboard/reports.jsx";
 import { Category } from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
 import Verify from "./components/auth/register/verifyPage.jsx";
@@ -227,7 +227,7 @@ function App() {
       {/* AdminDashboard */}
       <Route path="/admin" element={<AdminDashboard/>} />
       <Route path="/admin/rating" element={<Ratings/>} />
-      <Route path="/admin/report" element={<Reports/>} />
+      <Route path="/admin/report" element={<ReportList/>} />
       <Route path="/admin/category" element={<Category/>} />
       <Route path="/admin/about" element={<About/>} />
     </>

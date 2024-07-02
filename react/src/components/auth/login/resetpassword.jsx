@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { resetPassword } from "../../../slices/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -41,6 +42,7 @@ const ResetPassword = () => {
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +62,8 @@ const ResetPassword = () => {
         icon: "success",
         title: "Success",
         text: "Password has been reset successfully.",
+      }).then(() => {
+        navigate("/login");
       });
     } catch (err) {
       setError("Failed to reset password. Please try again.");

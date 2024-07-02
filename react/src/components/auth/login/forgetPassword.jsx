@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { forgetPassword } from "../../../slices/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -40,7 +41,7 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const [error, setError] = useState("");
-  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +51,8 @@ const ForgetPassword = () => {
         icon: "success",
         title: "Success",
         text: "Password reset link has been sent to your email.",
+      }).then(() => {
+        navigate("/reset-password");
       });
     } catch (err) {
       setError("Failed to send reset link. Please try again.");
@@ -116,9 +119,9 @@ const ForgetPassword = () => {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ bgcolor: "#7B3C1E" }}>
+            {/* <Avatar sx={{ bgcolor: "#7B3C1E" }}>
               <LockOutlinedIcon />
-            </Avatar>
+            </Avatar> */}
             <Typography component="h1" variant="h5">
               Forget Password
             </Typography>

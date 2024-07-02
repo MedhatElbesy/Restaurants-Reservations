@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col, Row } from "reactstrap";
-import ProjectTables from "./ProjectTable";
-import TopCards from "./TopCards";
+
 import Blog from "./Blog";
 export const Category = () => {
 

@@ -15,9 +15,9 @@ import {
   Button,
 } from "reactstrap";
 import About from './About';
-import { Category } from "./Category";
-import { Ratings } from "./ratings";
-import { Reports } from "./reports";
+// import { Category } from "./Category";
+// import { Ratings } from "./ratings";
+// import { Reports } from "./reports";
 
 
 function AdminDashboard() {
@@ -41,9 +41,9 @@ const Handletoggle = () => {
           <div className="d-flex justify-content-between align-items-center">
             <h3>Restaurant</h3>
             <div>
-              <NavLink to="/admin" className="text-white mr-3 btn">
+              {/* <NavLink to="/admin" className="text-white mr-3 btn">
                 Dashboard
-              </NavLink>
+              </NavLink> */}
               <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle >
                 <img
@@ -73,19 +73,19 @@ const Handletoggle = () => {
             <img src="https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg" alt="Logo" className="img-fluid rounded-circle" width="100" height="100"/>
           </div>
           <nav className="nav flex-column text-center text-white">
-            <NavLink to="/admin/category" className="nav-link text-white py-4 h1 menu">
+            <NavLink to="/admin/category" className="nav-link text-white py-4 h1 menuadmin">
               <span>Categories</span>
             </NavLink>
-            {/* <NavLink to="/admin/governotate" className="nav-link text-white menu">
-              Governorates
-            </NavLink> */}
-            <NavLink to="/admin/rating" className="nav-link text-white py-4 menu">
+            <NavLink to="/admin/rating" className="nav-link text-white py-4 menuadmin">
               <span>Ratings</span>
             </NavLink>
-            <NavLink to="/admin/report" className="nav-link text-white py-4 menu">
+            <NavLink to="/admin/report" className="nav-link text-white py-4 menuadmin">
               <span>Reports</span>
             </NavLink>
-            <NavLink to="/admin/about" className="nav-link text-white py-4 menu">
+            <NavLink to="/admin/report" className="nav-link text-white py-4 menuadmin">
+              <span>Comments</span>
+            </NavLink>
+            <NavLink to="/admin/about" className="nav-link text-white py-4 menuadmin">
               <span>About</span>
             </NavLink>
           </nav>

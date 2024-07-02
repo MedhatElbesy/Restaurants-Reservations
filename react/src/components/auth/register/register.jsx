@@ -15,7 +15,9 @@ import {
   InputAdornment,
   IconButton,
   FormGroup,
-  FormControlLabel,
+  InputLabel,
+  Select,
+  FormControl,
   Radio,
   RadioGroup
 } from "@mui/material";
@@ -57,7 +59,7 @@ const Register = () => {
     gender: "",
     profile_image: "",
     birth_date: "",
-    roles_name:""
+    roles_name: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -76,11 +78,11 @@ const Register = () => {
     }));
   };
 
-  const handleRole = (e) =>{
-    const {value } = e.target;
+  const handleRole = (e) => {
+    const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      roles_name:value,
+      roles_name: value,
     }));
   }
   // Validate first name and last name
@@ -165,7 +167,7 @@ const Register = () => {
         icon: "error",
         title: "Oops...",
         text: "Please select you want to register as a user or an admin.",
-      });s
+      }); s
       setError("Please select you want to register as a user or an admin.");
       return;
     }
@@ -446,7 +448,6 @@ const Register = () => {
                     >
                       <MenuItem value="male">Male</MenuItem>
                       <MenuItem value="female">Female</MenuItem>
-                      <MenuItem value="other">Other</MenuItem>
                     </TextField>
                   </Grid>
                   <Grid item xs={12}>
@@ -466,26 +467,23 @@ const Register = () => {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <FormGroup>
-                      <RadioGroup 
-                        name="roles_name"
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        size="small"
+                        select
+                        labelId="roles-label"
+                        id="roles-select"
                         value={formData.roles_name}
+                        label="Role"
                         onChange={handleRole}
                       >
-                        <FormControlLabel
-                          value="user"
-                          control={<Radio />}
-                          label="User"
-                        />
-                        <FormControlLabel
-                          value="admin"
-                          control={<Radio />}
-                          label="Admin"
-                        />
-                      </RadioGroup>
-                    </FormGroup>
+                        <MenuItem value="user">User</MenuItem>
+                        <MenuItem value="admin">Admin</MenuItem>
+                      </TextField>
                   </Grid>
-                  
+
                 </Grid>
                 <Button
                   // component={Link}
