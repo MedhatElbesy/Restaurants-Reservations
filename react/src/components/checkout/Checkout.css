@@ -15,15 +15,15 @@
           margin-bottom: 10px;
         }
         .bar {
-          height: .8rem;
+          height: 0.8rem;
           width: 100%;
           background-color: #023c499c;
         }
         .bar.visited {
-          background-color:  var(--secColor);
+          background-color: var(--secColor);
         }
         &:not(:last-child) {
-          margin-right: .2rem;
+          margin-right: 0.2rem;
         }
       }
     }
@@ -45,6 +45,72 @@
         &:not(:last-child) {
           border-bottom: 1px solid var(--textColor);
         }
+      }
+    }
+  }
+  .payment {
+    .table-payment-details {
+      .head {
+        padding: 1rem;
+        background-color: #595b5c3d;
+        margin-bottom: 0;
+        font-size: 2rem;
+        border-bottom: 1px solid var(--textColor);
+      }
+      background-color: #011f25e0;
+      .details {
+        padding: 2rem;
+        & > div {
+          margin-bottom: 1rem;
+          border-bottom: 1px solid #595b5c7c;
+          & > p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          p:nth-child(1) {
+            margin-bottom: 0.1rem;
+            color: var(--secColor);
+            /* span:nth-child(1) {
+
+            } */
+          }
+          p:nth-child(2) {
+            font-size: 0.8rem;
+            span:nth-child(1) {
+              padding-left: 0.5rem;
+            }
+          }
+        }
+        .extra-chair-price,
+        .child-chair-price {
+        }
+      }
+      .reciet {
+        width: 75%;
+        margin: auto;
+        padding: 0rem 2rem 1rem;
+        & > div {
+          margin-bottom: 1rem;
+          border-bottom: 1px solid #595b5c3a;
+          p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+        div:nth-child(2) {
+          color: #c0c0c052;
+        }
+        div:nth-child(3) {
+          font-weight: bold;
+        }
+      }
+    }
+    .payment-method {
+      .head {
+        font-size: 2rem;
+        padding: 1rem;
       }
     }
   }

@@ -37,7 +37,7 @@ const Checkout = () => {
     },
     {
       name: "Payment",
-      component: <Payment table={table} details={reservationData} />,
+      component: <Payment table={table} details={reservationData} branch={branch}/>,
     },
     {
       name: "Done",
