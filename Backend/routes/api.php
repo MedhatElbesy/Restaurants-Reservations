@@ -90,7 +90,9 @@ Route::middleware(['auth:sanctum', 'category.owner'])->group(function () {
 
 Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories'])->middleware('auth:sanctum');
 
-Route::apiResource('categories',CategoryController::class);
+//Route::get('/category/cur-user', [CategoryController::class, 'getOwnerCategories']);
+
+//Route::apiResource('categories',CategoryController::class);
 
 
 Route::resource('restaurants', RestaurantController::class);
