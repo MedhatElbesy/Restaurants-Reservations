@@ -10,7 +10,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
   useMapEvents({
@@ -39,6 +39,7 @@ const AddLocation = () => {
   const cities = useSelector(selectCities);
   const states = useSelector(selectStates);
   const locationStatus = useSelector((state) => state.location.status);
+  const navigate = useNavigate();
 
   const [position, setPosition] = useState(null);
   const [openingTime, setOpeningTime] = useState(null);
@@ -152,28 +153,13 @@ const AddLocation = () => {
     });
 
     try {
-      await dispatch(addLocationAsync(formDataToSend));
-      setFormData({
-        address: '',
-        zip: '',
-        latitude: '',
-        longitude: '',
-        opening_time: '',
-        closed_time: '',
-        closed_days: [],
-        number_of_tables: '',
-        phone_number: '',
-        mobile_number: '',
-        status: 'Opened',
-        country_id: '',
-        governorate_id: '',
-        city_id: '',
-        state_id: '',
+      await dispatch(addLocationAsync(formDataToSend))
+      .then((result) => {
+        if (result.meta.requestStatus === 'fulfilled') {
+          navigate(-1); 
+        }
       });
-      setPosition(null);
-      setOpeningTime(null);
-      setClosingTime(null);
-      setImages([]);
+    
     } catch (error) {
       console.error('Error adding location:', error);
     }
@@ -187,13 +173,21 @@ const AddLocation = () => {
   return (
     <main className="container">
 
-      <h2>Add Location</h2>
+   <section className='formUserDashboard'>
+
+      <h2 className='text-center my-5'>Add Location</h2>
 
       <form onSubmit={handleSubmit}>
         
         {countries && countries.length > 0 && (
           <div className="mb-3">
-            <label htmlFor="country_id" className="form-label">Country</label>
+
+            <label
+             htmlFor="country_id"
+             className="form-label">
+              Country
+            </label>
+
             <select
               className="form-control"
               id="country_id"
@@ -203,15 +197,26 @@ const AddLocation = () => {
             >
               <option value="">Select Country</option>
               {countries.map(country => (
-                <option key={country.id} value={country.id}>{country.name}</option>
+                <option 
+                  key={country.id}
+                  value={country.id}>
+                  {country.name}
+                </option>
               ))}
             </select>
           </div>
         )}
 
+
         {governorates && (
           <div className="mb-3">
-            <label htmlFor="governorate_id" className="form-label">Governorate</label>
+
+            <label 
+             htmlFor="governorate_id" 
+             className="form-label">
+              Governorate
+            </label>
+
             <select
               className="form-control"
               id="governorate_id"
@@ -221,15 +226,27 @@ const AddLocation = () => {
             >
               <option value="">Select Governorate</option>
               {governorates.map(governorate => (
-                <option key={governorate.id} value={governorate.id}>{governorate.name}</option>
+                <option 
+                 key={governorate.id} 
+                 value={governorate.id}>
+                  {governorate.name}
+                </option>
               ))}
             </select>
+
           </div>
         )}
 
+
         {cities && (
           <div className="mb-3">
-            <label htmlFor="city_id" className="form-label">City</label>
+
+            <label 
+             htmlFor="city_id" 
+             className="form-label">
+              City
+            </label>
+
             <select
               className="form-control"
               id="city_id"
@@ -239,15 +256,26 @@ const AddLocation = () => {
             >
               <option value="">Select City</option>
               {cities.map(city => (
-                <option key={city.id} value={city.id}>{city.name}</option>
+                <option 
+                  key={city.id} 
+                  value={city.id}>
+                    {city.name}
+                </option>
               ))}
             </select>
+
           </div>
         )}
 
         {states && (
           <div className="mb-3">
-            <label htmlFor="state_id" className="form-label">State</label>
+
+            <label 
+             htmlFor="state_id" 
+             className="form-label">
+              State
+            </label>
+
             <select
               className="form-control"
               id="state_id"
@@ -257,7 +285,11 @@ const AddLocation = () => {
             >
               <option value="">Select State</option>
               {states.map(state => (
-                <option key={state.id} value={state.id}>{state.name}</option>
+                <option 
+                 key={state.id} 
+                 value={state.id}>
+                  {state.name}
+                </option>
               ))}
             </select>
           </div>
@@ -313,7 +345,7 @@ const AddLocation = () => {
           </div>
         </div>
 
-        <div className="row mb-3">
+        <section className="row mb-3">
           <div className="col">
             <MapContainer center={position || [51.505, -0.09]} zoom={13} style={{ height: '200px' }}>
               <TileLayer
@@ -323,7 +355,7 @@ const AddLocation = () => {
               <LocationMarker position={position} setPosition={setPosition} setFormData={setFormData} />
             </MapContainer>
           </div>
-        </div>
+        </section>
 
         <div className="mb-3">
           <label htmlFor="closed_days" className="form-label">Closed Days</label>
@@ -438,8 +470,10 @@ const AddLocation = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">Add Location</button>
+        <button type="submit" className="btn btn-primary col-12">Add Location</button>
       </form>
+
+      </section>
     </main>
   );
 };

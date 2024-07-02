@@ -32,9 +32,11 @@ class TableAvailabilityController extends Controller
         }
         return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.',$availability );
     }
+    
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(StoreTableAvailabilityRequest $request)
     {
         try {

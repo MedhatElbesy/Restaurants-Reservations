@@ -1,35 +1,52 @@
 .reservation {
+  .head {
+    border-bottom: 1px solid rgb(139, 108, 51, 0.25);
+    color: #494949;
+    .counter {
+      font-size: 1.1rem;
+      span {
+        color: #adadad;
+        font-weight: bold;
+      }
+    }
+  }
   .navigations {
     text-align: right;
     button {
       border: 0;
-      border-radius: .4rem;
-      background-color: #8b6c33;
-      color: var(--mainColor);
+      margin: 0 0.2rem;
       font-weight: bold;
-      padding: .4rem .8rem;
-      margin: 0 .2rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      color: var(--mainColor);
+      background-color: #8b6c33;
     }
   }
   .additional {
-    background-color: var(--mainColor);
-    padding: 0.5rem;
-    .time {
-      border: 1px solid #c9c9c9;
+    /* background-color: var(--mainColor); */
+    & > div {
+      border: 1px solid #c9c9c956;
+      border-radius: 0.4rem;
+      margin-bottom: 1rem;
       h4 {
         color: #494949;
+        margin-bottom: 1rem;
       }
+    }
+    .time,
+    .extra-seats,
+    .child-seats {
+      padding: 1rem;
       p {
-        /* flex-grow: 1; */
         margin: 0.2rem;
-        padding: .5rem .8rem ;
+        padding: 0.5rem 0.8rem;
         text-align: center;
         font-weight: bold;
-        width: fit-content;
-        font-size: .8rem;
+        flex-grow: 1;
+        font-size: 0.8rem;
         color: #808080;
         border: 1px solid #c9c9c9;
-        transition: .2s ease-in-out;
+        transition: 0.2s ease-in-out;
         &:hover {
           cursor: pointer;
           color: var(--mainColor);
@@ -41,8 +58,54 @@
         background-color: #8b6c33;
       }
     }
-    .extra-seats {
-      
+  }
+  .user-data {
+    .error {
+      margin: .4rem auto;
+      text-align: center;
+      color: var(--errorColor);
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.5rem;
+      outline: none;
+      border-radius: 0.2rem;
+      border: 1px solid #c9c9c9ea;
+      color: #8b6c33;
+      &:focus {
+        border: 1px solid #8b6c33;
+      }
+    }
+    .form-check {
+      .form-check-input {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 5px;
+        &:checked {
+          background-color: #8b6c33;
+        }
+        &:focus {
+          box-shadow: 0 0 0 0.25rem rgb(139, 108, 51, 0.25);
+        }
+      }
+      color: #494949;
+      .terms {
+        color: #8b6c33;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.8rem;
+      }
     }
   }
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+  padding: .5rem 1.5rem;
+  background-color:#414040e7 !important;
+}
+div:where(.swal2-container) .swal2-html-container {
+  color: var(--errorColor);
+  font-weight: bold;
+  font-size: 1.8rem !important;
 }

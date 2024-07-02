@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react"; // Import useState for managing selected time
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useBranch } from "../branches/BranchContext";
-import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
+import { useSelector } from "react-redux";
 
-const TimeAndAdditional = ({ onSelectTime }) => {
-  const dispatch = useDispatch();
-  const { branch } = useBranch();
-  const { tableId } = useParams();
+const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
-  const [selectedId, setSelectedId] = useState(null); // State to store selected time id
-  const table = branch.tables.find((table) => table.id == tableId);
-
-  useEffect(() => {
-    dispatch(getTableAvailability(tableId));
-  }, [dispatch, tableId]);
-
   const handleSelectTime = (id) => {
-    setSelectedId(id);
-    onSelectTime(id); // Pass selected id to parent component
+    const updatedData = { ...selectedData, availabilityId: id };
+    setSelectedData(updatedData);
+  };
+
+  const handleSelectSeats = (extraSeats) => {
+    const updatedData = { ...selectedData, extraSeats };
+    setSelectedData(updatedData);
+  };
+
+  const handleSelectChildSeats = (childSeats) => {
+    const updatedData = { ...selectedData, childSeats };
+    setSelectedData(updatedData);
   };
 
   return (
@@ -27,12 +23,17 @@ const TimeAndAdditional = ({ onSelectTime }) => {
         {tableAvailability ? (
           <div className="time">
             <h4 className="text-center fs-5">Time</h4>
-            <div className=" d-flex flex-wrap justify-content-center">
+            <div className="d-flex flex-wrap">
               {tableAvailability.map((available) => (
                 <p
                   key={available.id}
                   onClick={() => handleSelectTime(available.id)}
-                  className={selectedId === available.id ? "selected" : ""}
+                  className={`
+                    ${
+                      selectedData.availabilityId === available.id
+                        ? "selected"
+                        : ""
+                    }`}
                 >
                   {available.start_time}-{available.end_time}
                 </p>
@@ -40,22 +41,48 @@ const TimeAndAdditional = ({ onSelectTime }) => {
             </div>
           </div>
         ) : (
-          <p>No times available</p>
+          <p className="not-available">No times available</p>
         )}
+
         {table.extra_number_of_chairs ? (
-          <div className="time d-flex flex-wrap justify-content-center">
-            {tableAvailability.map((available) => (
-              <p
-                key={available.id}
-                onClick={() => handleSelectTime(available.id)}
-                className={selectedId === available.id ? "selected" : ""}
-              >
-                {available.start_time}-{available.end_time}
-              </p>
-            ))}
+          <div className="extra-seats">
+            <h4 className="text-center fs-5">Extra Seats</h4>
+            <div className="d-flex flex-wrap justify-content-center">
+              {Array.from({ length: 5 }, (_, i) => (
+                <p
+                  key={i}
+                  onClick={() => handleSelectSeats(i + 1)}
+                  className={`${
+                    selectedData.extraSeats === i + 1 ? "selected" : ""
+                  }`}
+                >
+                  {i + 1}
+                </p>
+              ))}
+            </div>
           </div>
         ) : (
-          <p>No extra seats for this table</p>
+          <p className="not-available">No extra seats for this table</p>
+        )}
+
+        {table.extra_number_of_childs_chairs ? (
+          <div className="child-seats mb-0">
+            <h4 className="text-center fs-5">Extra Child Seats</h4>
+            <div className="d-flex flex-wrap justify-content-center">
+              {Array.from({ length: 5 }, (_, i) => (
+                <p
+                  key={i}
+                  onClick={() => handleSelectChildSeats(i + 1)}
+                  className={`
+                    ${selectedData.childSeats === i + 1 ? "selected" : ""} `}
+                >
+                  {i + 1}
+                </p>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="not-available">No extra child seats for this table</p>
         )}
       </div>
     </article>

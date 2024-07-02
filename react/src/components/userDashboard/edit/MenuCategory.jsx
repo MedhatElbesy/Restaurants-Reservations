@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchMenuCategoryById } from '../../../slices/restaurant/menuCategory/FetchMenuCategoryById'; 
 import { updateMenuCategoryThunk } from '../../../slices/restaurant/menuCategory/updateMenuCategory';
 import Loader from '../../../layouts/loader/loader';
@@ -8,6 +8,7 @@ import Loader from '../../../layouts/loader/loader';
 const MenuCategory = () => {
   const { menuCategoryId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menuCategory = useSelector((state) => state.menuCategory.menuCategory);
   const status = useSelector((state) => state.menuCategory.status);
   const error = useSelector((state) => state.menuCategory.error);
@@ -24,7 +25,7 @@ const MenuCategory = () => {
     if (menuCategoryId) {
       dispatch(fetchMenuCategoryById(menuCategoryId));
     }
-  }, [menuCategoryId, dispatch]);
+  }, [menuCategoryId]);
 
 
   useEffect(() => {
@@ -57,7 +58,12 @@ const MenuCategory = () => {
      
     };
 
-    dispatch(updateMenuCategoryThunk({ menuCategoryId, data: updatedData }));
+    dispatch(updateMenuCategoryThunk({ menuCategoryId, data: updatedData }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1);
+      }
+    });
   };
 
 
@@ -75,7 +81,10 @@ const MenuCategory = () => {
 
   return (
     <main className="container">
-      <h2 className="text-light">Edit Menu Category</h2>
+
+      <section className='formUserDashboard'>
+
+      <h2 className='text-light text-center my-4'>Edit Menu Category</h2>
 
       <form onSubmit={handleSubmit}>
 
@@ -115,8 +124,9 @@ const MenuCategory = () => {
           </select>
         </div>
         
-        <button type="submit" className="btn btn-primary">Update</button>
+        <button type="submit" className="btn btn-primary col-12">Update</button>
       </form>
+      </section>
     </main>
   );
 };

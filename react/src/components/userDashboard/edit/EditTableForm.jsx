@@ -84,7 +84,12 @@ const EditTableForm = () => {
   
     console.log("Data to be updated:", Object.fromEntries(formDataToUpdate.entries())); 
   
-    await dispatch(updateTableAsync({ tableId, data: formDataToUpdate }));
+    await dispatch(updateTableAsync({ tableId, data: formDataToUpdate }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
   if (fetchTableStatus === 'loading' || updateTableStatus === 'loading') {
@@ -94,7 +99,9 @@ const EditTableForm = () => {
   return (
     <main className="container">
 
-      <h2>Update Table</h2>
+     <section className='formUserDashboard'>
+
+      <h2 className='text-light text-center my-4'>Update Table</h2>
 
       {updateTableStatus === 'failed' && <p className="text-danger">An error occur</p>}
 
@@ -132,7 +139,7 @@ const EditTableForm = () => {
             type="file"
             id="cover"
             name="cover"
-            className="form-control-file"
+            className="form-control-file text-light my-3"
             onChange={handleChange}
           />
         </div>
@@ -214,12 +221,12 @@ const EditTableForm = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary mt-3">
+        <button type="submit" className="btn btn-primary col-12 mt-3">
           Update Table
         </button>
 
       </form>
-
+</section>
     </main>
   );
 };

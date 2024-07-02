@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addRestaurantCategory } from '../../../api/restaurant/addRestaurant';
-import { fetchAllCategory, fetchAllRestaurantCategoryById } from '../../../api/restaurant/restaurantFetch';
+import { fetchAllCategory, fetchAllRestaurantCategoryById , restaurantCategory} from '../../../api/restaurant/restaurantFetch';
 import { editRestaurantCategory } from '../../../api/restaurant/updateAtRestaurant';
 
 
@@ -13,6 +13,18 @@ export const addCategoryAsync = createAsyncThunk('restaurantCategory/addCategory
   }
 });
 
+
+export const fetchRestaurantCategoryAsync = createAsyncThunk(
+  'restaurantCategory/fetchRestaurantCategory',
+  async (restaurantId, { rejectWithValue }) => {
+    try {
+      const response = await restaurantCategory(restaurantId);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const fetchAllCategoryAsync = createAsyncThunk('restaurantCategory/fetchAllCategory', async (_, { rejectWithValue }) => {
   try {
@@ -49,6 +61,7 @@ const restaurantCategorySlice = createSlice({
   initialState: {
     categories: [],
     category: null,
+    restaurantCategory:null,
     status: 'idle',
     error: null,
   },
@@ -62,6 +75,10 @@ const restaurantCategorySlice = createSlice({
       .addCase(fetchAllCategoryAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.categories = action.payload;
+      })
+      .addCase(fetchRestaurantCategoryAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.restaurantCategory = action.payload; 
       })
       .addCase(fetchCategoryByIdAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';

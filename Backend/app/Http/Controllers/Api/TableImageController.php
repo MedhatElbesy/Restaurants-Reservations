@@ -59,7 +59,7 @@ class TableImageController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:table_images,id',
+            'table_id' => 'required|exists:table_images,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Loader from '../../layouts/loader/loader';
 import { fetchRestaurantById } from '../../slices/restaurant/restaurantSlice';
 import { deleteMenuCategoryThunk } from '../../slices/restaurant/menuCategory/deleteMenuCategorySlice';
@@ -9,11 +9,11 @@ import { deleteLocationAsync } from '../../slices/restaurant/location/deleteSlic
 import DetailsTable from './show/DetailsTable';
 import LocationsTable from './show/LocationsTable';
 import LocationTablesTable from './show/LocationTablesTable';
-import CategoriesTable from './show/CategoriesTable';
 import MenuCategoriesTable from './show/MenuCategoriesTable';
-import './Restaurant.css';
 import Sidebar from '../../layouts/Sidebar';
-import SpecificCategories from './show/SpecificCategories';
+import './Restaurant.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faEye} from '@fortawesome/free-solid-svg-icons';
 
 const Restaurant = () => {
   const { restaurantId } = useParams();
@@ -45,22 +45,22 @@ const Restaurant = () => {
   }
 
   if (status === 'failed') {
-    return <div>An error occur</div>;
+    return <div>An error occurred</div>;
   }
 
   return (
     <div className="restaurant-container row">
-
       <Sidebar />
-
       <main className="container-fluid restaurant col-10 offset-2">
-
+        
         <section className="restaurant-cover">
+          <img 
+           className="restaurant-cover-img" 
+           src="/images/1 (1).jpg" 
+           alt="Cover" 
+          />
 
-          <img className="restaurant-cover-img" src="/images/1 (1).jpg" alt="Cover" />
-
-          <div className="restaurant-overlay">
-            
+          <div className="restaurants-overlay">
             <header className='restaurant-header'>
               {restaurant && (
                 <>
@@ -70,10 +70,7 @@ const Restaurant = () => {
                 </>
               )}
             </header>
-
-
           </div>
-
         </section>
 
         {restaurant ? (
@@ -83,9 +80,7 @@ const Restaurant = () => {
               <DetailsTable restaurant={restaurant} />
             </section>
 
-            <section id="specific-category">
-              <SpecificCategories/>
-            </section>
+            
 
             <section id="locations">
               <LocationsTable restaurant={restaurant} handleDeleteLocation={handleDeleteLocation} />
@@ -95,10 +90,22 @@ const Restaurant = () => {
               <LocationTablesTable restaurant={restaurant} />
             </section>
 
-            <section id="categories">
-              <CategoriesTable restaurant={restaurant} />
-            </section>
 
+            <section id="specific-category" className='text-center formUserDashboard'>
+            <Link to={`/specific`}>
+                <FontAwesomeIcon icon={faEye} className="text-warning mx-3 display-6 my-2" />
+            </Link>
+            <h1 className='text-light'>Your Specific Category</h1>
+            </section>  
+
+            <section id="restaurant-category" className='text-center formUserDashboard'>
+            <Link to={`/user-dashboard/restaurant-category/${restaurantId}`}>
+                <FontAwesomeIcon icon={faEye} className="text-warning mx-3 display-6 my-2" />
+            </Link>
+            <h1 className='text-light'>Restaurant Category</h1>
+            </section>  
+     
+      
             <section id="menu-categories">
               <MenuCategoriesTable 
                 restaurant={restaurant} 
@@ -107,10 +114,14 @@ const Restaurant = () => {
               />
             </section>
 
+           
+
           </div>
         ) : (
           <div>No restaurant data</div>
         )}
+
+        
       </main>
       
     </div>

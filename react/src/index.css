@@ -8,6 +8,7 @@
   --mainColor: #f8f9fae0;
   --secColor: #ffd28d;
   --textColor: #a1a1a1;
+  --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
   --secFont: "Bad Script", cursive;
   ::-webkit-scrollbar {
@@ -34,7 +35,7 @@
 }
 
 body {
-  background-color: var(--backgroundColor) !important;
+ 
   font-family: "Playfair Display", serif;
   transition: .3s ease-in-out;
 }

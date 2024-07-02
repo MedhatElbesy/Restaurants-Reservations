@@ -98,3 +98,36 @@ export const fetchAllRestaurantCategoryById = async (categoryId) => {
       throw error;
   }
 };
+
+
+export const fetchTableImageById = async (imageId) => {
+  try {
+      const response = await axios.get(`/table-images/${imageId}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching table images data", error);
+      throw error;
+  }
+};
+
+export const specificCategory = async () => {
+  try {
+      const response = await axios.get(`/category/cur-user`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching your category data", error);
+      throw error;
+  }
+};
+
+
+
+export const restaurantCategory = async (restaurantId) => {
+  try {
+      const response = await axios.get(`/restaurant/${restaurantId}/category`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching restaurant category data", error);
+      throw error;
+  }
+};

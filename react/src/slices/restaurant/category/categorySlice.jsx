@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { updateRestaurantCategory } from '../../../api/restaurant/updateAtRestaurant';
-import { categoryById } from '../../../api/restaurant/restaurantFetch';
-import { addCategory } from '../../../api/restaurant/addRestaurant'; 
-
+import { categoryById, specificCategory} from '../../../api/restaurant/restaurantFetch';
+import { addCategory } from '../../../api/restaurant/addRestaurant';
+import {  deleteSpecificCategory } from '../../../api/restaurant/delete';
 
 export const fetchCategoryByIdAsync = createAsyncThunk(
   'category/fetchCategoryById',
@@ -16,6 +16,17 @@ export const fetchCategoryByIdAsync = createAsyncThunk(
   }
 );
 
+export const fetchSpecificCategoryAsync = createAsyncThunk(
+  'specificCategory/fetchCategory',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await specificCategory();
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const updateCategoryAsync = createAsyncThunk(
   'category/updateCategory',
@@ -41,6 +52,18 @@ export const addCategoryAsync = createAsyncThunk(
   }
 );
 
+export const deleteCategoryAsync = createAsyncThunk(
+  'category/deleteCategory',
+  async (categoryId, { rejectWithValue }) => {
+    try {
+      const data = await deleteSpecificCategory(categoryId);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const categorySlice = createSlice({
   name: 'category',
   initialState: {
@@ -55,6 +78,10 @@ const categorySlice = createSlice({
         state.status = 'succeeded';
         state.category = action.payload;
       })
+      .addCase(fetchSpecificCategoryAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.category = action.payload;
+      })
       .addCase(updateCategoryAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.category = action.payload;
@@ -62,6 +89,10 @@ const categorySlice = createSlice({
       .addCase(addCategoryAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.category = action.payload;
+      })
+      .addCase(deleteCategoryAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.category = null; 
       })
       .addMatcher(
         (action) => action.type.endsWith('/pending'),

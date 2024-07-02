@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {updateUserAsync } from '../../../slices/user/updateUserSlice';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
   const userData = useSelector((state) => state.user.data);
   const [formData, setFormData] = useState({
@@ -60,7 +62,12 @@ export default function EditProfile() {
       formDataToUpdate.append('profile_image', formData.profile_image);
     }
 
-    dispatch(updateUserAsync({ userId, data: formDataToUpdate }));
+    dispatch(updateUserAsync({ userId, data: formDataToUpdate }))
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate(-1); 
+      }
+    });
   };
 
   const handleInputChange = (event) => {
@@ -81,9 +88,9 @@ export default function EditProfile() {
 
       <section className="row justify-content-center">
 
-        <div className="card col-12">
+        <div className="card col-12 table-card">
 
-          <h5 className="card-header">Edit Profile</h5>
+          <h1 className="card-header text-light text-center">Edit Profile</h1>
 
           <div className="card-body">
 
@@ -191,7 +198,7 @@ export default function EditProfile() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary col-12">
                 Update
               </button>
 

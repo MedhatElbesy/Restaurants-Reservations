@@ -1,85 +1,74 @@
-const ReservationForm = ({ formData, setFormData }) => {
+const ReservationForm = ({ formData, setFormData, register, errors }) => {
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
 
   return (
-    <form>
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label">
-          First and Last Name
-        </label>
+    <form className="user-data d-flex flex-wrap">
+      <div className="mb-3 col-11">
         <input
           type="text"
-          className="form-control"
+          className="form-input"
           id="name"
           name="name"
-          value={formData.name || ""}
+          placeholder="Full Name"
+          {...register("name", { required: "Full Name is required" })}
           onChange={handleChange}
-          required
         />
+        {errors.name && <p className="error">{errors.name.message}</p>}
       </div>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Your Email
-        </label>
+      <div className="mb-3 col-5">
         <input
           type="email"
-          className="form-control"
+          className="form-input"
           id="email"
           name="email"
-          value={formData.email || ""}
+          placeholder="Your Email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "value does not match email format",
+            },
+          })}
           onChange={handleChange}
-          required
         />
+        {errors.email && <p className="error">{errors.email.message}</p>}
       </div>
-      <div className="mb-3">
-        <label htmlFor="telephone" className="form-label">
-          Your Telephone
-        </label>
+      <div className="mb-3 col-5 offset-1">
         <input
           type="tel"
-          className="form-control"
+          className="form-input"
           id="telephone"
           name="telephone"
-          value={formData.telephone || ""}
+          placeholder="Phone Number"
+          {...register("telephone", {
+            required: "Phone number is required",
+            minLength: {
+              value: 10,
+              message: "Phone number must be at least 10 digits",
+            },
+          })}
           onChange={handleChange}
-          required
         />
+        {errors.telephone && (
+          <p className="error">{errors.telephone.message}</p>
+        )}
       </div>
-      <div className="mb-3">
-        <label htmlFor="additionalInfo" className="form-label">
-          Please provide any additional info
-        </label>
+      <div className="mb-3 col-11">
         <textarea
-          className="form-control"
+          className="form-input"
           id="additionalInfo"
           name="additionalInfo"
-          value={formData.additionalInfo || ""}
-          onChange={handleChange}
+          placeholder="Please provide any additional info"
           rows="3"
-        ></textarea>
-      </div>
-      <div className="form-check mb-3">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="acceptTerms"
-          name="acceptTerms"
-          checked={formData.acceptTerms || false}
+          {...register("additionalInfo")}
           onChange={handleChange}
-          required
-        />
-        <label className="form-check-label" htmlFor="acceptTerms">
-          Please accept our{" "}
-          <a href="/terms" target="_blank" rel="noopener noreferrer">
-            Terms and conditions
-          </a>
-        </label>
+        ></textarea>
       </div>
     </form>
   );

@@ -4,6 +4,7 @@ import {
   addAvailability,
   updateAvailability,
   deleteAvailability,
+  getAvailabilityById
 } from "../../../api/restaurant/table-availability/tableAvailability";
 
 export const getTableAvailability = createAsyncThunk(
@@ -22,11 +23,11 @@ export const getTableAvailability = createAsyncThunk(
   }
 );
 
-export const addTableAvailability = createAsyncThunk(
-  "availability/addAvailability",
-  async (tableId, availableData, { rejectWithValue }) => {
+export const getTableAvailabilityById = createAsyncThunk(
+  "availability/getAvailabilityById",
+  async (tableAvailabilityId, { rejectWithValue }) => {
     try {
-      const data = await addAvailability(tableId, availableData);
+      const data = await getAvailabilityById(tableAvailabilityId);
       return data;
     } catch (error) {
       return rejectWithValue({
@@ -37,6 +38,24 @@ export const addTableAvailability = createAsyncThunk(
     }
   }
 );
+
+
+export const addTableAvailability = createAsyncThunk(
+  "availability/addAvailability",
+  async (availableData, { rejectWithValue }) => {
+    try {
+      const data = await addAvailability(availableData);
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
+
 
 export const updateTableAvailability = createAsyncThunk(
   "availability/updateAvailability",
@@ -74,6 +93,7 @@ const availabilitySlice = createSlice({
   name: "availability",
   initialState: {
     tableAvailability: null,
+    availabilityTable:null,
     status: "idle",
     loading: false,
     error: null,
@@ -85,6 +105,11 @@ const availabilitySlice = createSlice({
         state.loading = false;
         state.status = "succeeded";
         state.tableAvailability = action.payload.data;
+      })
+      .addCase(getTableAvailabilityById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.status = "succeeded";
+        state.availabilityTable = action.payload.data; 
       })
       .addCase(addTableAvailability.fulfilled, (state) => {
         state.loading = false;
