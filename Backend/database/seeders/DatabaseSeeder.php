@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             //PaymentsSeeder::class,
             UserActivationSeeder::class,
             RestaurantImagesSeeder::class,
-            CommentsSeeder::class
+            CommentsSeeder::class,
+            GatewaySeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

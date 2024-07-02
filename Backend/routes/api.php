@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CountryController;
+use App\Http\Controllers\Api\GatewayController;
 use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\ReservationController;
@@ -138,5 +139,6 @@ Route::apiResource('table-images',TableImageController::class);
 Route::apiResource('restaurant-images',ResturantImagesController::class);
 
 Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
+Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);

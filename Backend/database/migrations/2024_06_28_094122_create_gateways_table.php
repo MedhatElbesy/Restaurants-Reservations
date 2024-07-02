@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ItemStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,8 @@ return new class extends Migration
             $table->string('slug');
             $table->string('description')->nullable();
             $table->string('photo')->nullable();
+            $table->enum('type', ['credit_card', 'cash', 'paypal', 'gateway']);
+            $table->enum('status', [ItemStatus::Available, ItemStatus::Unavailable])->default(ItemStatus::Available);
             $table->timestamps();
         });
     }
