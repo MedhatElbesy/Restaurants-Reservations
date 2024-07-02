@@ -1,9 +1,9 @@
 const ReservationForm = ({ formData, setFormData, register, errors }) => {
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
 
@@ -69,32 +69,6 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           {...register("additionalInfo")}
           onChange={handleChange}
         ></textarea>
-      </div>
-      <div className="form-check mb-3 col-11">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="acceptTerms"
-          name="acceptTerms"
-          {...register("acceptTerms", {
-            required: "You must accept the terms and conditions",
-          })}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="acceptTerms">
-          Please accept our{" "}
-          <a
-            href="/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="terms"
-          >
-            Terms and conditions
-          </a>
-        </label>
-        {errors.acceptTerms && (
-          <p className="error">{errors.acceptTerms.message}</p>
-        )}
       </div>
     </form>
   );

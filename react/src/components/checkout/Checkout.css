@@ -11,8 +11,11 @@
         position: relative;
         flex: 1;
         .step-label {
-          color: var(--secColor);
+          /* color: var(--secColor); */
           margin-bottom: 10px;
+        }
+        .step-label.visited {
+          color: var(--secColor);
         }
         .bar {
           height: 0.8rem;
@@ -50,6 +53,7 @@
   }
   .payment {
     .table-payment-details {
+      background-color: #011f25e0;
       .head {
         padding: 1rem;
         background-color: #595b5c3d;
@@ -57,7 +61,6 @@
         font-size: 2rem;
         border-bottom: 1px solid var(--textColor);
       }
-      background-color: #011f25e0;
       .details {
         padding: 2rem;
         & > div {
@@ -104,6 +107,7 @@
         }
         div:nth-child(3) {
           font-weight: bold;
+          font-size: 1.3rem;
         }
       }
     }
@@ -111,6 +115,56 @@
       .head {
         font-size: 2rem;
         padding: 1rem;
+      }
+      .vodafone-cash {
+        padding: 1rem;
+        div:not(:last-child) {
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid #f2f6f72c;
+        }
+        .amount {
+          padding: 1rem;
+          color: var(--textColor);
+          font-weight: bold;
+          background-color: #011f25e0;
+        }
+        label {
+          font-size: 1.2rem;
+        }
+        .form-control {
+          color: var(--backgroundColor);
+          &:focus {
+            border: rgba(3, 44, 54, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba(2, 53, 66, 0.25);
+          }
+        }
+        .form-check {
+          .form-check-input {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 5px;
+            color: var(--textColor);
+            &:checked {
+              background-color: var(--backgroundColor);
+            }
+            &:focus {
+              box-shadow: 0 0 0 0.25rem rgba(2, 53, 66, 0.432);
+            }
+          }
+          .terms {
+            color: var(--secColor);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+          }
+        }
+        .error {
+          margin-bottom: 0rem;
+          margin-top: 1rem;
+          text-align: center;
+          color: var(--errorColor);
+        }
       }
     }
   }
@@ -125,5 +179,16 @@
       color: var(--backgroundColor);
       background-color: var(--secColor);
     }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .step-wrapper {
+    flex-direction: column; /* Stack steps vertically on small screens */
+  }
+
+  .step {
+    margin-bottom: 20px; /* Add spacing between stacked steps */
   }
 }

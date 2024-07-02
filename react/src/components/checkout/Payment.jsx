@@ -1,7 +1,15 @@
 import PaymentDetails from "./PaymentDetails";
 import VodafoneCash from "./payment-methods/VodafoneCash";
 
-const Payment = ({ table, details, branch }) => {
+const Payment = ({
+  table,
+  details,
+  branch,
+  formData,
+  setFormData,
+  register,
+  errors,
+}) => {
   const { selectedData } = details;
 
   const extraChairTotal =
@@ -20,17 +28,24 @@ const Payment = ({ table, details, branch }) => {
   };
 
   return (
-    <article className="payment d-flex justify-content-around text-color my-5">
-      <div className="table-payment-details col-5">
+    <article className="payment d-flex flex-wrap justify-content-around text-color my-5">
+      <div className="table-payment-details col-12 col-sm-10 col-md-6 col-lg-5">
         <PaymentDetails
           table={table}
           selectedData={selectedData}
           amount={amount}
         />
       </div>
-      <div className="payment-method col-5">
-        <p className="head">Payment Method</p>
-        <VodafoneCash total={total} branchMobileNumber={branch.mobile_number} />
+      <div className="payment-method col-12 col-sm-10 col-md-6 col-lg-5 mt-5 mt-md-0">
+        <p className="head">Payment Method <span className="fs-5 text-danger">vodafone cash</span></p>
+        <VodafoneCash
+          total={total}
+          branchMobileNumber={branch.mobile_number}
+          formData={formData}
+          setFormData={setFormData}
+          register={register}
+          errors={errors}
+        />
       </div>
     </article>
   );
