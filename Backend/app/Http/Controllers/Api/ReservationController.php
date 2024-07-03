@@ -41,18 +41,16 @@ class ReservationController extends Controller
                 'terms_and_conditions' => $validated['terms_and_conditions'],
             ]);
 
-            foreach ($validated['details'] as $detail) {
-                ReservationDetail::create([
-                    'reservation_id' => $reservation->id,
-                    'table_id' => $detail['table_id'],
-                    'table_availability_id' => $detail['table_availability_id'],
-                    'reservation_date' => $detail['reservation_date'],
-                    'reservation_time' => $detail['reservation_time'],
-                    'amount' => $detail['amount'],
-                    'number_of_extra_chairs' => $detail['number_of_extra_chairs'],
-                    'number_of_extra_childs_chairs' => $detail['number_of_extra_childs_chairs'],
-                ]);
-            }
+            ReservationDetail::create([
+                'reservation_id' => $reservation->id,
+                'table_id' => $validated['table_id'],
+                'table_availability_id' => $validated['table_availability_id'],
+                'reservation_date' => $validated['reservation_date'],
+                'reservation_time' => $validated['reservation_time'],
+                'amount' => $validated['amount'],
+                'number_of_extra_chairs' => $validated['number_of_extra_chairs'],
+                'number_of_extra_childs_chairs' => $validated['number_of_extra_childs_chairs'],
+            ]);
 
             $validated['transaction_image'] = $this->uploadImage($request, 'transaction_image', 'transaction_images') ?? null;
 
