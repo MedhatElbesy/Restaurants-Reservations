@@ -1,4 +1,4 @@
-import { openingDays } from "../../../utils";
+import { openingDays } from "../../../helpers/utils";
 import { useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import Image from "react-bootstrap/Image";

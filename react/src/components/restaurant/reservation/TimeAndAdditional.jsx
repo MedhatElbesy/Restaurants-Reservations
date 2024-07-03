@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { formatTime } from "../../../utils";
+import { formatTime } from "../../../helpers/utils";
 
 const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);

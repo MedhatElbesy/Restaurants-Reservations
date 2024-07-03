@@ -9,6 +9,7 @@ import CustomCalendar from "./Calender";
 import TimeAndAdditional from "./TimeAndAdditional";
 import ReservationForm from "./ReservationForm";
 import { useForm } from "react-hook-form";
+
 import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
 import "./Reservation.css";
 
@@ -45,6 +46,7 @@ const Reservation = () => {
         <CustomCalendar
           reservationDate={reservationDate}
           setreservationDate={setreservationDate}
+          branch={branch}
         />
       ),
       label: "Select a date",
@@ -88,12 +90,12 @@ const Reservation = () => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const onSubmit = (data) => {
-    setFormData(data);
+  const onSubmit = (userData) => {
+    setFormData(userData);
     const reservationData = {
-      formData: data,
-      selectedData: selectedData,
-      reservationDate: reservationDate,
+      userData,
+      selectedData,
+      reservationDate,
       branchId: branch.id,
       tableId: table.id,
     };

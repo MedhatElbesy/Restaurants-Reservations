@@ -127,7 +127,7 @@ const Register = () => {
         icon: "error",
         title: "Oops...",
         text: "Please select you want to register as a user or an admin.",
-      }); s
+      });
       setError("Please select you want to register as a user or an admin.");
       return;
     }

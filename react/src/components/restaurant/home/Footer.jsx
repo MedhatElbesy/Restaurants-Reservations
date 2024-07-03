@@ -1,4 +1,4 @@
-import { openingDays } from "../../../utils";
+import { openingDays } from "../../../helpers/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
