@@ -60,7 +60,7 @@ const Register = () => {
     gender: "",
     profile_image: "",
     birth_date: "",
-    roles_name: ""
+    role_name: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -83,7 +83,7 @@ const Register = () => {
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      roles_name: value,
+      role_name: value,
     }));
   }
   // Validate first name and last name
@@ -122,7 +122,7 @@ const Register = () => {
       return;
     }
 
-    if (!data.roles_name) {
+    if (!data.role_name) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -412,7 +412,7 @@ const Register = () => {
                         select
                         labelId="roles-label"
                         id="roles-select"
-                        value={formData.roles_name}
+                        value={formData.role_name}
                         label="Role"
                         onChange={handleRole}
                       >

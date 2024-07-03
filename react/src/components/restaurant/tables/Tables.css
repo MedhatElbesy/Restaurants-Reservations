@@ -11,8 +11,8 @@
 
 .table-id {
   position: absolute;
-  top: .1rem;
-  left: .1rem;
+  top: 0.1rem;
+  left: 0.1rem;
   width: 2rem;
   height: 2rem;
   display: flex;
@@ -20,7 +20,7 @@
   border-radius: 50%;
   align-items: center;
   font-weight: bold;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: var(--textColor);
   font-family: var(--secFont);
   background-color: #031e24bd;
@@ -87,13 +87,12 @@
 
 .table-details {
   position: fixed;
-  top: 15vh;
+  top: 10vh;
   left: 0vw;
   width: 100vw;
-  height: 80vh;
+  height: 90vh;
   background-color: #020708f8;
   z-index: 9999;
-  border-bottom: 2px solid var(--secColor);
   border-top: 2px solid var(--secColor);
   h3 {
     margin: 0 auto;
@@ -122,8 +121,10 @@
         color: var(--textColor);
         font-size: 1.3rem;
         padding: 0.5rem;
+        margin-top: 2rem;
         transition: var(--mainTransition);
         background-color: #3137382d;
+        border: 1px solid #80808062;
         &:hover {
           background-color: #3137384d;
         }

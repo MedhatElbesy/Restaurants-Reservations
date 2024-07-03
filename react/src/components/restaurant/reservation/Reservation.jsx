@@ -6,7 +6,7 @@ import { useBranch } from "../branches/BranchContext";
 import Swal from "sweetalert2";
 import MapContainer from "../../Map/Map";
 import CustomCalendar from "./Calender";
-import TimeAndAdditional from "./Time";
+import TimeAndAdditional from "./TimeAndAdditional";
 import ReservationForm from "./ReservationForm";
 import { useForm } from "react-hook-form";
 import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
@@ -31,7 +31,7 @@ const Reservation = () => {
     extraSeats: null,
     childSeats: null,
   });
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [reservationDate, setreservationDate] = useState(null);
 
   const {
     register,
@@ -43,8 +43,8 @@ const Reservation = () => {
     {
       component: (
         <CustomCalendar
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
+          reservationDate={reservationDate}
+          setreservationDate={setreservationDate}
         />
       ),
       label: "Select a date",
@@ -73,7 +73,7 @@ const Reservation = () => {
   ];
 
   const handleNext = () => {
-    if (step === 0 && !selectedDate) {
+    if (step === 0 && !reservationDate) {
       showError("You must select a date.");
       return;
     }
@@ -93,7 +93,7 @@ const Reservation = () => {
     const reservationData = {
       formData: data,
       selectedData: selectedData,
-      selectedDate: selectedDate,
+      reservationDate: reservationDate,
       branchId: branch.id,
       tableId: table.id,
     };
@@ -110,19 +110,22 @@ const Reservation = () => {
 
   return (
     <section
-      className="reservation d-flex justify-content-between p-4"
+      className="reservation d-flex flex-wrap justify-content-center"
       style={{ backgroundColor: "#edededf0" }}
     >
-      <div className="col-5">
+
+      {/* Map */}
+      <div className="map col-12 col-sm-12 col-lg-4 order-1 order-lg-0">
         <MapContainer
           latitude={branch.latitude}
           longitude={branch.longitude}
           popup={restaurant.name}
         />
       </div>
-      <div className="col-7 px-4">
+      {/* Reservation Details */}
+      <div className="col-12 col-sm-11 col-lg-8 px-lg-4 mt-4 mt-lg-0 p-4">
         <div>
-          <h4 className="mb-0">Reserve a table</h4>
+          <h4 className="mb-0 fs-1">Reserve a table</h4>
           <p>or Call us at {branch.mobile_number}</p>
         </div>
         <div className="p-3" style={{ backgroundColor: "#f4f4f4" }}>
@@ -133,6 +136,8 @@ const Reservation = () => {
             </div>
             {stepsComp[step].component}
           </div>
+
+          {/* Navigations */}
           <div className="navigations pt-4">
             {step !== 0 && (
               <button onClick={handlePrevious} disabled={step === 0}>

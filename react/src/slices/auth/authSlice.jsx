@@ -1,10 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser, registerUser , forgetPasswordUser, resetPasswordUser} from "../../api/auth/auth";
-
+import {
+  loginUser,
+  registerUser,
+  forgetPasswordUser,
+  resetPasswordUser,
+} from "../../api/auth/auth";
 
 export const login = createAsyncThunk(
   "auth/login",
-  async ({email, password},{ rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const data = await loginUser(email, password);
       console.log(data);
@@ -38,7 +42,7 @@ export const register = createAsyncThunk(
 export const forgetPassword = createAsyncThunk(
   "auth/forgetPassword",
   async (email, { rejectWithValue }) => {
-    console.log(email)
+    console.log(email);
     try {
       const data = await forgetPasswordUser(email);
       return data;
@@ -56,7 +60,11 @@ export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async ({ token, password, password_confirmation }, { rejectWithValue }) => {
     try {
-      const data = await resetPasswordUser(token, password, password_confirmation);
+      const data = await resetPasswordUser(
+        token,
+        password,
+        password_confirmation
+      );
       return data;
     } catch (error) {
       return rejectWithValue({
@@ -97,39 +105,41 @@ const authSlice = createSlice({
       //login
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        const data = action.payload;
+        const data = action.payload.data;
+        console.log(data);
         if (data && data.user) {
-          console.log("authed");
+          console.log(data.token);
+          state.status = "succeeded";
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.user.id);
+          localStorage.setItem("role", data.user.role_name[0]);
+          state.loggedIn = true;
           state.user = data.user;
           state.userId = data.user.id;
           state.token = data.token;
-          state.loggedIn = true;
-          state.role = data.user.roles_name[0];
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.user.id);
-          localStorage.setItem("role", data.user.roles_name[0]);
-          state.status = "succeeded";
+          state.role = data.user.role_name[0];
+          console.log(data.user.role_name[0]);
         } else {
           state.status = "failed";
           state.error = "Unexpected response structure";
         }
       })
       // register
-      .addCase(register.fulfilled, (state, action) => {
-        state.loading= false;
+      .addCase(register.fulfilled, (state) => {
+        state.loading = false;
       })
 
       // forgetPassword
-      .addCase(forgetPassword.fulfilled, (state, action) => {
+      .addCase(forgetPassword.fulfilled, (state) => {
         state.loading = false;
         state.status = "passwordResetEmailSent";
       })
       // resetPassword
-      .addCase(resetPassword.fulfilled, (state, action) => {
+      .addCase(resetPassword.fulfilled, (state) => {
         state.loading = false;
         state.status = "passwordReset";
       })
-      
+
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {

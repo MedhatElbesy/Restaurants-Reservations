@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { makeCheckout } from "../../api/checkout/checkout";
+import { getAllGateways } from "../../api/checkout/gateway";
 
-export const checkoutResevation = createAsyncThunk(
-  "checkout/checkoutResevation",
-  async (checkoutData, { rejectWithValue }) => {
+export const getGateways = createAsyncThunk(
+  "gateways/getGateways",
+  async (_, { rejectWithValue }) => {
     try {
-      const data = await makeCheckout(checkoutData);
+      const data = await getAllGateways();
       return data;
     } catch (error) {
       return rejectWithValue({
@@ -17,19 +17,21 @@ export const checkoutResevation = createAsyncThunk(
   }
 );
 
-const checkoutSlice = createSlice({
-  name: "reservations",
+const gatewaysSlice = createSlice({
+  name: "gateways",
   initialState: {
     status: "idle",
+    gateways: null,
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(checkoutResevation.fulfilled, (state) => {
+      .addCase(getGateways.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "succeeded";
+        state.gateways = action.payload.data;
       })
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
@@ -49,4 +51,4 @@ const checkoutSlice = createSlice({
   },
 });
 
-export default checkoutSlice.reducer;
+export default gatewaysSlice.reducer;

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { checkoutResevation } from "../../slices/checkout/checkoutSlice";
 import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
@@ -12,6 +13,7 @@ import "./Checkout.css";
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { reservationData } = location.state;
   const { restaurant } = useSelector((state) => state.restaurant);
   const branch = restaurant.locations.find(
@@ -74,17 +76,19 @@ const Checkout = () => {
     }
   };
 
-  const handlePlaceOrder = (data) => {
-    console.log("Order placed with data:", {
-      ...data,
+  const handlePlaceOrder = async (paymentData) => {
+    const checkoutData = {
+      ...paymentData,
       ...reservationData,
       ...formData,
-    });
+    };
+    const response = await dispatch(checkoutResevation(checkoutData)).unwrap();
+    console.log(response);
     nextStep();
   };
 
   return (
-    <section className="checkout m-5">
+    <section className="checkout p-sm-5 p-3">
       <div className="head text-center mb-5">
         <h1 className="text-sec">Checkout</h1>
         <p className="text-color">{table.description}</p>

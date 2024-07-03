@@ -22,6 +22,13 @@
       background-color: #8b6c33;
     }
   }
+  .map {
+    min-height: 100% !important;
+    .leaflet-container {
+      min-height: 300px !important;
+      height: 100% !important;
+    }
+  }
   .additional {
     /* background-color: var(--mainColor); */
     & > div {
@@ -43,6 +50,7 @@
         text-align: center;
         font-weight: bold;
         flex-grow: 1;
+        width: fit-content;
         font-size: 0.8rem;
         color: #808080;
         border: 1px solid #c9c9c9;
@@ -61,13 +69,13 @@
   }
   .user-data {
     .error {
-      margin: .4rem auto;
+      margin: 0.4rem auto;
       text-align: center;
       color: var(--errorColor);
     }
     .form-input {
       width: 100%;
-      padding: 0.5rem;
+      /* padding: 0.5rem; */
       outline: none;
       border-radius: 0.2rem;
       border: 1px solid #c9c9c9ea;
@@ -101,11 +109,30 @@
 }
 
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
-  padding: .5rem 1.5rem;
-  background-color:#414040e7 !important;
+  padding: 0.5rem 1.5rem;
+  background-color: #414040e7 !important;
 }
 div:where(.swal2-container) .swal2-html-container {
   color: var(--errorColor);
   font-weight: bold;
   font-size: 1.8rem !important;
+}
+
+.form-floating {
+  label {
+    font-size: 0.9rem;
+    color: #8b6c33;
+  }
+  .form-control {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+.form-floating > .form-control,
+.form-floating > .form-control-plaintext,
+.form-floating > .form-select {
+  height: calc(3.5rem) !important;
+  min-height: calc(2.5rem) !important;
+  line-height: 1 !important;
 }
