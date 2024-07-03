@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/PaymentResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/PaymentResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/ReservationDetailResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/ReservationDetailResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/ReservationResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/ReservationResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +212,7 @@
       <workItem from="1719616356527" duration="661000" />
       <workItem from="1719643084700" duration="4755000" />
       <workItem from="1719666466404" duration="24559000" />
-      <workItem from="1720031350484" duration="1221000" />
+      <workItem from="1720031350484" duration="3682000" />
     </task>
     <task id="LOCAL-00001" summary="Rename migration">
       <option name="closed" value="true" />

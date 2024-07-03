@@ -20,8 +20,6 @@ class ReservationResource extends JsonResource
             'total_price' => $this->total_price,
             'notes' => $this->notes,
             'terms_and_conditions' => $this->terms_and_conditions,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'details' => ReservationDetailResource::collection($this->whenLoaded('details')),
             'payments' => PaymentResource::collection($this->whenLoaded('payments')),
         ];
