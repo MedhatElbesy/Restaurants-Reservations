@@ -46,7 +46,7 @@ class ReservationController extends Controller
                 'table_id' => $validated['table_id'],
                 'table_availability_id' => $validated['table_availability_id'],
                 'reservation_date' => $validated['reservation_date'],
-                'reservation_time' => $validated['reservation_time'],
+                //'reservation_time' => $validated['reservation_time'],
                 'amount' => $validated['amount'],
                 'number_of_extra_chairs' => $validated['number_of_extra_chairs'],
                 'number_of_extra_childs_chairs' => $validated['number_of_extra_childs_chairs'],

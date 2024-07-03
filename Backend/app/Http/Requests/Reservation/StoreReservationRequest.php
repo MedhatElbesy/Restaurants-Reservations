@@ -30,7 +30,7 @@ class StoreReservationRequest extends FormRequest
             'table_id' => 'required|exists:tables,id',
             'table_availability_id' => 'required|exists:table_availabilities,id',
             'reservation_date' => 'required|date',
-            'reservation_time' => 'nullable|date_format:H:i',
+            //'reservation_time' => 'nullable|date_format:H:i',
             //'amount' => 'required|numeric|min:0',
             'number_of_extra_chairs' => 'required|integer|min:0',
             'number_of_extra_childs_chairs' => 'required|integer|min:0',
