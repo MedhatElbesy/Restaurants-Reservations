@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
@@ -30,9 +31,10 @@ class ReservationController extends Controller
     {
         $auth_user = Auth::guard('sanctum')->user();
         $validated = $request->validated();
+        dd($validated);
+
 
         DB::beginTransaction();
-
         try {
             $reservation = Reservation::create([
                 'user_id' => $auth_user->id,
@@ -82,12 +84,12 @@ class ReservationController extends Controller
         return response()->json(new ReservationResource($reservation->load('details', 'payments')), 200);
     }
 
-//    public function update(UpdateReservationRequest $request, Reservation $reservation): JsonResponse
-//    {
-//        $validated = $request->validated();
-//        $reservation->update($validated);
-//        return response()->json(new ReservationResource($reservation), 200);
-//    }
+    //    public function update(UpdateReservationRequest $request, Reservation $reservation): JsonResponse
+    //    {
+    //        $validated = $request->validated();
+    //        $reservation->update($validated);
+    //        return response()->json(new ReservationResource($reservation), 200);
+    //    }
 
     public function destroy(Reservation $reservation): JsonResponse
     {
