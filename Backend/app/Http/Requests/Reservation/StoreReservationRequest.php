@@ -37,7 +37,7 @@ class StoreReservationRequest extends FormRequest
 
             'amount'            => 'required|numeric|min:0',
             'gateway_id'        => 'nullable|exists:gateways,id',
-            'transaction_image' => 'nullable|string|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'transaction_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'transaction_phone_number' => 'nullable|string|max:20',
             'transaction_id' => 'nullable|string',
             'customer_name'  => 'required|string|max:255',
