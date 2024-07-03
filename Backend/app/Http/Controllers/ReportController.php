@@ -10,6 +10,15 @@ use Exception;
 
 class ReportController extends Controller
 {
+
+
+    function index(){
+        $reports = Report::all();
+        if(!$reports){
+            return ApiResponse::sendResponse(500,"No Reports");
+        }
+            return ApiResponse::sendResponse(200,"All Reports ", $reports);
+    }
     public function store(StoreReportRequest $request)
     {
         try {
