@@ -106,23 +106,15 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         const data = action.payload.data;
-        console.log(data);
-        if (data && data.user) {
-          console.log(data.token);
-          state.status = "succeeded";
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.user.id);
-          localStorage.setItem("role", data.user.role_name[0]);
-          state.loggedIn = true;
-          state.user = data.user;
-          state.userId = data.user.id;
-          state.token = data.token;
-          state.role = data.user.role_name[0];
-          console.log(data.user.role_name[0]);
-        } else {
-          state.status = "failed";
-          state.error = "Unexpected response structure";
-        }
+        state.status = "succeeded";
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
+        localStorage.setItem("role", data.user.role_name);
+        state.loggedIn = true;
+        state.user = data.user;
+        state.userId = data.user.id;
+        state.token = data.token;
+        state.role = data.user.role_name;
       })
       // register
       .addCase(register.fulfilled, (state) => {

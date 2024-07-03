@@ -118,7 +118,7 @@ class TablesSeeder extends Seeder
                 'number_of_chairs' => 8,
                 'max_number_of_persons' => 16,
                 'description' => "Newly added to our collection.",
-                'cover' => 'https://tinyurl.com/39ywyfed',
+                'cover' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4VuYowKNWwiHdc7JB0THZe7G1qV2tHS9OYw&s',
                 'price' => 200.00,
                 'sale_price' => 180.00,
                 'extra_number_of_chairs' => 2,

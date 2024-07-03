@@ -24,7 +24,7 @@ class GatewaySeeder extends Seeder
                 'title' => 'Vodafone Cash',
                 'slug' => 'vodafone_cash',
                 'description' => 'Vodafone Cash payment gateway',
-                'photo' => "https://ali-printing.com/wp-content/uploads/2023/03/Vodafone-Cash-Logo-200x266.png",
+                'photo' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7-l08NdkpCXRrAYLOeSKO18vm37Lsn8cSyA&s",
                 'type' => 'cash'
             ],
             [
