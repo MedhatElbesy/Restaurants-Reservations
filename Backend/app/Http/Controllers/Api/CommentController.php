@@ -43,7 +43,7 @@ class CommentController extends Controller
     {
         try {
             $restaurant = RestaurantLocation::findOrFail($restaurantId);
-            $comments = $restaurant->comments()->get();
+            $comments = $restaurant->comments()->with('user')->get();
             return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to get comments', ['error' => $e->getMessage()]);
