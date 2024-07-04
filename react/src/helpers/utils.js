@@ -1,3 +1,5 @@
+import isoCodes from "iso-country-currency";
+
 const weekDays = [
   "Sunday",
   "Monday",
@@ -57,7 +59,7 @@ export const getOpeningDays = (excludedDays) => {
 };
 
 // Main function to calculate opening days and times
-export const openingDays = (excludedDays, openTime, closeTime) => {
+export const openingDays = (excludedDays, openTime = "", closeTime = "") => {
   // Get current time
   const now = new Date();
   const currentTime = {
@@ -65,7 +67,6 @@ export const openingDays = (excludedDays, openTime, closeTime) => {
     minutes: now.getMinutes(),
   };
 
-  // Parse open and close times
   const parsedOpenTime = parseTime(openTime);
   const parsedCloseTime = parseTime(closeTime);
 
@@ -82,7 +83,6 @@ export const openingDays = (excludedDays, openTime, closeTime) => {
   const formattedOpenTime = formatTime(openTime);
   const formattedCloseTime = formatTime(closeTime);
 
-  // Return the result
   return {
     fromTo: [openingDays[0], openingDays[openingDays.length - 1]],
     days: openingDays,
@@ -100,7 +100,9 @@ export const checkoutAmount = (table, selectedData) => {
     Number(selectedData.childSeats) * Number(table.extra_child_chair_price);
   const subTotal = Number(table.price) + extraChildTotal + extraChairTotal;
   const discount = Number(table.price) - Number(table.sale_price);
-  const total = subTotal - discount;
+  const beforeTax = subTotal - discount;
+  const tax = beforeTax * 0.1;
+  const total = beforeTax + tax;
 
   return {
     total,
@@ -108,5 +110,24 @@ export const checkoutAmount = (table, selectedData) => {
     subTotal,
     extraChildTotal,
     extraChairTotal,
+    beforeTax,
+    tax,
   };
+};
+
+export const formatPrice = (price, countryCode) => {
+  // Get currency data based on country code
+  const currencyData = isoCodes.getAllInfoByISO(countryCode.toUpperCase());
+
+  // Extract the currency code
+  const currency = currencyData.currency;
+
+  // Construct the locale using the country code
+  const locale = `${countryCode.toLowerCase()}-${countryCode.toUpperCase()}`;
+
+  // Format the price using the retrieved currency and locale
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(price);
 };

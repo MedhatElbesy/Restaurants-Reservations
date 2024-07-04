@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { checkoutAmount } from "../../utils";
+import { checkoutAmount } from "../../helpers/utils";
 import CashGateways from "./gateways/CashGateways";
 import PaymentDetails from "./PaymentDetails";
 import { getGateways } from "../../slices/checkout/gatewaysSlice";
@@ -9,8 +9,8 @@ const Payment = ({
   table,
   details,
   branch,
-  formData,
-  setFormData,
+  paymentData,
+  setPaymentData,
   register,
   errors,
 }) => {
@@ -25,10 +25,8 @@ const Payment = ({
   }, [dispatch]);
 
   useEffect(() => {
-    if(gateways) {
-      const selected = gateways.find(
-        (gateway) => gateway.type === "cash"
-      );
+    if (gateways) {
+      const selected = gateways.find((gateway) => gateway.type === "cash");
       setSelectedGatewayId(selected.id);
     }
   }, [dispatch, gateways]);
@@ -44,6 +42,7 @@ const Payment = ({
           table={table}
           selectedData={selectedData}
           amount={amount}
+          branch={branch}
         />
       </div>
       <div className="gateways m-auto col-11 mt-5">
@@ -75,9 +74,9 @@ const Payment = ({
                   <div key={gateway.id} className="selected-gateway">
                     <CashGateways
                       amount={amount}
-                      branchMobileNumber={branch.mobile_number}
-                      formData={formData}
-                      setFormData={setFormData}
+                      branch={branch}
+                      paymentData={paymentData}
+                      setPaymentData={setPaymentData}
                       register={register}
                       errors={errors}
                       gateway={gateway}

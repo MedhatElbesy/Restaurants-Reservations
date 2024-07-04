@@ -85,7 +85,21 @@ const userSlice = createSlice({
       .addCase(deleteUserAddressAsync.fulfilled, (state, action) => {
         state.loading = false;
       })
-      
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.loading = true;
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.loading = false;
+          state.status = "failed";
+          state.error = action.payload;
+        }
+      );
   },
 });
 

@@ -99,9 +99,20 @@ export const deleteTableImages = async (imageId) => {
 };
 
 
-export const deleteSpecificCategory = async () => {
+export const deleteSpecificCategory = async (categoryId) => {
     try {
-        const response = await axios.delete(`/categories`);
+        const response = await axios.delete(`/categories/${categoryId}`);
+        return response.data;
+    } catch (error) {
+        console.error("An error occurred during deleting categories", error);
+        throw error;
+    }
+  };
+ 
+
+  export const restaurantCategory = async (categoryId) => {
+    try {
+        const response = await axios.delete(`/restaurant-categories/${categoryId}`);
         return response.data;
     } catch (error) {
         console.error("An error occurred during deleting categories", error);

@@ -1,5 +1,5 @@
 .general {
-    font-family: 'Playfair Display';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 @keyframes expand {
@@ -64,7 +64,7 @@ input {
 
 .text-night:hover,
 .text-night.active {
-    color: yellow !important;
+    color:#ffd28d !important;
 }
 
 @media (max-width: 991px) {

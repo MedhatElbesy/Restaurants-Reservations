@@ -84,14 +84,15 @@ const MenuCategory = () => {
 
       <section className='formUserDashboard'>
 
-      <h2 className='text-light text-center my-4'>Edit Menu Category</h2>
+      <h2 className='text-center my-4'>Edit Menu Category</h2>
 
       <form onSubmit={handleSubmit}>
 
         <div className="mb-3">
-          <label htmlFor="name" className="form-label text-light">Name</label>
+          <label htmlFor="name" className="form-label">Name</label>
           <input 
           type="text" 
+          required
           className="form-control" 
           id="name" name="name" 
           value={formData.name} 
@@ -100,18 +101,19 @@ const MenuCategory = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="description" className="form-label text-light">Description</label>
+          <label htmlFor="description" className="form-label">Description</label>
           <textarea 
           className="form-control" 
           id="description" 
           name="description" 
+          required
           value={formData.description} 
           onChange={handleChange} 
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="status" className="form-label text-light">Status</label>
+          <label htmlFor="status" className="form-label">Status</label>
           <select 
           className="form-control" 
           id="status" 
@@ -124,7 +126,7 @@ const MenuCategory = () => {
           </select>
         </div>
         
-        <button type="submit" className="btn btn-primary col-12">Update</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Update</button>
       </form>
       </section>
     </main>

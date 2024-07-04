@@ -74,9 +74,6 @@
           p:nth-child(1) {
             margin-bottom: 0.1rem;
             color: var(--secColor);
-            /* span:nth-child(1) {
-
-            } */
           }
           p:nth-child(2) {
             font-size: 0.8rem;
@@ -92,18 +89,22 @@
       .reciet {
         margin: auto;
         & > div {
-          margin-bottom: 1rem;
+          margin-bottom: .5rem;
           border-bottom: 1px solid #595b5c3a;
           p {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: .5rem;
           }
         }
         div:nth-child(2) {
-          color: #c0c0c052;
+          color: #c0c0c06e;
         }
         div:nth-child(3) {
+          color: #c0c0c06e;
+        }
+        div:nth-child(4) {
           font-weight: bold;
           font-size: 1.3rem;
         }
@@ -135,7 +136,7 @@
       }
       .cash-gateway {
         padding: 1rem;
-        div:not(:last-child) {
+        div:not(:last-of-type) {
           padding-bottom: 1.5rem;
           border-bottom: 1px solid #f2f6f72c;
         }

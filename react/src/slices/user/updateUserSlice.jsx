@@ -20,19 +20,23 @@ export const updateUserAsync = createAsyncThunk(
 
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState:{
+    loading: false,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(updateUserAsync.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
         state.error = null;
       })
       .addCase(updateUserAsync.fulfilled, (state) => {
         state.status = 'succeeded';
+        state.loading = false;
       })
       .addCase(updateUserAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

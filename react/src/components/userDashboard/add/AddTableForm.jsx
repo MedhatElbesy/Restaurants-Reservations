@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTableAsync, selectAddTableStatus, selectAddTableError } from '../../../slices/restaurant/table/addTableSlice';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 
 const AddTableForm = () => {
@@ -36,9 +37,17 @@ const AddTableForm = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.cover && formData.cover.size > 2048 * 1024) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'The cover file must not be greater than 2048 kilobytes.',
+      });
+      return;
+    }
 
     const formDataToSubmit = new FormData();
     formDataToSubmit.append('number_of_chairs', formData.number_of_chairs);
@@ -57,12 +66,9 @@ const AddTableForm = () => {
     }
 
     await dispatch(addTableAsync(formDataToSubmit))
-    .then((result) => {
-      if (result.meta.requestStatus === 'fulfilled') {
+      .then(() => {
         navigate(-1); 
-      }
-    });
-   
+      });
   };
 
   if (addTableStatus === 'loading') {
@@ -76,11 +82,11 @@ const AddTableForm = () => {
 
         <div className="col-md-6">
 
-          <div className="card table-card">
+          <div className="card">
 
-            <div className="card-body">
+            <div className="card-body table-card">
 
-              <h2 className="card-title text-center mb-4 text-light">Add Table</h2>
+              <h2 className="card-title text-center mb-4">Add Table</h2>
 
               {addTableError && (
                 <div className="alert alert-danger">
@@ -88,9 +94,7 @@ const AddTableForm = () => {
                 </div>
               )}
 
-              <form 
-              onSubmit={handleSubmit} 
-              encType="multipart/form-data">
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
 
                 <div className="form-group">
                   <input type="hidden" value={locationId}></input>
@@ -124,6 +128,7 @@ const AddTableForm = () => {
                   <input
                     type="file"
                     id="cover"
+                    accept="image/*"
                     name="cover"
                     className="form-control-file"
                     onChange={handleChange}
@@ -133,7 +138,7 @@ const AddTableForm = () => {
                 <div className="form-group">
                   <label htmlFor="price">Price</label>
                   <input
-                    type="text"
+                    type="number"
                     id="price"
                     name="price"
                     className="form-control"
@@ -146,7 +151,7 @@ const AddTableForm = () => {
                 <div className="form-group">
                   <label htmlFor="sale_price">Sale Price</label>
                   <input
-                    type="text"
+                    type="number"
                     id="sale_price"
                     name="sale_price"
                     className="form-control"
@@ -169,7 +174,7 @@ const AddTableForm = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="extra_number_of_childs_chairs"> Extra Child Chairs</label>
+                  <label htmlFor="extra_number_of_childs_chairs">Extra Child Chairs</label>
                   <input
                     type="number"
                     id="extra_number_of_childs_chairs"
@@ -196,7 +201,7 @@ const AddTableForm = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="description">Description</label> 
+                  <label htmlFor="description">Description</label>
                   <textarea
                     id="description"
                     name="description"
@@ -207,7 +212,7 @@ const AddTableForm = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary col-12 my-3">
+                <button type="submit" className="btn btn-warning col-12 my-3">
                   Add Table
                 </button>
 

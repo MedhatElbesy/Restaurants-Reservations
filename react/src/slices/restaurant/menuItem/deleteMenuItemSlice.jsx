@@ -13,19 +13,19 @@ const deleteMenuItemSlice = createSlice({
   name: 'deleteMenuItem',
   initialState: {
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(deleteMenuItemThunk.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(deleteMenuItemThunk.fulfilled, (state) => {
         state.status = 'succeeded';
+        state.loading = false;
       })
       .addCase(deleteMenuItemThunk.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

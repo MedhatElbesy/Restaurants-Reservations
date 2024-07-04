@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { handelCheckoutData } from "../../helpers/checkoutData";
 import { checkoutResevation } from "../../slices/checkout/checkoutSlice";
 import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
@@ -24,7 +25,7 @@ const Checkout = () => {
   );
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [paymentData, setPaymentData] = useState({});
   const {
     register,
     handleSubmit,
@@ -47,8 +48,8 @@ const Checkout = () => {
           table={table}
           details={reservationData}
           branch={branch}
-          formData={formData}
-          setFormData={setFormData}
+          paymentData={paymentData}
+          setPaymentData={setPaymentData}
           register={register}
           errors={errors}
         />
@@ -75,20 +76,24 @@ const Checkout = () => {
       prevStep();
     }
   };
-
-  const handlePlaceOrder = async (paymentData) => {
-    const checkoutData = {
-      ...paymentData,
-      ...reservationData,
-      ...formData,
-    };
-    const response = await dispatch(checkoutResevation(checkoutData)).unwrap();
-    console.log(response);
-    nextStep();
+  const handlePlaceOrder = async () => {
+    const checkoutData = handelCheckoutData(reservationData, paymentData);
+    for (let pair of checkoutData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+    try {
+      const response = await dispatch(
+        checkoutResevation(checkoutData)
+      ).unwrap();
+      console.log(response);
+      nextStep();
+    } catch (error) {
+      console.error("Error placing order:", error.data.errors);
+    }
   };
 
   return (
-    <section className="checkout p-sm-5 p-3">
+    <section className="checkout p-sm-5 p-3 m-lg-5">
       <div className="head text-center mb-5">
         <h1 className="text-sec">Checkout</h1>
         <p className="text-color">{table.description}</p>

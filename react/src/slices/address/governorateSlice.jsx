@@ -15,6 +15,7 @@ const governorateSlice = createSlice({
     initialState :{
     governorates: [],
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {
@@ -23,14 +24,16 @@ const governorateSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchGovernoratesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.loading = 'loading';
       })
       .addCase(fetchGovernoratesAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.governorates = action.payload;
       })
       .addCase(fetchGovernoratesAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.payload;
       });
   },

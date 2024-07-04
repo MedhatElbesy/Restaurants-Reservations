@@ -31,7 +31,7 @@ const EditTableForm = () => {
     if (tableId) {
       dispatch(fetchTableByIdAsync(tableId));
     }
-  }, [ tableId]);
+  }, [tableId]);
 
 
   useEffect(() => {
@@ -57,7 +57,13 @@ const EditTableForm = () => {
 
   const handleChange = (e) => {
     if (e.target.name === 'cover') {
-      setFormData({ ...formData, cover: e.target.files[0] }); 
+      const file = e.target.files[0];
+      if (file.size > 2048 * 1024) { 
+        alert('The cover file must not be greater than 2048 kilobytes.');
+        e.target.value = '';
+        return;
+      }
+      setFormData({ ...formData, cover: file });
     } else {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
@@ -99,134 +105,46 @@ const EditTableForm = () => {
   return (
     <main className="container">
 
-     <section className='formUserDashboard'>
+      <section className='formUserDashboard'>
 
-      <h2 className='text-light text-center my-4'>Update Table</h2>
+        <h2 className=' text-center my-4'>Update Table</h2>
 
-      {updateTableStatus === 'failed' && <p className="text-danger">An error occur</p>}
+        {updateTableStatus === 'failed' && <p className="text-danger">An error occurred</p>}
 
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
 
-        <div className="form-group">
-          <label htmlFor="number_of_chairs">Number of Chairs</label>
-          <input
-            type="number"
-            id="number_of_chairs"
-            name="number_of_chairs"
-            className="form-control"
-            value={formData.number_of_chairs}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="number_of_chairs">Number of Chairs</label>
+            <input
+              type="number"
+              id="number_of_chairs"
+              name="number_of_chairs"
+              className="form-control"
+              value={formData.number_of_chairs}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="max_number_of_persons">Max Number of Persons</label>
-          <input
-            type="number"
-            id="max_number_of_persons"
-            name="max_number_of_persons"
-            className="form-control"
-            value={formData.max_number_of_persons}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        
+          <div className="form-group">
+            <label htmlFor="cover">Cover</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="cover"
+              name="cover"
+              className="form-control-file text-light my-3"
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="cover">Cover</label>
-          <input
-            type="file"
-            id="cover"
-            name="cover"
-            className="form-control-file text-light my-3"
-            onChange={handleChange}
-          />
-        </div>
+          <button type="submit" className="btn btn-warning my-3 col-12 mt-3">
+            Update Table
+          </button>
 
-        <div className="form-group">
-          <label htmlFor="price">Price</label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            className="form-control"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="sale_price">Sale Price</label>
-          <input
-            type="text"
-            id="sale_price"
-            name="sale_price"
-            className="form-control"
-            value={formData.sale_price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="extra_number_of_chairs">Extra Number of Chairs</label>
-          <input
-            type="number"
-            id="extra_number_of_chairs"
-            name="extra_number_of_chairs"
-            className="form-control"
-            value={formData.extra_number_of_chairs}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="extra_number_of_childs_chairs"> Extra Child Chairs</label>
-          <input
-            type="number"
-            id="extra_number_of_childs_chairs"
-            name="extra_number_of_childs_chairs"
-            className="form-control"
-            value={formData.extra_number_of_childs_chairs}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="status">Status</label>
-          <select
-            id="status"
-            name="status"
-            className="form-control"
-            value={formData.status}
-            onChange={handleChange}
-            required
-          >
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            className="form-control"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary col-12 mt-3">
-          Update Table
-        </button>
-
-      </form>
-</section>
+        </form>
+      </section>
     </main>
   );
 };

@@ -7,6 +7,8 @@ import { Container } from "react-bootstrap";
 import Navbar from "./navbar/Navbar";
 import Footer from "./home/Footer";
 import Loader from "../../layouts/loader/loader";
+import "./Restaurant.css"
+
 
 export default function RestaurantDetails() {
   const { restaurantId } = useParams();
@@ -31,7 +33,7 @@ export default function RestaurantDetails() {
   }
 
   return (
-    <Container fluid>
+    <Container fluid className="user-restaurant-container">
       <Navbar />
       {restaurant && (
         <>

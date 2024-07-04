@@ -34,7 +34,7 @@ class StoreUserRequest extends FormRequest
             'profile_image'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gender'                => 'nullable|in:male,female',
             'birth_date'            => 'nullable|date',
-            'roles_name'            => 'required|in:user,owner',
+            'role_name'            => 'required|in:user,owner',
             'google_id'             => 'nullable|string',
             'facebook_id'           => 'nullable|string',
             'twitter_id'            => 'nullable|string',

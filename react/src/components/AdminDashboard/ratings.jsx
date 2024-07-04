@@ -1,35 +1,47 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchRatings } from '../../slices/adminDashboard/adminSlice';
 import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-const staticRatings = [
-  { id: 1, restaurant_location_id: 1, user_id: 1, rate: 4 },
-  { id: 2, restaurant_location_id: 2, user_id: 2, rate: 5 },
-  { id: 3, restaurant_location_id: 3, user_id: 3, rate: 3 },
-  { id: 4, restaurant_location_id: 4, user_id: 4, rate: 2 },
-  // Add more static data as needed
-];
-
 const Ratings = () => {
-  return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom sx={{ color: '#ffd28d' }}>
-        Ratings
-      </Typography>
+  const dispatch = useDispatch();
+  const ratings = useSelector((state) => state.adminDashboard.ratings) || []; 
+  const ratingStatus = useSelector((state) => state.adminDashboard.status);
+  const error = useSelector((state) => state.adminDashboard.error);
+
+  useEffect(() => {
+    if (ratingStatus === 'idle') {
+      dispatch(fetchRatings());
+    }
+  }, [ratingStatus, dispatch]);
+
+  let content;
+
+  if (ratingStatus === 'loading') {
+    content = <div>Loading...</div>;
+  } else if (ratingStatus === 'succeeded') {
+    if (ratings.length === 0) {
+      content = <div style={{ marginRight: '10px' }}>No ratings available.</div>;
+    } else {
+    content = (
       <Grid container spacing={3}>
-        {staticRatings.map((rating) => (
-          <Grid item  key={rating.id}>
+        
+        {Array.isArray(ratings) && ratings.map((rating) => ( 
+          <Grid item key={rating.id}>
             <Card
               sx={{
                 bgcolor: '#fcdb94',
                 boxShadow: 'none',
-                Width: 300,
+                margin:'20px',
+                width: 300,
                 transition: 'box-shadow 0.3s ease-in-out',
                 '&:hover': {
                   boxShadow: '0px 4px 8px rgba(255, 255, 255, 0.5)',
                 },
               }}
             >
+              
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   Restaurant Name: {rating.restaurant_location_id}
@@ -45,11 +57,29 @@ const Ratings = () => {
                     <StarIcon key={index} color="disabled" />
                   ))}
                 </Box>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  Created at: {rating.created_at}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  Updated at: {rating.updated_at}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+    );
+  }
+  } else if (ratingStatus === 'failed') {
+    content = <div>{error}</div>;
+  }
+
+  return (
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h2" gutterBottom sx={{ color: '#ffd28d',textAlign:'center',fontFamily:'"Bad Script", cursive' }}>
+        Ratings
+      </Typography>
+      {content}
     </Box>
   );
 };

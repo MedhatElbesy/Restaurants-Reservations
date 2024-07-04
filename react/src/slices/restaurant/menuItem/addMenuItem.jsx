@@ -17,21 +17,21 @@ const menuSlice = createSlice({
   initialState: {
     menuItem: null,
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addMenuItemThunk.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(addMenuItemThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.menuItem = action.payload; 
       })
       .addCase(addMenuItemThunk.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.payload;
       });
   },

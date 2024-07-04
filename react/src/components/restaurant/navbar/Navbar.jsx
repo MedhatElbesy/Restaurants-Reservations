@@ -4,8 +4,8 @@ import "./Navbar.css";
 
 export default function Navbar() {
   return (
-    <Row className="rest-nav text-center my-3 ">
-      <Nav className="justify-content-center">
+    <Row className="rest-nav text-center">
+      <Nav className="justify-content-center my-3 ">
         <Nav.Link as={NavLink} to="home">
           Home
         </Nav.Link>

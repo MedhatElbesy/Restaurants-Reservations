@@ -101,9 +101,8 @@
   }
   article {
     height: 50vh;
-    overflow: hidden;
     .details {
-      padding: 0rem 1.8rem;
+      padding: 0 1.8rem;
       p {
         color: var(--mainColor);
         font-size: 1.3rem;

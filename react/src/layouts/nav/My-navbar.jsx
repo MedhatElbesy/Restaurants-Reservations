@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import { Navbar, Nav, Form, FormControl, Button, Image, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { BodyColorContext } from "../../BodyColorContext"; // Adjust the path as necessary
-import { NavLink } from "react-router-dom";
+import { BodyColorContext } from "../../BodyColorContext"; 
+import {  NavLink } from "react-router-dom";
 
-import './aya-navbar-style.css';
+import './navbar-style.css';
 
 export default function MyNavbar() {
   const { bodyColor, toggleColor } = useContext(BodyColorContext);
@@ -13,17 +13,16 @@ export default function MyNavbar() {
 
   return (
     <Navbar bg={bodyColor} expand="lg" className="sticky-top general">
-      <Navbar.Brand href="/userprofile" className="d-flex align-items-center">
+      <Navbar.Brand href="" className="d-flex align-items-center">
+       
         <Image
-          src="https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png"
+          src="./images/logo-white.png"
           roundedCircle
           alt="Logo"
-          className="mx-3"
-          style={{ width: '3rem', height: '3rem', borderRadius: '50%' }} 
+          className="mx-5"
+          style={{ width: '4rem', height: '4rem', borderRadius: '50%' }} 
         />
-        <span className={`text-${bodyColor === "light" ? "dark" : "light"} mx-1`}>
-          Username
-        </span>
+     
       </Navbar.Brand>
 
       <Navbar.Toggle
@@ -83,9 +82,9 @@ export default function MyNavbar() {
 
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
-            to="/register"
+            to="/userprofile"
           >
-            Register
+            profile
           </NavLink>
 
           <NavLink

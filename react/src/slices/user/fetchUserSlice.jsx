@@ -15,21 +15,24 @@ const userSlice = createSlice({
   initialState: {
     data: null,
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserDataById.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchUserDataById.fulfilled, (state, action) => {
         state.data = action.payload.data; 
         state.status = 'succeeded';
+        state.loading = false;
         state.error = null;
       })
       .addCase(fetchUserDataById.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

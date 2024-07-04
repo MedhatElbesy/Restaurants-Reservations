@@ -1,31 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  getCommentsByRestaurantId,
-  addCommentToRestaurant,
-} from "../../api/restaurant/review/comments";
+import axios from "../../axios";
 
-export const getRestaurantComments = createAsyncThunk(
-  "comments/getRestaurantComments",
-  async (restaurantId, { rejectWithValue }) => {
+export const getBranchComments = createAsyncThunk(
+  "comments/getBranchComments",
+  async (branchId, { rejectWithValue }) => {
     try {
-      const data = await getCommentsByRestaurantId(restaurantId);
-      return data;
-    } catch (error) {
-      return rejectWithValue({
-        status: error.response.status,
-        data: error.response.data,
-        message: error.message,
-      });
-    }
-  }
-);
-
-export const fetchRestaurantById = createAsyncThunk(
-  "restaurant/fetchById",
-  async (restaurantId, { rejectWithValue }) => {
-    try {
-      const data = await getRestaurantById(restaurantId);
-      return data;
+      const response = await axios.get(`/comments/${branchId}`);
+      return response.data;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
@@ -37,11 +18,31 @@ export const fetchRestaurantById = createAsyncThunk(
 );
 
 export const addComment = createAsyncThunk(
-  "restaurant/addComment",
-  async ({comment, restaurantId}, { rejectWithValue }) => {
+  "comments/addComment",
+  async ({comment, branchId}, { rejectWithValue }) => {
     try {
-      const data = await addCommentToRestaurant(comment, restaurantId);
-      return data;
+      const response = await axios.post(`/comments/${branchId}`, comment);
+      return response.data;
+    } catch (error) {
+      console.log(error)
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
+
+export const updateComment = createAsyncThunk(
+  "comments/updateComment",
+  async ({ comment, commentId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/comments/${commentId}/?method='PUT'`,
+        comment
+      );
+      return response.data;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
@@ -52,12 +53,12 @@ export const addComment = createAsyncThunk(
   }
 );
 
-export const deleteRestaurantAsync = createAsyncThunk(
-  "restaurant/deleteRestaurant",
-  async (restaurantId, { rejectWithValue }) => {
+export const deleteComment = createAsyncThunk(
+  "comments/deleteComment",
+  async (commentId, { rejectWithValue }) => {
     try {
-      const data = await deleteRestaurant(restaurantId);
-      return data;
+      const response = await axios.delete(`/comments/${commentId}`);
+      return response.data;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
@@ -68,10 +69,10 @@ export const deleteRestaurantAsync = createAsyncThunk(
   }
 );
 
-const restaurantSlice = createSlice({
-  name: "restaurant",
+const commentsSlice = createSlice({
+  name: "comments",
   initialState: {
-    restaurantComments: [],
+    branchComments: [],
     status: "idle",
     loading: false,
     error: null,
@@ -79,26 +80,29 @@ const restaurantSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getRestaurantComments.fulfilled, (state, action) => {
+      .addCase(getBranchComments.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "succeeded";
-        state.restaurantComments = action.payload.data;
+        state.branchComments = action.payload.data;
       })
-      // .addCase(updateRestaurantAsync.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   state.restaurant = action.payload.data;
-      // })
-      // .addCase(addRestaurantAsync.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   state.restaurant = action.payload.data;
-      // })
-      // .addCase(deleteRestaurantAsync.fulfilled, (state) => {
-      //   state.restaurants = state.restaurants.filter(
-      //     (restaurant) => restaurant.id !== action.payload
-      //   );
-      //   state.status = "succeeded";
-      //   state.restaurant = null;
-      // })
+      .addCase(addComment.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.branchComments.push(action.payload.data);
+      })
+      .addCase(updateComment.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.branchComments = state.branchComments.filter(
+          (comment) => comment.id !== action.payload.data.id
+        );
+        state.branchComments.push(action.payload.data);
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        state.branchComments = state.branchComments.filter(
+          (comment) => comment.id !== action.payload.data.id
+        );
+        state.status = "succeeded";
+        state.restaurant = null;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {
@@ -117,4 +121,4 @@ const restaurantSlice = createSlice({
   },
 });
 
-export default restaurantSlice.reducer;
+export default commentsSlice.reducer;

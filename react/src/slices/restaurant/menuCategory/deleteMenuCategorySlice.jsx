@@ -19,9 +19,6 @@ const deleteMenuCategorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(deleteMenuCategoryThunk.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(deleteMenuCategoryThunk.fulfilled, (state) => {
         state.status = 'succeeded';
       })

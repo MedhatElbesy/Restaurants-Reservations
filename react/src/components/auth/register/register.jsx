@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -16,11 +16,6 @@ import {
   InputAdornment,
   IconButton,
   FormGroup,
-  InputLabel,
-  Select,
-  FormControl,
-  Radio,
-  RadioGroup,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockPersonIcon from '@mui/icons-material/LockPerson';
@@ -29,121 +24,66 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
 
-import './register.css'
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const defaultTheme = createTheme();
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    mobile_number: "",
-    gender: "",
-    profile_image: "",
-    birth_date: "",
-    role_name: ""
-  });
-
+  const [formData, setFormData] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authError = useSelector((state) => state.auth.error);
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: files ? files[0] : value,
     }));
   };
 
-  const handleRole = (e) => {
-    const { value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      role_name: value,
-    }));
-  }
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      profile_image: file,
-    }));
-  }
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleClickShowConfirmPassword = () => {
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
-  };
 
-  const onSubmit = async (data) => {
-    if (data.password !== data.password_confirmation) {
+  const onSubmit = async () => {
+    if (formData.password !== formData.password_confirmation) {
       Swal.fire({
-        icon: "error",
         title: "Oops...",
         text: "Passwords do not match.",
       });
-      setError("Passwords do not match.");
       return;
     }
 
-    if (!data.role_name) {
+    if (!formData.role_name) {
       Swal.fire({
-        icon: "error",
         title: "Oops...",
         text: "Please select you want to register as a user or an admin.",
       });
-      setError("Please select you want to register as a user or an admin.");
       return;
     }
 
     try {
-      const response = await dispatch(registerUser(data)).unwrap();
+      const response = await dispatch(registerUser(formData)).unwrap();
       localStorage.setItem("token", response.token);
       Swal.fire({
         icon: "success",
         title: "Registration successful!",
         text: "A verification email has been sent to your email address.",
       });
-      navigate('/verify/:token');
+      navigate("/verify/:token");
     } catch (err) {
       Swal.fire({
-        icon: "error",
         title: "Oops...",
         text: authError || "Registration failed.",
       });
-      setError(authError || "Registration failed. Try Again!");
     }
   };
 
@@ -227,6 +167,7 @@ const Register = () => {
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{ mt: 1, ml: 2, width: "100%" }}
+                encType="multipart/form-data"
               >
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
@@ -244,11 +185,13 @@ const Register = () => {
                         required: "First name is required",
                         pattern: {
                           value: /^[a-zA-Z]{3,}$/,
-                          message: "Name should be at least 3 characters and contain only letters.",
+                          message:
+                            "Name should be at least 3 characters and contain only letters.",
                         },
                       })}
                       error={!!errors.first_name}
                       helperText={errors.first_name?.message}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -265,11 +208,13 @@ const Register = () => {
                         required: "Last name is required",
                         pattern: {
                           value: /^[a-zA-Z]{3,}$/,
-                          message: "Name should be at least 3 characters and contain only letters.",
+                          message:
+                            "Name should be at least 3 characters and contain only letters.",
                         },
                       })}
                       error={!!errors.last_name}
                       helperText={errors.last_name?.message}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -285,12 +230,14 @@ const Register = () => {
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          value:
+                            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                           message: "Invalid email address",
                         },
                       })}
                       error={!!errors.email}
                       helperText={errors.email?.message}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -308,7 +255,8 @@ const Register = () => {
                         required: "Password is required",
                         minLength: {
                           value: 8,
-                          message: "Password should be at least 8 characters long",
+                          message:
+                            "Password should be at least 8 characters long",
                         },
                       })}
                       error={!!errors.password}
@@ -330,6 +278,7 @@ const Register = () => {
                           </InputAdornment>
                         ),
                       }}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -364,6 +313,28 @@ const Register = () => {
                           </InputAdornment>
                         ),
                       }}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      size="small"
+                      name="birth_date"
+                      label="Birth Date"
+                      type="date"
+                      id="birth_date"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      {...register("birth_date", {
+                        required: "Birth date is required",
+                      })}
+                      error={!!errors.birth_date}
+                      helperText={errors.birth_date?.message}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -393,10 +364,10 @@ const Register = () => {
                       label="Profile Image"
                       type="file"
                       id="profile_image"
-                      onChange={handleImageChange}
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -406,11 +377,11 @@ const Register = () => {
                       fullWidth
                       size="small"
                       select
-                      labelId="roles-label"
                       id="roles-select"
-                      value={formData.roles_name}
+                      value={formData.role_name}
                       label="Role"
-                      onChange={handleRole}
+                      name="role_name"
+                      onChange={handleChange}
                     >
                       <MenuItem value="user">User</MenuItem>
                       <MenuItem value="admin">Admin</MenuItem>
@@ -422,7 +393,14 @@ const Register = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      bgcolor: "#7B3C1E",
+                      "&:hover": {
+                        bgcolor: "#5a2915",
+                      },
+                    }}
                   >
                     Register
                   </Button>
@@ -439,7 +417,6 @@ const Register = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Copyright sx={{ mt: 5 }} />
     </ThemeProvider>
   );
 };

@@ -74,6 +74,7 @@ const EditRestaurantCategory = () => {
           <Form.Label>Select Category:</Form.Label>
           <Form.Select 
            name="category_id" 
+           required
            value={formData.category_id} 
            onChange={handleChange}
           >
@@ -117,7 +118,7 @@ const EditRestaurantCategory = () => {
           />
         </div>
 
-        <Button variant="primary col-12" type="submit">
+        <Button variant="warning my-3 col-12" type="submit">
           Update Category
         </Button>
 

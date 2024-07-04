@@ -2,8 +2,31 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Loader from '../../../layouts/loader/loader';
+import { fetchRestaurantById } from '../../../slices/restaurant/restaurantSlice';
+import { useRestaurant } from '../RestaurantContext';
 
-const CategoriesTable = ({ restaurant }) => {
+const CategoriesTable = () => {
+
+  const { restaurantId, restaurant, status, error } = useRestaurant();
+
+  useEffect(() => {
+    if (restaurantId) {
+      dispatch(fetchRestaurantById(restaurantId));
+    }
+  }, [restaurantId]);
+
+
+  if (status === 'loading') {
+    return <Loader />;
+  }
+
+
+  if (status === 'failed') {
+    return <div>An error occurred: {error}</div>;
+  }
+
+
   return (
     <section className='restaurant-details row my-5'>
 
@@ -17,6 +40,7 @@ const CategoriesTable = ({ restaurant }) => {
       </h2>
 
       <table className="locations my-2">
+
         <thead>
           <tr>
             <th>Name</th>
@@ -26,6 +50,7 @@ const CategoriesTable = ({ restaurant }) => {
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {restaurant.categories.map((category) => (
             <tr key={category.id}>
@@ -46,7 +71,9 @@ const CategoriesTable = ({ restaurant }) => {
             </tr>
           ))}
         </tbody>
+
       </table>
+      
     </section>
   );
 };
