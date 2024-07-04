@@ -19,6 +19,7 @@ class CommentResource extends JsonResource
             'restaurant_location_id' => $this->restaurant_location_id,
             'user_id' => $this->user_id,
             'comment' => $this->comment,
+            'created_at' => $this->updated_at,
         ];
     }
 }

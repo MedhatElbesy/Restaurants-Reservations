@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\MenuItemController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
+use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ReportController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -142,3 +143,11 @@ Route::apiResource('reservations', ReservationController::class)->middleware('au
 Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
+
+
+
+
+// Route::get('paypal', [PayPalController::class, 'index'])->name('paypal');
+// Route::get('paypal/payment', [PayPalController::class, 'payment'])->name('paypal.payment');
+// Route::get('paypal/payment/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.payment.success');
+// Route::get('paypal/payment/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.payment/cancel');
