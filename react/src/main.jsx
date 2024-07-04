@@ -13,15 +13,19 @@ library.add(faCoffee, faCheckSquare);
 
 import { BodyColorProvider } from './BodyColorContext';
 import { BranchProvider } from "./components/restaurant/branches/BranchContext.jsx";
-
-
+import ErrorBoundary from './ErrorBoundary'
+import { RouterProvider } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 <React.StrictMode>
-    <BodyColorProvider>
-      <BranchProvider>
-      <App />
-      </BranchProvider>
-    </BodyColorProvider>
+    <React.StrictMode>
+    <ErrorBoundary>
+      <BodyColorProvider>
+        <BranchProvider>
+          <App />
+        </BranchProvider>
+      </BodyColorProvider>
+    </ErrorBoundary>
+  </React.StrictMode>
 </React.StrictMode>
 )
