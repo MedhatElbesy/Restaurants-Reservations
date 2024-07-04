@@ -81,18 +81,22 @@ input {
     flex-direction: column;
     align-items: center;
   }
-
-  .focused{
-    animation: none 0s;
+  .nav-cover{
     width: 100%;
+    margin: 0;
+  }
+  .focused{
+    margin: 0 !important;
+    animation: none 0s !important;
+    width: 100% !important;
   }
   .non-focused{
-    animation: none 0s;
-    width: 100%;
+    margin: 0 !important;
+    animation: none 0s !important;
+    width: 100% !important;
   }
   .search-bar{
-    margin: 1rem 0;
-    width: 100%;
+    width: 100% !important;
   }
   .nav-elements {
     text-align: center;
