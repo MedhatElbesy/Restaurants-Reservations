@@ -63,7 +63,7 @@ import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaura
 import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
 import  Ratings  from "./components/AdminDashboard/ratings.jsx";
 import ReportList from "./components/AdminDashboard/reports.jsx";
-import { Category } from "./components/AdminDashboard/Category.jsx";
+// import  Category from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
 import Verify from "./components/auth/register/verifyPage.jsx";
 import AddTableImage from "./components/userDashboard/add/AddTableImage.jsx";
@@ -75,6 +75,8 @@ import TableAvailability from "./components/userDashboard/show/TableAvailability
 import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailability.jsx";
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
+import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
+import RestaurantShow from "./components/AdminDashboard/RestaurantDetails.jsx";
 
   const Layout = () => (
   <>
@@ -231,8 +233,10 @@ function App() {
       <Route path="/admin" element={<AdminDashboard/>} />
       <Route path="/admin/rating" element={<Ratings/>} />
       <Route path="/admin/report" element={<ReportList/>} />
-      <Route path="/admin/category" element={<Category/>} />
+      {/* <Route path="/admin/category" element={<Category/>} /> */}
       <Route path="/admin/about" element={<About/>} />
+      <Route path="/admin/restaurant" element={<RestaurantList />} />
+        <Route path="/restaurant/:id" element={<RestaurantShow />} />
     </Route>
   );
 

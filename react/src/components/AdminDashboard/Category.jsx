@@ -1,44 +1,24 @@
-import React from 'react'
+import  { useEffect } from 'react';
 import { Col, Row } from "reactstrap";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRestaurants } from '../../slices/adminDashboard/adminSlice'; // Adjust the path accordingly
 import Blog from "./Blog";
+
 export const Category = () => {
+  const dispatch = useDispatch();
+  const { restaurants, loading, error } = useSelector((state) => state.adminDashboard);
 
-const BlogData = [
-  {
-    image: "https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg",
-    title: "This is simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: "https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg",
-    title: "Lets be simple blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: "https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg",
-    title: "Don't Lamp blog",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-  {
-    image: "https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg",
-    title: "Simple is beautiful",
-    subtitle: "2 comments, 1 Like",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    btnbg: "primary",
-  },
-];
+  useEffect(() => {
+    dispatch(fetchRestaurants());
+  }, [dispatch]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>
@@ -90,14 +70,14 @@ const BlogData = [
       </Row> */}
       {/***Blog Cards***/}
       <Row>
-        {BlogData.map((blg, index) => (
+        {restaurants.map((category, index) => (
           <Col sm="6" lg="6" xl="3" key={index} className="m-4">
             <Blog
-              image={blg.image}
-              title={blg.title}
-              subtitle={blg.subtitle}
-              text={blg.description}
-              color={blg.btnbg}
+              image={category.image || "https://media.architecturaldigest.com/photos/572a34ffe50e09d42bdfb5e0/master/pass/japanese-restaurants-la-01.jpg"}
+              title={category.name}
+              subtitle="2 comments, 1 Like"
+              text={category.description || "This is a wider card with supporting text below as a natural lead-in to additional content."}
+              color="primary"
             />
           </Col>
         ))}
@@ -105,5 +85,3 @@ const BlogData = [
     </div>
   );
 };
-
-
