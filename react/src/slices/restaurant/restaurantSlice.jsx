@@ -94,10 +94,12 @@ const restaurantSlice = createSlice({
       })
       .addCase(updateRestaurantAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.loading = false;
         state.restaurant = action.payload.data;
       })
       .addCase(addRestaurantAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.loading = false;
         state.restaurant = action.payload.data;
       })
       .addCase(deleteRestaurantAsync.fulfilled, (state, action) => {
@@ -105,15 +107,12 @@ const restaurantSlice = createSlice({
           (restaurant) => restaurant.id !== action.payload
         );
         state.status = "succeeded";
+        state.loading = false;
         state.restaurant = null; 
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state) => {
-          state.loading = true;
-          state.status = "loading";
-        }
-      )
+      .addCase(fetchRestaurantById.pending, (state) => {
+        state.loading = true;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

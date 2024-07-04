@@ -82,6 +82,18 @@ class RatingController extends Controller
                 ->limit($limit)
                 ->get();
 
+                foreach ($topRatedRestaurants as $restaurant) {
+                    $locationInfo = DB::table('restaurant_locations')
+                        ->join('restaurants', 'restaurant_locations.restaurant_id', '=', 'restaurants.id')
+                        ->join('restaurant_location_images', 'restaurant_locations.id', '=', 'restaurant_location_images.restaurant_location_id')
+                        ->where('restaurant_locations.id', $restaurant->restaurant_location_id)
+                        ->select('restaurant_locations.*', 'restaurant_location_images.image', 'restaurants.name as restaurant_name')
+                        ->first();
+    
+                    $restaurant->location_image = $locationInfo->image ?? null;
+                    $restaurant->restaurant_name = $locationInfo->restaurant_name ?? null;
+                }    
+
             return ApiResponse::sendResponse(200, 'Top rated restaurants', $topRatedRestaurants);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to fetch top rated restaurants', ['error' => $e->getMessage()]);

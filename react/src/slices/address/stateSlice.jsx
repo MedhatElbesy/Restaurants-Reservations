@@ -15,20 +15,23 @@ const stateSlice = createSlice({
   initialState: {
     states: [],
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchStatesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchStatesAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.states = action.payload;
       })
       .addCase(fetchStatesAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

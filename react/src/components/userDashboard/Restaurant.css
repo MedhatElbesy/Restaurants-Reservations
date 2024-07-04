@@ -1,13 +1,3 @@
-.restaurant-details {
-  border: 8px solid rgb(102, 58, 38);
-  background: #FFA17F; 
-  background: -webkit-linear-gradient(to right, #00223E, #FFA17F);  
-  background: linear-gradient(to right, #00223E, #FFA17F); 
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 3px 8px 14px rgba(166, 95, 15, 0.708);
-}
-
 .restaurant-details .text-center {
   font-size: 24px;
   color: #ffffff;
@@ -39,7 +29,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.482);
+  background-color: rgba(0, 0, 0, 0.448);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,22 +85,23 @@
   background-color: white;
   text-align: center;
   font-size:large;
+
  
 }
 .locations th,
 .locations td {
-  border: 1px solid  #f1a58cc0; 
-
+  border: 1px solid  #efcd7dc0; 
+  padding:1%;
 }
 
 .locations th {
-  background: #f1a58cc0;  
+  background: #f1c98cc0;  
 }
 
 
 
 .locations tr:nth-child(even) {
-  background: #f1a58c59; 
+  background: #eaad5159; 
 }
 .restaurant-header{
   font-family: "Bad Script", cursive;
@@ -118,7 +109,7 @@
 
 .restaurant-header h1 ,
 .restaurant-header h4 {
-  color: #ca8e46;
+  color: #ffd28d;
 }
 
 .restaurant-header h1{
@@ -130,56 +121,128 @@ font-weight: 500;
 
 .formUserDashboard{
   margin-top: 3%;
-  background: #FFA17F; 
-  background: -webkit-linear-gradient(to right, #00223E, #FFA17F);  
-  background: linear-gradient(to right, #00223E, #FFA17F); 
+  background:#ffd28d; 
+
  padding: 20px;
  border: 1px saddlebrown solid;
  border-radius: 20px;
 }
 
-.formUserDashboard button{
-  background: #a14422; 
-  background: -webkit-linear-gradient(to right, #02192b, #bb4920);  
-  background: linear-gradient(to right, #020f1a, #ac5130); 
-}
-
-.formUserDashboard button:hover{
-  background: #b15a3b; 
-  background: -webkit-linear-gradient(to right, #13456c, #bb4920);  
-  background: linear-gradient(to right, #223d53, #6b2f17); 
-}
 
 
 .formUserDashboard label{
-  color: white;
+  color: rgb(28, 25, 25);
 }
 
 .table-card{
-  background: #FFA17F; 
-  background: -webkit-linear-gradient(to right, #00223E, #FFA17F);  
-  background: linear-gradient(to right, #00223E, #FFA17F); 
+ background-color:#ffd28d;
   border: 1px saddlebrown solid;
   border-radius: 20px;
 }
 
-.table-card label 
-{
- padding:1%;
-  color: white;
+
+.my-card{
+  min-height: 20vh;
+}
+
+.my-card  .card-body{
+  font-size: larger;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+} 
+
+.my-card  .card-header{
+  font-size: larger;
+  color: #ca8e46;
+  text-align: center;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+} 
+
+.card-style{
+   background-color: #030404eb;
+   border: 4px #ffd28d solid;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-style h2 {
+  color: #ffd28d;
 }
 
 
-.table-card button{
-  background: #a14422; 
-  background: -webkit-linear-gradient(to right, #02192b, #bb4920);  
-  background: linear-gradient(to right, #020f1a, #ac5130); 
+.location-container{
+  background-color: #030404eb;
+   border: 4px #ffd28d solid;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.table-card button:hover{
-  background: #b15a3b; 
-  background: -webkit-linear-gradient(to right, #13456c, #bb4920);  
-  background: linear-gradient(to right, #223d53, #6b2f17); 
+
+.my-card-header h5 {
+  color: #ca8e46;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.my-card-body p{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
+  font-weight: 400;
+  border-bottom: 1px  #ffd28d solid;
+}
+
+.details-section img{
+  height: 10vh;
+ width: 20vw;
+}
+.location-container h2 {
+  color: #ffd28d;
+}
+
+.specific-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.tables-card{
+  min-height: 100vh;
+ 
+}
+
+.tables-card  p{
+  background-color:#ffd18d2f;
+  
+}
+
+.custom-slider {
+  width: 100%; 
+  max-width: 20vw; 
+  margin: 0 auto;
+}
+
+.custom-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.fixed-image {
+  width:15vw;
+  height:17vh; 
+  object-fit: cover; 
+  border-radius: 8px; 
+}
+
+.card-img-container {
+  width: 25vw; 
+  height: 20vh; 
+}
+
 
 

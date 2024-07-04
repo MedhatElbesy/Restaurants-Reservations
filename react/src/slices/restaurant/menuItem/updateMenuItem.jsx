@@ -15,21 +15,21 @@ const updateMenuItemSlice = createSlice({
   initialState: {
     menuItem: null,
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(updateMenuItemThunk.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(updateMenuItemThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.menuItem = action.payload;
         state.error = null;
       })
       .addCase(updateMenuItemThunk.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.payload;
       });
   },

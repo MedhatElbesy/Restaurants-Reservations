@@ -82,17 +82,13 @@ const tableImageSlice = createSlice({
         state.status = 'succeeded';
         state.images = state.images.filter((image) => image.id !== action.meta.arg);
       })
-      .addMatcher(
-        (action) => action.type.endsWith('/pending'),
-        (state) => {
-          state.loading = true;
-          state.status = 'loading';
-        }
-      )
+      .addCase(fetchTableImageByIdAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
         (state, action) => {
-          state.loading = false;
           state.status = 'failed';
           state.error = action.payload;
         }

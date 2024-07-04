@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchTableImageByIdAsync, updateTableImageAsync } from '../../../slices/restaurant/tableImage/tableImage';
-import Loader from '../../../layouts/loader/loader';
+
 
 const EditTableImage = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const EditTableImage = () => {
 
       <section className='formUserDashboard'>
 
-        <h1 className='text-light text-center my-4'>Update Table Image</h1>
+        <h1 className='text-center my-4'>Update Table Image</h1>
 
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="mb-3">
@@ -63,7 +63,7 @@ const EditTableImage = () => {
 
         </div>
 
-        <button type="submit" className="btn btn-primary col-12">Update Table Image</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Update Table Image</button>
         {status === 'failed' && <p className="mt-3 text-danger">Error: "An error occurred. Please try again later."</p>}
 
       </form>

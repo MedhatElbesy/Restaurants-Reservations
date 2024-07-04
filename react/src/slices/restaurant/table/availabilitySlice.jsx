@@ -126,13 +126,12 @@ const availabilitySlice = createSlice({
         state.loading = false;
         state.status = "succeeded";
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state) => {
-          state.loading = true;
-          state.status = "loading";
-        }
-      )
+      .addCase(getTableAvailabilityById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getTableAvailability.pending, (state) => {
+        state.loading = true;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

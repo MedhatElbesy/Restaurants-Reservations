@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Alert } from 'react-bootstrap';
 
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
@@ -207,9 +208,6 @@ const EditLocation = () => {
   }
 
 
-  if (status === 'failed') {
-    return <div>Error: {error}</div>;
-  }
 
 
   return location ? (
@@ -217,14 +215,20 @@ const EditLocation = () => {
 
    <section className='formUserDashboard'>
 
-      <h2  className='text-light text-center my-4'>Edit Location</h2>
+      <h2  className='text-center my-4'>Edit Location</h2>
 
       <form onSubmit={handleSubmit}>
+      {status === 'failed' && (
+          <Alert variant="danger">
+            <p>please enter unique number</p>
+          </Alert>
+        )}
 
         <div className="mb-3">
           <label htmlFor="address" className="form-label">Address</label>
           <input 
             type="text" 
+            required
             className="form-control" 
             id="address" 
             name="address" 
@@ -236,7 +240,8 @@ const EditLocation = () => {
         <div className="mb-3">
           <label htmlFor="zip" className="form-label">Zip Code</label>
           <input 
-            type="text" 
+            type="number" 
+            required
             className="form-control" 
             id="zip" 
             name="zip" 
@@ -251,6 +256,8 @@ const EditLocation = () => {
             <label htmlFor="latitude" className="form-label">Latitude</label>
             <input 
               type="text" 
+              required
+              readOnly
               className="form-control" 
               id="latitude" 
               name="latitude" 
@@ -263,6 +270,7 @@ const EditLocation = () => {
             <label htmlFor="longitude" className="form-label">Longitude</label>
             <input 
               type="text" 
+              readOnly
               className="form-control" 
               id="longitude" 
               name="longitude" 
@@ -292,6 +300,7 @@ const EditLocation = () => {
             className="form-control" 
             id="images" 
             name="images" 
+            accept="image/*"
             multiple 
             onChange={handleFileChange} 
           />
@@ -324,6 +333,7 @@ const EditLocation = () => {
           <label htmlFor="number_of_tables" className="form-label">Number of Tables</label>
           <input 
             type="number" 
+            required
             className="form-control" 
             id="number_of_tables" 
             name="number_of_tables" 
@@ -339,6 +349,7 @@ const EditLocation = () => {
             onChange={(time) => handleTimeChange(time, 'opening')}
             showTimeSelect
             showTimeSelectOnly
+            required
             timeIntervals={15}
             timeCaption="Time"
             dateFormat="h:mm aa"
@@ -352,6 +363,7 @@ const EditLocation = () => {
             selected={closingTime}
             onChange={(time) => handleTimeChange(time, 'closing')}
             showTimeSelect
+            required
             showTimeSelectOnly
             timeIntervals={15}
             timeCaption="Time"
@@ -364,6 +376,7 @@ const EditLocation = () => {
           <label htmlFor="phone_number" className="form-label">Phone Number</label>
           <input 
             type="tel" 
+            required
             className="form-control" 
             id="phone_number" 
             name="phone_number" 
@@ -378,6 +391,7 @@ const EditLocation = () => {
             type="tel" 
             className="form-control" 
             id="mobile_number" 
+            required
             name="mobile_number" 
             value={formData.mobile_number} 
             onChange={handleChange} 
@@ -389,6 +403,7 @@ const EditLocation = () => {
           <select 
             className="form-control" 
             id="status" 
+            required
             name="status" 
             value={formData.status} 
             onChange={handleChange}
@@ -398,7 +413,7 @@ const EditLocation = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary col-12">Update</button>
+        <button type="submit" className="btn btn-warning my-3 col-12">Update</button>
 
       </form>
       </section>

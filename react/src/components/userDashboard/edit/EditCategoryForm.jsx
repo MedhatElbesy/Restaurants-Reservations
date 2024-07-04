@@ -30,7 +30,7 @@ const EditCategoryForm = () => {
       setFormData({
         name: category.name,
         slug: category.slug,
-        cover: null, 
+        cover: null,
         description: category.description,
         status: category.status,
       });
@@ -57,7 +57,6 @@ const EditCategoryForm = () => {
     return statusValue.charAt(0).toUpperCase() + statusValue.slice(1).toLowerCase();
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -72,26 +71,15 @@ const EditCategoryForm = () => {
     }
 
     dispatch(updateCategoryAsync({ categoryId, formData: formDataForSubmission }))
-    .then((result) => {
-      if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
-      }
-    });
+      .then((result) => {
+        if (result.meta.requestStatus === 'fulfilled') {
+          navigate(-1); 
+        }
+      });
   };
 
-
   if (status === 'loading' || !category) {
-    return (
-      <Loader></Loader>
-    );
-  }
-
-  if (status === 'failed') {
-    return (
-      <Alert variant="danger">
-       <p>Failed to load category. Please try again later</p>
-      </Alert>
-    );
+    return <Loader />;
   }
 
   return (
@@ -99,82 +87,88 @@ const EditCategoryForm = () => {
 
       <section className='formUserDashboard'>
 
-        <h2 className='text-light text-center my-4'>Edit Category</h2>
+        <h2 className='text-center my-4'>Edit Category</h2>
+
+        {status === 'failed' && (
+          <Alert variant="danger">
+            <p>Failed to load category. Please try again later</p>
+          </Alert>
+        )}
  
         <Form onSubmit={handleSubmit}>
-
+          
           <div className="mb-3">
-           <Form.Label htmlFor="name">Name:</Form.Label>
-           <Form.Control
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name} 
-            onChange={handleChange} />
+            <Form.Label htmlFor="name">Name:</Form.Label>
+            <Form.Control
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name} 
+              onChange={handleChange} />
           </div>
 
-         <div className="mb-3">
-           <Form.Control 
-           type="hidden"  
-           name="slug" 
-           value={formData.slug} 
-           onChange={handleChange} />
-         </div>
+          <div className="mb-3">
+            <Form.Control 
+              type="hidden"  
+              name="slug" 
+              value={formData.slug} 
+              onChange={handleChange} />
+          </div>
 
-        <div className="mb-3">
-          <Form.Label htmlFor="cover">Cover:</Form.Label>
-          <Form.Control 
-          type="file" 
-          id="cover" 
-          name="cover" 
-          onChange={handleFileChange} />
-          {category.cover && 
-          <p className="text-muted">Current Cover: {category.cover}</p>}
-        </div>
+          <div className="mb-3">
+            <Form.Label htmlFor="cover">Cover:</Form.Label>
+            <Form.Control 
+              type="file" 
+              accept="image/*"
+              id="cover" 
+              name="cover" 
+              onChange={handleFileChange} />
+            {category.cover && 
+            <p className="text-muted">Current Cover: {category.cover}</p>}
+          </div>
 
-        <div className="mb-3">
-          <Form.Label htmlFor="description">Description:</Form.Label>
-          <Form.Control 
-          as="textarea" 
-          id="description" 
-          rows={3} name="description" 
-          value={formData.description} 
-          onChange={handleChange} />
-        </div>
+          <div className="mb-3">
+            <Form.Label htmlFor="description">Description:</Form.Label>
+            <Form.Control 
+              as="textarea" 
+              id="description" 
+              rows={3} 
+              name="description" 
+              value={formData.description} 
+              onChange={handleChange} />
+          </div>
 
-        <div className="mb-3">
-          <Form.Label>Status:</Form.Label><br />
-          <Form.Check
-            type="radio"
-            id="enabled"
-            name="status"
-            label="Enabled"
-            value="Enabled"
-            checked={formData.status === 'enabled'}
-            onChange={handleChange}
-          />
+          <div className="mb-3">
+            <Form.Label>Status:</Form.Label><br />
+            <Form.Check
+              type="radio"
+              id="enabled"
+              name="status"
+              label="Enabled"
+              value="Enabled"
+              checked={formData.status === 'enabled'}
+              onChange={handleChange}
+            />
 
-          <Form.Check
-            type="radio"
-            id="disabled"
-            name="status"
-            label="Disabled"
-            value="Disabled"
-            checked={formData.status === 'disabled'}
-            onChange={handleChange}
-          />
+            <Form.Check
+              type="radio"
+              id="disabled"
+              name="status"
+              label="Disabled"
+              value="Disabled"
+              checked={formData.status === 'disabled'}
+              onChange={handleChange}
+            />
+          </div>
 
-        </div>
-
-        <Button 
-        variant="primary"
-        type="submit">
-          Update Category
-        </Button>
-
-      </Form>
+          <Button 
+            variant="warning"
+            type="submit"
+            className='col-12 my-3'>
+            Update Category
+          </Button>
+        </Form>
       </section>
-
     </main>
   );
 };

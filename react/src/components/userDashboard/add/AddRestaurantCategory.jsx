@@ -69,6 +69,7 @@ const AddRestaurantCategory = () => {
 
           <Form.Select 
            name="category_id" 
+           required
            value={formData.category_id} 
            onChange={handleChange}
           >
@@ -113,7 +114,7 @@ const AddRestaurantCategory = () => {
           />
         </div>
 
-        <Button variant="primary col-12" type="submit">
+        <Button variant="warning col-12" type="submit">
           Add Category
         </Button>
       </Form>

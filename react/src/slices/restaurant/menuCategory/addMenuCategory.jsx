@@ -22,9 +22,6 @@ const addMenuCategorySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addMenuCategoryThunk .pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(addMenuCategoryThunk .fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.menuItem = action.payload; 

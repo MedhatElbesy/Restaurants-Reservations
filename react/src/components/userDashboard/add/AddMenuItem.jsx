@@ -46,16 +46,16 @@ const AddMenuItem = () => {
 
   return (
 
-    <main className="container">
+<main className="container">
 
-<section className='formUserDashboard'>
+  <section className='formUserDashboard'>
 
-      <h2 className='text-light text-center my-5'>Add Menu Item</h2>
+      <h2 className='text-center my-5'>Add Menu Item</h2>
 
       <form onSubmit={handleSubmit}>
 
         <div className="mb-3">
-          <label htmlFor="name" className="form-label text-light">Name</label>
+          <label htmlFor="name" className="form-label">Name</label>
           <input 
           type="text" 
           className="form-control" 
@@ -67,7 +67,7 @@ const AddMenuItem = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="slug" className="form-label text-light">Slug</label>
+          <label htmlFor="slug" className="form-label">Slug</label>
           <input 
           type="text" 
           className="form-control" 
@@ -79,7 +79,7 @@ const AddMenuItem = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="description" className="form-label text-light">Description</label>
+          <label htmlFor="description" className="form-label">Description</label>
           <textarea 
           className="form-control" 
           id="description" 
@@ -90,7 +90,7 @@ const AddMenuItem = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="price" className="form-label text-light">Price</label>
+          <label htmlFor="price" className="form-label">Price</label>
           <input 
           type="number" 
           className="form-control" 
@@ -102,7 +102,7 @@ const AddMenuItem = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="sale_price" className="form-label text-light">Sale Price</label>
+          <label htmlFor="sale_price" className="form-label">Sale Price</label>
           <input 
           type="number" 
           className="form-control" 
@@ -114,7 +114,7 @@ const AddMenuItem = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="status" className="form-label text-light">Status</label>
+          <label htmlFor="status" className="form-label">Status</label>
           <select 
           className="form-control" 
           id="status" 
@@ -127,7 +127,7 @@ const AddMenuItem = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-primary col-12">Add Menu Item</button>
+        <button type="submit" className="btn btn-warning col-12">Add Menu Item</button>
       </form>
 
       </section>

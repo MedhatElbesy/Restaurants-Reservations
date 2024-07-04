@@ -39,6 +39,7 @@ const AddLocation = () => {
   const cities = useSelector(selectCities);
   const states = useSelector(selectStates);
   const locationStatus = useSelector((state) => state.location.status);
+  const {error} = useSelector((state) => state.location);
   const navigate = useNavigate();
 
   const [position, setPosition] = useState(null);
@@ -46,6 +47,8 @@ const AddLocation = () => {
   const [closingTime, setClosingTime] = useState(null);
   const [images, setImages] = useState([]);
 
+
+  
 
   const [formData, setFormData] = useState({
     address: '',
@@ -123,14 +126,30 @@ const AddLocation = () => {
     }
   };
 
+
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
+    const maxSizeInBytes = 2048 * 1024; 
+  
+    const isValidFiles = files.every(file => {
+      const sizeInBytes = file.size;
+      return sizeInBytes <= maxSizeInBytes;
+    });
+  
+    if (!isValidFiles) {
+      alert('Please upload images with size up to 2 MB.');
+      return;
+    }
+  
+   
     setImages(files);
   };
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formDataToSend = new FormData();
     formDataToSend.append('address', formData.address);
     formDataToSend.append('zip', formData.zip);
@@ -151,27 +170,29 @@ const AddLocation = () => {
     images.forEach((image, index) => {
       formDataToSend.append(`images[${index}]`, image);
     });
-
+  
     try {
-      await dispatch(addLocationAsync(formDataToSend))
-      .then((result) => {
-        if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
-        }
-      });
-    
-    } catch (error) {
+      const resultAction = await dispatch(addLocationAsync(formDataToSend));
+  
+      if (resultAction.meta.requestStatus === 'fulfilled') {
+        navigate(-1);
+      } else {
+          
+         alert('An error occurred ,please enter unique number'); 
+        
+      }
+    }  catch (error) {
       console.error('Error adding location:', error);
     }
+    
   };
-
-
+  
   if (locationStatus === 'loading') {
     return <Loader />;
   }
 
   return (
-    <main className="container">
+ <main className="container">
 
    <section className='formUserDashboard'>
 
@@ -191,6 +212,7 @@ const AddLocation = () => {
             <select
               className="form-control"
               id="country_id"
+              required
               name="country_id"
               value={formData.country_id}
               onChange={handleChange}
@@ -220,6 +242,7 @@ const AddLocation = () => {
             <select
               className="form-control"
               id="governorate_id"
+              required
               name="governorate_id"
               value={formData.governorate_id}
               onChange={handleChange}
@@ -250,6 +273,7 @@ const AddLocation = () => {
             <select
               className="form-control"
               id="city_id"
+              required
               name="city_id"
               value={formData.city_id}
               onChange={handleChange}
@@ -280,6 +304,7 @@ const AddLocation = () => {
               className="form-control"
               id="state_id"
               name="state_id"
+              required
               value={formData.state_id}
               onChange={handleChange}
             >
@@ -302,6 +327,7 @@ const AddLocation = () => {
             className="form-control"
             id="address"
             name="address"
+            required
             value={formData.address}
             onChange={handleChange}
           />
@@ -314,6 +340,7 @@ const AddLocation = () => {
             className="form-control"
             id="zip"
             name="zip"
+            required
             value={formData.zip}
             onChange={handleChange}
           />
@@ -326,6 +353,7 @@ const AddLocation = () => {
               type="text"
               className="form-control"
               id="latitude"
+              required
               name="latitude"
               value={formData.latitude}
               onChange={handleLatLngChange}
@@ -339,6 +367,7 @@ const AddLocation = () => {
               className="form-control"
               id="longitude"
               name="longitude"
+              required
               value={formData.longitude}
               onChange={handleLatLngChange}
             />
@@ -361,6 +390,7 @@ const AddLocation = () => {
           <label htmlFor="closed_days" className="form-label">Closed Days</label>
           <select
             multiple
+            required
             className="form-control"
             id="closed_days"
             name="closed_days"
@@ -384,6 +414,7 @@ const AddLocation = () => {
           <label htmlFor="number_of_tables" className="form-label">Number of Tables</label>
           <input
             type="number"
+            required
             className="form-control"
             id="number_of_tables"
             name="number_of_tables"
@@ -398,6 +429,7 @@ const AddLocation = () => {
             selected={openingTime}
             onChange={(time) => handleTimeChange(time, 'opening')}
             showTimeSelect
+            required
             showTimeSelectOnly
             timeIntervals={15}
             timeCaption="Time"
@@ -412,6 +444,7 @@ const AddLocation = () => {
             selected={closingTime}
             onChange={(time) => handleTimeChange(time, 'closing')}
             showTimeSelect
+            required
             showTimeSelectOnly
             timeIntervals={15}
             timeCaption="Time"
@@ -427,6 +460,7 @@ const AddLocation = () => {
             className="form-control"
             id="phone_number"
             name="phone_number"
+            required
             value={formData.phone_number}
             onChange={handleChange}
           />
@@ -439,6 +473,7 @@ const AddLocation = () => {
             className="form-control"
             id="mobile_number"
             name="mobile_number"
+            required
             value={formData.mobile_number}
             onChange={handleChange}
           />
@@ -450,6 +485,7 @@ const AddLocation = () => {
             className="form-control"
             id="status"
             name="status"
+            required
             value={formData.status}
             onChange={handleChange}
           >
@@ -459,18 +495,19 @@ const AddLocation = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="images" className="form-label">Images</label>
-          <input
-            type="file"
-            className="form-control"
-            id="images"
-            name="images"
-            multiple
-            onChange={handleFileChange}
-          />
-        </div>
+            <label htmlFor="images" className="form-label">Images</label>
+            <input
+              type="file"
+              className="form-control"
+              id="images"
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleFileChange}
+            />
+          </div>
 
-        <button type="submit" className="btn btn-primary col-12">Add Location</button>
+        <button type="submit" className="btn btn-warning col-12">Add Location</button>
       </form>
 
       </section>

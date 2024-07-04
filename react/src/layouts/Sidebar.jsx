@@ -20,12 +20,12 @@ const Sidebar = () => {
   return (
     <nav className={`sidebar ${bodyColor === 'light' ? 'sidebar-light' : 'sidebar-dark'} col-2`}>
       <ul>
-        <li><Link  onClick={(e) => handleScroll(e, 'details')}>Details</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'locations')}>Locations</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'location-tables')}>Location Tables</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'menu-categories')}>Menu Categories</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'specific-category')}>Specific Category</Link></li>
-        <li><Link  onClick={(e) => handleScroll(e, 'images')}>Restaurant Images</Link></li>
+        <li><Link to={`details`} >Details</Link></li>
+        <li><Link  to={`locations`}>Locations</Link></li>
+        <li><Link  to={`tables`} >Location Tables</Link></li>
+        <li><Link  to={`menu-category`} >Menu Categories</Link></li>
+        <li><Link  to={`category`} >Specific Category</Link></li>
+        <li><Link  to={`restaurant-category`} >Restaurant Caregory</Link></li>
       </ul>
     </nav>
   );
