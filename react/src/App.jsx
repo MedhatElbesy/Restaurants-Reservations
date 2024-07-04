@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 import { Provider } from "react-redux";
 
@@ -75,9 +76,18 @@ import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailabi
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
 
+  const Layout = () => (
+  <>
+    <MyNavbar />
+    <Outlet/>
+  </>
+);
+
 function App() {
+
+
   const routes = createRoutesFromElements(
-    <>
+    <Route element={<Layout />}>
       {/* Auth Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -223,13 +233,12 @@ function App() {
       <Route path="/admin/report" element={<ReportList/>} />
       <Route path="/admin/category" element={<Category/>} />
       <Route path="/admin/about" element={<About/>} />
-    </>
+    </Route>
   );
 
-  const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes);
   return (
     <Provider store={store}>
-      <MyNavbar />
       <RouterProvider router={router} />
     </Provider>
   );

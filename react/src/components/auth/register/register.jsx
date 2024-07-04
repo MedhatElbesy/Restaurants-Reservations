@@ -71,6 +71,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const authError = useSelector((state) => state.auth.error);
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -86,25 +88,17 @@ const Register = () => {
       role_name: value,
     }));
   }
-  // Validate first name and last name
-  const validateName = (name) => {
-    const regex = /^[a-zA-Z]{3,}$/;
-    return regex.test(name)
-      ? null
-      : "Name should be at least 3 characters and contain only letters.";
-  };
 
-  // Validate password
-  const validatePassword = (password) => {
-    return password.length >= 8
-      ? null
-      : "Password should be at least 8 characters long.";
-  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      profile_image: file,
+    }));
+  }
 
-  // Validate email
-  const validateEmail = (email) => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return regex.test(email) ? null : "Invalid email address.";
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleClickShowConfirmPassword = () => {
@@ -404,23 +398,22 @@ const Register = () => {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                      <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        size="small"
-                        select
-                        labelId="roles-label"
-                        id="roles-select"
-                        value={formData.role_name}
-                        label="Role"
-                        onChange={handleRole}
-                      >
-                        <MenuItem value="user">User</MenuItem>
-                        <MenuItem value="admin">Admin</MenuItem>
-                      </TextField>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      size="small"
+                      select
+                      labelId="roles-label"
+                      id="roles-select"
+                      value={formData.roles_name}
+                      label="Role"
+                      onChange={handleRole}
+                    >
+                      <MenuItem value="user">User</MenuItem>
+                      <MenuItem value="admin">Admin</MenuItem>
+                    </TextField>
                   </Grid>
-
                 </Grid>
                 <FormGroup>
                   <Button

@@ -15,12 +15,13 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+
+    public function index(){
+        $comments = Comment::all();
+        if(!$comments){
+            return ApiResponse::sendResponse(500, "Error",);
+        }
+        return ApiResponse::sendResponse(200, "All Comment", $comments);
     }
 
     /**
@@ -43,8 +44,13 @@ class CommentController extends Controller
     {
         try {
             $restaurant = RestaurantLocation::findOrFail($restaurantId);
-            $comments = $restaurant->comments()->get();
-            return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
+            $comments = $restaurant->comments()->with('user')->get();
+            $averageRating = $restaurant->averageRating();
+            return ApiResponse::sendResponse(200, 'comments', [
+            'comments' => CommentResource::collection($comments),
+            'average_rating' => $averageRating
+        ]);
+            // return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to get comments', ['error' => $e->getMessage()]);
         }
