@@ -44,7 +44,12 @@ class CommentController extends Controller
         try {
             $restaurant = RestaurantLocation::findOrFail($restaurantId);
             $comments = $restaurant->comments()->with('user')->get();
-            return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
+            $averageRating = $restaurant->averageRating();
+            return ApiResponse::sendResponse(200, 'comments', [
+            'comments' => CommentResource::collection($comments),
+            'average_rating' => $averageRating
+        ]);
+            // return ApiResponse::sendResponse(200, 'comments',CommentResource::collection($comments));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to get comments', ['error' => $e->getMessage()]);
         }

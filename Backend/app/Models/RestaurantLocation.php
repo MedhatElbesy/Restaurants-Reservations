@@ -73,7 +73,10 @@ class RestaurantLocation extends Model
         return $this->belongsTo(User::class);
     }
 
-    
 
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rate');
+    }
 
 }
