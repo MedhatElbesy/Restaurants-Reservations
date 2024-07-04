@@ -8,36 +8,56 @@ const weekDays = [
   "Saturday",
 ];
 
+// Parse time function
+export const parseTime = (time) => {
+  if (!time || typeof time !== "string") {
+    return null;
+  }
+  const [hours, minutes] = time.split(":").map((num) => parseInt(num));
+  return { hours, minutes };
+};
+
+// Check if currently open function
+export const isOpenNow = (currentTime, openTime, closeTime, excludedDays) => {
+  if (!currentTime || !openTime || !closeTime) {
+    return false;
+  }
+
+  const currentTotalMinutes = currentTime.hours * 60 + currentTime.minutes;
+  const openTotalMinutes = openTime.hours * 60 + openTime.minutes;
+  const closeTotalMinutes = closeTime.hours * 60 + closeTime.minutes;
+
+  // Check if current time is within opening hours
+  const withinOpeningHours =
+    currentTotalMinutes >= openTotalMinutes &&
+    currentTotalMinutes < closeTotalMinutes;
+
+  // Check if today is an excluded day
+  const today = weekDays[new Date().getDay()];
+  const isExcludedDay = excludedDays.includes(today);
+
+  return withinOpeningHours && !isExcludedDay;
+};
+
+// Format time to 12-hour format with AM/PM
+export const formatTime = (timeString) => {
+  const timeObj = parseTime(timeString);
+  if (!timeObj) {
+    return null;
+  }
+  const { hours, minutes } = timeObj;
+  const period = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  return `${formattedHours}:${minutes < 10 ? "0" : ""}${minutes} ${period}`;
+};
+
+// Function to get opening days without excluded days
+export const getOpeningDays = (excludedDays) => {
+  return weekDays.filter((day) => !excludedDays.includes(day));
+};
+
+// Main function to calculate opening days and times
 export const openingDays = (excludedDays, openTime, closeTime) => {
-  const parseTime = (time) => {
-    if (!time || typeof time !== "string") {
-      return null;
-    }
-    const [hours, minutes] = time.split(":").map((num) => parseInt(num));
-    return { hours, minutes };
-  };
-
-  const isOpenNow = (currentTime, openTime, closeTime) => {
-    if (!currentTime || !openTime || !closeTime) {
-      return false;
-    }
-
-    const currentTotalMinutes = currentTime.hours * 60 + currentTime.minutes;
-    const openTotalMinutes = openTime.hours * 60 + openTime.minutes;
-    const closeTotalMinutes = closeTime.hours * 60 + closeTime.minutes;
-
-    // Check if current time is within opening hours
-    const withinOpeningHours =
-      currentTotalMinutes >= openTotalMinutes &&
-      currentTotalMinutes < closeTotalMinutes;
-
-    // Check if today is an excluded day
-    const today = weekDays[new Date().getDay()];
-    const isExcludedDay = excludedDays.includes(today);
-
-    return withinOpeningHours && !isExcludedDay;
-  };
-
   // Get current time
   const now = new Date();
   const currentTime = {
@@ -50,22 +70,17 @@ export const openingDays = (excludedDays, openTime, closeTime) => {
   const parsedCloseTime = parseTime(closeTime);
 
   // Filter out excluded days
-  const openingDays = weekDays.filter((day) => !excludedDays.includes(day));
-  const isClosed = !isOpenNow(currentTime, parsedOpenTime, parsedCloseTime);
+  const openingDays = getOpeningDays(excludedDays);
+  const isClosed = !isOpenNow(
+    currentTime,
+    parsedOpenTime,
+    parsedCloseTime,
+    excludedDays
+  );
 
-  // Format parsedOpenTime and parsedCloseTime to 12-hour format with AM/PM
-  const formatTime = (timeObj) => {
-    if (!timeObj) {
-      return null;
-    }
-    const { hours, minutes } = timeObj;
-    const period = hours >= 12 ? "PM" : "AM";
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    return `${formattedHours}:${minutes < 10 ? "0" : ""}${minutes} ${period}`;
-  };
-
-  const formattedOpenTime = formatTime(parsedOpenTime);
-  const formattedCloseTime = formatTime(parsedCloseTime);
+  // Format open and close times
+  const formattedOpenTime = formatTime(openTime);
+  const formattedCloseTime = formatTime(closeTime);
 
   // Return the result
   return {
@@ -74,5 +89,24 @@ export const openingDays = (excludedDays, openTime, closeTime) => {
     open: formattedOpenTime,
     close: formattedCloseTime,
     isClosed: isClosed,
+  };
+};
+
+// Function to calculate checkout amount
+export const checkoutAmount = (table, selectedData) => {
+  const extraChairTotal =
+    Number(selectedData.extraSeats) * Number(table.extra_chair_price);
+  const extraChildTotal =
+    Number(selectedData.childSeats) * Number(table.extra_child_chair_price);
+  const subTotal = Number(table.price) + extraChildTotal + extraChairTotal;
+  const discount = Number(table.price) - Number(table.sale_price);
+  const total = subTotal - discount;
+
+  return {
+    total,
+    discount,
+    subTotal,
+    extraChildTotal,
+    extraChairTotal,
   };
 };

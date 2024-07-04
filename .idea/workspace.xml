@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/GatewayController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/seeders/GatewaySeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Reservation/StoreReservationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110421_create_user_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110421_create_user_addresses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094122_create_gateways_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094122_create_gateways_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094125_create_reservation_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094125_create_reservation_details_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_29_073947_create_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_29_073947_create_payments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/PaymentsSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,10 +181,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ComposerRunConfigurationType" factoryName="Composer Script">
-      <option name="pathToComposerJson" value="$PROJECT_DIR$/Backend/composer.json" />
-      <method v="2" />
-    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/Backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -223,6 +210,7 @@
       <workItem from="1719616356527" duration="661000" />
       <workItem from="1719643084700" duration="4755000" />
       <workItem from="1719666466404" duration="24559000" />
+      <workItem from="1720031350484" duration="4697000" />
     </task>
     <task id="LOCAL-00001" summary="Rename migration">
       <option name="closed" value="true" />

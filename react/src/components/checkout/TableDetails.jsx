@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 const TableDetials = ({ table, details }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
-  const { selectedData, selectedDate } = details;
+  const { selectedData, reservationDate } = details;
   const time = tableAvailability.find(
     (available) => available.id == selectedData.availabilityId
   );
 
-  const date = selectedDate.toLocaleDateString("en-US", {
+  const date = reservationDate.toLocaleDateString("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",

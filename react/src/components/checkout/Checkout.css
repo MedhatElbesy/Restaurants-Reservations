@@ -1,4 +1,5 @@
 .checkout {
+  background-color: var(--backgroundColor);
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -62,7 +63,6 @@
         border-bottom: 1px solid var(--textColor);
       }
       .details {
-        padding: 2rem;
         & > div {
           margin-bottom: 1rem;
           border-bottom: 1px solid #595b5c7c;
@@ -90,9 +90,7 @@
         }
       }
       .reciet {
-        width: 75%;
         margin: auto;
-        padding: 0rem 2rem 1rem;
         & > div {
           margin-bottom: 1rem;
           border-bottom: 1px solid #595b5c3a;
@@ -111,12 +109,31 @@
         }
       }
     }
-    .payment-method {
+    .gateways {
       .head {
         font-size: 2rem;
-        padding: 1rem;
       }
-      .vodafone-cash {
+      .gateway-images {
+        figure {
+          height: 60px;
+          width: 100px;
+          img {
+            background-color: #FFF;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: var(--mainTransition);
+            object-fit: contain;
+            border-radius: .5rem;
+            border: 3px solid transparent;
+          }
+          .selected {
+            border: 3px solid var(--textColor);
+            transform: scale(1.1);
+          }
+        }
+      }
+      .cash-gateway {
         padding: 1rem;
         div:not(:last-child) {
           padding-bottom: 1.5rem;
@@ -127,6 +144,9 @@
           color: var(--textColor);
           font-weight: bold;
           background-color: #011f25e0;
+          span:first-child{
+            font-size: 1.5rem;
+          }
         }
         label {
           font-size: 1.2rem;
@@ -136,27 +156,6 @@
           &:focus {
             border: rgba(3, 44, 54, 0.25);
             box-shadow: 0 0 0 0.25rem rgba(2, 53, 66, 0.25);
-          }
-        }
-        .form-check {
-          .form-check-input {
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-right: 5px;
-            color: var(--textColor);
-            &:checked {
-              background-color: var(--backgroundColor);
-            }
-            &:focus {
-              box-shadow: 0 0 0 0.25rem rgba(2, 53, 66, 0.432);
-            }
-          }
-          .terms {
-            color: var(--secColor);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.8rem;
           }
         }
         .error {

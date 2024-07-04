@@ -22,7 +22,7 @@ export const registerUser = async (userData) => {
       gender: userData.gender,
       profile_image: userData.profile_image,
       birth_date: userData.birth_date,
-      roles_name:userData.roles_name
+      role_name:userData.role_name
     });
     return response.data;
   } catch (error) {

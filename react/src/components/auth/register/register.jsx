@@ -60,7 +60,7 @@ const Register = () => {
     gender: "",
     profile_image: "",
     birth_date: "",
-    roles_name: ""
+    role_name: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -85,7 +85,7 @@ const Register = () => {
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      roles_name: value,
+      role_name: value,
     }));
   }
 
@@ -116,7 +116,7 @@ const Register = () => {
       return;
     }
 
-    if (!data.roles_name) {
+    if (!data.role_name) {
       Swal.fire({
         icon: "error",
         title: "Oops...",

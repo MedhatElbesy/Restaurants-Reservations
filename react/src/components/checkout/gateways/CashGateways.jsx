@@ -1,19 +1,21 @@
 const VodafoneCash = ({
   branchMobileNumber,
-  total,
+  amount,
   formData,
   setFormData,
   register,
   errors,
+  gateway,
 }) => {
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      gateway: gateway,
+      total_price: amount.total,
+      [name]: value,
     });
   };
-
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
@@ -24,22 +26,25 @@ const VodafoneCash = ({
   };
 
   return (
-    <div className="vodafone-cash">
-      <p className="amount mb-4 fs-5 rounded-3">
-        Transfer <span className="text-sec">{total}</span> to:{" "}
+    <div className="cash-gateway d-flex flex-wrap justify-content-center">
+      <p className="col-12 col-sm-9 col-md-7 mb-2 fs-4">
+        Pay Using {gateway.title}
+      </p>
+      <p className="amount mb-4 fs- rounded-3 col-12 col-sm-9 col-md-7 text-center fs-6">
+        Transfer <span className="text-sec">{amount.total}</span> to:{" "}
         <span className="text-sec">{branchMobileNumber}</span>
       </p>
-      <div>
+      <div className="col-12 col-sm-9 col-md-7">
         <label className="mb-2" htmlFor="vodafoneCashNumber">
-          Vodafone Cash Number
+          {gateway.title} Number
         </label>
         <input
           type="tel"
           className="form-input form-control"
-          id="telephone"
-          name="telephone"
-          placeholder="Phone Number"
-          {...register("telephone", {
+          id="transaction_phone_number"
+          name="transaction_phone_number"
+          placeholder={`${gateway.title} Number`}
+          {...register("transaction_phone_number", {
             required: "Phone number is required",
             minLength: {
               value: 10,
@@ -48,11 +53,11 @@ const VodafoneCash = ({
           })}
           onChange={handleChange}
         />
-        {errors.telephone && (
-          <p className="error">{errors.telephone.message}</p>
+        {errors.transaction_phone_number && (
+          <p className="error">{errors.transaction_phone_number.message}</p>
         )}
       </div>
-      <div className="my-3">
+      <div className="col-12 col-sm-9 col-md-7 my-3">
         <label className="mb-2" htmlFor="paymentProof">
           Upload Payment Proof (Image)
         </label>
@@ -69,32 +74,6 @@ const VodafoneCash = ({
         />
         {errors.paymentProof && (
           <p className="error">{errors.paymentProof.message}</p>
-        )}
-      </div>
-      <div className="form-check mb-3">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="acceptTerms"
-          name="acceptTerms"
-          {...register("acceptTerms", {
-            required: "You must accept the terms and conditions",
-          })}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="acceptTerms">
-          Please accept our{" "}
-          <a
-            href="/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="terms"
-          >
-            Terms and conditions
-          </a>
-        </label>
-        {errors.acceptTerms && (
-          <p className="error">{errors.acceptTerms.message}</p>
         )}
       </div>
     </div>

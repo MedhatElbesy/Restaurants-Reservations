@@ -12,6 +12,7 @@ use App\Http\Resources\TableResource;
 use App\Helpers\ApiResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class TableController extends Controller
 {
@@ -58,7 +59,7 @@ class TableController extends Controller
 
             DB::commit();
             return ApiResponse::sendResponse(200, 'Table updated successfully', new TableResource($table));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             DB::rollback();
             return ApiResponse::sendResponse(500, 'Failed to update table', ['error' => $e->getMessage()]);
         }
@@ -73,7 +74,7 @@ class TableController extends Controller
 
             DB::commit();
             return ApiResponse::sendResponse(204,"Successfully Deleted");
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             DB::rollback();
             return ApiResponse::sendResponse(500, 'Failed to delete table', ['error' => $e->getMessage()]);
         }

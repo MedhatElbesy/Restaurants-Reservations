@@ -12,7 +12,7 @@ const MapContainer = ({ popup }) => {
   const position = [30.0566, 31.3301];
 
   return (
-    <LeafletMap center={position} zoom={12} style={{ minHeight: "100%" }}>
+    <LeafletMap center={position} zoom={12}>
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

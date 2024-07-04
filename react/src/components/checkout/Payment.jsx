@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { checkoutAmount } from "../../utils";
+import CashGateways from "./gateways/CashGateways";
 import PaymentDetails from "./PaymentDetails";
-import VodafoneCash from "./payment-methods/VodafoneCash";
+import { getGateways } from "../../slices/checkout/gatewaysSlice";
 
 const Payment = ({
   table,
@@ -10,42 +14,80 @@ const Payment = ({
   register,
   errors,
 }) => {
+  const dispatch = useDispatch();
+  const { gateways } = useSelector((state) => state.gateways);
   const { selectedData } = details;
+  const amount = checkoutAmount(table, selectedData);
+  const [selectedGatewayId, setSelectedGatewayId] = useState(null);
 
-  const extraChairTotal =
-    Number(selectedData.extraSeats) * Number(table.extra_chair_price);
-  const extraChildTotal =
-    Number(selectedData.childSeats) * Number(table.extra_child_chair_price);
-  const subTotal = Number(table.price) + extraChildTotal + extraChairTotal;
-  const discount = Number(table.price) - Number(table.sale_price);
-  const total = subTotal - discount;
-  const amount = {
-    total,
-    discount,
-    subTotal,
-    extraChildTotal,
-    extraChairTotal,
+  useEffect(() => {
+    dispatch(getGateways());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(gateways) {
+      const selected = gateways.find(
+        (gateway) => gateway.type === "cash"
+      );
+      setSelectedGatewayId(selected.id);
+    }
+  }, [dispatch, gateways]);
+
+  const handleGatewayClick = (gatewayId) => {
+    setSelectedGatewayId(gatewayId);
   };
 
   return (
-    <article className="payment d-flex flex-wrap justify-content-around text-color my-5">
-      <div className="table-payment-details col-12 col-sm-10 col-md-6 col-lg-5">
+    <article className="payment text-color my-5">
+      <div className="table-payment-details m-auto col-11">
         <PaymentDetails
           table={table}
           selectedData={selectedData}
           amount={amount}
         />
       </div>
-      <div className="payment-method col-12 col-sm-10 col-md-6 col-lg-5 mt-5 mt-md-0">
-        <p className="head">Payment Method <span className="fs-5 text-danger">vodafone cash</span></p>
-        <VodafoneCash
-          total={total}
-          branchMobileNumber={branch.mobile_number}
-          formData={formData}
-          setFormData={setFormData}
-          register={register}
-          errors={errors}
-        />
+      <div className="gateways m-auto col-11 mt-5">
+        <p className="head mb-5 text-center">Confirm Reservation</p>
+        <div className="gateway-images d-flex justify-content-center">
+          {gateways &&
+            gateways.map((gateway) => {
+              if (gateway.type === "cash") {
+                return (
+                  <figure className="mb-5 mx-2" key={gateway.id}>
+                    <img
+                      src={gateway.photo}
+                      alt={gateway.name}
+                      onClick={() => handleGatewayClick(gateway.id)}
+                      className={`gateway-image ${
+                        selectedGatewayId === gateway.id ? "selected" : ""
+                      }`}
+                    />
+                  </figure>
+                );
+              }
+            })}
+        </div>
+        {gateways &&
+          gateways.map((gateway) => {
+            if (gateway.type === "cash") {
+              return (
+                selectedGatewayId === gateway.id && (
+                  <div key={gateway.id} className="selected-gateway">
+                    <CashGateways
+                      amount={amount}
+                      branchMobileNumber={branch.mobile_number}
+                      formData={formData}
+                      setFormData={setFormData}
+                      register={register}
+                      errors={errors}
+                      gateway={gateway}
+                    />
+                  </div>
+                )
+              );
+            }
+            return null; // Add return null to handle other gateway types
+          })}
       </div>
     </article>
   );

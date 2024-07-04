@@ -2,14 +2,14 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./Calender.css";
 
-const CustomCalendar = ({ selectedDate, setSelectedDate }) => {
+const CustomCalendar = ({ reservationDate, setreservationDate }) => {
   const handleDateChange = (newDate) => {
-    setSelectedDate(newDate);
+    setreservationDate(newDate);
   };
 
   return (
     <div>
-      <Calendar onChange={handleDateChange} value={selectedDate} />
+      <Calendar onChange={handleDateChange} value={reservationDate} />
     </div>
   );
 };

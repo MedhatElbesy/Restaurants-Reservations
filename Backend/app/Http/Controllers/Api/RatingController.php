@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\DB;
 class RatingController extends Controller
 {
 
+
+    public function show(){
+        $ratings = Rating::all();
+        if(!$ratings){
+            return ApiResponse::sendResponse(500, "Error",);
+        }
+        return ApiResponse::sendResponse(200, "All ratings", $ratings);
+    }
+
     public function getUserRatingForRestaurant($restaurantLocationId, $userId)
     {
         $rating = Rating::where('restaurant_location_id', $restaurantLocationId)
