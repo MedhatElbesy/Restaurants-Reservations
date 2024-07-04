@@ -87,11 +87,12 @@ class RatingController extends Controller
                         ->join('restaurants', 'restaurant_locations.restaurant_id', '=', 'restaurants.id')
                         ->join('restaurant_location_images', 'restaurant_locations.id', '=', 'restaurant_location_images.restaurant_location_id')
                         ->where('restaurant_locations.id', $restaurant->restaurant_location_id)
-                        ->select('restaurant_locations.*', 'restaurant_location_images.image', 'restaurants.name as restaurant_name')
+                        ->select('restaurant_locations.*', 'restaurant_location_images.image', 'restaurants.name as restaurant_name', 'restaurants.id as restaurant_id')
                         ->first();
     
                     $restaurant->location_image = $locationInfo->image ?? null;
                     $restaurant->restaurant_name = $locationInfo->restaurant_name ?? null;
+                    $restaurant->restaurant_id = $locationInfo->restaurant_id ?? null;
                 }    
 
             return ApiResponse::sendResponse(200, 'Top rated restaurants', $topRatedRestaurants);

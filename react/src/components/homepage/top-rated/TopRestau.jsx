@@ -9,6 +9,7 @@ import {
   selectTopRatedRestaurantsStatus,
 } from '../../../slices/restaurant/top-restaurants/topRestaurantSlice'; 
 import './TopRestau.css';
+import { Link } from 'react-router-dom';
 
 
 export default function TopRestau() {
@@ -38,7 +39,9 @@ export default function TopRestau() {
         <CardSlick>
           {restaurants.map((restaurant, index) => (
             <div key={index} className="restaurant-slide">
+              <Link to={`/restaurant/${restaurant.restaurant_id}`}>
               <Card name={restaurant.restaurant_name} image={restaurant.location_image} />
+              </Link>
             </div>
           ))}
         </CardSlick>

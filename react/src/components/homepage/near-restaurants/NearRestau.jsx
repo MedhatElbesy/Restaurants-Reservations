@@ -5,6 +5,7 @@ import Card from '../card/Card';
 import { fetchNearestRestaurants } from '../../../slices/restaurant/nearest-restaurants/nearestRestaurants';
 import '../top-rated/TopRestau.css';
 import Loader from '../../../layouts/loader/loader';
+import { Link } from 'react-router-dom';
 
 const NearRestau = () => {
   const dispatch = useDispatch();
@@ -30,10 +31,12 @@ const NearRestau = () => {
           <CardSlick>
             {nearestRestaurantsData.map((restaurant, index) => (
               <div key={index} className="restaurant-slide">
+                <Link to={`/restaurant/${restaurant.restaurant_id}`}>
                 <Card
                   name={restaurant.restaurant_name}
                   image={restaurant.image}
                 />
+                </Link>
               </div>
             ))}
           </CardSlick>
