@@ -23,11 +23,13 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
+
+import './register.css'
 
 function Copyright(props) {
   return (
@@ -214,9 +216,9 @@ const Register = () => {
                 width: "100%",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "#7B3C1E", color: "white" }}>
-                <LockOutlinedIcon />
-              </Avatar>
+                <LockPersonIcon className="fs-1"/>
+              {/* <Avatar sx={{ m:0, bgcolor: "#7B3C1E", color: "white" }}>
+              </Avatar> */}
               <Typography component="h1" variant="h5">
                 Register
               </Typography>
