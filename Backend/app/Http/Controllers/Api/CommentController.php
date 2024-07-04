@@ -30,8 +30,9 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         try {
-            $comment = Comment::create($request->validated());
-            return ApiResponse::sendResponse(201,"created successfully",$comment);
+            $user = auth()->user();
+            $data = array_merge($request->validated(), ['user_id' => $user->id]);
+            $comment = Comment::create($data);            return ApiResponse::sendResponse(201,"created successfully",$comment);
         }catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create comment', ['error' => $e->getMessage()]);
         }
