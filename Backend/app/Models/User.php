@@ -40,7 +40,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'roles_name' => 'array',
+        'role_name' => 'array',
     ];
 
     /**
@@ -84,4 +84,3 @@ class User extends Authenticatable
         return $this->hasMany(Rating::class, 'user_id', 'id');
     }
 }
-

@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,31 +20,22 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { login } from "../../../slices/auth/authSlice";
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const defaultTheme = createTheme();
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
     if (authStatus.isAuthenticated) {
-      if (authStatus.role === 'admin') {
-        navigate('/admin');
+      if (authStatus.role === "admin") {
+        navigate("/admin");
       } else {
         navigate("/");
       }
@@ -167,20 +158,41 @@ const Login = () => {
                 helperText={errors.password?.message}
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={
+                  <Checkbox
+                    sx={{
+                      "&:checked": {
+                        bgcolor: "#5a2915 !important",
+                      },
+                    }}
+                    value="remember"
+                    color="primary"
+                  />
+                }
                 label="Remember me"
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: "#7B3C1E" }}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: "#7B3C1E",
+                  "&:hover": {
+                    bgcolor: "#5a2915",
+                  },
+                }}
               >
                 Login
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/forget-password" variant="body2" sx={{ color: "#7B3C1E" }}>
+                  <Link
+                    href="/forget-password"
+                    variant="body2"
+                    sx={{ color: "#7B3C1E" }}
+                  >
                     Forgot password?
                   </Link>
                 </Grid>
@@ -201,7 +213,6 @@ const Login = () => {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>

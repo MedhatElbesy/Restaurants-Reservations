@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+import { formatTime } from "../../helpers/utils";
+
 const TableDetials = ({ table, details }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
   const { selectedData, reservationDate } = details;
@@ -37,7 +39,7 @@ const TableDetials = ({ table, details }) => {
         </p>
         <p>
           <span>Reservation Time : </span>
-          {time.start_time} - {time.end_time}
+          {`${formatTime(time.start_time)} - ${formatTime(time.end_time)}`}
         </p>
       </div>
     </article>
