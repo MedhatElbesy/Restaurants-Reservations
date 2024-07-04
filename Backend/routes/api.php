@@ -126,8 +126,11 @@ Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
 Route::resource('/comments',CommentController::class);
 Route::post('/reports', [ReportController::class, 'store']);
+Route::get('/reports', [ReportController::class, 'show']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
 Route::post('/ratings', [RatingController::class, 'store']);
+Route::get('/ratings', [RatingController::class, 'show']);
+
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
 Route::get('/restaurant/{restaurantId}/user/{userId}/rating', [RatingController::class, 'getUserRatingForRestaurant']);
 Route::get('/table-availability/{id}', [TableAvailabilityController::class, 'showByTableAvailabilities']);
@@ -146,8 +149,3 @@ Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory
 
 
 
-
-// Route::get('paypal', [PayPalController::class, 'index'])->name('paypal');
-// Route::get('paypal/payment', [PayPalController::class, 'payment'])->name('paypal.payment');
-// Route::get('paypal/payment/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.payment.success');
-// Route::get('paypal/payment/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.payment/cancel');

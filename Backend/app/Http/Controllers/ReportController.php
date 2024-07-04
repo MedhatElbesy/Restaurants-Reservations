@@ -11,7 +11,13 @@ use Exception;
 class ReportController extends Controller
 {
 
-
+public function show(){
+        $report = Report::all();
+        if(!$report){
+            return ApiResponse::sendResponse(500, "Error",);
+        }
+        return ApiResponse::sendResponse(200, "All Report", $report);
+    }
     function index(){
         $reports = Report::all();
         if(!$reports){
