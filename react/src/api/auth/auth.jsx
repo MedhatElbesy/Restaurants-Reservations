@@ -11,18 +11,26 @@ export const loginUser = async (email, password) => {
 };
 
 export const registerUser = async (userData) => {
+  const data = new FormData();
+  data.append("first_name", userData.first_name);
+  data.append("last_name", userData.last_name);
+  data.append("email", userData.email);
+  data.append("password", userData.password);
+  data.append("password_confirmation", userData.password_confirmation);
+  data.append("mobile_number", userData.mobile_number);
+  data.append("gender", userData.gender);
+  data.append("profile_image", userData.profile_image);
+  data.append("birth_date", userData.birth_date);
+  data.append("role_name", userData.role_name);
   try {
-    const response = await axios.post(`/register`, {
-      first_name: userData.first_name,
-      last_name: userData.last_name,
-      email: userData.email,
-      password: userData.password,
-      password_confirmation: userData.password_confirmation,
-      mobile_number: userData.mobile_number,
-      gender: userData.gender,
-      profile_image: userData.profile_image,
-      birth_date: userData.birth_date,
-      role_name:userData.role_name
+
+    for (let pair of data.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+    const response = await axios.post(`/register`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
   } catch (error) {

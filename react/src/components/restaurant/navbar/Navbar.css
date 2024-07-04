@@ -8,6 +8,7 @@
 
 .rest-nav .nav-link {
   color: var(--mainColor) !important;
+  font-size: 1.1rem;
 }
 
 .rest-nav .nav .active {

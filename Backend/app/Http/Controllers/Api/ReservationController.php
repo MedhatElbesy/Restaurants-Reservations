@@ -31,8 +31,6 @@ class ReservationController extends Controller
     {
         $auth_user = Auth::guard('sanctum')->user();
         $validated = $request->validated();
-        dd($validated);
-
 
         DB::beginTransaction();
         try {

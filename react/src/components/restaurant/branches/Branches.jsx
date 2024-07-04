@@ -7,6 +7,7 @@ import { useBranch } from "./BranchContext";
 import { BranchAddress } from "./BranchAddress";
 import { BranchOpening } from "./BranchOpening";
 import { BranchTables } from "./BranchTables";
+import  BranchComments from "../../review/comments/BranchComments"
 import Tables from "../tables/TablesCollection";
 import "./Branches.css";
 
@@ -35,7 +36,7 @@ const Branches = () => {
     <section className="branches m-4">
       <Tabs
         activeKey={branch?.id}
-        onSelect={handleSelect} // Pass the function directly to onSelect
+        onSelect={handleSelect}
         className="br-tabs border-0"
       >
         {branches.length > 0 ? (
@@ -75,6 +76,7 @@ const BranchDetails = ({ onShowTables }) => {
       <BranchTables onShowTables={onShowTables} />
       <BranchOpening />
       <BranchAddress />
+      <BranchComments />
     </div>
   );
 };

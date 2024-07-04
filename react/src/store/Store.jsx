@@ -28,6 +28,7 @@ import tableImageReducer from "../slices/restaurant/tableImage/tableImage";
 import userAddressReducer from "../slices/user/userAddressSlice";
 import checkoutReducer from "../slices/checkout/checkoutSlice";
 import gatewaysReducer from "../slices/checkout/gatewaysSlice";
+import commentsReducer from "../slices/review/commentsSlice";
 
 const store = configureStore({
   reducer: {
@@ -60,6 +61,7 @@ const store = configureStore({
     tableAvailability: availabilityReducer,
     checkout: checkoutReducer,
     gateways: gatewaysReducer,
+    comments: commentsReducer,
   },
 });
 
