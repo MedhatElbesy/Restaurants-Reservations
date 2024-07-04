@@ -89,14 +89,17 @@ input {
     margin: 0 !important;
     animation: none 0s !important;
     width: 100% !important;
+    margin-bottom: 1.1rem !important;
   }
   .non-focused{
     margin: 0 !important;
     animation: none 0s !important;
     width: 100% !important;
+     margin-bottom: 1.1rem !important;
   }
   .search-bar{
     width: 100% !important;
+    margin-bottom: 1.1rem !important;
   }
   .nav-elements {
     text-align: center;
