@@ -37,8 +37,10 @@ class RatingController extends Controller
 
     public function store(StoreRatingRequest $request)
     {
+        $user = auth()->user();
+        $data = array_merge($request->validated(), ['user_id' => $user->id]);
         try {
-            $rating = Rating::create($request->validated());
+            $rating = Rating::create($data);
             return ApiResponse::sendResponse(201,"created successfully",$rating);
         }catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create rating', ['error' => $e->getMessage()]);
@@ -89,11 +91,11 @@ class RatingController extends Controller
                         ->where('restaurant_locations.id', $restaurant->restaurant_location_id)
                         ->select('restaurant_locations.*', 'restaurant_location_images.image', 'restaurants.name as restaurant_name', 'restaurants.id as restaurant_id')
                         ->first();
-    
+
                     $restaurant->location_image = $locationInfo->image ?? null;
                     $restaurant->restaurant_name = $locationInfo->restaurant_name ?? null;
                     $restaurant->restaurant_id = $locationInfo->restaurant_id ?? null;
-                }    
+                }
 
             return ApiResponse::sendResponse(200, 'Top rated restaurants', $topRatedRestaurants);
         } catch (Exception $e) {

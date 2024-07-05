@@ -23,7 +23,7 @@ class StoreRatingRequest extends FormRequest
     {
         return [
             'restaurant_location_id' => 'required|exists:restaurant_locations,id',
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'rate' => 'required|integer|between:1,5',
         ];
     }
