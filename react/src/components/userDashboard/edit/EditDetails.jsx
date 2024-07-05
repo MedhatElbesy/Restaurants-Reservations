@@ -15,7 +15,6 @@ const EditDetails = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     title: '',
     summary: '',
     description: '',
@@ -34,7 +33,6 @@ const EditDetails = () => {
     if (restaurant) {
       setFormData({
         name: restaurant.name,
-        slug: restaurant.slug,
         title: restaurant.title,
         summary: restaurant.summary,
         description: restaurant.description,
@@ -79,7 +77,6 @@ const EditDetails = () => {
     const formDataForSubmission = new FormData();
     formDataForSubmission.append('user_id', userId);
     formDataForSubmission.append('name', formData.name);
-    formDataForSubmission.append('slug', formData.slug);
     formDataForSubmission.append('title', formData.title);
     formDataForSubmission.append('summary', formData.summary);
     formDataForSubmission.append('description', formData.description);
@@ -99,9 +96,7 @@ const EditDetails = () => {
       });
   };
 
-  if (status === 'loading') {
-    return <Loader />;
-  }
+ 
 
   return (
     <main className="container">
@@ -137,20 +132,6 @@ const EditDetails = () => {
             />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="slug" className="form-label">
-              Slug
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="slug"
-              name="slug"
-              value={formData.slug}
-              onChange={handleChange}
-              required
-            />
-          </div>
 
           <div className="mb-3">
             <label htmlFor="title" className="form-label">

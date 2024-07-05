@@ -189,7 +189,6 @@ const MenuCategoriesTable = () => {
                 <thead>
                   <tr className='text-dark'>
                     <th>Name</th>
-                    <th>Slug</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Sale Price</th>
@@ -202,7 +201,6 @@ const MenuCategoriesTable = () => {
                   {selectedCategory.menu_items.map((item) => (
                     <tr key={item.id} className='text-dark'>
                       <td>{item.name}</td>
-                      <td>{item.slug}</td>
                       <td>{item.description}</td>
                       <td>{item.price}</td>
                       <td>{item.sale_price}</td>

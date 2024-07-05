@@ -82,7 +82,7 @@ const EditTableAvailability = () => {
   };
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (

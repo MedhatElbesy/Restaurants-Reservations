@@ -12,7 +12,6 @@ const AddCategoryForm = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     cover: null,
     description: '',
     status: 'Enabled',
@@ -66,7 +65,6 @@ const AddCategoryForm = () => {
 
     const formDataForSubmission = new FormData();
     formDataForSubmission.append('name', formData.name);
-    formDataForSubmission.append('slug', formData.slug);
     formDataForSubmission.append('description', formData.description);
     formDataForSubmission.append('status', capitalizeStatus(formData.status));
     formDataForSubmission.append('user_id', userId);
@@ -109,16 +107,6 @@ const AddCategoryForm = () => {
               onChange={handleChange} />
           </div>
 
-          <div className="mb-3">
-            <Form.Label htmlFor="slug">Slug:</Form.Label>
-            <Form.Control
-              type="text"
-              required
-              id="slug"
-              name="slug"
-              value={formData.slug}
-              onChange={handleChange} />
-          </div>
 
           <div className="mb-3">
             <Form.Label htmlFor="cover">Cover:</Form.Label>

@@ -30,7 +30,7 @@ const DetailsTable = () => {
       <div
         className="cover-image position-relative"
         style={{
-          backgroundImage: `url('/images/barista-making-coffee-F2GU6L8.jpg')`,
+          backgroundImage: `url(${restaurant.cover})`,
           backgroundSize: 'cover',
           height: '80vh',
         }}
@@ -57,10 +57,11 @@ const DetailsTable = () => {
         </div>
 
         <div className="logo-image position-absolute top-0 start-0">
-          {restaurant.logo && (
-            <img src={restaurant.logo} alt="Logo" className="img-fluid" />
+         {restaurant.logo && (
+          <img src={restaurant.logo} alt="Logo" className="img-fluid " />
           )}
         </div>
+
 
       </div>
 

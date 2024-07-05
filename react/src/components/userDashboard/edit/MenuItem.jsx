@@ -17,7 +17,6 @@ const MenuItem = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     description: '',
     price: '',
     salePrice: '',
@@ -36,7 +35,6 @@ const MenuItem = () => {
     if (menuItem) {
       setFormData({
         name: menuItem.name || '',
-        slug: menuItem.slug || '',
         description: menuItem.description || '',
         price: menuItem.price || '',
         salePrice: menuItem.sale_price || '',
@@ -101,17 +99,6 @@ const MenuItem = () => {
            />
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="slug" className="form-label">Slug</label>
-          <input 
-          type="text" 
-          className="form-control" 
-          id="slug" 
-          name="slug"
-          required 
-          value={formData.slug} 
-          onChange={handleChange} />
-        </div>
 
         <div className="mb-3">
           <label htmlFor="description" className="form-label">Description</label>

@@ -46,7 +46,7 @@ export const updateMenuCategory = async (menuCategoryId, data) => {
 export const updateRestaurantCategory = async (categoryId, data) => {
     try {
   
-      const response = await axios.post(`/categories/${categoryId}?_method=PATCH`, data, {
+      const response = await axios.post(`/categories/${categoryId}?_method=PUT`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -34,6 +34,7 @@ const SpecificCategories = () => {
               'The category has been deleted.',
               'success'
             );
+            dispatch(fetchSpecificCategoryAsync());
           })
           .catch((error) => {
             console.error('Error deleting category:', error);
@@ -74,38 +75,30 @@ const SpecificCategories = () => {
 
               <div className="card-color h-100">
 
-
                 <Card.Body>
-
                   <Card.Title className='text-center table-font my-3'>{category.name}</Card.Title>
-
                   <Card.Text className='text-center custom-font-style'>
                     {category.description}<br />
                   </Card.Text>
-
                   <div className="text-center">
-
                     <Link to={`/edit-category/${category.id}`} className="text-success me-3">
                       <FontAwesomeIcon icon={faEdit} className="text-primary" />
                     </Link>
-
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="text-danger"
                       onClick={() => handleDeleteCategory(category.id)}
                     />
-
                   </div>
-
                 </Card.Body>
 
               </div>
-
+              
             </div>
           ))}
         </div>
       ) : (
-        <p>..............</p>
+        <p>............</p>
       )}
     </section>
   );

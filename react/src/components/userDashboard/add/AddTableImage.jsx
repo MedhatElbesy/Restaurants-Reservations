@@ -67,7 +67,7 @@ const AddTableImage = () => {
 
           <button type="submit" className="btn btn-warning my-5 col-12">Add Table Images</button>
 
-          {status === 'failed' && <p className="mt-3 text-danger">Error: An error occurred. Please try again later.</p>}
+        
         </form>
       </section>
     </main>

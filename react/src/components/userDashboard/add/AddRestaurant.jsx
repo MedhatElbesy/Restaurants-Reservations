@@ -13,7 +13,6 @@ const AddRestaurant = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     title: '',
     summary: '',
     description: '',
@@ -61,7 +60,6 @@ const AddRestaurant = () => {
     const formDataForSubmission = new FormData();
     formDataForSubmission.append('user_id', userId); 
     formDataForSubmission.append('name', formData.name);
-    formDataForSubmission.append('slug', formData.slug);
     formDataForSubmission.append('title', formData.title);
     formDataForSubmission.append('summary', formData.summary);
     formDataForSubmission.append('description', formData.description);
@@ -94,15 +92,7 @@ const AddRestaurant = () => {
     }
   };
 
-  if (status === 'failed') {
-    return (
-      <div className="container">
-        <div className="alert alert-danger" role="alert">
-          Error: {error.message}
-        </div>
-      </div>
-    );
-  }
+ 
 
   return (
     <main className="container">
@@ -129,18 +119,6 @@ const AddRestaurant = () => {
             />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="slug" className="form-label">Slug</label>
-            <input
-              type="text"
-              className="form-control"
-              id="slug"
-              name="slug"
-              value={formData.slug}
-              onChange={handleChange}
-              required
-            />
-          </div>
 
           <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
@@ -182,7 +160,7 @@ const AddRestaurant = () => {
           </div>
 
           <section className="mb-3">
-            <label className="form-label">Status</label>
+            <label className="form-label mx-3">Status</label>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
