@@ -26,8 +26,8 @@ return new class extends Migration
             $table->enum('gender', ['female', 'male'])->nullable();
             $table->date('birth_date')->nullable();
             //$table->enum('role', ['user', 'business'])->default('user');
-            $table->enum('roles_name',['user','admin','owner'])->default('user');
-            $table->enum('status', [ UserStatus::Active, UserStatus::InActive, UserStatus::Blocked, UserStatus::Deleted])->default(UserStatus::Active);
+            $table->enum('roles_name', ['user', 'admin', 'owner'])->default('user');
+            $table->enum('status', [UserStatus::Active, UserStatus::InActive, UserStatus::Blocked, UserStatus::Deleted])->default(UserStatus::Active);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('google_id')->nullable();
             $table->string('facebook_id')->nullable();
@@ -41,8 +41,8 @@ return new class extends Migration
             'first_name'    => 'Admin',
             'last_name'     => 'one',
             'email'         => 'admin@gmail.com',
-            'password'      =>'admin',
-            'roles_name'    => 'admin',
+            'password'      => 'admin',
+            'roles_name'    => "admin",
             'status'        => UserStatus::Active,
             'created_at'    => now(),
             'updated_at'    => now(),
@@ -62,7 +62,7 @@ return new class extends Migration
             'last_name'     => 'One',
             'email'         => 'restaurant@gmail.com',
             'password'      => 'restaurant',
-            'roles_name'    => 'owner',
+            'roles_name'    => "owner",
             'status'        => UserStatus::Active,
             'created_at'    => now(),
             'updated_at'    => now(),
