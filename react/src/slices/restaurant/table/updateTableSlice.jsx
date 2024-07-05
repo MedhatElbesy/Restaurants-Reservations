@@ -10,18 +10,18 @@ const updateTableSlice = createSlice({
   initialState: {
     status: 'idle',
     error: null,
+    loading: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(updateTableAsync.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(updateTableAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
       })
       .addCase(updateTableAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

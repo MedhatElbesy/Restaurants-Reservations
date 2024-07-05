@@ -21,9 +21,6 @@ const menuCategoryUpdateSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(updateMenuCategoryThunk.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(updateMenuCategoryThunk.fulfilled, (state) => {
         state.status = 'succeeded';
       })

@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import { Navbar, Nav, Form, FormControl, Button, Image, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { BodyColorContext } from "../../BodyColorContext"; // Adjust the path as necessary
+import { BodyColorContext } from "../../BodyColorContext"; 
 import { NavLink } from "react-router-dom";
 
-import './aya-navbar-style.css';
+import './navbar-style.css';
 
 export default function MyNavbar() {
   const { bodyColor, toggleColor } = useContext(BodyColorContext);
@@ -13,29 +13,23 @@ export default function MyNavbar() {
 
   return (
     <Navbar bg={bodyColor} expand="lg" className="sticky-top general">
-      <Navbar.Brand href="/userprofile" className="d-flex align-items-center">
+      <Navbar.Brand href="" className="d-flex align-items-center">
         <Image
-          src="https://static-00.iconduck.com/assets.00/user-icon-1024x1024-dtzturco.png"
+          src="./images/logo-white.png"
           roundedCircle
           alt="Logo"
-          className="mx-3"
-          style={{ width: '3rem', height: '3rem', borderRadius: '50%' }} 
+          className="mx-5"
+          style={{ width: '4rem', height: '4rem', borderRadius: '50%' }} 
         />
-        <span className={`text-${bodyColor === "light" ? "dark" : "light"} mx-1`}>
-          Username
-        </span>
       </Navbar.Brand>
 
-      <Navbar.Toggle
-        aria-controls="basic-navbar-nav"
-        className={`text-${bodyColor === "light" ? "dark" : "light"}`}
-      >
+      <Navbar.Toggle aria-controls="basic-navbar-nav">
         <FontAwesomeIcon icon={faBars} />
       </Navbar.Toggle>
 
-      <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-around">
+      <Navbar.Collapse id="basic-navbar-nav">
         <div className="nav-cover">
-          <Form className={searchFocused ? 'focused' : 'not-focused'}>
+          <Form className={searchFocused ? 'focused search-bar' : 'not-focused search-bar'}>
             <InputGroup>
               <InputGroup.Text id="search-icon">
                 <FontAwesomeIcon icon={faSearch} />
@@ -45,58 +39,52 @@ export default function MyNavbar() {
                 placeholder="Search" 
                 aria-label="Search" 
                 aria-describedby="search-icon" 
-                onClick={() => setSearchFocused(true)} 
+                onFocus={() => setSearchFocused(true)} 
                 onBlur={() => setSearchFocused(false)} 
               />
               <Button variant={`outline-${bodyColor === "light" ? "primary" : "warning"}`}>Search</Button>
             </InputGroup>
           </Form>
         </div>
-        <Nav className="d-flex justify-content-around w-75 nav-elements">
+        <Nav className="ml-auto nav-elements">
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
             to="/"
           >
             Home
           </NavLink>
-
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
             to="/contact"
           >
             Contact
           </NavLink>
-
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
             to="/about"
           >
             About
           </NavLink>
-
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
             to="/login"
           >
             Login
           </NavLink>
-
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
-            to="/register"
+            to="/userprofile"
           >
-            Register
+            Profile
           </NavLink>
-
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
             to="/logout"
           >
             Logout
           </NavLink>
-
           <Button
-            variant={`outline-${bodyColor === 'light' ? 'secondary' : 'warning'} bg-${bodyColor === 'light' ? 'light' : 'dark'} rounded-pill`}
+            variant={`outline-${bodyColor === 'light' ? 'secondary' : 'warning'} bg-${bodyColor === 'light' ? 'light' : 'dark'} rounded-pill button-width`}
             onClick={toggleColor}
           >
             {bodyColor === "light" ? (

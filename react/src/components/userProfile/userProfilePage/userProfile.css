@@ -14,45 +14,26 @@ img[alt="Profile"] {
   overflow-x: hidden;
 }
 
-.userProfile strong,
 .userProfile h2 {
-  color: #ca8e46;
-}
-
-.userProfile h2 {
+  color: #ffd28d;
   font-family: "Playfair Display", serif;
-  border-radius: 5px;
-  padding-left: 15px;
-  box-shadow: 3px 3px 10px rgba(234, 129, 9, 0.708);
-  min-height: 15vh;
-  display: flex;
-  align-items: center;
+ 
+}
 
+.custom-border-bottom{
+  border-bottom: 2px #ffd28d solid ;
+  border-radius: 15px;
 }
-.userProfile p{
-  font-family:Arial, Helvetica, sans-serif;
-}
+
+
 
 .aside-data {
   border-radius: 8px;
-  border: 1px solid white;
   height: 100%; 
+  padding-top: 5%;
+
 }
 
-
- .info {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-img[alt="side image"]{
-  width:100%;
-  height:100%;
-  border-radius: 8px;
-  object-fit:50% 50%;
-}
 
 
 .icon-wrapper{
@@ -66,13 +47,25 @@ img[alt="side image"]{
   text-shadow: 8px 8px 14px rgba(96, 95, 95, 0.988);
 }
 
-
-
-
-.my-image-container {
-  position: relative;
-  object-fit: cover;
+.userProfile h3{
+  font-family: 'Playfair Display', serif;
+  color: #ffd28d;
+  text-shadow: 8px 8px 14px rgba(96, 95, 95, 0.988);
 }
+
+.custom-font {
+  color: #ffd28d;
+  font-size: larger;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.custom-border {
+  border-top: 2px solid #ffd28d; 
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+}
+
 
 
 
@@ -101,3 +94,5 @@ img[alt="side image"]{
   text-shadow: 8px 8px 14px rgba(113, 77, 19, 0.988);
   z-index:8;
 }
+
+

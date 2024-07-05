@@ -52,9 +52,6 @@ const locationSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(updateLocationAsync.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(updateLocationAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.location = action.payload;
@@ -62,9 +59,6 @@ const locationSlice = createSlice({
       .addCase(updateLocationAsync.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to update location';
-      })
-      .addCase(addLocationAsync.pending, (state) => {
-        state.status = 'loading';
       })
       .addCase(addLocationAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';

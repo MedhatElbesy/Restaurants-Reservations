@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faKey, faLock, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
 import { deleteRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
@@ -10,6 +10,8 @@ import './userProfile.css';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { deleteUserAddressAsync } from '../../../slices/user/userAddressSlice';
+
+const ITEMS_PER_PAGE = 3;
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const UserProfile = () => {
   const userDataError = useSelector((state) => state.user.error);
   const { bodyColor } = useContext(BodyColorContext);
   const [restaurants, setRestaurants] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     if (userId) {
@@ -46,7 +49,6 @@ const UserProfile = () => {
       if (result.isConfirmed) {
         dispatch(deleteUserAddressAsync({ userId, addressId }))
           .then(() => {
-            const updatedAddresses = userData.addresses.filter(address => address.id !== addressId);
             dispatch(fetchUserDataById(userId)); 
             Swal.fire(
               'Deleted!',
@@ -109,25 +111,30 @@ const UserProfile = () => {
     return null;
   }
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.floor(restaurants.length / ITEMS_PER_PAGE)));
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
+  const currentRestaurants = restaurants.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+
   return (
     <>
       <main className="userProfile">
-        <section className="row position-relative">
-          <div className="col-12 restaurant-cover">
 
+        <section className="row position-relative">
+
+          <div className="col-12 restaurant-cover">
             <img
-              style={{ height: '80vh' }}
+              style={{ height: '50vh' }}
               className="w-100"
               src={bodyColor === 'light' ? "/images/1 (1).jpg" : "/images/banner_top_all.png"}
               alt="Cover"
             />
-
-            <div className="restaurant-overlay">
-              <header className='restaurant-header'>
-                <h1 className='display-4'>Every Restaurant Has Story</h1>
-              </header>
-            </div>
-
+            <div className="restaurant-overlay"></div>
           </div>
 
           <div className="col-2 position-absolute bottom-0 start-0 z-2">
@@ -137,84 +144,67 @@ const UserProfile = () => {
               className="rounded-circle"
             />
           </div>
+
         </section>
+        
+        <section className="row my-5 mx-2">
 
-        <section className="row my-5">
-          <aside className="col-8 my-5">
+          <aside className="col-5 my-5">
+
             <section className="my-5">
-              <h2 className='my-5'>Personal Information</h2>
-              <section className='info'>
 
-                <div className="icon-wrapper">
-                  <Link to={`/change-password/${userId}`} className="text-warning text-decoration-none">
-                    <FontAwesomeIcon icon={faLock} className="text-warning" />
-                    <span>Change Password</span>
-                  </Link>
-                </div>
-
-                <div className="icon-wrapper">
-                  <Link to={`/edit-profile/${userId}`} className="text-warning text-decoration-none">
-                    <FontAwesomeIcon icon={faEdit} className=" text-warning" />
-                    <span>Edit Profile</span>
-                  </Link>
-                </div>
-
+              <h2 className="my-5 text-center custom-border-bottom">Personal Information</h2>
+              <section className="info">
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-5`}>
+                  <strong className='custom-font'>Name:</strong> {userData.first_name} {userData.last_name}
+                </p>
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-5`}>
+                  <strong className='custom-font'>Email:</strong> {userData.email}
+                </p>
+                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-5`}>
+                  <strong className='custom-font'>Number:</strong> {userData.mobile_number || 'N/A'}
+                </p>
               </section>
 
-              <section className='info'>
-                
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-3`}>
-                  <strong>Name:</strong> {userData.first_name} {userData.last_name}
-                </p>
-
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                  <strong>Email:</strong> {userData.email}
-                </p>
-
-                <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                  <strong>Mobile Number:</strong> {userData.mobile_number || 'N/A'}
-                </p>
-
-              </section>
             </section>
 
-            <section>
-              <h2>Address Information
-                <span>
-                  <Link to={`/add-address`}>
-                    <FontAwesomeIcon
-                      icon={faPlus}
-                      className="text-warning mx-5" />
-                  </Link>
-                </span>
+          </aside>
+          
+          <aside className="col-6 offset-1 aside-data">
+            
+            <section className='text-center'>
+              <h2 className=' custom-border-bottom'>Address Information
+                <Link to={`/add-address`} className="text-warning text-decoration-none">
+                  <FontAwesomeIcon icon={faPlus} className="text-warning h3 my-2 mx-3" />
+                </Link>
               </h2>
               {userData.addresses && userData.addresses.length > 0 ? (
                 userData.addresses.map((address) => (
                   <div key={address.id} className="info my-5">
-                    <Link to={`/edit-address/${address.id}`} className="text-warning text-decoration-none">
-                      <FontAwesomeIcon icon={faEdit} className=" text-warning" />
-                    </Link>
-                    <span onClick={() => handleDeleteAddress(address.id)}>
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        className="text-warning mx-3"
-                      />
-                    </span>
-                    <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                      <strong>Address:</strong> {address.address}
-                    </p>
-                    <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                      <strong>Country:</strong> {address.country}
-                    </p>
-                    <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                      <strong>Governorate:</strong> {address.governorate}
-                    </p>
-                    <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                      <strong>City:</strong> {address.city}
-                    </p>
-                    <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
-                      <strong>State:</strong> {address.state}
-                    </p>
+                    <div className="row">
+                      <div className="col">
+                        <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                          <strong className='custom-font'>Address:</strong> {address.address}
+                        </p>
+                        <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                          <strong className='custom-font'>Country:</strong> {address.country}
+                        </p>
+                      </div>
+                      <div className="col">
+                        <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                          <strong className='custom-font'>City:</strong> {address.city}
+                        </p>
+                        <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'}`}>
+                          <strong className='custom-font'>State:</strong> {address.state}
+                        </p>
+                        <Link to={`/edit-address/${address.id}`} className="text-warning text-decoration-none">
+                          <FontAwesomeIcon icon={faEdit} className="text-warning" />
+                        </Link>
+                        <span onClick={() => handleDeleteAddress(address.id)}>
+                          <FontAwesomeIcon icon={faTrash} className="text-warning mx-3" />
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 ))
               ) : (
@@ -222,68 +212,66 @@ const UserProfile = () => {
               )}
             </section>
 
-            {role === 'owner' && (
-              <section>
-                <h2>
-                  Restaurants
-                  <span>
-                    <Link to={`/user-dashboard/add-restaurant/${userId}`}>
-                      <FontAwesomeIcon
-                        icon={faPlus}
-                        className="text-warning mx-5" />
-                    </Link>
-                  </span>
-                </h2>
-                {restaurants && restaurants.length > 0 ? (
-                  restaurants.map((restaurant) => (
-                    <div key={restaurant.id} className="info my-5 restaurant-info">
-                      <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-4`}>
-                        <strong>Name:</strong> {restaurant.name}
-                        <Link to={`/user-dashboard/restaurant/${restaurant.id}`} className='ms-3 h5'>
-                          <FontAwesomeIcon icon={faEye} className="text-warning" />
-                        </Link>
-                        <span onClick={() => handleDeleteRestaurant(restaurant.id)}>
-                          <FontAwesomeIcon
-                            icon={faTrash}
-                            className="text-warning mx-5"
-                          />
-                        </span>
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <p>No restaurants found</p>
-                )}
-              </section>
-            )}
           </aside>
-          <aside className="col-4 aside-data">
-            <div className="my-image-container side-image">
-              <img
-                src="/images/1 (4).jpg"
-                alt="side image"
-                className="side-image"
-              />
 
-              <div className="image-overlay">
-               
+        </section>
+        
+        <section className='container custom-border my-5'>
+
+          {role === 'owner' && (
+            <section className='col-12 text-center my-5'>
+
+              <h2 className='my-4'>
+                Restaurants
+                <span>
+                  <Link to={`/add-restaurant/${userId}`}>
+                    <FontAwesomeIcon icon={faPlus} className="text-warning mx-5" />
+                  </Link>
+                </span>
+              </h2>
+
+              <div className="row">
+                {currentRestaurants.map((restaurant) => (
+                  <div key={restaurant.id} className="col-md-4 my-3">
+
+                    <section className=" text-center">
+                     
+                        <h3 className="card-title custom-font">{restaurant.name}</h3>
+                        <Link to={`/user-dashboard/restaurant/${restaurant.id}/main`}>
+                          <FontAwesomeIcon icon={faEye} className="text-warning h5 my-4 mx-4 ms-2" />
+                        </Link>
+                       
+                          <FontAwesomeIcon icon={faTrash} 
+                           className="text-danger h5 my-4 ms-2 " 
+                           onClick={() => handleDeleteRestaurant(restaurant.id)} />
+                       
+                    
+                    </section>
+
+                  </div>
+                ))}
               </div>
 
-              
-            </div>
+              <div className="my-3">
+                <button onClick={handlePrevPage} 
+                 disabled={currentPage === 0} 
+                 className="btn btn-warning mx-2">
+                  back
+                </button>
 
-            <section className='caption'>
-              <p className='text-center my-5'>
-                Explore a world of flavors and stories at our restaurants. 
-              </p>
+                <button 
+                 onClick={handleNextPage} 
+                 disabled={(currentPage + 1) * ITEMS_PER_PAGE >= restaurants.length} 
+                 className="btn btn-warning mx-2">
+                  Next
+                </button>
 
-              <p className='  text-center my-5'>
-               Let's create unforgettable dining experiences together!
-              </p>
+              </div>
 
-              </section>
-          </aside>
+            </section>
+          )}
         </section>
+        
       </main>
     </>
   );

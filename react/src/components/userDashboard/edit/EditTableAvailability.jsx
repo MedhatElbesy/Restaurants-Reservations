@@ -11,6 +11,7 @@ const EditTableAvailability = () => {
   const { availabilityTable, loading, error } = useSelector((state) => state.tableAvailability);
 
   const [availabilityData, setAvailabilityData] = useState([]);
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     if (availableId) {
@@ -30,6 +31,17 @@ const EditTableAvailability = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const isValid = availabilityData.every(availability => {
+      const startTime = new Date(`1970-01-01T${availability.start_time}`);
+      const endTime = new Date(`1970-01-01T${availability.end_time}`);
+      return startTime < endTime;
+    });
+
+    if (!isValid) {
+      setFormError('Start time must be before End time for all availabilities.');
+      return;
+    }
 
     const updatedAvailabilityData = availabilityData.map((availability) => ({
       ...availability,
@@ -53,7 +65,6 @@ const EditTableAvailability = () => {
     return `${hours}:${minutes}`;
   };
 
-
   const handleAvailabilityChange = (e, index, fieldName) => {
     const { value } = e.target;
 
@@ -70,58 +81,52 @@ const EditTableAvailability = () => {
     setAvailabilityData(updatedAvailabilityData);
   };
 
-
   if (loading) {
     return <Loader/>;
-  }
-
-
-  if (error) {
-    return <p>Error loading availability data</p>;
   }
 
   return (
     <section className='formUserDashboard'>
 
-     <form onSubmit={handleSubmit}>
-      {availabilityData.map((availability, index) => (
-        <div key={index}>
-          <label>Start Time:</label>
-          <input
-            className="form-control"
-            type="time"
-            value={availability.start_time || ''}
-            onChange={(e) => handleAvailabilityChange(e, index, 'start_time')}
-            required
-          />
+      <form onSubmit={handleSubmit}>
+        
+        {availabilityData.map((availability, index) => (
+          <div key={index}>
+            <label>Start Time:</label>
+            <input
+              className="form-control"
+              type="time"
+              value={availability.start_time || ''}
+              onChange={(e) => handleAvailabilityChange(e, index, 'start_time')}
+              required
+            />
 
-          <label>End Time:</label>
-          <input
-            className="form-control"
-            type="time"
-            value={availability.end_time || ''}
-            onChange={(e) => handleAvailabilityChange(e, index, 'end_time')}
-            required
-          />
+            <label>End Time:</label>
+            <input
+              className="form-control"
+              type="time"
+              value={availability.end_time || ''}
+              onChange={(e) => handleAvailabilityChange(e, index, 'end_time')}
+              required
+            />
 
-          <label>Status:</label>
-          <select
-            className="form-control"
-            value={availability.status || ''}
-            onChange={(e) => handleAvailabilityChange(e, index, 'status')}
-            
-          >
-            <option value="">Select Status</option>
-            <option value="Available">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select>
-        </div>
-      ))}
+            <label>Status:</label>
+            <select
+              className="form-control"
+              value={availability.status || ''}
+              onChange={(e) => handleAvailabilityChange(e, index, 'status')}
+            >
+              <option value="">Select Status</option>
+              <option value="Available">Available</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+          </div>
+        ))}
 
-      <button className="btn btn-primary col-12 my-4" type="submit">Update All Availabilities</button>
+        {formError && <div className="alert alert-danger my-3">{formError}</div>}
 
-    </form>
-    
+        <button className="btn btn-warning col-12 my-4" type="submit">Update All Availabilities</button>
+      </form>
     </section>
   );
 };

@@ -38,7 +38,7 @@ class PayPalController extends Controller
         if (isset($response['id']) && $response['id'] != null) {
 
             foreach ($response['links'] as $links) {
-                dd($links);
+                // dd($links);
                 if ($links['rel'] == 'approve') {
 
                     return redirect()->away($links['href']);

@@ -11,19 +11,19 @@ const deleteTableSlice = createSlice({
   name: 'deleteTable',
   initialState: {
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(deleteTableAsync.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(deleteTableAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
       })
       .addCase(deleteTableAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

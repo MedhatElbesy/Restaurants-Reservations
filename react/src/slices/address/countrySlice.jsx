@@ -21,20 +21,23 @@ const countriesSlice = createSlice({
   initialState: {
     countries: [],
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCountriesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchCountriesAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.countries = action.payload;
       })
       .addCase(fetchCountriesAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

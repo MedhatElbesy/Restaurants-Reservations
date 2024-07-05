@@ -94,12 +94,12 @@ const categorySlice = createSlice({
         state.status = 'succeeded';
         state.category = null; 
       })
-      .addMatcher(
-        (action) => action.type.endsWith('/pending'),
-        (state) => {
-          state.status = 'loading';
-        }
-      )
+      .addCase(fetchCategoryByIdAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchSpecificCategoryAsync.pending, (state) => {
+        state.status = 'loading';
+      })
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
         (state, action) => {

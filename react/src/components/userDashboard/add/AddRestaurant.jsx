@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
-import Loader from '../../../layouts/loader/loader';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -97,11 +96,11 @@ const AddRestaurant = () => {
   }
 
   return (
-    <main className="container">
+  <main className="container">
 
     <section className='formUserDashboard'>
 
-       <h2 className='text-center my-5 text-light'>Add New Restaurant</h2>
+       <h2 className='text-center my-5'>Add New Restaurant</h2>
 
         <form onSubmit={handleSubmit} className="text-light" encType="multipart/form-data">
  
@@ -270,6 +269,8 @@ const AddRestaurant = () => {
 
           <input 
            type="file" 
+           required
+           accept="image/*"
            className="form-control" 
            id="logo" 
            name="logo" 
@@ -284,13 +285,15 @@ const AddRestaurant = () => {
 
           <input 
            type="file" 
+           required
+           accept="image/*"
            className="form-control" 
            id="cover" 
            name="cover" 
            onChange={handleFileChange} />
         </div>
 
-        <button type="submit" className="btn btn-primary col-12">
+        <button type="submit" className="btn btn-warning my-3 col-12">
           Submit
         </button>
       </form>

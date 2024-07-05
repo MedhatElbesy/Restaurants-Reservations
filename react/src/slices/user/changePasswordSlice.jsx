@@ -22,13 +22,14 @@ const changePasswordSlice = createSlice({
   name: "changePassword",
   initialState: {
     status: "idle",
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(changePasswordAsync.pending, (state) => {
-        state.status = "loading";
+        state.loading = true;
         state.error = null;
       })
       .addCase(changePasswordAsync.fulfilled, (state) => {

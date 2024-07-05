@@ -131,3 +131,24 @@ export const restaurantCategory = async (restaurantId) => {
       throw error;
   }
 };
+
+export const nearestRestaurants = async (userId) => {
+  try {
+      const response = await axios.get(`/nearest-locations/${userId}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching nearest restaurant data", error);
+      throw error;
+  }
+};
+
+
+export const topRestaurants = async () => {
+  try {
+      const response = await axios.get(`/top-rated-restaurants`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching top restaurant data", error);
+      throw error;
+  }
+};

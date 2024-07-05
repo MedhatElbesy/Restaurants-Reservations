@@ -1,59 +1,107 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { fetchRestaurantCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory'; 
+import { fetchRestaurantCategoryAsync, deleteCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Card, Spinner } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const RestaurantCategory = () => {
   const { restaurantId } = useParams();
   const dispatch = useDispatch();
-  const { restaurantCategory, error } = useSelector((state) => state.restaurantCategory);
+  const { restaurantCategory, error, status } = useSelector((state) => state.restaurantCategory);
 
   useEffect(() => {
     if (restaurantId) {
       dispatch(fetchRestaurantCategoryAsync(restaurantId));
     }
-  }, [restaurantId]);
+  }, [ restaurantId]);
+
+  const handleDeleteCategory = (categoryId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this category!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCategoryAsync(categoryId));
+        Swal.fire(
+          'Deleted!',
+          'Your category has been deleted.',
+          'success'
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your category is safe :)',
+          'error'
+        );
+      }
+    });
+  };
 
   return (
     <main>
 
-    <section className='restaurant-details row my-5'>
+      <section className='container location-container my-5'>
 
-      <Link to={`/user-dashboard/add-restaurant-category/${restaurantId}`}>
-       <FontAwesomeIcon icon={faPlus} className="text-warning my-3 mx-3 h2" />
-      </Link>
-      
-      <h1 className='text-center text-light'>
-        Restaurant Categories
-      </h1>
-      
-      {restaurantCategory && restaurantCategory.length > 0 ? (
-        <table className="locations my-4">
-          <thead className='text-center'>
-            <tr>
-              <th>Category Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody className='text-center'>
+        <h2 className='text-center mb-4'>
+          Restaurant Categories
+          <Link to={`/add-restaurant-category/${restaurantId}`} className="float-end">
+            <FontAwesomeIcon icon={faPlus} className="text-warning mx-3 h2" />
+          </Link>
+        </h2>
+
+        {status === 'loading' && (
+          <div className="text-center">
+            <Spinner animation="border" role="status" />
+          </div>
+        )}
+
+        
+        {restaurantCategory && restaurantCategory.length > 0 && (
+          <section className="row row-cols-1 row-cols-md-3 g-4">
+
             {restaurantCategory.map((item) => (
-              <tr key={item.id}>
-                <td className='text-dark'>{item.category.name}</td>
-                <td>
-                <Link to={`/user-dashboard/edit-restaurant-category/${item.id}`}>
-                  <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
-                </Link>
-              </td>
-              </tr>
+              <div key={item.id} className="col">
+
+                <Card className="h-100">
+
+                  <Card.Body>
+
+                    <Card.Title className="text-dark">
+                      {item.category.name}
+                    </Card.Title>
+
+                    <div className="d-flex justify-content-end">
+
+                      <Link to={`/edit-restaurant-category/${item.id}`} className="text-primary me-3">
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Link>
+                      
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-danger"
+                        onClick={() => handleDeleteCategory(item.id)}
+                        style={{ cursor: 'pointer' }}
+                      />
+
+                    </div>
+
+                  </Card.Body>
+                </Card>
+              </div>
             ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No categories found.</p>
-      )}
-    
+          </section>
+        )}
+
+        {restaurantCategory && restaurantCategory.length === 0 && (
+          <p className="text-center mt-4">No categories found.</p>
+        )}
       </section>
     </main>
   );

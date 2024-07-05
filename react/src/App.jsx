@@ -75,6 +75,7 @@ import TableAvailability from "./components/userDashboard/show/TableAvailability
 import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailability.jsx";
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
+import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome.jsx";
 import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
 import RestaurantShow from "./components/AdminDashboard/RestaurantDetails.jsx";
 
@@ -120,112 +121,137 @@ function App() {
       <Route path="/add-address" element={<AddUserAddress />} />
       <Route path="/edit-address/:addressId" element={<EditUserAddress />} />
       <Route path="/availability/:tableId" element={<TableAvailability />} />
-      <Route
-        path="/add-availability/:tableId"
-        element={<AddAvailabilityForm />}
+      <Route path="/add-availability/:tableId" element={<AddAvailabilityForm />} />
+
+   <Route path="/user-dashboard/restaurant/:restaurantId" element={<Restaurant />}>
+
+   <Route
+        path="main"
+        element={<UserDashboardHome />}
       />
+
       <Route
-        path="/user-dashboard/restaurant/:restaurantId"
-        element={<Restaurant />}
+        path="details"
+        element={<DetailsTable />}
       />
+
+     <Route
+        path="locations"
+        element={<LocationsTable />}
+      />
+
+     <Route
+        path="tables"
+        element={<LocationTablesTable />}
+      />
+
+    <Route
+        path="menu-category"
+        element={<MenuCategoriesTable />}
+      />
+
+     <Route
+        path="category"
+        element={<SpecificCategories />}
+      />
+
+    <Route
+        path="restaurant-category"
+        element={<RestaurantCategory />}
+      />
+
+     <Route
+        path="location-table/:locationId"
+        element={<RestaurantCategory />}
+      />
+
+
+      </Route>
+
       <Route
-        path="/user-dashboard/edit-restaurant/:restaurantId"
+        path="/edit-restaurant/:restaurantId"
         element={<EditDetails />}
       />
       <Route
-        path="/user-dashboard/edit-category/:categoryId"
+        path="/edit-category/:categoryId"
         element={<EditCategory />}
       />
       <Route
-        path="/user-dashboard/edit-location/:locationId"
+        path="/edit-location/:locationId"
         element={<EditLocation />}
       />
 
       <Route
-        path="/user-dashboard/edit-menu-category/:menuCategoryId"
+        path="/edit-menu-category/:menuCategoryId"
         element={<MenuCategory />}
       />
       <Route
-        path="/user-dashboard/edit-menu-item/:menuItemId"
+        path="/edit-item/:menuItemId"
         element={<MenuItem />}
       />
       <Route
-        path="/user-dashboard/add-item/:menuCategoryId"
+        path="/add-item/:menuCategoryId"
         element={<AddMenuItem />}
       />
       <Route
-        path="/user-dashboard/add-category/:restaurantId"
+        path="/add-category/:restaurantId"
         element={<AddMenuCategory />}
       />
 
       <Route
-        path="/user-dashboard/add-location/:restaurantId"
-        element={<AddLocation />}
+        path="/add-location/:restaurantId" 
+        element={<AddLocation />} 
       />
 
-      <Route
-        path="/user-dashboard/add-table/:locationId"
-        element={<AddTableForm />}
+      <Route 
+        path="/add-table/:locationId" 
+        element={<AddTableForm />} 
       />
 
-      <Route
-        path="/user-dashboard/edit-table/:tableId"
-        element={<EditTableForm />}
+      <Route 
+        path="/edit-table/:tableId"
+        element={<EditTableForm />} 
       />
 
-      <Route
-        path="/user-dashboard/add-restaurant/:userId"
-        element={<AddRestaurant />}
+      <Route 
+        path="/add-restaurant/:userId"
+        element={<AddRestaurant />} 
       />
 
-      <Route path="/user-dashboard/details" element={<DetailsTable />} />
+  
+    
 
-      <Route path="/user-dashboard/location" element={<LocationsTable />} />
-
-      <Route
-        path="/user-dashboard/location-tables"
-        element={<LocationTablesTable />}
+     <Route 
+        path="/add-special-category" 
+        element={<AddCategoryForm />} 
       />
 
-      <Route
-        path="/user-dashboard/menu-category"
-        element={<MenuCategoriesTable />}
+    <Route 
+        path="/add-restaurant-category/:restaurantId" 
+        element={<AddRestaurantCategory />} 
       />
 
-      <Route
-        path="/user-dashboard/add-special-category"
-        element={<AddCategoryForm />}
+     <Route 
+        path="/edit-restaurant-category/:categoryId" 
+        element={<EditRestaurantCategory />} 
       />
 
-      <Route
-        path="/user-dashboard/add-restaurant-category/:restaurantId"
-        element={<AddRestaurantCategory />}
-      />
 
-      <Route
-        path="/user-dashboard/edit-restaurant-category/:categoryId"
-        element={<EditRestaurantCategory />}
-      />
+      <Route 
+        path="/add-table-image/:tableId" 
+        element={<AddTableImage />} 
+      /> 
 
-      <Route
-        path="/user-dashboard/restaurant-category/:restaurantId"
-        element={<RestaurantCategory />}
-      />
+      <Route 
+        path="/edit-table-image/:imageId" 
+        element={<EditTableImage />} 
+      />  
 
-      <Route
-        path="/user-dashboard/add-table-image/:tableId"
-        element={<AddTableImage />}
-      />
+     <Route 
+        path="/edit-availability/:availableId" 
+        element={<EditTableAvailability />} 
+      />  
 
-      <Route
-        path="/user-dashboard/edit-table-image/:imageId"
-        element={<EditTableImage />}
-      />
-
-      <Route
-        path="/user-dashboard/edit-availability/:availableId"
-        element={<EditTableAvailability />}
-      />
 
       {/* AdminDashboard */}
       <Route path="/admin" element={<AdminDashboard />} />

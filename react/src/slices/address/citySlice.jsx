@@ -13,20 +13,23 @@ const citySlice = createSlice({
   initialState: {
     cities: [],
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCitiesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
       })
       .addCase(fetchCitiesAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
         state.cities = action.payload;
       })
       .addCase(fetchCitiesAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.payload;
       });
   },

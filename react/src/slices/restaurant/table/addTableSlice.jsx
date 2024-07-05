@@ -9,19 +9,19 @@ const addTableSlice = createSlice({
   name: 'addTable',
   initialState: {
     status: 'idle',
+    loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addTableAsync.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(addTableAsync.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.loading = false;
       })
       .addCase(addTableAsync.rejected, (state, action) => {
         state.status = 'failed';
+        state.loading = false;
         state.error = action.error.message;
       });
   },

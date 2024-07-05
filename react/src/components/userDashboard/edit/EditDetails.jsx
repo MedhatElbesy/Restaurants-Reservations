@@ -102,7 +102,7 @@ const EditDetails = () => {
     return (
       <div className="container">
         <div className="alert alert-danger" role="alert">
-          Error: {error.message}
+         <p>Make Sure you filled all fields</p>
         </div>
       </div>
     );
@@ -113,7 +113,7 @@ const EditDetails = () => {
 
       <section className='formUserDashboard'>
 
-        <h2 className='text-light text-center my-4'>
+        <h2 className='text-center my-4'>
           Edit Restaurant Details
         </h2>
 
@@ -256,6 +256,7 @@ const EditDetails = () => {
             </label>
             <input
               type="file"
+              accept="image/*"
               className="form-control"
               id="logo"
               name="logo"
@@ -269,6 +270,7 @@ const EditDetails = () => {
             </label>
             <input
               type="file"
+              accept="image/*"
               className="form-control"
               id="cover"
               name="cover"
@@ -276,7 +278,7 @@ const EditDetails = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary col-12">
+          <button type="submit" className="btn btn-warning my-3 col-12">
             Submit
           </button>
         </form>
