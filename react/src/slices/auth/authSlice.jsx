@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { encryptData, getEncryptedItem } from "../../helpers/cryptoUtils";
+
 import {
   loginUser,
   registerUser,
@@ -16,7 +18,7 @@ export const login = createAsyncThunk(
       return rejectWithValue({
         status: error.response.status,
         data: error.response.data,
-        message: error.message,
+        message: error.response.data,
       });
     }
   }
@@ -41,7 +43,6 @@ export const register = createAsyncThunk(
 export const forgetPassword = createAsyncThunk(
   "auth/forgetPassword",
   async (email, { rejectWithValue }) => {
-    console.log(email);
     try {
       const data = await forgetPasswordUser(email);
       return data;
@@ -79,13 +80,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    userId: localStorage.getItem("userId") || null,
-    token: localStorage.getItem("token") || null,
-    loggedIn: !!localStorage.getItem("token"),
+    userId: getEncryptedItem("userId"),
+    token: getEncryptedItem("token"),
+    loggedIn: !!sessionStorage.getItem("token"),
     status: "idle",
     loading: false,
     error: null,
-    role: localStorage.getItem("role") || null,
+    role: getEncryptedItem("role"),
   },
   reducers: {
     logout: (state) => {
@@ -94,9 +95,9 @@ const authSlice = createSlice({
       state.token = null;
       state.loggedIn = false;
       state.role = null;
-      localStorage.removeItem("token");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("role");
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("userId");
+      sessionStorage.removeItem("role");
     },
   },
   extraReducers: (builder) => {
@@ -106,9 +107,12 @@ const authSlice = createSlice({
         state.loading = false;
         const data = action.payload.data;
         state.status = "succeeded";
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.user.id);
-        localStorage.setItem("role", data.user.role_name);
+
+        // Encrypt sensitive data
+        sessionStorage.setItem("token", encryptData(data.token));
+        sessionStorage.setItem("userId", encryptData(data.user.id));
+        sessionStorage.setItem("role", encryptData(data.user.role_name));
+
         state.loggedIn = true;
         state.user = data.user;
         state.userId = data.user.id;
@@ -119,7 +123,6 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state) => {
         state.loading = false;
       })
-
       // forgetPassword
       .addCase(forgetPassword.fulfilled, (state) => {
         state.loading = false;
@@ -130,7 +133,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.status = "passwordReset";
       })
-
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {

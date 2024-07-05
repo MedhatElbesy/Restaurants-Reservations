@@ -23,6 +23,8 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.12",
     "iso-country-currency": "^0.7.2",
     "leaflet": "^1.9.4",
