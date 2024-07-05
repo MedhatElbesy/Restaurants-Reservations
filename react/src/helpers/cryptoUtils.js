@@ -8,13 +8,13 @@ export const encryptData = (data) => {
 
 export const decryptData = (encryptedItem) => {
   const bytes = CryptoJS.AES.decrypt(encryptedItem, secretKey);
-  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+  return JSON.parse(decryptedData);
 };
 
 export const getEncryptedItem = (key) => {
   const encryptedItem = sessionStorage.getItem(key);
   if (encryptedItem) {
-    console.log(encryptedItem);
     try {
       return decryptData(encryptedItem);
     } catch (error) {

@@ -111,13 +111,14 @@ const authSlice = createSlice({
         // Encrypt sensitive data
         sessionStorage.setItem("token", encryptData(data.token));
         sessionStorage.setItem("userId", encryptData(data.user.id));
-        sessionStorage.setItem("role", encryptData(data.user.role_name));
+        console.log(data.user.roles_name);
+        sessionStorage.setItem("role", encryptData(data.user.roles_name));
 
         state.loggedIn = true;
         state.user = data.user;
         state.userId = data.user.id;
         state.token = data.token;
-        state.role = data.user.role_name;
+        state.role = data.user.roles_name;
       })
       // register
       .addCase(register.fulfilled, (state) => {
