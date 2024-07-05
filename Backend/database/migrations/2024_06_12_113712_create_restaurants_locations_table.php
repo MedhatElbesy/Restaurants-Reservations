@@ -40,8 +40,7 @@ return new class extends Migration
             $table->foreign('governorate_id')->references('id')->on('governorates')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('state_id')->references('id')->on('states')->cascadeOnDelete()->cascadeOnDelete();
 
-            $table->times
-            tamps();
+            $table->timestamps();
         });
     }
 
