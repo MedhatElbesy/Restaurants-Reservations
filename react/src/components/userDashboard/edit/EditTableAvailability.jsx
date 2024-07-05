@@ -81,7 +81,9 @@ const EditTableAvailability = () => {
     setAvailabilityData(updatedAvailabilityData);
   };
 
- 
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className='formUserDashboard col-6 offset-3 my-5'>

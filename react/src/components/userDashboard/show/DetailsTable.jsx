@@ -30,7 +30,7 @@ const DetailsTable = () => {
       <div
         className="cover-image position-relative"
         style={{
-          backgroundImage: `url('/images/barista-making-coffee-F2GU6L8.jpg')`,
+          backgroundImage: `url(${restaurant.cover})`,
           backgroundSize: 'cover',
           height: '80vh',
         }}
