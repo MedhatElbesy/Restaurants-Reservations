@@ -79,7 +79,9 @@ const EditCategoryForm = () => {
       });
   };
 
-
+  if (status === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <main className='my-2'>

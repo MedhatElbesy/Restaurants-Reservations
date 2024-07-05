@@ -13,7 +13,7 @@ const MenuItem = () => {
   const menuItem = useSelector((state) => state.menuItem.menuItem);
   const status = useSelector((state) => state.menuItem.status);
   const error = useSelector((state) => state.menuItem.error);
-
+  const loading = useSelector((state) => state.menuItem.loading);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -68,7 +68,7 @@ const MenuItem = () => {
   };
 
 
-  if (status === 'loading') {
+  if (loading) {
     return <Loader />;
   }
 

@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserAsync } from '../../../slices/user/updateUserSlice';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../../layouts/loader/loader';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
   const userData = useSelector((state) => state.user.data);
+  const loading = useSelector((state) => state.user.loading);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -93,6 +95,11 @@ export default function EditProfile() {
       });
     }
   };
+
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className="container mt-5">
@@ -218,7 +225,7 @@ export default function EditProfile() {
               <button type="submit" className="btn btn-warning my-4 col-12">
                 Update
               </button>
-              
+
             </form>
           </div>
         </div>

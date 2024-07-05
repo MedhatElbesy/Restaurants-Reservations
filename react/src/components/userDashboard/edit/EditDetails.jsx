@@ -97,6 +97,9 @@ const EditDetails = () => {
   };
 
  
+  if (status === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <main className="container">
