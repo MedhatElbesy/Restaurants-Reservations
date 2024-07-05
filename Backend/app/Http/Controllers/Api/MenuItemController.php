@@ -20,7 +20,6 @@ class MenuItemController extends Controller
         $validatedData = $request->validate([
             'menu_category_id' => 'required|exists:menu_categories,id',
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:menu_items',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
@@ -45,7 +44,6 @@ class MenuItemController extends Controller
         $validatedData = $request->validate([
             'menu_category_id' => 'required|exists:menu_categories,id',
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:menu_items,slug,' . $menuItem->id,
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',

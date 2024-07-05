@@ -59,10 +59,6 @@ class CategoryController extends Controller
                 'sometimes',
                 'required'
             ],
-            'slug' => [
-                'sometimes',
-                'required'
-            ],
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'sometimes|in:Enabled,Disabled,Deleted',
