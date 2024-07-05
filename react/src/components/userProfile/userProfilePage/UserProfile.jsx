@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faLock, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BodyColorContext } from '../../../BodyColorContext';
 import Loader from '../../../layouts/loader/loader';
 import { deleteRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
@@ -143,6 +143,7 @@ const UserProfile = () => {
               alt="Profile"
               className="rounded-circle"
             />
+            
           </div>
 
         </section>
@@ -150,11 +151,25 @@ const UserProfile = () => {
         <section className="row my-5 mx-2">
 
           <aside className="col-5 my-5">
+          <span>
+                <Link to={`/edit-profile/${userId}`} className='text-decoration-none text-warning mx-2' >
+                  <FontAwesomeIcon icon={faEdit}  className='text-warning'/>
+                  Edit Profile
+                </Link>
+
+                <Link to={`/change-password/${userId}`} className='text-decoration-none text-warning mx-2' >
+                  <FontAwesomeIcon icon={faLock}  className='text-warning'/>
+                  Change Password
+                </Link>
+                 
+                </span>
 
             <section className="my-5">
 
               <h2 className="my-5 text-center custom-border-bottom">Personal Information</h2>
               <section className="info">
+                
+              
                 <p className={`text-${bodyColor === 'light' ? 'dark' : 'light'} my-5`}>
                   <strong className='custom-font'>Name:</strong> {userData.first_name} {userData.last_name}
                 </p>

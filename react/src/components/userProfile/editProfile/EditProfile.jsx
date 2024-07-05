@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {updateUserAsync } from '../../../slices/user/updateUserSlice';
+import { updateUserAsync } from '../../../slices/user/updateUserSlice';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,14 +17,15 @@ export default function EditProfile() {
     profile_image_url: '',
     gender: '',
     birth_date: '',
-    profile_image: null, 
+    profile_image: null,
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (userId) {
       dispatch(fetchUserDataById(userId));
     }
-  }, [userId]);
+  }, [userId, dispatch]);
 
   useEffect(() => {
     if (userData) {
@@ -40,9 +41,10 @@ export default function EditProfile() {
     }
   }, [userData]);
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage(''); 
+
     const dataToUpdate = {
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -53,7 +55,6 @@ export default function EditProfile() {
       birth_date: formData.birth_date,
     };
 
-  
     const formDataToUpdate = new FormData();
     Object.entries(dataToUpdate).forEach(([key, value]) => {
       formDataToUpdate.append(key, value);
@@ -63,17 +64,28 @@ export default function EditProfile() {
     }
 
     dispatch(updateUserAsync({ userId, data: formDataToUpdate }))
-    .then((result) => {
-      if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
-      }
-    });
+      .then((result) => {
+        if (result.meta.requestStatus === 'fulfilled') {
+          navigate(-1);
+        }
+      });
   };
 
   const handleInputChange = (event) => {
     const { name, value, files } = event.target;
     if (name === 'profile_image') {
-      setFormData({ ...formData, profile_image: files[0] });
+      const file = files[0];
+      const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+
+      if (!validExtensions.includes(fileExtension)) {
+        setErrorMessage('Invalid image format. Please upload a jpg, jpeg, png, or gif file.');
+      } else if (file.size > 2 * 1024 * 1024) {
+        setErrorMessage('Image size should not exceed 2 MB.');
+      } else {
+        setFormData({ ...formData, profile_image: file });
+        setErrorMessage('');
+      }
     } else {
       setFormData({
         ...formData,
@@ -82,7 +94,6 @@ export default function EditProfile() {
     }
   };
 
-
   return (
     <main className="container mt-5">
 
@@ -90,9 +101,11 @@ export default function EditProfile() {
 
         <div className="card col-12 table-card">
 
-          <h1 className="card-header text-center">Edit Profile</h1>
+          <h1 className="text-center">Edit Profile</h1>
 
           <div className="card-body">
+
+            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
             <form onSubmit={handleSubmit}>
 
@@ -174,14 +187,18 @@ export default function EditProfile() {
                 <label htmlFor="gender" className="form-label">
                   Gender:
                 </label>
-                <input
-                  type="text"
+                <select
                   className="form-control"
                   id="gender"
                   name="gender"
                   value={formData.gender}
                   onChange={handleInputChange}
-                />
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
               </div>
 
               <div className="mb-3">
@@ -198,18 +215,14 @@ export default function EditProfile() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary col-12">
+              <button type="submit" className="btn btn-warning my-4 col-12">
                 Update
               </button>
-
+              
             </form>
-
           </div>
-
         </div>
-
       </section>
-      
     </main>
   );
 }
