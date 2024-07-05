@@ -59,10 +59,6 @@ class CategoryController extends Controller
                 'sometimes',
                 'required'
             ],
-            'slug' => [
-                'sometimes',
-                'required'
-            ],
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'sometimes|in:Enabled,Disabled,Deleted',
@@ -99,12 +95,12 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-//           //validate user
-//            $user = Auth::guard('sanctum')->user();
-//
-//            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
-//                throw new \Exception("You can't update this category");
-//            }
+          //validate user
+           $user = Auth::guard('sanctum')->user();
+
+           if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+               throw new \Exception("You can't update this category");
+           }
         $category->delete();
 
         return response()->json(null, 204);

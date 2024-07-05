@@ -22,6 +22,8 @@ const AddRestaurant = () => {
     cover: null,
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -32,17 +34,26 @@ const AddRestaurant = () => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
+    const file = files[0];
+
+    if (file.size > 2 * 1024 * 1024) {
+      setErrorMessage(`Please upload images with size up to 2 MB for ${name === 'logo' ? 'Logo' : 'Cover'}.`);
+      setFormData({
+        ...formData,
+        [name]: null,
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
-      [name]: files[0],
+      [name]: file,
     });
   };
-
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,8 +94,6 @@ const AddRestaurant = () => {
     }
   };
 
- 
-
   if (status === 'failed') {
     return (
       <div className="container">
@@ -96,114 +105,85 @@ const AddRestaurant = () => {
   }
 
   return (
-  <main className="container">
-
-    <section className='formUserDashboard'>
-
-       <h2 className='text-center my-5'>Add New Restaurant</h2>
-
+    <main className="container">
+      <section className='formUserDashboard'>
+        <h2 className='text-center my-5'>Add New Restaurant</h2>
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="text-light" encType="multipart/form-data">
- 
-         <input type="hidden" name="user_id" value={userId} />
+          <input type="hidden" name="user_id" value={userId} />
 
           <div className="mb-3">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-           <label htmlFor="name" className="form-label">
-             Name
-           </label>
+          <div className="mb-3">
+            <label htmlFor="slug" className="form-label">Slug</label>
+            <input
+              type="text"
+              className="form-control"
+              id="slug"
+              name="slug"
+              value={formData.slug}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-         <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <div className="mb-3">
+            <label htmlFor="title" className="form-label">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        </div>
+          <div className="mb-3">
+            <label htmlFor="summary" className="form-label">Summary</label>
+            <textarea
+              className="form-control"
+              id="summary"
+              name="summary"
+              value={formData.summary}
+              onChange={handleChange}
+              rows="3"
+              required
+            />
+          </div>
 
-        <div className="mb-3">
+          <div className="mb-3">
+            <label htmlFor="description" className="form-label">Description</label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="5"
+              required
+            />
+          </div>
 
-          <label htmlFor="slug" className="form-label">
-            Slug
-          </label>
-
-          <input
-            type="text"
-            className="form-control"
-            id="slug"
-            name="slug"
-            value={formData.slug}
-            onChange={handleChange}
-            required
-          />
-
-        </div>
-
-        <div className="mb-3">
-
-          <label htmlFor="title" className="form-label">
-            Title
-          </label>
-
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-          />
-
-        </div>
-
-        <div className="mb-3">
-
-          <label htmlFor="summary" className="form-label">
-            Summary
-          </label>
-
-          <textarea
-            className="form-control"
-            id="summary"
-            name="summary"
-            value={formData.summary}
-            onChange={handleChange}
-            rows="3"
-            required
-          />
-
-        </div>
-
-        <div className="mb-3">
-
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-
-          <textarea
-            className="form-control"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="5"
-            required
-          />
-
-        </div>
-
-        <section className="mb-3">
-
-          <label className="form-label">Status</label>
-
-          <section>
-
+          <section className="mb-3">
+            <label className="form-label">Status</label>
             <div className="form-check form-check-inline">
-
               <input
                 className="form-check-input"
                 type="radio"
@@ -213,15 +193,9 @@ const AddRestaurant = () => {
                 checked={formData.status.toLowerCase() === 'active'}
                 onChange={handleChange}
               />
-
-              <label className="form-check-label" htmlFor="active">
-                Active
-              </label>
-
+              <label className="form-check-label" htmlFor="active">Active</label>
             </div>
-
             <div className="form-check form-check-inline">
-
               <input
                 className="form-check-input"
                 type="radio"
@@ -231,15 +205,9 @@ const AddRestaurant = () => {
                 checked={formData.status.toLowerCase() === 'inactive'}
                 onChange={handleChange}
               />
-
-              <label className="form-check-label" htmlFor="inactive">
-                Inactive
-              </label>
-
+              <label className="form-check-label" htmlFor="inactive">Inactive</label>
             </div>
-
             <div className="form-check form-check-inline">
-
               <input
                 className="form-check-input"
                 type="radio"
@@ -249,54 +217,38 @@ const AddRestaurant = () => {
                 checked={formData.status.toLowerCase() === 'deleted'}
                 onChange={handleChange}
               />
-
-              <label className="form-check-label" htmlFor="deleted">
-                Deleted
-              </label>
-
+              <label className="form-check-label" htmlFor="deleted">Deleted</label>
             </div>
-            
           </section>
 
-        </section>
+          <div className="mb-3">
+            <label htmlFor="logo" className="form-label">Logo</label>
+            <input 
+              type="file" 
+              required
+              accept="image/*"
+              className="form-control" 
+              id="logo" 
+              name="logo" 
+              onChange={handleFileChange} />
+          </div>
 
+          <div className="mb-3">
+            <label htmlFor="cover" className="form-label">Cover</label>
+            <input 
+              type="file" 
+              required
+              accept="image/*"
+              className="form-control" 
+              id="cover" 
+              name="cover" 
+              onChange={handleFileChange} />
+          </div>
 
-        <div className="mb-3">
-
-          <label htmlFor="logo" className="form-label">
-            Logo
-          </label>
-
-          <input 
-           type="file" 
-           required
-           accept="image/*"
-           className="form-control" 
-           id="logo" 
-           name="logo" 
-           onChange={handleFileChange} />
-        </div>
-
-        <div className="mb-3">
-
-          <label htmlFor="cover" className="form-label">
-            Cover
-          </label>
-
-          <input 
-           type="file" 
-           required
-           accept="image/*"
-           className="form-control" 
-           id="cover" 
-           name="cover" 
-           onChange={handleFileChange} />
-        </div>
-
-        <button type="submit" className="btn btn-warning my-3 col-12">
-          Submit
-        </button>
-      </form>
+          <button type="submit" className="btn btn-warning my-3 col-12">
+            Submit
+          </button>
+        </form>
       </section>
     </main>
   );

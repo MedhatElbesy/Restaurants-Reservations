@@ -170,12 +170,23 @@ const EditLocation = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
+    let validFiles = [];
+  
+    files.forEach((file) => {
+      if (file.size <= 2 * 1024 * 1024) { 
+        validFiles.push(file);
+      } else {
+       
+        console.log(`File ${file.name} exceeds the maximum size of 2MB.`);
+      }
+    });
+  
     setFormData({
       ...formData,
-      images: files,
+      images: validFiles,
     });
   };
-
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -343,7 +354,7 @@ const EditLocation = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="opening_time" className="form-label">Opening Time</label>
+          <label htmlFor="opening_time" className="form-label mx-3">Opening Time</label>
           <DatePicker
             selected={openingTime}
             onChange={(time) => handleTimeChange(time, 'opening')}
@@ -358,7 +369,7 @@ const EditLocation = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="closed_time" className="form-label">Closing Time</label>
+          <label htmlFor="closed_time" className="form-label mx-3">Closing Time</label>
           <DatePicker
             selected={closingTime}
             onChange={(time) => handleTimeChange(time, 'closing')}
@@ -413,7 +424,7 @@ const EditLocation = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning my-3 col-12">Update</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Update</button>
 
       </form>
       </section>

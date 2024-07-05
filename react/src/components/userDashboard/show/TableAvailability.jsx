@@ -71,7 +71,6 @@ const TableAvailability = () => {
         {loading && (
           <div className="text-center my-5">
             <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
             </Spinner>
           </div>
         )}
@@ -82,7 +81,7 @@ const TableAvailability = () => {
             <table className="locations my-3">
 
               <thead>
-                <tr>
+                <tr className='text-dark'>
                   <th>Start Time</th>
                   <th>End Time</th>
                   <th>Status</th>
@@ -92,13 +91,13 @@ const TableAvailability = () => {
 
               <tbody>
                 {localAvailability.map((avail) => (
-                  <tr key={avail.id}>
+                  <tr key={avail.id} className='text-dark'>
                     <td>{avail.start_time}</td>
                     <td>{avail.end_time}</td>
                     <td>{avail.status}</td>
                     <td>
                       <Link to={`/edit-availability/${avail.id}`}>
-                        <FontAwesomeIcon icon={faEdit} className="text-success" />
+                        <FontAwesomeIcon icon={faEdit} className="text-primary" />
                       </Link>
                       <FontAwesomeIcon
                         icon={faTrash}

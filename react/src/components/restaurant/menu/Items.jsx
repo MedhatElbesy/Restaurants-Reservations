@@ -3,7 +3,7 @@ export default function Items({ item }) {
     <div
       className={`${
         item.status === "unavailable" ? "unavailable" : "item"
-      } d-flex flex-wrap justify-content-between col-9 col-md-5 mb-4 p-2`}
+      } d-flex flex-wrap justify-content-between col-12 col-sm-9 col-md-5 mb-4 p-2`}
     >
       <div className="item-data w-75">
         <p className="name text-sec mb-2">{item.name}</p>

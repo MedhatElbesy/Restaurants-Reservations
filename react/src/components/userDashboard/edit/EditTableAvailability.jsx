@@ -86,10 +86,10 @@ const EditTableAvailability = () => {
   }
 
   return (
-    <section className='formUserDashboard'>
+    <main className='formUserDashboard col-6 offset-3 my-5'>
 
       <form onSubmit={handleSubmit}>
-        
+        <h1 className='text-center my-4'>Edit Table Availability</h1>
         {availabilityData.map((availability, index) => (
           <div key={index}>
             <label>Start Time:</label>
@@ -101,7 +101,7 @@ const EditTableAvailability = () => {
               required
             />
 
-            <label>End Time:</label>
+            <label className='my-2'>End Time:</label>
             <input
               className="form-control"
               type="time"
@@ -110,7 +110,7 @@ const EditTableAvailability = () => {
               required
             />
 
-            <label>Status:</label>
+            <label className='my-2'>Status:</label>
             <select
               className="form-control"
               value={availability.status || ''}
@@ -125,9 +125,9 @@ const EditTableAvailability = () => {
 
         {formError && <div className="alert alert-danger my-3">{formError}</div>}
 
-        <button className="btn btn-warning col-12 my-4" type="submit">Update All Availabilities</button>
+        <button className="btn btn-warning col-12 my-5" type="submit">Update Availability</button>
       </form>
-    </section>
+    </main>
   );
 };
 

@@ -18,9 +18,9 @@ export const BranchOpening = () => {
   );
 
   return (
-    <article className="opening mx-0 d-flex justify-content-between py-5 border-bottom">
-      <div className="col-5 d-flex flex-column justify-content-between">
-        <h3 className="text-center fs-1 text-sec mb-3 p-3">Opening Hours</h3>
+    <article className="opening mx-0 d-flex flex-wrap justify-content-center text-center text-lg-start justify-content-lg-between py-5 border-bottom">
+      <div className="col-md-7 col-lg-6 d-flex flex-column justify-content-between">
+        <h3 className="text-center text-sec mb-3 p-3">Opening Hours</h3>
         <p className="text-color">{restaurant.description}</p>
         <div className="days">
           <p className="text-main mb-2 fs-3">
@@ -47,7 +47,7 @@ export const BranchOpening = () => {
           </NavLink>
         </div>
       </div>
-      <div className="image col-6">
+      <div className="image d-none d-lg-block col-6">
         <Image
           src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_bg.jpg"
           style={{ height: "350px", width: "100%" }}

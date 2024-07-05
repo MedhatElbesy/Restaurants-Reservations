@@ -2,14 +2,13 @@
   overflow-x: auto;
   width: 90%;
   margin: auto;
-  padding: 0 !important; /* temp */
+  padding: 0 !important;
   flex-wrap: nowrap !important;
   .nav-link {
     color: var(--mainColor) !important;
     height: 100%;
     white-space: nowrap !important;
     border-bottom: none !important;
-
     &:hover {
       color: var(--secColor) !important;
     }

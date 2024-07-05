@@ -42,6 +42,15 @@ const AddCategoryForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
+    if (file.size > 2 * 1024 * 1024) { 
+      setErrorMessage('Please upload images with size up to 2 MB.');
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        cover: null, 
+      }));
+      return;
+    }
+
     setFormData(prevFormData => ({
       ...prevFormData,
       cover: file,
@@ -77,7 +86,7 @@ const AddCategoryForm = () => {
   return (
     <main>
 
-      <section className='formUserDashboard'>
+      <section className='formUserDashboard col-6 offset-3'>
 
         <h2 className='text-center my-5'>Add Category</h2>
 
@@ -156,7 +165,7 @@ const AddCategoryForm = () => {
             />
           </div>
 
-          <Button className='col-12' variant="warning" type="submit">
+          <Button className='col-12 my-3' variant="warning" type="submit">
             Add Category
           </Button>
 

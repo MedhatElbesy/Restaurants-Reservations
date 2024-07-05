@@ -98,7 +98,7 @@ const AddMenuCategory = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning col-12">Add Menu Category</button>
+        <button type="submit" className="btn my-4 btn-warning col-12">Add Menu Category</button>
       </form>
       </section>
     </main>

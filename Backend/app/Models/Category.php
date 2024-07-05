@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,9 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     public $guarded = ['id', 'created_at', 'updated_at'];
 
     public function getCoverUrlAttribute()
@@ -36,5 +38,14 @@ class Category extends Model
     public function restaurantCategories(): HasMany
     {
         return $this->hasMany(RestaurantCategory::class);
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

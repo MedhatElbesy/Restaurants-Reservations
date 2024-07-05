@@ -28,9 +28,11 @@ import tableImageReducer from "../slices/restaurant/tableImage/tableImage";
 import userAddressReducer from "../slices/user/userAddressSlice";
 import checkoutReducer from "../slices/checkout/checkoutSlice";
 import gatewaysReducer from "../slices/checkout/gatewaysSlice";
-import nearestRestaurantsReducer from '../slices/restaurant/nearest-restaurants/nearestRestaurants'
-import topRatedRestaurantsReducer from '../slices/restaurant/top-restaurants/topRestaurantSlice'
+import nearestRestaurantsReducer from "../slices/restaurant/nearest-restaurants/nearestRestaurants";
+import topRatedRestaurantsReducer from "../slices/restaurant/top-restaurants/topRestaurantSlice";
 import adminReducer from "../slices/adminDashboard/adminSlice";
+import commentsReducer from "../slices/review/commentsSlice";
+import ratingReducer from "../slices/review/ratingSlice";
 
 const store = configureStore({
   reducer: {
@@ -63,9 +65,11 @@ const store = configureStore({
     tableAvailability: availabilityReducer,
     checkout: checkoutReducer,
     gateways: gatewaysReducer,
+    adminDashboard: adminReducer,
+    comments: commentsReducer,
+    rating: ratingReducer,
     nearestRestaurants: nearestRestaurantsReducer,
-    topRatedRestaurants:topRatedRestaurantsReducer,
-    adminDashboard:adminReducer
+    topRatedRestaurants: topRatedRestaurantsReducer,
   },
 });
 

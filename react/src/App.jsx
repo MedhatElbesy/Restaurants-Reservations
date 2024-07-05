@@ -61,7 +61,7 @@ import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaura
 
 // Admin Dashboard
 import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
-import  Ratings  from "./components/AdminDashboard/ratings.jsx";
+import Ratings from "./components/AdminDashboard/ratings.jsx";
 import ReportList from "./components/AdminDashboard/reports.jsx";
 // import  Category from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
@@ -79,16 +79,14 @@ import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome
 import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
 import RestaurantShow from "./components/AdminDashboard/RestaurantDetails.jsx";
 
-  const Layout = () => (
+const Layout = () => (
   <>
     <MyNavbar />
-    <Outlet/>
+    <Outlet />
   </>
 );
 
 function App() {
-
-
   const routes = createRoutesFromElements(
     <Route element={<Layout />}>
       {/* Auth Routes */}
@@ -256,17 +254,17 @@ function App() {
 
 
       {/* AdminDashboard */}
-      <Route path="/admin" element={<AdminDashboard/>} />
-      <Route path="/admin/rating" element={<Ratings/>} />
-      <Route path="/admin/report" element={<ReportList/>} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/rating" element={<Ratings />} />
+      <Route path="/admin/report" element={<ReportList />} />
       {/* <Route path="/admin/category" element={<Category/>} /> */}
-      <Route path="/admin/about" element={<About/>} />
+      <Route path="/admin/about" element={<About />} />
       <Route path="/admin/restaurant" element={<RestaurantList />} />
-        <Route path="/restaurant/:id" element={<RestaurantShow />} />
+      <Route path="/restaurant/:id" element={<RestaurantShow />} />
     </Route>
   );
 
-const router = createBrowserRouter(routes);
+  const router = createBrowserRouter(routes);
   return (
     <Provider store={store}>
       <RouterProvider router={router} />

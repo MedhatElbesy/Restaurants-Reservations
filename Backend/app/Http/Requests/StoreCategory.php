@@ -23,7 +23,6 @@ class StoreCategory extends FormRequest
     {
         return [
             'name' => 'required|unique:categories,name',
-            'slug' => 'required|unique:categories,slug',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'status' => 'required|in:Enabled,Disabled,Deleted',

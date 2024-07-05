@@ -46,7 +46,6 @@ class RestaurantController extends Controller
 
             $restaurant = Restaurant::create([
                 'user_id' => $validatedData['user_id'],
-                'slug' => $validatedData['slug'],
                 'title' => $validatedData['title'],
                 'name' => $validatedData['name'],
                 'summary' => $validatedData['summary'],
@@ -150,7 +149,6 @@ class RestaurantController extends Controller
 
             $restaurant->fill([
                 'user_id' => $validatedData['user_id'],
-                'slug' => $validatedData['slug'],
                 'title' => $validatedData['title'],
                 'name' => $validatedData['name'],
                 'summary' => $validatedData['summary'],

@@ -47,6 +47,10 @@ const EditCategoryForm = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Please choose an image file smaller than 2MB.');
+      return;
+    }
     setFormData(prevFormData => ({
       ...prevFormData,
       cover: file,
@@ -83,9 +87,9 @@ const EditCategoryForm = () => {
   }
 
   return (
-    <main>
+    <main className='my-2'>
 
-      <section className='formUserDashboard'>
+      <section className='formUserDashboard col-6 offset-3'>
 
         <h2 className='text-center my-4'>Edit Category</h2>
 
@@ -124,7 +128,7 @@ const EditCategoryForm = () => {
               name="cover" 
               onChange={handleFileChange} />
             {category.cover && 
-            <p className="text-muted">Current Cover: {category.cover}</p>}
+            <p className="text-light">Current Cover: {category.cover}</p>}
           </div>
 
           <div className="mb-3">

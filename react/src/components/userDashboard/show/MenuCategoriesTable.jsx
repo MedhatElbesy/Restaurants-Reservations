@@ -130,7 +130,7 @@ const MenuCategoriesTable = () => {
 
             <Col key={category.id}>
 
-              <Card className="h-100">
+              <div className="h-100 card-color">
 
                 <Card.Body>
                   <section className="d-flex justify-content-between align-items-center">
@@ -140,7 +140,7 @@ const MenuCategoriesTable = () => {
                     <span className="ms-auto">
 
                       <Link to={`/edit-menu-category/${category.id}`} className="text-success me-3">
-                        <FontAwesomeIcon icon={faEdit} className="text-success" />
+                        <FontAwesomeIcon icon={faEdit} className="text-primary" />
                       </Link>
 
                       <FontAwesomeIcon
@@ -159,7 +159,7 @@ const MenuCategoriesTable = () => {
 
                   <span className="ms-auto">
 
-                    <p className='my-4 h6'>
+                    <p className='my-4 h6 text-light'>
                       Add Menu Item 
                       <Link to={`/add-item/${category.id}`} className="me-3 mx-2">
                         <FontAwesomeIcon icon={faPlus} className="text-warning" />
@@ -170,7 +170,7 @@ const MenuCategoriesTable = () => {
 
                 </Card.Body>
 
-              </Card>
+              </div>
 
             </Col>
           ))}
@@ -179,7 +179,7 @@ const MenuCategoriesTable = () => {
         <Modal show={showItemsModal} onHide={handleModalClose} dialogClassName="modal-fullscreen location-container">
 
           <Modal.Header closeButton>
-            <Modal.Title>{selectedCategory && selectedCategory.name} Menu Items</Modal.Title>
+            <Modal.Title className='text-dark'>{selectedCategory && selectedCategory.name} Menu Items</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
@@ -187,7 +187,7 @@ const MenuCategoriesTable = () => {
               <table className="table">
 
                 <thead>
-                  <tr>
+                  <tr className='text-dark'>
                     <th>Name</th>
                     <th>Slug</th>
                     <th>Description</th>
@@ -200,7 +200,7 @@ const MenuCategoriesTable = () => {
 
                 <tbody>
                   {selectedCategory.menu_items.map((item) => (
-                    <tr key={item.id}>
+                    <tr key={item.id} className='text-dark'>
                       <td>{item.name}</td>
                       <td>{item.slug}</td>
                       <td>{item.description}</td>
@@ -223,7 +223,7 @@ const MenuCategoriesTable = () => {
                 
               </table>
             ) : (
-              <p>No menu items available</p>
+              <p className='text-dark'>No menu items available</p>
             )}
           </Modal.Body>
         </Modal>

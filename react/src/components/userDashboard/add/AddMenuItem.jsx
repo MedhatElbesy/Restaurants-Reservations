@@ -127,7 +127,7 @@ const AddMenuItem = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning col-12">Add Menu Item</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Add Menu Item</button>
       </form>
 
       </section>

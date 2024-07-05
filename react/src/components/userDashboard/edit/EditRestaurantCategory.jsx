@@ -63,10 +63,10 @@ const EditRestaurantCategory = () => {
   }
 
   return (
-  <main>
-    <section className='formUserDashboard'>
+  <main className='my-5'>
+    <section className='formUserDashboard col-6 offset-3'>
 
-      <h2 className='text-light text-center my-4'>Update Category</h2>
+      <h2 className='text-center my-4'>Update Category</h2>
 
       <Form onSubmit={handleSubmit}>
 
