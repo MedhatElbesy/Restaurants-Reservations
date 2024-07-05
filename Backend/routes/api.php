@@ -124,7 +124,11 @@ Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsControl
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);
-Route::resource('/comments',CommentController::class)->middleware('auth:sanctum');
+
+Route::resource('comments', CommentController::class)->except(['show', 'index'])->middleware('auth:sanctum');
+Route::get('comments', [CommentController::class, 'index']);
+Route::get('comments/{restaurantId}', [CommentController::class, 'show']);
+
 Route::post('/reports', [ReportController::class, 'store']);
 Route::get('/reports', [ReportController::class, 'show']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
