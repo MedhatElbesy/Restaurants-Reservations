@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantCategory;
 use App\Http\Requests\UpdateRestaurantCategory;
@@ -59,8 +60,12 @@ class RestaurantCategoryController extends Controller
     public function destroy($id)
     {
         $restaurantCategory = RestaurantCategory::findOrFail($id);
-        $restaurantCategory->delete();
-        return response()->json(null, 204);
+        try {
+            $restaurantCategory->delete();
+            return ApiResponse::sendResponse(204 , 'Successfully Deleted');
+        }catch (\Exception $e){
+            return ApiResponse::sendResponse(404,"can't delete this category ");
+        }
     }
 
 }
