@@ -24,6 +24,7 @@ import {
 import { MapContainer, TileLayer, Marker, ZoomControl, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import Loader from '../../../layouts/loader/loader';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 
 const LocationMarker = ({ setFormData }) => {
@@ -45,7 +46,7 @@ const LocationMarker = ({ setFormData }) => {
 };
 
 const EditUserAddress = () => {
-  const { userId } = useSelector(state => state.auth);
+  const userId = decryptData('userId');
   const { addressId } = useParams();
   const dispatch = useDispatch();
   const countries = useSelector(selectCountries);

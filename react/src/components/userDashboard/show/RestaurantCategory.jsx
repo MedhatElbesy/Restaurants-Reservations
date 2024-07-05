@@ -28,12 +28,15 @@ const RestaurantCategory = () => {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteCategoryAsync(categoryId));
-        Swal.fire(
-          'Deleted!',
-          'Your category has been deleted.',
-          'success'
-        );
+        dispatch(deleteCategoryAsync(categoryId))
+          .then(() => {
+            dispatch(fetchRestaurantCategoryAsync(restaurantId));
+            Swal.fire(
+              'Deleted!',
+              'Your category has been deleted.',
+              'success'
+            );
+          })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',

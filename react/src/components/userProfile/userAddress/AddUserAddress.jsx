@@ -8,6 +8,7 @@ import { fetchStatesAsync, selectStates } from '../../../slices/address/stateSli
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
   useMapEvents({
@@ -25,7 +26,7 @@ const LocationMarker = ({ position, setPosition, setFormData }) => {
 };
 
 const AddUserAddress = () => {
-  const { userId } = useSelector(state => state.auth); 
+  const userId = decryptData('userId');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const countries = useSelector(selectCountries);

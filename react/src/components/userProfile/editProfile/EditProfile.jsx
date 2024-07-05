@@ -4,11 +4,12 @@ import { updateUserAsync } from '../../../slices/user/updateUserSlice';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../../layouts/loader/loader';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.auth.userId);
+  const userId = decryptData('userId');
   const userData = useSelector((state) => state.user.data);
   const loading = useSelector((state) => state.user.loading);
   const [formData, setFormData] = useState({
