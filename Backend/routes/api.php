@@ -30,7 +30,7 @@ use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
 use App\Http\Controllers\PayPalController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Api\ReportController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
