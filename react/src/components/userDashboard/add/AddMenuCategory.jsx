@@ -10,7 +10,6 @@ const AddMenuCategory = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     description: '',
     status: 'Enabled',
   });
@@ -60,17 +59,6 @@ const AddMenuCategory = () => {
           required />
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="slug" className="form-label">Slug</label>
-          <input 
-          type="text" 
-          className="form-control" 
-          id="slug" 
-          name="slug" 
-          value={formData.slug} 
-          onChange={handleChange} 
-          required />
-        </div>
 
         <div className="mb-3">
           <label htmlFor="description" className="form-label">Description</label>

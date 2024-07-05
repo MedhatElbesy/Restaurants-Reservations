@@ -13,7 +13,6 @@ const EditCategoryForm = () => {
 
   const [formData, setFormData] = useState({
     name: '',
-    slug: '',
     cover: null,
     description: '',
     status: 'Enabled',
@@ -29,7 +28,6 @@ const EditCategoryForm = () => {
     if (category) {
       setFormData({
         name: category.name,
-        slug: category.slug,
         cover: null,
         description: category.description,
         status: category.status,
@@ -66,7 +64,6 @@ const EditCategoryForm = () => {
 
     const formDataForSubmission = new FormData();
     formDataForSubmission.append('name', formData.name);
-    formDataForSubmission.append('slug', formData.slug);
     formDataForSubmission.append('description', formData.description);
     formDataForSubmission.append('status', capitalizeStatus(formData.status));
 
@@ -82,9 +79,7 @@ const EditCategoryForm = () => {
       });
   };
 
-  if (status === 'loading' || !category) {
-    return <Loader />;
-  }
+
 
   return (
     <main className='my-2'>
@@ -111,13 +106,6 @@ const EditCategoryForm = () => {
               onChange={handleChange} />
           </div>
 
-          <div className="mb-3">
-            <Form.Control 
-              type="hidden"  
-              name="slug" 
-              value={formData.slug} 
-              onChange={handleChange} />
-          </div>
 
           <div className="mb-3">
             <Form.Label htmlFor="cover">Cover:</Form.Label>

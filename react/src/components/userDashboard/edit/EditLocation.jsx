@@ -214,9 +214,6 @@ const EditLocation = () => {
   };
 
 
-  if (status === 'loading') {
-    return <Loader />;
-  }
 
 
 

@@ -434,7 +434,7 @@ const AddLocation = () => {
             timeIntervals={15}
             timeCaption="Time"
             dateFormat="h:mm aa"
-            className="form-control"
+            className="form-control mx-1"
           />
         </div>
 
@@ -449,7 +449,7 @@ const AddLocation = () => {
             timeIntervals={15}
             timeCaption="Time"
             dateFormat="h:mm aa"
-            className="form-control"
+            className="form-control mx-1"
           />
         </div>
 

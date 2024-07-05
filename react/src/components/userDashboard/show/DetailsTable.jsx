@@ -57,10 +57,11 @@ const DetailsTable = () => {
         </div>
 
         <div className="logo-image position-absolute top-0 start-0">
-          {restaurant.logo && (
-            <img src={restaurant.logo} alt="Logo" className="img-fluid" />
+         {restaurant.logo && (
+          <img src={restaurant.logo} alt="Logo" className="img-fluid " />
           )}
         </div>
+
 
       </div>
 
