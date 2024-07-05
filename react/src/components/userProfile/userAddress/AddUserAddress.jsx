@@ -96,7 +96,7 @@ const AddUserAddress = () => {
 
      <section className='formUserDashboard'>
 
-       <h2 className='text-light text-center my-4'>Add User Address</h2>
+       <h2 className='text-center my-4'>Add User Address</h2>
 
        <form onSubmit={handleSubmit}>
 
@@ -231,7 +231,7 @@ const AddUserAddress = () => {
         </section>
 
        
-        <button type="submit" className="btn btn-primary col-12">Add Address</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Add Address</button>
 
       </form>
 

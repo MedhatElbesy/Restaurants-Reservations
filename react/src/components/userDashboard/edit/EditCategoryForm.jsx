@@ -87,9 +87,9 @@ const EditCategoryForm = () => {
   }
 
   return (
-    <main>
+    <main className='my-2'>
 
-      <section className='formUserDashboard'>
+      <section className='formUserDashboard col-6 offset-3'>
 
         <h2 className='text-center my-4'>Edit Category</h2>
 
@@ -128,7 +128,7 @@ const EditCategoryForm = () => {
               name="cover" 
               onChange={handleFileChange} />
             {category.cover && 
-            <p className="text-muted">Current Cover: {category.cover}</p>}
+            <p className="text-light">Current Cover: {category.cover}</p>}
           </div>
 
           <div className="mb-3">

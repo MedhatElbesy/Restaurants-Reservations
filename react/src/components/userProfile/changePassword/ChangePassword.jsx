@@ -24,11 +24,19 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.new_password.length < 8) {
+      setErrorMessage('New password must be at least 8 characters long.');
+      return;
+    }
+    if (formData.new_password !== formData.new_password_confirmation) {
+      setErrorMessage('New password and confirmation do not match.');
+      return;
+    }
+
     try {
-      await dispatch(changePasswordAsync(formData))
-      .then((result) => {
+      await dispatch(changePasswordAsync(formData)).then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
+          navigate(-1);
         }
       });
       setErrorMessage('');
@@ -63,7 +71,7 @@ const ChangePassword = () => {
 
             <div className="card-body table-card">
 
-              <h2 className="card-title text-center mb-4 text-light">Change Password</h2>
+              <h2 className="card-title text-center mb-4">Change Password</h2>
 
               {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
@@ -76,7 +84,6 @@ const ChangePassword = () => {
                   </label>
 
                   <div className="input-group">
-
                     <input
                       type={showCurrentPassword ? 'text' : 'password'}
                       className="form-control"
@@ -86,7 +93,6 @@ const ChangePassword = () => {
                       onChange={handleChange}
                       required
                     />
-
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
@@ -94,7 +100,6 @@ const ChangePassword = () => {
                     >
                       <FontAwesomeIcon icon={showCurrentPassword ? faEyeSlash : faEye} />
                     </button>
-
                   </div>
 
                 </section>
@@ -106,7 +111,6 @@ const ChangePassword = () => {
                   </label>
 
                   <div className="input-group">
-
                     <input
                       type={showNewPassword ? 'text' : 'password'}
                       className="form-control"
@@ -116,7 +120,6 @@ const ChangePassword = () => {
                       onChange={handleChange}
                       required
                     />
-
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
@@ -124,7 +127,6 @@ const ChangePassword = () => {
                     >
                       <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} />
                     </button>
-
                   </div>
 
                 </section>
@@ -136,7 +138,6 @@ const ChangePassword = () => {
                   </label>
 
                   <div className="input-group">
-
                     <input
                       type={showNewPasswordConfirmation ? 'text' : 'password'}
                       className="form-control"
@@ -146,7 +147,6 @@ const ChangePassword = () => {
                       onChange={handleChange}
                       required
                     />
-
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
@@ -154,25 +154,20 @@ const ChangePassword = () => {
                     >
                       <FontAwesomeIcon icon={showNewPasswordConfirmation ? faEyeSlash : faEye} />
                     </button>
-
                   </div>
 
                 </section>
 
-                <button type="submit" className="btn btn-primary col-12 my-2">
+                <button type="submit" className="btn btn-warning col-12 my-4">
                   Change Password
                 </button>
 
               </form>
-
+              
             </div>
-
           </div>
-
         </div>
-        
       </section>
-
     </main>
   );
 };

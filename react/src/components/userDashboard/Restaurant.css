@@ -115,26 +115,48 @@ font-weight: 500;
 
 
 .formUserDashboard{
-  margin-top: 3%;
-  background:#ffd28d; 
-
- padding: 20px;
- border: 1px saddlebrown solid;
- border-radius: 20px;
+  background: #232526; 
+  background: -webkit-linear-gradient(to right, #414345, #232526); 
+  background: linear-gradient(to right, #414345, #232526); 
+  box-shadow: 0 0 10px  #ffd28d;
+  color: #efcd7dc0; 
+  border: 1px solid #efcd7dc0; 
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
 }
 
 
 
 .formUserDashboard label{
-  color: rgb(28, 25, 25);
+  color: #efcd7dc0; 
+  font-size: larger;
 }
 
 .table-card{
- background-color:#ffd28d;
-  border: 1px saddlebrown solid;
-  border-radius: 20px;
+  background: #232526; 
+  background: -webkit-linear-gradient(to right, #414345, #232526); 
+  background: linear-gradient(to right, #414345, #232526); 
+  box-shadow: 0 0 10px  #ffd28d;
+  color: #efcd7dc0; 
+  border: 1px solid #efcd7dc0; 
+  border-radius: 0.5rem;
 }
 
+.table-card label{
+  color: #efcd7dc0; 
+  font-size: larger;
+}
+
+.table-card h2{
+  color: #efcd7dc0; 
+  font-size: larger;
+}
+
+.table-card h1{
+  color: #efcd7dc0; 
+  
+}
 
 .my-card{
   min-height: 20vh;

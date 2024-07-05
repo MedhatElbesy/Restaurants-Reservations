@@ -47,7 +47,7 @@ const EditTableImage = () => {
   }, [imageId]);
 
   return (
-    <main className="container mt-5">
+    <main className="container col-6  my-5">
 
       <section className='formUserDashboard'>
 
@@ -70,7 +70,7 @@ const EditTableImage = () => {
             </section>
           </div>
 
-          <button type="submit" className="btn btn-primary col-12">Update Table Image</button>
+          <button type="submit" className="btn btn-warning my-4 col-12">Update Table Image</button>
 
           {status === 'failed' && <p className="mt-3 text-danger">Error: "An error occurred. Please try again later."</p>}
 
