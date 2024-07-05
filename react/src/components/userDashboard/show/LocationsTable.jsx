@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -40,16 +40,15 @@ const LocationsTable = () => {
     });
   };
 
-  
-
   if (!restaurant || !restaurant.locations) {
     return <Loader/>; 
   }
 
   return (
-    <section className="location-container my-5 container">
+    <main className="location-container my-5 container">
 
       <section className="row">
+
         <h2 className="text-center col-12">
           Locations
           <span>
@@ -58,92 +57,118 @@ const LocationsTable = () => {
             </Link>
           </span>
         </h2>
+
       </section>
 
       <section className="row">
 
         {restaurant.locations.map((location) => (
-          <div key={location.id} className="col-md-5 mx-5 mb-4 my-5">
 
-            <div className="card">
-              <header className="card-header my-card-header">
-                <h5 className="card-title">{location.address}</h5>
-              </header>
+          <div key={location.id} className="col-md-5 col-10 mx-5 my-5 location-container">
 
-              <div className="card-body my-card-body">
-                
-                <p><strong>Country:</strong> 
-                {location.country ? location.country.name : 'N/A'}
-                </p>
+            <header className="location-header">
+              <h5 className="location-title">{location.address}</h5>
+            </header>
 
-                <p><strong>Governorate:</strong> 
-                {location.governorate ? location.governorate.name : 'N/A'}
-                </p>
+            <div className="location-body">
 
-                <p><strong>City:</strong> 
-                {location.city ? location.city.name : 'N/A'}
-                </p>
+              <section className="detail-row">
 
-                <p><strong>State:</strong> 
-                {location.state ? location.state.name : 'N/A'}
-                </p>
+                <div className="detail-item  text-light col-6">
+                  <strong className='table-font' >Country:</strong> 
+                  {location.country ? location.country.name : 'N/A'}
+                </div>
 
-                <p><strong>Zip:</strong> 
-                {location.zip}
-                </p>
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Governorate:</strong> 
+                  {location.governorate ? location.governorate.name : 'N/A'}
+                </div>
 
-                <p><strong>Latitude:</strong> 
-                {location.latitude}
-                </p>
+              </section>
 
-                <p><strong>Longitude:</strong> 
-                {location.longitude}
-                </p>
+              <section className="detail-row">
 
-                <p><strong>Phone Number:</strong> 
-                {location.phone_number}
-                </p>
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>City:</strong> 
+                  {location.city ? location.city.name : 'N/A'}
+                </div>
 
-                <p><strong>Mobile Number:</strong> 
-                {location.mobile_number}
-                </p>
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>State:</strong> 
+                  {location.state ? location.state.name : 'N/A'}
+                </div>
 
-                <p><strong>Opening Time:</strong> 
-                {location.opening_time}
-                </p>
+              </section>
 
-                <p><strong>Closing Time:</strong> 
-                {location.closed_time}
-                </p>
+              <section className="detail-row">
 
-                <p><strong>Closed Days:</strong> 
-                {location.closed_days}
-                </p>
+              <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Number of Tables:</strong> 
+                  {location.number_of_tables}
+                </div>
 
-                <p><strong>Number of Tables:</strong> 
-                {location.number_of_tables}
-                </p>
+                <div className="detail-item text-light col-6">
+                  <strong   className='table-font'>Status:</strong> 
+                  {location.status}
+                </div>
 
-                <p><strong>Status:</strong> 
-                {location.status}
-                </p>
+              </section>
 
-                <section className="text-end">
-                  <Link to={`/edit-location/${location.id}`} className="text-primary me-3">
-                    <FontAwesomeIcon icon={faEdit} />
-                  </Link>
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleDeleteLocation(location.id)}
-                    className="text-danger"
-                  />
-                </section>
-              </div>
+              <section className="detail-row">
+
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Phone Number:</strong> 
+                  {location.phone_number}
+                </div>
+
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Mobile Number:</strong> 
+                  {location.mobile_number}
+                </div>
+
+              </section>
+
+              <section className="detail-row">
+
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Opening Time:</strong> 
+                  {location.opening_time}
+                </div>
+
+                <div className="detail-item text-light col-6">
+                  <strong className='table-font'>Closing Time:</strong> 
+                  {location.closed_time}
+                </div>
+
+              </section>
+
+              <section className="detail-row">
+
+                <div className="detail-item col-6 text-light">
+                  <strong className='table-font'>Closed Days:</strong> 
+                  {location.closed_days}
+                </div>
+
+              </section>
+
             </div>
+
+            <section className="location-actions">
+              <Link to={`/edit-location/${location.id}`} >
+                <FontAwesomeIcon icon={faEdit}  className='text-primary'/>
+              </Link>
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => handleDeleteLocation(location.id)}
+                className="text-danger"
+              />
+            </section>
+
           </div>
         ))}
       </section>
-    </section>
+
+    </main>
   );
 };
 

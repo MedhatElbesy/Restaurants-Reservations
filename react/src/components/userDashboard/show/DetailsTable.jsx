@@ -9,137 +9,61 @@ const DetailsTable = () => {
   const { restaurant } = useRestaurantContext();
 
   if (!restaurant) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (
-
     <main className="details-section my-5 col-10 offset-1">
 
-      <div className="card-style">
+       <h2 className="my-4 text-center" style={{ fontSize: '2rem' }}>
+            {restaurant.name}
+            <Link 
+             to={`/edit-restaurant/${restaurant.id}`} 
+             className="float-end text-white"
+            >
 
-        <h2 className="my-4 text-center">
-          Details
-          <Link to={`/edit-restaurant/${restaurant.id}`} className="float-end text-white">
-            <FontAwesomeIcon icon={faEdit} className="me-2 text-warning" />
-          </Link>
-        </h2>
+              <FontAwesomeIcon icon={faEdit} className="me-2 text-warning" />
+            
+            </Link>
+       </h2>
 
-        <section className="row">
+      <div
+        className="cover-image position-relative"
+        style={{
+          backgroundImage: `url('/images/barista-making-coffee-F2GU6L8.jpg')`,
+          backgroundSize: 'cover',
+          height: '80vh',
+        }}
+      >
+        <div className="overlay-content position-absolute top-0 start-0 end-0 bottom-0">
+          
 
+          <section className="details-section text-center text-white">
 
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Logo</header>
-
-              <div className="card-body">
-                {restaurant.logo ? (
-                   <img src={restaurant.logo} alt="Logo" className="img-fluid" />
-                ) : (
-                  <p className="card-text">N/A</p>
-                )}
-              </div>
-
+              <h3>{restaurant.title}</h3>
+              <p>{restaurant.summary}</p>
+              <p>{restaurant.description}</p>
+            
+            <div
+              className=" details-color  mb-3"
+              style={{ position: 'absolute', bottom: '20px', left: '20px' }}
+            >
+              <p>{restaurant.hot_line}</p>
             </div>
 
+            
           </section>
 
-          <section className="col-md-4">
+        </div>
 
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Cover</header>
-
-              <div className="card-body">
-                {restaurant.cover ? (
-                  <img src={restaurant.cover} alt="Cover" className="img-fluid" />
-                ) : (
-                  <p className="card-text">N/A</p>
-                )}
-              </div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Name</header>
-
-              <div className="card-body">{restaurant.name}</div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Title</header>
-
-              <div className="card-body">{restaurant.title}</div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Summary</header>
-
-              <div className="card-body">{restaurant.summary}</div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Hot Line</header>
-
-              <div className="card-body">{restaurant.hot_line}</div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Description</header>
-
-              <div className="card-body">{restaurant.description}</div>
-
-            </div>
-
-          </section>
-
-          <section className="col-md-4">
-
-            <div className="card mb-3 my-card">
-
-              <header className="card-header">Status</header>
-              
-              <div className="card-body">{restaurant.status}</div>
-
-            </div>
-
-          </section>
-
-        </section>
+        <div className="logo-image position-absolute top-0 start-0">
+          {restaurant.logo && (
+            <img src={restaurant.logo} alt="Logo" className="img-fluid" />
+          )}
+        </div>
 
       </div>
-      
+
     </main>
   );
 };

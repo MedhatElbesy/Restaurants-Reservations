@@ -47,6 +47,10 @@ const EditCategoryForm = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Please choose an image file smaller than 2MB.');
+      return;
+    }
     setFormData(prevFormData => ({
       ...prevFormData,
       cover: file,

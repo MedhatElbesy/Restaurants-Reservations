@@ -42,6 +42,15 @@ const AddCategoryForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
+    if (file.size > 2 * 1024 * 1024) { 
+      setErrorMessage('Please upload images with size up to 2 MB.');
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        cover: null, 
+      }));
+      return;
+    }
+
     setFormData(prevFormData => ({
       ...prevFormData,
       cover: file,

@@ -72,25 +72,21 @@ const SpecificCategories = () => {
           {filteredCategories.map((category) => (
             <div key={category.id} className="col">
 
-              <Card className="specific-card h-100">
+              <div className="card-color h-100">
 
-                {category.cover && (
-                  <Card.Img variant="top" src={category.cover} alt={category.name} />
-                )}
 
                 <Card.Body>
 
-                  <Card.Title>{category.name}</Card.Title>
+                  <Card.Title className='text-center table-font my-3'>{category.name}</Card.Title>
 
-                  <Card.Text>
-                    <strong>Description:</strong> {category.description}<br />
-                    <strong>Status:</strong> {category.status}
+                  <Card.Text className='text-center custom-font-style'>
+                    {category.description}<br />
                   </Card.Text>
 
-                  <div className="d-flex justify-content-end mt-auto">
+                  <div className="text-center">
 
                     <Link to={`/edit-category/${category.id}`} className="text-success me-3">
-                      <FontAwesomeIcon icon={faEdit} className="text-success" />
+                      <FontAwesomeIcon icon={faEdit} className="text-primary" />
                     </Link>
 
                     <FontAwesomeIcon
@@ -103,7 +99,7 @@ const SpecificCategories = () => {
 
                 </Card.Body>
 
-              </Card>
+              </div>
 
             </div>
           ))}

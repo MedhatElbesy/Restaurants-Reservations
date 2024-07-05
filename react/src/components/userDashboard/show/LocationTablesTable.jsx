@@ -100,7 +100,7 @@ const LocationTablesTable = () => {
   }
 
   return (
-    <section className="location-container container my-5">
+    <main className="location-container container my-5">
 
       <h2 className="text-center">Locations Tables</h2>
 
@@ -109,7 +109,7 @@ const LocationTablesTable = () => {
         {restaurant.locations.map((location) => (
           <div className="col mb-3" key={location.id}>
 
-            <div className="card">
+            <section className="card-color">
               <div className="card-header d-flex justify-content-between align-items-center">
                 <h5 className="card-title mb-0">{location.address}</h5>
                 <span>
@@ -124,7 +124,7 @@ const LocationTablesTable = () => {
 
                 </span>
               </div>
-            </div>
+            </section>
 
           </div>
         ))}
@@ -137,7 +137,7 @@ const LocationTablesTable = () => {
         </Modal.Header>
 
 
-        <Modal.Body className="modal-body-scroll text-light location-container">
+        <Modal.Body className="modal-body-scroll location-container">
 
           {selectedLocation && selectedLocation.tables && selectedLocation.tables.length > 0 ? (
             <section className="row row-cols-1 row-cols-md-3 g-4">
@@ -145,37 +145,35 @@ const LocationTablesTable = () => {
               {selectedLocation.tables.map((table) => (
                 <div key={table.id} className="col mb-3">
 
-                  <div className="card tables-card">
+                  <div className=" tables-card">
 
-                    <div className="card-body border border-dark">
-
-                      <p className="pb-3">
-                        <strong>Number of Chairs:</strong>
-                         {table.number_of_chairs}
+                      <p className="pb-3 text-light">
+                        <strong className='table-font'>Number of Chairs:</strong>
+                       <span></span>  {table.number_of_chairs}
                       </p>
 
-                      <p className="pb-3">
-                        <strong>Max Persons:</strong> 
+                      <p className="pb-3 text-light">
+                        <strong  className='table-font'>Max Persons:</strong> 
                         {table.max_number_of_persons}
                       </p>
 
-                      <p className="pb-3">
-                        <strong>Description:</strong> 
+                      <p className="pb-3 text-light">
+                        <strong  className='table-font'>Description:</strong> 
                         {table.description}
                       </p>
 
-                      <p className="pb-3">
-                        <strong>Price:</strong> 
+                      <p className="pb-3 text-light">
+                        <strong  className='table-font'>Price:</strong> 
                         {table.price}
                       </p>
 
-                      <p className="pb-3">
-                        <strong>Sale Price:</strong> 
+                      <p className="pb-3 text-light">
+                        <strong  className='table-font'>Sale Price:</strong> 
                         {table.sale_price}
                       </p>
 
-                      <p className="pb-3">
-                        <strong>Availability:</strong>
+                      <p className="pb-3 text-light">
+                        <strong  className='table-font'>Availability:</strong>
                         <Link to={`/availability/${table.id}`}>
                           <FontAwesomeIcon icon={faEye} className="text-warning mx-3" />
                         </Link>
@@ -183,8 +181,8 @@ const LocationTablesTable = () => {
 
                       <section>
 
-                        <Link to={`/edit-table/${table.id}`} className="text-success me-3">
-                          <FontAwesomeIcon icon={faEdit} className="text-success" />
+                        <Link to={`/edit-table/${table.id}`} className=" me-3">
+                          <FontAwesomeIcon icon={faEdit} className="text-primary" />
                         </Link>
 
                         <FontAwesomeIcon
@@ -192,15 +190,14 @@ const LocationTablesTable = () => {
                           className="text-danger"
                           onClick={() => handleDelete(table.id)}
                         />
-
+                        
                       </section>
 
-                      <div className="d-flex justify-content-between align-items-center mt-3">
-
-                        <>
+                      <div className="d-flex justify-content-center align-items-center col-12">
                         
                           {table.images.length > 0 ? (
-                            <section className="location-container my-5">
+
+                            <section className="location-container my-3">
 
                               <Link to={`/add-table-image/${table.id}`}>
                                 <FontAwesomeIcon icon={faPlus} className="text-warning" />
@@ -209,7 +206,9 @@ const LocationTablesTable = () => {
                               <Slider {...carouselSettings} className="custom-slider mt-3">
 
                                 {table.images.map((image, index) => (
+
                                   <div key={index} className="carousel-item custom-slide">
+
                                     <Card className="card-img-container">
 
                                       <Card.Img
@@ -220,22 +219,18 @@ const LocationTablesTable = () => {
 
                                       <Card.Body>
                                        
-                                        <div className="text-center">
+                                        <div className="mx-5">
                                           <span>
-
-                                            <Link to={`/edit-table-image/${image.id}`} className="text-success me-3">
-                                              <FontAwesomeIcon icon={faEdit} className="text-success" />
+                                            <Link to={`/edit-table-image/${image.id}`} className='mx-2'>
+                                              <FontAwesomeIcon icon={faEdit} className="text-primary mx-5" />
                                             </Link>
-
                                             <FontAwesomeIcon
                                               icon={faTrash}
-                                              className="text-danger mx-2"
+                                              className="text-danger"
                                               onClick={() => handleDeleteImage(image.id)}
                                             />
-
                                           </span>
                                         </div>
-
                                       </Card.Body>
 
                                     </Card>
@@ -253,11 +248,9 @@ const LocationTablesTable = () => {
                               </Link>
                             </div>
                           )}
-                        </>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
               ))}
             </section>
           ) : (
@@ -268,7 +261,7 @@ const LocationTablesTable = () => {
 
       {deleteStatus === 'loading' && <p>Deleting...</p>}
       {deleteError && <p>Error when deleting table</p>}
-    </section>
+    </main>
   );
 };
 
