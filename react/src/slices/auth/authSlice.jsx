@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { encryptData, getEncryptedItem } from "../../helpers/cryptoUtils";
+import { encryptData, decryptData } from "../../helpers/cryptoUtils";
 
 import {
   loginUser,
@@ -80,13 +80,13 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    userId: getEncryptedItem("userId"),
-    token: getEncryptedItem("token"),
+    userId: decryptData("userId"),
+    token: decryptData("token"),
     loggedIn: !!sessionStorage.getItem("token"),
     status: "idle",
     loading: false,
     error: null,
-    role: getEncryptedItem("role"),
+    role: decryptData("role"),
   },
   reducers: {
     logout: (state) => {
@@ -111,7 +111,6 @@ const authSlice = createSlice({
         // Encrypt sensitive data
         sessionStorage.setItem("token", encryptData(data.token));
         sessionStorage.setItem("userId", encryptData(data.user.id));
-        console.log(data.user.roles_name);
         sessionStorage.setItem("role", encryptData(data.user.roles_name));
 
         state.loggedIn = true;

@@ -6,20 +6,12 @@ export const encryptData = (data) => {
   return CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
 };
 
-export const decryptData = (encryptedItem) => {
-  const bytes = CryptoJS.AES.decrypt(encryptedItem, secretKey);
-  const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-  return JSON.parse(decryptedData);
-};
-
-export const getEncryptedItem = (key) => {
-  const encryptedItem = sessionStorage.getItem(key);
-  if (encryptedItem) {
-    try {
-      return decryptData(encryptedItem);
-    } catch (error) {
-      console.error("Error decrypting data:", error);
-    }
+export const decryptData = (key) => {
+  const ciphertext = sessionStorage.getItem(key);
+  if (ciphertext) {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, secretKey);
+    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+    return JSON.parse(decryptedData);
   }
   return null;
 };
