@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCategoryByIdAsync, fetchAllCategoryAsync, updateCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { Form, Button, Alert } from 'react-bootstrap';
+import Loader from '../../../layouts/loader/loader';
 
 const EditRestaurantCategory = () => {
   const dispatch = useDispatch();
@@ -60,6 +61,11 @@ const EditRestaurantCategory = () => {
       <p> Failed to update category. Please try again later.</p>
       </Alert>
     );
+  }
+
+
+  if (status === 'loading') {
+    return <Loader />;
   }
 
   return (

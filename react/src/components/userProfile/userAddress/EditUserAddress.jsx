@@ -23,6 +23,7 @@ import {
 } from '../../../slices/address/stateSlice';
 import { MapContainer, TileLayer, Marker, ZoomControl, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import Loader from '../../../layouts/loader/loader';
 
 
 const LocationMarker = ({ setFormData }) => {
@@ -53,6 +54,7 @@ const EditUserAddress = () => {
   const states = useSelector(selectStates);
   const navigate = useNavigate();
   const userAddress = useSelector(state => state.userAddress.userAddress);
+  const loading = useSelector(state => state.userAddress.loading);
 
   const [formData, setFormData] = useState({
     address: '',
@@ -129,6 +131,11 @@ const EditUserAddress = () => {
       console.error('Error updating user address:', error);
     }
   };
+
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className="container">

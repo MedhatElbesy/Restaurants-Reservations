@@ -94,7 +94,9 @@ const EditTableForm = () => {
     });
   };
 
-  
+  if (fetchTableStatus === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <main className="container">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchTableImageByIdAsync, updateTableImageAsync } from '../../../slices/restaurant/tableImage/tableImage';
 import Swal from 'sweetalert2';
+import Loader from '../../../layouts/loader/loader';
 
 const EditTableImage = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,11 @@ const EditTableImage = () => {
       dispatch(fetchTableImageByIdAsync(imageId));
     }
   }, [imageId]);
+
+  
+  if (status === 'loading') {
+    return <Loader />;
+  }
 
   return (
     <main className="container col-6  my-5">
