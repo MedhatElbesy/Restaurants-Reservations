@@ -131,3 +131,27 @@ export const formatPrice = (price, countryCode) => {
     currency: currency,
   }).format(price);
 };
+
+
+export function formatDate(dateTimeString) {
+  const date = new Date(dateTimeString);
+
+  // Format the date part: "Sep 17, 2023"
+  const formattedDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  // Format the time part: "10:59 am"
+  const formattedTime = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  // Combine date and time formats: "Sep 17, 2023 at 10:59 am"
+  const formattedDateTime = `${formattedDate} at ${formattedTime}`;
+
+  return formattedDateTime;
+}

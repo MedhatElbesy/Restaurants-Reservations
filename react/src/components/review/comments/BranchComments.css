@@ -1,0 +1,77 @@
+.branch-comments {
+  h4 {
+    font-family: var(--secFont);
+    color: var(--secColor);
+  }
+  .add-review {
+    border-bottom: 1px solid #ffffff1f;
+    .add-comment {
+      textarea {
+        outline: none;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        color: #a18c56;
+        background-color: transparent;
+        border: 1px solid #4f4836e3;
+        transition: var(--mainTransition);
+        &:focus {
+          border: 1px solid #8a7b55d7;
+        }
+      }
+      .add-btn {
+        outline: none;
+        border: 0;
+        padding: 0.5rem;
+        background-color: #8a7b55a2;
+        color: #eeeeeed5;
+        font-size: 0.9rem;
+        transition: var(--mainTransition);
+        &:hover {
+          background-color: #a18c564f;
+        }
+        &:disabled {
+          background-color: #a18c562f;
+          color: #eeeeee52;
+        }
+      }
+    }
+  }
+  .all-users-comments {
+    .filter {
+      padding-left: 0 !important;
+      .reviews-count {
+        color: #eeeeeea1;
+      }
+      select {
+        border-color: #a18c565b;
+        background-color: transparent;
+        color: #eeeeeea1;
+        padding: .4rem .8rem;
+        font-size: .8rem;
+        outline: none;
+        option {
+          background-color: var(--backgroundColor);
+          color: #eeeeeec0;
+          &:checked {
+            background-color:#2e2407a9 !important;
+          }
+        }
+      }
+    }
+    .users-comments {
+      .user-comment {
+        border-bottom: 1px solid #ffffff1f;
+      }
+    }
+  }
+}
+
+
+.star-rating-component .empty-icons .star-svg{
+  color: #CCCCCC !important;
+}
+
+.star-rating-component .filled-icons .star-svg {
+  color: var(--secColor)!important;
+}

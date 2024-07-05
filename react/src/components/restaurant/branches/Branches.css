@@ -52,13 +52,17 @@
   border-radius: var(--bs-border-radius);
 }
 
-.branches svg {
-  color: var(--secColor);
-  width: 1.2rem;
-  height: 1.2rem;
-  vertical-align: middle;
-  margin-right: 0.3rem;
-}
+.branches {
+  .address {
+    svg {
+      color: var(--secColor);
+      width: 1.2rem;
+      height: 1.2rem;
+      vertical-align: middle;
+      margin-right: 0.3rem;
+    }
+  }
+} 
 
 .address .phone a {
   color: var(--mainColor) !important;

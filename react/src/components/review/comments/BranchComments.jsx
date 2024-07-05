@@ -1,9 +1,11 @@
-import AddComment from "./AddComment";
-
+import AddReview from "./AddReview";
+import Comments from "./Comments";
+import "./BranchComments.css";
 const BranchComments = () => {
   return (
-    <section>
-      <AddComment />
+    <section className="branch-comments m-5">
+      <AddReview />
+      <Comments />
     </section>
   );
 };

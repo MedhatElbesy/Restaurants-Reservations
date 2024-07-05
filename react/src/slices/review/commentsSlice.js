@@ -1,35 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../axios";
+import {
+  getAllComments,
+  addUserComment,
+  updateUserComment,
+  deleteUserComment,
+} from "../../api/restaurant/review/comments";
 
 export const getBranchComments = createAsyncThunk(
   "comments/getBranchComments",
   async (branchId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/comments/${branchId}`);
-      return response.data;
+      const data = await getAllComments(branchId);
+      return data;
     } catch (error) {
-      return rejectWithValue({
-        status: error.response.status,
-        data: error.response.data,
-        message: error.message,
-      });
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
 
 export const addComment = createAsyncThunk(
   "comments/addComment",
-  async ({comment, branchId}, { rejectWithValue }) => {
+  async ({ comment, branchId }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`/comments/${branchId}`, comment);
+      const response = await addUserComment(comment, branchId);
       return response.data;
     } catch (error) {
-      console.log(error)
-      return rejectWithValue({
-        status: error.response.status,
-        data: error.response.data,
-        message: error.message,
-      });
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -38,16 +34,12 @@ export const updateComment = createAsyncThunk(
   "comments/updateComment",
   async ({ comment, commentId }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        `/comments/${commentId}/?method='PUT'`,
-        comment
-      );
-      return response.data;
+      const data = await updateUserComment(comment, commentId);
+      return data;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
-        data: error.response.data,
-        message: error.message,
+        message: error.response.data.message,
       });
     }
   }
@@ -57,13 +49,12 @@ export const deleteComment = createAsyncThunk(
   "comments/deleteComment",
   async (commentId, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`/comments/${commentId}`);
-      return response.data;
+      const data = await deleteUserComment(commentId);
+      return data;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
-        data: error.response.data,
-        message: error.message,
+        message: error.response.data.message,
       });
     }
   }
@@ -83,28 +74,32 @@ const commentsSlice = createSlice({
       .addCase(getBranchComments.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "succeeded";
-        state.branchComments = action.payload.data;
+        state.branchComments = action.payload.data.comments;
+        console.log(state.branchComments);
       })
-      .addCase(addComment.fulfilled, (state, action) => {
+      .addCase(addComment.fulfilled, (state,action) => {
         state.status = "succeeded";
+        state.loading = false;
+        console.log(state.branchComments);
+        console.log(action.payload.data);
         state.branchComments.push(action.payload.data);
       })
       .addCase(updateComment.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.branchComments = state.branchComments.filter(
-          (comment) => comment.id !== action.payload.data.id
-        );
-        state.branchComments.push(action.payload.data);
-      })
-      .addCase(deleteComment.fulfilled, (state, action) => {
-        state.branchComments = state.branchComments.filter(
-          (comment) => comment.id !== action.payload.data.id
-        );
-        state.status = "succeeded";
-        state.restaurant = null;
-      })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
+        state.loading = false;
+        state.branchComments = state.branchComments.map((comment) =>
+          comment.id === action.payload.data.id ? action.payload.data : comment
+      );
+    })
+    .addCase(deleteComment.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.loading = false;
+      state.branchComments = state.branchComments.filter(
+        (comment) => comment.id !== action.payload.data.id
+      );
+    })
+    .addMatcher(
+      (action) => action.type.endsWith("/pending"),
         (state) => {
           state.loading = true;
           state.status = "loading";

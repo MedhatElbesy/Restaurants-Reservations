@@ -29,6 +29,8 @@ import userAddressReducer from "../slices/user/userAddressSlice";
 import checkoutReducer from "../slices/checkout/checkoutSlice";
 import gatewaysReducer from "../slices/checkout/gatewaysSlice";
 import adminReducer from "../slices/adminDashboard/adminSlice";
+import commentsReducer from "../slices/review/commentsSlice"
+import ratingReducer from "../slices/review/ratingSlice"
 
 const store = configureStore({
   reducer: {
@@ -61,7 +63,9 @@ const store = configureStore({
     tableAvailability: availabilityReducer,
     checkout: checkoutReducer,
     gateways: gatewaysReducer,
-    adminDashboard:adminReducer,
+    adminDashboard: adminReducer,
+    comments: commentsReducer,
+    rating: ratingReducer,
   },
 });
 
