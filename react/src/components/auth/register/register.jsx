@@ -16,13 +16,29 @@ import {
   InputAdornment,
   IconButton,
   FormGroup,
+  
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LockPersonIcon from '@mui/icons-material/LockPerson';
+import LockPersonIcon from "@mui/icons-material/LockPerson";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload"
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
+import { styled } from "@mui/material/styles";
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
 
 const defaultTheme = createTheme();
 
@@ -156,10 +172,10 @@ const Register = () => {
                 width: "100%",
               }}
             >
-                <LockPersonIcon className="fs-1"/>
+              <LockPersonIcon className="fs-1" />
               {/* <Avatar sx={{ m:0, bgcolor: "#7B3C1E", color: "white" }}>
               </Avatar> */}
-              <Typography component="h1" variant="h5">
+              <Typography component="h1" variant="h4">
                 Register
               </Typography>
               <Box
@@ -355,7 +371,7 @@ const Register = () => {
                     </TextField>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    {/* <TextField
                       margin="normal"
                       required
                       fullWidth
@@ -368,7 +384,18 @@ const Register = () => {
                         shrink: true,
                       }}
                       onChange={handleChange}
-                    />
+                    /> */}
+
+                    <Button
+                      component="label"
+                      role={undefined}
+                      variant="contained"
+                      tabIndex={-1}
+                      startIcon={<CloudUploadIcon />}
+                    >
+                      Upload file
+                      <VisuallyHiddenInput type="file" />
+                    </Button>
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
