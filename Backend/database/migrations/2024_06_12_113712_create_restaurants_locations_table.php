@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('longitude')->nullable();
             $table->time('opening_time')->nullable();
             $table->time('closed_time')->nullable();
-            $table->text('closed_days')->nullable(); 
+            $table->text('closed_days')->nullable();
             $table->integer('number_of_tables')->default(0);
             $table->string('phone_number')->nullable()->unique();
             $table->string('mobile_number')->nullable()->unique();
@@ -40,7 +40,8 @@ return new class extends Migration
             $table->foreign('governorate_id')->references('id')->on('governorates')->cascadeOnDelete()->cascadeOnDelete();
             $table->foreign('state_id')->references('id')->on('states')->cascadeOnDelete()->cascadeOnDelete();
 
-            $table->timestamps();
+            $table->times
+            tamps();
         });
     }
 

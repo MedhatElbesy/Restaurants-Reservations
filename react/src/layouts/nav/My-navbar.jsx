@@ -38,11 +38,12 @@ export default function MyNavbar() {
                 type="text" 
                 placeholder="Search" 
                 aria-label="Search" 
+                className="search"
                 aria-describedby="search-icon" 
                 onFocus={() => setSearchFocused(true)} 
                 onBlur={() => setSearchFocused(false)} 
               />
-              <Button variant={`outline-${bodyColor === "light" ? "primary" : "warning"}`}>Search</Button>
+              <Button variant={`outline-${bodyColor === "light" ? "primary" : "yello-color"}`}>Search</Button>
             </InputGroup>
           </Form>
         </div>
@@ -90,7 +91,7 @@ export default function MyNavbar() {
             {bodyColor === "light" ? (
               <FontAwesomeIcon icon={faMoon} className="p-0 fs-5 font-weight-light"/>
             ) : (
-              <FontAwesomeIcon icon={faSun} className="p-0 fs-5 font-weight-light text-warning"/>
+              <FontAwesomeIcon icon={faSun} className="p-0 sun-large-screen fs-5 font-weight-light text-warning"/>
             )}
           </Button>
         </Nav>

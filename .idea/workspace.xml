@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Restaurants-Reservations.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Restaurants-Reservations.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Middleware/AutherizeCategoryOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Middleware/AutherizeCategoryOwner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Middleware/CategoryOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Middleware/CategoryOwner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/User/StoreUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/User/StoreUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/User/UpdateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/User/UpdateUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/UserResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/UserResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110420_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_110420_create_users_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/config/paypal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/PayPalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/PayPalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_113712_create_restaurants_locations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_113712_create_restaurants_locations_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/src/components/auth/register/register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/auth/register/register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,20 +158,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/Restaurants-Reservations&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "C:/xampp/htdocs/Restaurants-Reservations",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -244,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720199692206</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix issue in user &quot;roles_name&quot;">
+      <option name="closed" value="true" />
+      <created>1720204896545</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720204896545</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +272,7 @@
     <MESSAGE value="Rename migration" />
     <MESSAGE value="remove slug from request" />
     <MESSAGE value="fix issue in report remove user id" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix issue in report remove user id" />
+    <MESSAGE value="fix issue in user &quot;roles_name&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix issue in user &quot;roles_name&quot;" />
   </component>
 </project>
