@@ -12,7 +12,7 @@ export function BranchTables({ onShowTables }) {
         />
       </div>
       <div className="col-md-7 col-lg-5 d-flex flex-column justify-content-between">
-        <h3 className="text-center fs-1 text-sec mb-3 p-3">Avialable Tables</h3>
+        <h3 className="text-center text-sec mb-3 p-3">Avialable Tables</h3>
         <p className="text-color">
           Reserve a table for your dining experience at our restaurant and enjoy
           a delightful meal in an elegant and cozy atmosphere

@@ -34,6 +34,7 @@ const Report = ({ show, handleClose, branch }) => {
         show={show}
         onHide={handleClose}
         onExited={() => setReportContent("")}
+        className="report-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>Add Report</Modal.Title>
