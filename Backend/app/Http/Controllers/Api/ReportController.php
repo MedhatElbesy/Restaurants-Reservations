@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportStatusRequest;
 use App\Models\Report;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -27,8 +29,12 @@ public function show(){
     }
     public function store(StoreReportRequest $request)
     {
+        $data = $request->validated();
+        $auth_user = Auth::guard('sanctum')->user();
+        $data['user_id'] = $auth_user->id;
+
         try {
-            $validatedData =Report::create($request->validated());
+            $validatedData =Report::create($data);
             return ApiResponse::sendResponse(201,'Report created successfully',$validatedData);
         }catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create Report', ['error' => $e->getMessage()]);
