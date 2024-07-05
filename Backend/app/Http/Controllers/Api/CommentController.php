@@ -24,20 +24,7 @@ class CommentController extends Controller
         return ApiResponse::sendResponse(200, "All Comment", $comments);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(StoreCommentRequest $request)
-    // {
-    //     try {
-    //         $user = auth()->user();
-    //         $data = array_merge($request->validated(), ['user_id' => $user->id]);
-    //         $comment = Comment::create($data);
-    //         return ApiResponse::sendResponse(201,"created successfully",$comment);
-    //     }catch (Exception $e) {
-    //         return ApiResponse::sendResponse(500, 'Failed to create comment', ['error' => $e->getMessage()]);
-    //     }
-    // }
+    
 public function store(StoreCommentRequest $request)
 {
     try {

@@ -23,15 +23,19 @@ use Illuminate\Support\Facades\Auth;
 class RestaurantlocationsController extends Controller
 {
     use UploadImageTrait;
-    /**
-     * Display a listing of the resource.
-     */
+
     public function getLocationsByRestaurant($restaurantId)
     {
         try {
             $restaurant = Restaurant::findOrFail($restaurantId);
-            $locations = $restaurant->locations;
-            return ApiResponse::sendResponse(200, ' Restaurant locations',$locations);
+            $locations = $restaurant->locations()->get();
+
+            $locations->each(function ($location) {
+                $location->average_rating = $location->averageRating();
+                $location->comments_count = $location->commentsCount();
+            });
+
+            return ApiResponse::sendResponse(200, 'Restaurant locations', $locations);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to retrieve locations', ['error' => $e->getMessage()]);
         }

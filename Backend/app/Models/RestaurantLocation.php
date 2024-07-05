@@ -79,4 +79,8 @@ class RestaurantLocation extends Model
         return $this->ratings()->avg('rate');
     }
 
+    public function commentsCount()
+    {
+        return $this->comments()->count();
+    }
 }
