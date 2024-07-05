@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         //specify category scope
         $user = Auth::guard('sanctum')->user();
-        if($user->role_name == "admin"){
+        if($user->roles_name == "admin"){
            $data['category_scope']='general';
         }else{
             $data['category_scope']='specific';
@@ -68,7 +68,7 @@ class CategoryController extends Controller
             //validate user
             $user = Auth::guard('sanctum')->user();
 
-            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+            if (!($user->roles_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
                 throw new \Exception("You can't update this category");
             }
 
@@ -98,7 +98,7 @@ class CategoryController extends Controller
 //           //validate user
 //            $user = Auth::guard('sanctum')->user();
 //
-//            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+//            if (!($user->roles_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
 //                throw new \Exception("You can't update this category");
 //            }
         $category->delete();

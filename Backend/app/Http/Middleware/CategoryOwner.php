@@ -18,7 +18,7 @@ class CategoryOwner
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::guard('sanctum')->user();
-        if($user->role_name == "user"){
+        if($user->roles_name == "user"){
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         return $next($request);

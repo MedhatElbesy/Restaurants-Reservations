@@ -21,7 +21,7 @@ class AutherizeCategoryOwner
 //        //validate user
 //        $user = User::where('id',Auth::id())->get();
 //        $category
-//        if( !($user->role_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
+//        if( !($user->roles_name == 'admin' && $category->category_scope == "general") || !($category->user_id == Auth::id())){
 //
 //        }
 
