@@ -95,12 +95,12 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-//           //validate user
-//            $user = Auth::guard('sanctum')->user();
-//
-//            if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
-//                throw new \Exception("You can't update this category");
-//            }
+          //validate user
+           $user = Auth::guard('sanctum')->user();
+
+           if (!($user->role_name == 'admin' && $category->category_scope == 'general') && $category->user_id != $user->id) {
+               throw new \Exception("You can't update this category");
+           }
         $category->delete();
 
         return response()->json(null, 204);
