@@ -24,7 +24,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::with(['locations'])->get();
+        $restaurants = Restaurant::select('name','description', 'cover','status')->withCount('locations')->get();
         if ($restaurants) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
         }
