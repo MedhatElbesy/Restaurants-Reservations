@@ -41,9 +41,10 @@ const Branches = () => {
       >
         {branches.length > 0 ? (
           branches.map((branch) => (
-            <Tab key={branch.id} eventKey={branch.id} title={branch.city.name}>
+            <Tab key={branch.id} eventKey={branch.id} title={branch.city.name}
+            >
               <h2 className="text-sec text-center sec-font mt-4">
-                {branch.city.name} Branch
+                {branch.city.name}
               </h2>
               {showTables ? (
                 <Tables tables={branch.tables} />
