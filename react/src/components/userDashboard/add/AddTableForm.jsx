@@ -29,13 +29,23 @@ const AddTableForm = () => {
 
   const handleChange = (e) => {
     if (e.target.name === 'cover') {
-      setFormData({ ...formData, cover: e.target.files[0] });
+      const file = e.target.files[0];
+      if (file && file.size > 2048 * 1024) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'The cover file must not be greater than 2048 kilobytes.',
+        });
+        return; 
+      }
+      setFormData({ ...formData, cover: file });
     } else {
       const { name, value } = e.target;
       const newValue = name === 'extra_number_of_chairs' ? parseInt(value) : value;
       setFormData({ ...formData, [name]: newValue });
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

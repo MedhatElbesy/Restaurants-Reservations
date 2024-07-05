@@ -69,18 +69,18 @@ const RestaurantCategory = () => {
             {restaurantCategory.map((item) => (
               <div key={item.id} className="col">
 
-                <Card className="h-100">
+                <div className="h-100 card-color">
 
                   <Card.Body>
 
-                    <Card.Title className="text-dark">
+                    <Card.Title className=" text-center">
                       {item.category.name}
                     </Card.Title>
 
-                    <div className="d-flex justify-content-end">
+                    <div className="text-center my-2">
 
-                      <Link to={`/edit-restaurant-category/${item.id}`} className="text-primary me-3">
-                        <FontAwesomeIcon icon={faEdit} />
+                      <Link to={`/edit-restaurant-category/${item.id}`}>
+                        <FontAwesomeIcon icon={faEdit}  className="text-primary me-3" />
                       </Link>
                       
                       <FontAwesomeIcon
@@ -93,7 +93,7 @@ const RestaurantCategory = () => {
                     </div>
 
                   </Card.Body>
-                </Card>
+                </div>
               </div>
             ))}
           </section>

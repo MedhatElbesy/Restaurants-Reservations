@@ -54,17 +54,24 @@ const EditDetails = () => {
   };
 
   const handleFileChange = (e) => {
-    const { name, files } = e.target;
+    const file = e.target.files[0];
+
+    
+    if (file.size > 2097152) {
+      alert('File size exceeds 2 MB limit. Please choose a smaller file.');
+      e.target.value = null;
+      return;
+    }
+
     setFormData({
       ...formData,
-      [name]: files[0], 
+      [e.target.name]: file,
     });
   };
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,20 +99,8 @@ const EditDetails = () => {
       });
   };
 
-
   if (status === 'loading') {
     return <Loader />;
-  }
-
-
-  if (status === 'failed') {
-    return (
-      <div className="container">
-        <div className="alert alert-danger" role="alert">
-         <p>Make Sure you filled all fields</p>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -225,7 +220,7 @@ const EditDetails = () => {
                   type="radio"
                   id="inactive"
                   name="status"
-                  value="InActive"
+                  value="Inactive"
                   checked={formData.status.toLowerCase() === 'inactive'}
                   onChange={handleChange}
                 />

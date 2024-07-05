@@ -170,12 +170,23 @@ const EditLocation = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
+    let validFiles = [];
+  
+    files.forEach((file) => {
+      if (file.size <= 2 * 1024 * 1024) { 
+        validFiles.push(file);
+      } else {
+       
+        console.log(`File ${file.name} exceeds the maximum size of 2MB.`);
+      }
+    });
+  
     setFormData({
       ...formData,
-      images: files,
+      images: validFiles,
     });
   };
-
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
