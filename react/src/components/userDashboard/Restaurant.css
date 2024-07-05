@@ -153,6 +153,11 @@ font-weight: 500;
   font-size: larger;
 }
 
+.table-card h1{
+  color: #efcd7dc0; 
+  
+}
+
 .my-card{
   min-height: 20vh;
 }

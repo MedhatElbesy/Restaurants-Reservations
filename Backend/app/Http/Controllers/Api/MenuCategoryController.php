@@ -23,7 +23,6 @@ class MenuCategoryController extends Controller
             $validated = $request->validate([
                 'restaurant_id' => 'required|exists:restaurants,id',
                 'name' => 'required|string',
-                'slug' => 'required|string|unique:menu_categories,slug',
                 'description' => 'nullable|string',
                 'status' => 'required|in:Enabled,Disabled,Deleted',
             ]);
@@ -54,7 +53,6 @@ class MenuCategoryController extends Controller
             $validated = $request->validate([
                 'restaurant_id' => 'required|exists:restaurants,id',
                 'name' => 'required|string',
-                'slug' => 'required|string|unique:menu_categories,slug,' . $menuCategory->id,
                 'description' => 'nullable|string',
                 'status' => 'required|in:Enabled,Disabled,Deleted',
             ]);

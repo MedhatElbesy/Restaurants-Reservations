@@ -23,7 +23,7 @@ class UpdateRestaurantRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'slug' => 'required|string|unique:restaurants,slug,' . $this->route('restaurant'), // unique rule with ignoring the current restaurant ID
+            //'slug' => 'required|string|unique:restaurants,slug,' . $this->route('restaurant'), // unique rule with ignoring the current restaurant ID
             'title' => 'required|string',
             'name' => 'required|string',
             'summary' => 'nullable|string',

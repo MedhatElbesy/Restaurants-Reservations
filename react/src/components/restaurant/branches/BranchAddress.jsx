@@ -13,7 +13,7 @@ export function BranchAddress() {
   const { branch } = useBranch();
   return (
     <article className="address mx-0 d-flex justify-content-center justify-content-lg-between flex-wrap py-5 border-bottom">
-      <div className="col-12 col-lg-6 order-1 order-lg-0 mt-5 mt-lg-0">
+      <div className="branch-map col-12 col-lg-6 order-1 order-lg-0 mt-5 mt-lg-0">
         <MapContainer
           latitude={branch.latitude}
           longitude={branch.longitude}
@@ -21,7 +21,7 @@ export function BranchAddress() {
         />
       </div>
       <div className="content mx-3 col-lg-5">
-        <h3 className="text-center fs-1 text-sec mb-3 p-3">Branch Address</h3>
+        <h3 className="text-center text-sec mb-3 p-3">Branch Address</h3>
         <div className="text-main">
           <div className="location ">
             <p className="fs-4 mb-0">

@@ -26,7 +26,6 @@ class StoreRestaurantRequest extends FormRequest
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|unique:restaurants',
-            'slug' => 'required|unique:restaurants',
             'title' => 'nullable',
             'summary' => 'nullable',
             'description' => 'nullable',
