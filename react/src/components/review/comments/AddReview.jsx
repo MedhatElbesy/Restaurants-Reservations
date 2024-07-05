@@ -3,14 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useBranch } from "../../restaurant/branches/BranchContext";
 import { addComment } from "../../../slices/review/commentsSlice";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 import StarRating from "../rating/Rating";
+import AddReport from "../report/Report";
+import { Alert } from "react-bootstrap";
 
 const AddComment = () => {
   const navigate = useNavigate();
-  const [comment, setComment] = useState("");
   const { branch } = useBranch();
   const dispatch = useDispatch();
   const error = useSelector((state) => state.comments.error);
+  const [comment, setComment] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,17 +29,23 @@ const AddComment = () => {
           addComment({ comment: comment.trim(), branchId: branch.id })
         ).unwrap();
         setComment("");
+        setAlertMessage("Comment posted successfully!");
       } catch (err) {
         console.log(err);
+        setAlertMessage("Failed to post comment. Please try again.");
         navigate("/server-error");
       }
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
     }
   };
 
   return (
     <article className="add-review pb-5">
       <h4 className="fs-1 mb-5">Post Your Review</h4>
-      <div className="review d-flex flex-wrap justify-content-lg-between justify-content-center ">
+
+      <div className="review d-flex flex-wrap justify-content-lg-between justify-content-center">
         <form
           onSubmit={handleSubmit}
           className="add-comment col-12 col-sm-9 col-md-7 col-lg-5"
@@ -44,7 +59,7 @@ const AddComment = () => {
           <button
             type="submit"
             className="add-btn d-block"
-            disabled={comment === ""}
+            disabled={comment.trim() === ""}
           >
             Post Comment
           </button>
@@ -57,6 +72,24 @@ const AddComment = () => {
           <StarRating branch={branch} />
         </div>
       </div>
+      <div className="report">
+        <p className="mt-3 mb-0 d-inline-block" onClick={handleOpenModal}>
+          <FontAwesomeIcon icon={faFlag} /> Report
+        </p>
+        <AddReport
+          show={showModal}
+          branch={branch}
+          handleClose={handleCloseModal}
+        />
+      </div>
+      {alertMessage && (
+        <Alert
+          variant={alertMessage.includes("successfully") ? "success" : "danger"}
+          className="position-fixed m-3"
+        >
+          {alertMessage}
+        </Alert>
+      )}
     </article>
   );
 };

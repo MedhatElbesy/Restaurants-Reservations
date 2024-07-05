@@ -62,7 +62,7 @@
       margin-right: 0.3rem;
     }
   }
-} 
+}
 
 .address .phone a {
   color: var(--mainColor) !important;
@@ -80,6 +80,7 @@
     font-size: 1.2rem;
   }
 }
+
 .address .location::before {
   content: "";
   position: absolute;

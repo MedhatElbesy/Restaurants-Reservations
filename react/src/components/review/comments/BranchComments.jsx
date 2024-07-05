@@ -3,7 +3,7 @@ import Comments from "./Comments";
 import "./BranchComments.css";
 const BranchComments = () => {
   return (
-    <section className="branch-comments m-5">
+    <section className="branch-comments px-sm-5 pt-5">
       <AddReview />
       <Comments />
     </section>

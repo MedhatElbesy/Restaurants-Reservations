@@ -75,14 +75,13 @@ const commentsSlice = createSlice({
         state.loading = false;
         state.status = "succeeded";
         state.branchComments = action.payload.data.comments;
-        console.log(state.branchComments);
       })
       .addCase(addComment.fulfilled, (state,action) => {
         state.status = "succeeded";
         state.loading = false;
         console.log(state.branchComments);
         console.log(action.payload.data);
-        state.branchComments.push(action.payload.data);
+        state.branchComments.push(action.payload.data.comment);
       })
       .addCase(updateComment.fulfilled, (state, action) => {
         state.status = "succeeded";

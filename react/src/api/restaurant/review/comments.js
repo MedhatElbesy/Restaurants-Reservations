@@ -24,7 +24,6 @@ export const addUserComment = async (comment, restaurant_location_id) => {
   try {
     const response = await axios.post(`/comments`, {
       restaurant_location_id,
-      user_id: 2,
       comment,
     });
     return response;

@@ -5,6 +5,7 @@ import { formatDate } from "../../../helpers/utils";
 import Loader from "../../../layouts/loader/loader";
 import { getBranchComments } from "../../../slices/review/commentsSlice";
 import StarRating from "../rating/Rating";
+import { Pagination } from "react-bootstrap";
 
 const Comments = () => {
   const dispatch = useDispatch();
@@ -13,20 +14,21 @@ const Comments = () => {
     (state) => state.comments
   );
   const [currentFilter, setCurrentFilter] = useState("recent");
+  const [currentPage, setCurrentPage] = useState(1);
+  const commentsPerPage = 5;
 
-  const isFirstRender = useRef(true);
+  const prevBranchId = useRef(null);
   useEffect(() => {
-    if (branch && isFirstRender.current) {
+    if (branch.id && branch.id !== prevBranchId.current) {
       dispatch(getBranchComments(branch.id));
-      isFirstRender.current = false;
+      prevBranchId.current = branch.id;
+      setCurrentPage(1);
     }
-  }, [dispatch, branch, branch.id]);
+  }, [dispatch, branch.id]);
 
   const filteredComments = () => {
     if (currentFilter === "top-rated") {
-      return branchComments
-        .slice()
-        .sort((a, b) => b.user.rate - a.user.rate);
+      return branchComments.slice().sort((a, b) => b.user.rate - a.user.rate);
     }
     return branchComments
       .slice()
@@ -35,7 +37,20 @@ const Comments = () => {
 
   const handleFilterChange = (e) => {
     setCurrentFilter(e.target.value);
+    setCurrentPage(1);
   };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const paginate = (comments) => {
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    return comments.slice(indexOfFirstComment, indexOfLastComment);
+  };
+
+  const paginatedComments = paginate(filteredComments());
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -44,8 +59,10 @@ const Comments = () => {
     return <Loader size={100} />;
   }
 
+  const totalPages = Math.ceil(filteredComments().length / commentsPerPage);
+
   return (
-    <article className="all-users-comments mt-5 pb-5 d-flex flex-column align-items-center">
+    <article className="all-users-comments mt-5 d-flex flex-column align-items-center">
       <h4 className="fs-1 mb-5">What People Are Saying</h4>
       <div className="filter d-flex justify-content-between align-items-center mb-5 col-12 col-sm-10 col-lg-7">
         <div className="reviews-count">
@@ -61,8 +78,8 @@ const Comments = () => {
         </select>
       </div>
       <div className="users-comments col-12 col-sm-10 col-lg-7">
-        {filteredComments().length > 0 &&
-          filteredComments().map((comment) => (
+        {paginatedComments.length > 0 ? (
+          paginatedComments.map((comment) => (
             <div key={comment.id} className="user-comment mb-3">
               <div className="user d-flex justify-content-between flex-column flex-sm-row">
                 <p className="user-name text-main mb-2">
@@ -81,8 +98,26 @@ const Comments = () => {
               </p>
               <p className="comment text-color">{comment.comment}</p>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-center fw-bold text-color">
+            No Reviews For This Branch
+          </p>
+        )}
       </div>
+      {filteredComments().length > commentsPerPage && (
+        <Pagination className="mt-4">
+          <Pagination.Prev
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Item active>{currentPage}</Pagination.Item>
+          <Pagination.Next
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
+      )}
     </article>
   );
 };

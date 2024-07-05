@@ -2,6 +2,7 @@ import axios from "../../../axios";
 
 export const addUserReport = async (report, restaurant_location_id) => {
   try {
+    console.log(report)
     const response = await axios.post(`/reports`, {
       restaurant_location_id,
       report,

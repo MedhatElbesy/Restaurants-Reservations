@@ -36,6 +36,22 @@
         }
       }
     }
+    .report {
+      text-align: right;
+      p {
+        color: var(--errorColor);
+        cursor: pointer;
+        svg {
+          transition: var(--mainTransition);
+          color: var(--errorColor) !important;
+        }
+        &:hover {
+          svg {
+            transform: scale(1.3);
+          }
+        }
+      }
+    }
   }
   .all-users-comments {
     .filter {
@@ -47,14 +63,14 @@
         border-color: #a18c565b;
         background-color: transparent;
         color: #eeeeeea1;
-        padding: .4rem .8rem;
-        font-size: .8rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
         outline: none;
         option {
           background-color: var(--backgroundColor);
           color: #eeeeeec0;
           &:checked {
-            background-color:#2e2407a9 !important;
+            background-color: #2e2407a9 !important;
           }
         }
       }
@@ -65,13 +81,78 @@
       }
     }
   }
+  .fade {
+    width: fit-content !important;
+    z-index: 1051;
+    left: 50%;
+    top: 70px;
+    transform: translateX(-50%);
+    background: #111412;
+    color: #e9e9e9;
+    border: 1px solid #4f4836e3;
+  }
+  .pagination {
+    .page-item {
+      .page-link {
+        color: var(--secColor);
+        border: none;
+        background-color: transparent !important;
+        font-size: 1.2rem;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      a {
+        transition: var(--mainTransition);
+        &:hover {
+          transform: scale(1.3);
+        }
+      }
+    }
+    .page-item.disabled {
+      .page-link {
+        color: #595959b0;
+      }
+    }
+  }
 }
 
-
-.star-rating-component .empty-icons .star-svg{
-  color: #CCCCCC !important;
+.star-rating-component .empty-icons .star-svg {
+  color: #cccccc !important;
 }
 
 .star-rating-component .filled-icons .star-svg {
-  color: var(--secColor)!important;
+  color: var(--secColor) !important;
+}
+
+.modal-dialog {
+  margin-top: 7rem !important;
+  .modal-content {
+    color: var(--secColor);
+    border: 2px solid #4f4836;
+    background-color: var(--backgroundColor) !important;
+    .modal-header {
+      border-bottom: 2px solid #4f4836;
+      .btn-close {
+        color: var(--secColor) !important;
+      }
+    }
+    textarea {
+      outline: none;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      color: #a18c56;
+      background-color: transparent;
+      border: 1px solid #4f4836e3;
+      transition: var(--mainTransition);
+      &:focus {
+        border: 1px solid #8a7b55d7;
+        box-shadow: 0 0 0 0.2rem rgba(138, 123, 85, 0.25);
+      }
+      &::placeholder {
+        color: #a18c56d2;
+      }
+    }
+  }
 }
