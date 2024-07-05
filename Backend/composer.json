@@ -12,7 +12,7 @@
         "laravel/tinker": "^2.8",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^6.7",
-        "srmklive/paypal": "^3.0"
+        "srmklive/paypal": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
