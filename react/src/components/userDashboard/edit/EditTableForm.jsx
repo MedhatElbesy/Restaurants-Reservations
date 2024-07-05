@@ -103,7 +103,7 @@ const EditTableForm = () => {
 
       <section className="formUserDashboard">
 
-        <h2 className="text-light text-center my-4">Update Table</h2>
+        <h2 className="text-center my-4">Update Table</h2>
 
         {updateTableStatus === 'failed' && 
          <p className="text-danger">
@@ -139,13 +139,13 @@ const EditTableForm = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group my-2">
             <label htmlFor="cover">Cover</label>
             <input
               type="file"
               id="cover"
               name="cover"
-              className="form-control-file text-light my-3"
+              className="form-control-file text-light my-2 "
               onChange={handleChange}
             />
           </div>
@@ -227,7 +227,7 @@ const EditTableForm = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary col-12 mt-3">
+          <button type="submit" className="btn btn-warning col-12 my-4">
             Update Table
           </button>
 

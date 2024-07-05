@@ -135,7 +135,7 @@ const EditUserAddress = () => {
 
     <section className='formUserDashboard'>
 
-      <h2 className='text-center text-light my-4'>Edit User Address</h2>
+      <h2 className='text-center my-4'>Edit User Address</h2>
 
       <form onSubmit={handleSubmit}>
        
@@ -269,7 +269,7 @@ const EditUserAddress = () => {
           </MapContainer>
         </section>
 
-        <button type="submit" className="btn btn-primary col-12">Update Address</button>
+        <button type="submit" className="btn btn-warning my-4 col-12">Update Address</button>
 
       </form>
 

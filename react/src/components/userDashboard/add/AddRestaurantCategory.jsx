@@ -55,9 +55,9 @@ const AddRestaurantCategory = () => {
   }
 
   return (
-    <main>
+    <main className='my-5'>
 
-     <section className='formUserDashboard'>
+     <section className='formUserDashboard col-6 offset-3'>
 
        <h2 className='text-center my-5'>Add Category</h2>
 
@@ -114,7 +114,7 @@ const AddRestaurantCategory = () => {
           />
         </div>
 
-        <Button variant="warning col-12" type="submit">
+        <Button variant="warning col-12 my-3" type="submit">
           Add Category
         </Button>
       </Form>

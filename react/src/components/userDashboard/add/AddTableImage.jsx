@@ -48,7 +48,7 @@ const AddTableImage = () => {
       <section className='formUserDashboard'>
         <h1 className='text-center my-2'>Add Table Image</h1>
         
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+        <form onSubmit={handleSubmit} className="needs-validation my-5" noValidate>
           <div className="mb-3">
             <label htmlFor="images" className="form-label">Images:</label>
             <input
@@ -65,7 +65,7 @@ const AddTableImage = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-warning my-3 col-12">Add Table Images</button>
+          <button type="submit" className="btn btn-warning my-5 col-12">Add Table Images</button>
 
           {status === 'failed' && <p className="mt-3 text-danger">Error: An error occurred. Please try again later.</p>}
         </form>

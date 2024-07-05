@@ -90,7 +90,7 @@ export default function EditProfile() {
 
         <div className="card col-12 table-card">
 
-          <h1 className="card-header text-light text-center">Edit Profile</h1>
+          <h1 className="card-header text-center">Edit Profile</h1>
 
           <div className="card-body">
 

@@ -35,10 +35,10 @@ const AddAvailabilityForm = () => {
   };
 
   return (
-    <section className='formUserDashboard'>
+    <section className='formUserDashboard my-5 col-6 offset-3'>
 
       <form onSubmit={handleSubmit}>
-        
+        <h1 className='text-center my-5'>Table Availability</h1>
         <div>
           <label>Start Time:</label>
           <input
@@ -51,7 +51,7 @@ const AddAvailabilityForm = () => {
         </div>
 
         <div>
-          <label>End Time:</label>
+          <label className='my-2'>End Time:</label>
           <input
             className="form-control"
             type="time"
@@ -62,7 +62,7 @@ const AddAvailabilityForm = () => {
         </div>
 
         <div>
-          <label>Status:</label>
+          <label className='my-2'>Status:</label>
           <select 
             className="form-control" 
             value={status} 
