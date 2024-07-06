@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTable extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,10 @@ class UpdateTable extends FormRequest
     public function rules(): array
     {
         return [
-            'restaurant_location_id' => 'nullable|integer',
-            'number_of_chairs' => 'nullable|integer',
-            'max_number_of_persons' => 'nullable|integer',
+            'name' => 'required|unique:categories,name',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
-            'price' => 'nullable|numeric',
-            'sale_price' => 'nullable|numeric',
-            'extra_number_of_chairs' => 'nullable|integer',
-            'extra_number_of_childs_chairs' => 'nullable|integer',
-            'status' => 'nullable|in:Available,Unavailable',
+            'status' => 'required|in:Enabled,Disabled,Deleted',
         ];
     }
 }

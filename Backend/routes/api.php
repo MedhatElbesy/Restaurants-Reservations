@@ -18,12 +18,12 @@ use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\RestaurantLocationImageController;
-use App\Http\Controllers\Api\ResturantImagesController;
+use App\Http\Controllers\Api\RestaurantImagesController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\UserAddressController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MenuCategoryController;
-use App\Http\Controllers\Api\RestaurantlocationsController;
+use App\Http\Controllers\Api\RestaurantLocationsController;
 use App\Http\Controllers\Api\TableAvailabilityController;
 use App\Http\Controllers\Api\MenuItemController;
 use App\Http\Controllers\Api\RatingController;
@@ -116,7 +116,7 @@ Route::apiResource('tables',TableController::class);
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 
 
-// Route::apiResource('restaurant-locations', RestaurantlocationsController::class);
+// Route::apiResource('restaurant-locations', RestaurantLocationsController::class);
 Route::get('/restaurantslocations/{restaurantId}', [RestaurantLocationsController::class, 'getLocationsByRestaurant']);
 Route::post('/restaurantslocations',[RestaurantLocationsController::class,'store'])->middleware('auth:sanctum');
 Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
@@ -144,7 +144,7 @@ Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class
 //Route::put('table-images/{id}',[TableImageController::class,'update']);
 Route::apiResource('table-images',TableImageController::class);
 
-Route::apiResource('restaurant-images',ResturantImagesController::class);
+Route::apiResource('restaurant-images',RestaurantImagesController::class);
 
 Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
 Route::get('gateways', [GatewayController::class, 'getAllGateways']);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Restaurant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +22,6 @@ class StoreRestaurantLocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'restaurant_id' => 'required|exists:restaurants,id',
             'address' => 'nullable|string|max:255',
             'country_id' => 'required|exists:countries,id',
             'governorate_id' => 'required|exists:governorates,id',
@@ -33,11 +32,11 @@ class StoreRestaurantLocationRequest extends FormRequest
             'longitude' => 'nullable|numeric',
             'opening_time' => 'nullable|date_format:H:i:s',
             'closed_time' => 'nullable|date_format:H:i:s',
-            'closed_days' => 'nullable',
+            'closed_days' => 'nullable|array',
             'number_of_tables' => 'required|integer|min:0',
             'phone_number' => 'nullable|string|unique:restaurant_locations,phone_number',
             'mobile_number' => 'nullable|string|unique:restaurant_locations,mobile_number',
-            'status' => 'required|in:Opened,Closed,Reported',
+            'status' => 'nullable|in:Opened,Closed,Reported',
             'images' => 'nullable|array|max:2048',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];

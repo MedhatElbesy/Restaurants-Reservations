@@ -77,7 +77,6 @@ import RestaurantCategory from "./components/userDashboard/show/RestaurantCatego
 import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome.jsx";
 import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
 import RestaurantShow from "./components/AdminDashboard/RestaurantDetails.jsx";
-import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
 
 const Layout = () => (
   <>
@@ -136,60 +135,73 @@ function App() {
 
         <Route path="locations" element={<LocationsTable />} />
 
-        <Route path="categories" element={<MenuCategoriesTable />} />
+        <Route path="tables" element={<LocationTablesTable />} />
+
+        <Route path="menu-category" element={<MenuCategoriesTable />} />
+
+        <Route path="category" element={<SpecificCategories />} />
+
+        <Route path="restaurant-category" element={<RestaurantCategory />} />
+
+        <Route
+          path="location-table/:locationId"
+          element={<RestaurantCategory />}
+        />
       </Route>
 
+      <Route path="/edit-restaurant/:restaurantId" element={<EditDetails />} />
+      <Route path="/edit-category/:categoryId" element={<EditCategory />} />
+      <Route path="/edit-location/:locationId" element={<EditLocation />} />
+
       <Route
-        path="/edit-location/:restaurantId/:locationId"
-        element={<EditLocation />}
+        path="/edit-menu-category/:menuCategoryId"
+        element={<MenuCategory />}
       />
-      <Route path="/edit-details/:restaurantId" element={<EditDetails />} />
-      <Route
-        path="/edit-category/:restaurantId/:categoryId"
-        element={<EditCategory />}
-      />
-      <Route path="/add-location/:restaurantId" element={<AddLocation />} />
-      <Route path="/add-table/:locationId" element={<AddTableForm />} />
-      <Route path="/edit-table/:tableId" element={<EditTableForm />} />
-      <Route path="/add-menu-item/:categoryId" element={<AddMenuItem />} />
+      <Route path="/edit-item/:menuItemId" element={<MenuItem />} />
+      <Route path="/add-item/:menuCategoryId" element={<AddMenuItem />} />
       <Route path="/add-category/:restaurantId" element={<AddMenuCategory />} />
-      <Route path="/edit-menu-item/:menuItemId" element={<MenuItem />} />
-      <Route path="/menu-category" element={<MenuCategory />} />
-      <Route path="/add-restaurant" element={<AddRestaurant />} />
-      <Route path="/restaurant-categories" element={<RestaurantCategory />} />
+
+      <Route path="/add-location/:restaurantId" element={<AddLocation />} />
+
+      <Route path="/add-table/:locationId" element={<AddTableForm />} />
+
+      <Route path="/edit-table/:tableId" element={<EditTableForm />} />
+
+      <Route path="/add-restaurant/:userId" element={<AddRestaurant />} />
+
+      <Route path="/add-special-category" element={<AddCategoryForm />} />
+
       <Route
-        path="/add-restaurant-category"
+        path="/add-restaurant-category/:restaurantId"
         element={<AddRestaurantCategory />}
       />
+
       <Route
         path="/edit-restaurant-category/:categoryId"
         element={<EditRestaurantCategory />}
       />
-      <Route
-        path="/restaurant-tables/:locationId"
-        element={<LocationTablesTable />}
-      />
+
       <Route path="/add-table-image/:tableId" element={<AddTableImage />} />
-      <Route path="/edit-table-image/:tableId" element={<EditTableImage />} />
+
+      <Route path="/edit-table-image/:imageId" element={<EditTableImage />} />
+
       <Route
-        path="/edit-table-availability/:tableId"
+        path="/edit-availability/:availableId"
         element={<EditTableAvailability />}
       />
 
-      {/* Admin Dashboard */}
-      <Route path="/admin" element={<AdminDashboard />}>
-        <Route path="categories" element={<RestaurantList />} />
-        <Route path="rating" element={<Ratings />} />
-        <Route path="report" element={<ReportList />} />
-        <Route path="comments" element={<CommentsAdmin />} />
-        <Route path="about" element={<About />} />
-        <Route path="categories/:restaurantId" element={<RestaurantShow />} />
-      </Route>
+      {/* AdminDashboard */}
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/rating" element={<Ratings />} />
+      <Route path="/admin/report" element={<ReportList />} />
+      {/* <Route path="/admin/category" element={<Category/>} /> */}
+      <Route path="/admin/about" element={<About />} />
+      <Route path="/admin/restaurant" element={<RestaurantList />} />
+      <Route path="/restaurant/:id" element={<RestaurantShow />} />
     </Route>
   );
 
   const router = createBrowserRouter(routes);
-
   return (
     <Provider store={store}>
       <RouterProvider router={router} />

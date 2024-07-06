@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Http\Controllers\Api\StateController;
-use App\Models\ResturantImages;
+use App\Models\RestaurantImages;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
