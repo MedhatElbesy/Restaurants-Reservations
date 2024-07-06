@@ -27,6 +27,7 @@
   box-shadow: 4px -5px 14px rgba(234, 129, 9, 0.949);
   z-index: 3;
   font-family: 'Times New Roman', Times, serif;
+  overflow-x: hidden;
 }
 
 .slide-in {

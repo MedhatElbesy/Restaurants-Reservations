@@ -240,7 +240,7 @@ const UserProfile = () => {
               <h2 className='my-4'>
                 Restaurants
                 <span>
-                  <Link to={`/add-restaurant/${userId}`}>
+                  <Link to={`/add-restaurant`}>
                     <FontAwesomeIcon icon={faPlus} className="text-warning mx-5" />
                   </Link>
                 </span>

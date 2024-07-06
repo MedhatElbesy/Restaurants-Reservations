@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\UserStatus;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\StoreRestaurantLocationRequest;
@@ -243,7 +244,20 @@ class RestaurantController extends Controller
         }
     }
 
-
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'status' => 'required|in:' . implode(',', [UserStatus::Active, UserStatus::InActive, UserStatus::Deleted])
+            ]);
+            $restaurant = Restaurant::findOrFail($id);
+            $restaurant->status = $request->status;
+            $restaurant->save();
+            return ApiResponse::sendResponse(200, 'Restaurant status updated successfully', $restaurant);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to update restaurant status', null, $e->getMessage());
+        }
+    }
 
 
 
