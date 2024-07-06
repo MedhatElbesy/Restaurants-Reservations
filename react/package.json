@@ -25,6 +25,7 @@
     "bootstrap-icons": "^1.11.3",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
+    "flowbite-react": "^0.10.1",
     "framer-motion": "^11.2.12",
     "iso-country-currency": "^0.7.2",
     "laravel-echo": "^1.16.1",

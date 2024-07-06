@@ -13,8 +13,8 @@ export function TableDetails({ table, onClose }) {
       <h3 className="pb-4 text-center mt-4 sec-font fs-1 text-sec">
         {table.description}
       </h3>
-      <article className="d-flex my-5 justify-content-between">
-        <div className="details mt-4 col-4">
+      <article className="d-flex flex-column flex-lg-row mt-5 align-items-center justify-content-lg-between">
+        <div className="details mt-4 mb-5 col-lg-4">
           <p>
             <span>
               <FontAwesomeIcon icon={faUsers} />
@@ -39,14 +39,14 @@ export function TableDetails({ table, onClose }) {
               {table.extra_number_of_childs_chairs} available.{" "}
             </p>
           )}
-          <div className="text-center my-4">
-            <NavLink to={`/restaurant/${restaurantId}/reservation/${table.id}`}>
-              <button className="reserve-table">Reserve Now</button>
-            </NavLink>
-          </div>
         </div>
         {table.images.length > 0 && <TableGallery gallery={table.images} />}
       </article>
+      <div className="text-center mb-4">
+        <NavLink to={`/restaurant/${restaurantId}/reservation/${table.id}`}>
+          <button className="reserve-table">Reserve Now</button>
+        </NavLink>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 .branches {
   h3 {
     font-family: "Fugaz One", sans-serif;
-    font-size: 2rem !important;
+    font-size: 2rem;
     letter-spacing: .1rem;
   }
   .br-tabs {
@@ -97,6 +97,13 @@
         vertical-align: middle;
         margin-right: 0.3rem;
       }
+    }
+  }
+  .reserver-button {
+    &.disabled {
+      background-color: rgba(26, 27, 27, 0.411) !important;
+      color: rgb(69, 69, 70);
+      border-color: rgb(69, 69, 70);
     }
   }
 }

@@ -4,7 +4,7 @@ import {
   addAvailability,
   updateAvailability,
   deleteAvailability,
-  getAvailabilityById
+  getAvailabilityById,
 } from "../../../api/restaurant/table-availability/tableAvailability";
 
 export const getTableAvailability = createAsyncThunk(
@@ -39,7 +39,6 @@ export const getTableAvailabilityById = createAsyncThunk(
   }
 );
 
-
 export const addTableAvailability = createAsyncThunk(
   "availability/addAvailability",
   async (availableData, { rejectWithValue }) => {
@@ -55,7 +54,6 @@ export const addTableAvailability = createAsyncThunk(
     }
   }
 );
-
 
 export const updateTableAvailability = createAsyncThunk(
   "availability/updateAvailability",
@@ -93,7 +91,7 @@ const availabilitySlice = createSlice({
   name: "availability",
   initialState: {
     tableAvailability: null,
-    availabilityTable:null,
+    availabilityTable: null,
     status: "idle",
     loading: false,
     error: null,
@@ -109,7 +107,7 @@ const availabilitySlice = createSlice({
       .addCase(getTableAvailabilityById.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "succeeded";
-        state.availabilityTable = action.payload.data; 
+        state.availabilityTable = action.payload.data;
       })
       .addCase(addTableAvailability.fulfilled, (state) => {
         state.loading = false;
@@ -126,12 +124,13 @@ const availabilitySlice = createSlice({
         state.loading = false;
         state.status = "succeeded";
       })
-      .addCase(getTableAvailabilityById.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getTableAvailability.pending, (state) => {
-        state.loading = true;
-      })
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.loading = true;
+          state.status = "loading";
+        }
+      )
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {

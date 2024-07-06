@@ -69,7 +69,8 @@ const AddLocation = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchCountriesAsync());
+    dispatch(fetchCountriesAsync())
+    ;
   }, []);
 
   useEffect(() => {

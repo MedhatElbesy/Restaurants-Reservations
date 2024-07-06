@@ -9,7 +9,6 @@ import {
   Dropdown,
 } from "reactstrap";
 
-
 function AdminDashboard() {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
