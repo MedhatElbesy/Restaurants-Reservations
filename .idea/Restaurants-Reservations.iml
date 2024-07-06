@@ -11,6 +11,13 @@
       <sourceFolder url="file://$MODULE_DIR$/Backend/tests/Unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/cocur/slugify" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/cviebrock/eloquent-sluggable" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/pusher/pusher-php-server" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/srmklive/paypal" />
+      <excludeFolder url="file://$MODULE_DIR$/Backend/vendor/stripe/stripe-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

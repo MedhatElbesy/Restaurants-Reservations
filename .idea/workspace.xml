@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88dabd71-e47b-4b0f-8812-7e402c424d5b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/config/paypal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/PayPalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/PayPalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_113712_create_restaurants_locations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_113712_create_restaurants_locations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/auth/register/register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/auth/register/register.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Restaurants-Reservations.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Restaurants-Reservations.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +141,13 @@
       <path value="$PROJECT_DIR$/Backend/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/Backend/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/Backend/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/Backend/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/Backend/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/Backend/vendor/cocur/slugify" />
+      <path value="$PROJECT_DIR$/Backend/vendor/cviebrock/eloquent-sluggable" />
+      <path value="$PROJECT_DIR$/Backend/vendor/srmklive/paypal" />
+      <path value="$PROJECT_DIR$/Backend/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/Backend/vendor/paragonie/sodium_compat" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -162,7 +163,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/xampp/htdocs/Restaurants-Reservations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -195,7 +196,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.14808.18" />
+        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.14475.35" />
       </set>
     </attachedChunks>
   </component>
@@ -217,6 +218,7 @@
       <workItem from="1719643084700" duration="4755000" />
       <workItem from="1719666466404" duration="24559000" />
       <workItem from="1720031350484" duration="4697000" />
+      <workItem from="1720210964663" duration="14731000" />
     </task>
     <task id="LOCAL-00001" summary="Rename migration">
       <option name="closed" value="true" />

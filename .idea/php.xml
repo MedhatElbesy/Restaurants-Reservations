@@ -130,6 +130,13 @@
       <path value="$PROJECT_DIR$/Backend/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/Backend/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/Backend/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/Backend/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/Backend/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/Backend/vendor/cocur/slugify" />
+      <path value="$PROJECT_DIR$/Backend/vendor/cviebrock/eloquent-sluggable" />
+      <path value="$PROJECT_DIR$/Backend/vendor/srmklive/paypal" />
+      <path value="$PROJECT_DIR$/Backend/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/Backend/vendor/paragonie/sodium_compat" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
