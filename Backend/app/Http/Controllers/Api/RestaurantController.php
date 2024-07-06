@@ -64,33 +64,6 @@ class RestaurantController extends Controller
                 'cover'=> $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
             ]);
 
-            if ($request->has('locations')) {
-                foreach ($request->locations as $locationData) {
-                    $locationRequest = new Request($locationData);
-                    $locationRequest->validate((new StoreRestaurantLocationRequest())->rules());
-
-                    RestaurantLocation::create([
-                        'restaurant_id' => $restaurant->id,
-                        'address' => $locationData['address'],
-                        'country_id' => $locationData['country_id'],
-                        'governorate_id' => $locationData['governorate_id'],
-                        'city_id' => $locationData['city_id'],
-                        'state_id' => $locationData['state_id'],
-                        'zip' => $locationData['zip'] ?? null,
-                        'latitude' => $locationData['latitude'] ?? null,
-                        'longitude' => $locationData['longitude'] ?? null,
-                        'opening_time' => $locationData['opening_time'] ?? null,
-                        'closed_time' => $locationData['closed_time'] ?? null,
-                        'closed_days' => $locationData['closed_days'] ? implode(',', $locationData['closed_days']) : null,
-                        'number_of_tables' => $locationData['number_of_tables'] ?? 0,
-                        'phone_number' => $locationData['phone_number'] ?? null,
-                        'mobile_number' => $locationData['mobile_number'] ?? null,
-                        'hot_line' => $locationData['hot_line'] ?? null,
-                        'status' => $locationData['status'] ?? 'Opened',
-                    ]);
-                }
-            }
-            $restaurant->load('restaurant_images', 'locations');
             DB::commit();
             return ApiResponse::sendResponse(201, 'Restaurant Created Successfully', new RestaurantResource($restaurant));
         } catch (\Throwable $e) {
@@ -144,33 +117,6 @@ class RestaurantController extends Controller
             ]);
 
             $restaurant->save();
-
-            if ($request->has('locations')) {
-                foreach ($validatedData['locations'] as $locationData) {
-
-                    if (isset($locationData['id'])) {
-                        $location = RestaurantLocation::findOrFail($locationData['id']);
-                        $location->update([
-                            'address' => $locationData['address'],
-                            'country_id' => $locationData['country_id'],
-                            'governorate_id' => $locationData['governorate_id'],
-                            'city_id' => $locationData['city_id'],
-                            'state_id' => $locationData['state_id'],
-                            'zip' => $locationData['zip'] ?? null,
-                            'latitude' => $locationData['latitude'] ?? null,
-                            'longitude' => $locationData['longitude'] ?? null,
-                            'opening_time' => $locationData['opening_time'] ?? null,
-                            'closed_time' => $locationData['closed_time'] ?? null,
-                            'closed_days' => $locationData['closed_days'] ? implode(',', $locationData['closed_days']) : null,
-                            'number_of_tables' => $locationData['number_of_tables'] ?? 0,
-                            'phone_number' => $locationData['phone_number'] ?? null,
-                            'mobile_number' => $locationData['mobile_number'] ?? null,
-                            'hot_line' => $locationData['hot_line'] ?? null,
-                            'status' => $locationData['status'] ?? 'Opened',
-                        ]);
-                    }
-                }
-            }
 
             if ($request->hasFile('logo')) {
                 $logo = $request->file('logo');
