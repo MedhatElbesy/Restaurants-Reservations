@@ -21,7 +21,7 @@ function AdminDashboard() {
           <h1 className="logo">Restaurant</h1>
           <nav className="nav flex-column text-center text-white">
             <NavLink
-              to="/admin/categories"
+              to="/admin/restaurants"
               className="nav-link text-white py-4 h1 menuadmin"
             >
               <span>Categories</span>
