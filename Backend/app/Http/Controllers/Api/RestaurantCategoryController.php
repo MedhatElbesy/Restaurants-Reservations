@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRestaurantCategory;
-use App\Http\Requests\UpdateRestaurantCategory;
-use App\Models\Category;
+use App\Http\Requests\Restaurant\StoreRestaurantCategoryRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantCategoryRequest;
 use App\Models\RestaurantCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RestaurantCategoryController extends Controller
 {
@@ -25,7 +22,7 @@ class RestaurantCategoryController extends Controller
         return response()->json($restaurantCategories);
     }
 
-    public function store(StoreRestaurantCategory $request)
+    public function store(StoreRestaurantCategoryRequest $request)
     {
 
         $restaurantCategory = RestaurantCategory::create($request->validated());
@@ -38,7 +35,7 @@ class RestaurantCategoryController extends Controller
         return response()->json($restaurantCategory);
     }
 
-    public function update(UpdateRestaurantCategory $request, $id)
+    public function update(UpdateRestaurantCategoryRequest $request, $id)
     {
         try {
             $restaurantCategory = RestaurantCategory::findOrFail($id);

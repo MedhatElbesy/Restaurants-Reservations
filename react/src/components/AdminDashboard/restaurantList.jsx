@@ -18,11 +18,10 @@ const RestaurantList = () => {
 
   const toggleModal = () => setModalOpen(!modalOpen);
 
-  const handleShowDetails = (restaurant) => {
-    setSelectedRestaurant(restaurant);
-    toggleModal();
-  };
-  
+  // const handleShowDetails = (restaurant) => {
+  //   setSelectedRestaurant(restaurant);
+  //   toggleModal();
+  // };
   const navTo = (link) => {
     navigate(link);
   };

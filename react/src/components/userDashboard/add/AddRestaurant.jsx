@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 const AddRestaurant = () => {
   const dispatch = useDispatch();
-  const { userId } = useParams(); 
+  const userId = decryptData('userId'); 
   const navigate = useNavigate();
   const status = useSelector((state) => state.restaurant.status);
   const error = useSelector((state) => state.restaurant.error);
