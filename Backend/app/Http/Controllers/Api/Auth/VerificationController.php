@@ -31,6 +31,6 @@ class VerificationController extends Controller
             }
         }
 
-        return ApiResponse::sendResponse(400, 'Invalid token! Make sure that you entered the correct code that was sent, and try again.');
+        return ApiResponse::sendResponse(400, 'Invalid code!');
     }
 }

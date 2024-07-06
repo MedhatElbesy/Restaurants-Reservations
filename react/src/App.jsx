@@ -95,9 +95,9 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/specific" element={<SpecificCategories />} />
-      <Route path="/verify" element={<Verify />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/verify" element={<Verify />} />
 
       {/* User Routes */}
       <Route path="/userprofile" element={<UserProfile />} />

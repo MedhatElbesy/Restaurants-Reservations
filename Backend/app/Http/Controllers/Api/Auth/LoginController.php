@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     /* this function use to user make login and return access token for you */
-    public function create_access_token(Request $request) : JsonResponse
+    public function create_access_token(Request $request): JsonResponse
     {
 
         $user = User::where('status', '=', UserStatus::Active)->where('email', $request->email)->first();
 
-        if ($user && Hash::check($request->password, $user->password))
-        {
-            if($user->email_verified_at === null){
-                return ApiResponse::sendResponse(401, 'You must verify your email first. check your email');
+        if ($user && Hash::check($request->password, $user->password)) {
+            if ($user->email_verified_at === null) {
+                return ApiResponse::sendResponse(401, 'email not verified, check your mail');
             }
 
             $device_name = $request->post('device_name', $request->userAgent());
@@ -35,9 +34,8 @@ class LoginController extends Controller
             ];
 
             return ApiResponse::sendResponse(200, 'Logged in successfully', $data);
-
-        }else{
-            return ApiResponse::sendResponse(401, 'Enter correct email and password.');
+        } else {
+            return ApiResponse::sendResponse(401, 'Invalid email or password.');
         }
     }
 }
