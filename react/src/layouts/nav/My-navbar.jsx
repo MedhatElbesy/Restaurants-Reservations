@@ -62,7 +62,7 @@ export default function MyNavbar() {
           </NavLink>
           <NavLink
             className={({ isActive }) => isActive ? `active text-${bodyColor === "light" ? "day" : "night"}` : `text-${bodyColor === "light" ? "day" : "night"}`}
-            to="/about"
+            to="/about-us"
           >
             About
           </NavLink>
