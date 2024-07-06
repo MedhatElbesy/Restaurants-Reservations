@@ -79,6 +79,7 @@ import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
 import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
 import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
 import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
+import ShowReservation from "./components/userDashboard/show/ShowReservation.jsx";
 
 
 // notifaication and about us
@@ -168,9 +169,14 @@ function App() {
         element={<RestaurantCategory />}
       />
 
-<Route
+     <Route
         path="location-table/:locationId"
         element={<RestaurantCategory />}
+      />
+
+     <Route
+        path="reservation"
+        element={<ShowReservation />}
       />
 
 
