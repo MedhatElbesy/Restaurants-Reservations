@@ -80,7 +80,6 @@ class TableImageController extends Controller
                 $tableImage->image = basename($imagePath);
             }
 
-            // Save the updated table image record
             $tableImage->save();
 
             DB::commit();
