@@ -141,7 +141,7 @@ Route::get('/table-availability/{id}', [TableAvailabilityController::class, 'sho
 Route::get('/top-rated-restaurants/{limit?}', [RatingController::class, 'topRatedRestaurants']);
 Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
-
+//Route::put('table-images/{id}',[TableImageController::class,'update']);
 Route::apiResource('table-images',TableImageController::class);
 
 Route::apiResource('restaurant-images',ResturantImagesController::class);

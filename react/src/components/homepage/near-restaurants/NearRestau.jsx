@@ -6,11 +6,12 @@ import { fetchNearestRestaurants } from '../../../slices/restaurant/nearest-rest
 import '../top-rated/TopRestau.css';
 import Loader from '../../../layouts/loader/loader';
 import { Link } from 'react-router-dom';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 const NearRestau = () => {
   const dispatch = useDispatch();
   const { data: nearestRestaurantsData, status, error } = useSelector(state => state.nearestRestaurants);
-  const userId = useSelector(state => state.auth.userId);
+  const userId = decryptData('userId');
 
   useEffect(() => {
     if (userId) {
