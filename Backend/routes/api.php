@@ -101,6 +101,8 @@ Route::resource('restaurants', RestaurantController::class);
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
 
 Route::apiResource('restaurants', RestaurantController::class);
+Route::put('/restaurants/{id}/update-status', [RestaurantController::class, 'updateStatus']);
+
 Route::get('/restaurants/user/{user_id}', [RestaurantController::class, 'getRestaurantsByUserId']);
 
 Route::apiResource('restaurant-categories', RestaurantCategoryController::class);
@@ -152,4 +154,5 @@ Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
 
 
-
+// Route::get('payment/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');
+// Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');

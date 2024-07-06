@@ -19,16 +19,16 @@ class PayPalController extends Controller
         $data = [];
         $data['items'] = [];
 
+
+
         $data['invoice_id'] = 1;
         $data['invoice_description']= "desi";
         $data['return_url'] = 'http://127.0.0.1:8000/payment/success';
         $data['cancel_url'] = 'http://127.0.0.1:8000/cancel';
         $data['total'] = 1000;
-
         $provider = new ExpressCheckout;
         $response = $provider->setExpressCheckout($data, true);
-
-
+        dd($response);
         return redirect($response['paypal_link']);
     }
 
@@ -43,6 +43,7 @@ class PayPalController extends Controller
     {
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
+
         if(in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])){
 
             return response()->json($response);
