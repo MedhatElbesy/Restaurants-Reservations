@@ -1,4 +1,4 @@
-import { NavLink} from "react-router-dom";
+import { NavLink, Route} from "react-router-dom";
 import React from "react";
 import './admin.css';
 import {
@@ -9,10 +9,11 @@ import {
   Dropdown,
 
 } from "reactstrap";
+// import CommentsAdmin from "./comments";
 // import About from './About';
-// import Category from './Category';
-// import Ratings from './Ratings';
-// import Reports from './Reports';
+// import Ratings from './ratings';
+// import Reports from './reports';
+// import RestaurantList from "./restaurantList";
 
 function AdminDashboard() {
   // const [isOpen, setIsOpen] = React.useState(false);
@@ -80,16 +81,17 @@ function AdminDashboard() {
           </nav>
         </div>
 
-        {/* <div className="col-10">
+         {/* <div className="col-10"> 
           <Routes>
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/category" element={<Category />} />
+            <Route path="/admin/restaurants" element={<RestaurantList />} />
             <Route path="/admin/rating" element={<Ratings />} />
             <Route path="/admin/report" element={<Reports />} />
+            <Route path="/admin/comments" element={<CommentsAdmin />}/>
             <Route path="/admin/about" element={<About />} />
-            {/* Add other routes here if needed */}
-          {/* </Routes> */}
-        {/* </div> */} 
+         
+          </Routes>
+        </div>  */}
       </div>
     </div>
   );

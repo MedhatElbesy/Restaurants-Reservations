@@ -92,12 +92,29 @@ export const fetchRatings = createAsyncThunk(
 
 //comments
 export const fetchComments = createAsyncThunk(
-  "admin/comment",
+  "admin/comments",
   async (_, { rejectWithValue }) => {
     try {
       const data = await getComments();
-      console.log(data)
-      return data;
+      console.log(data.data)
+      return data.data;
+    } catch (error) {
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "admin/deleteComment",
+  async (commentId, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/comments/${commentId}`);
+      console.log(commentId);
+      return commentId;
     } catch (error) {
       return rejectWithValue({
         status: error.response.status,
@@ -155,7 +172,7 @@ const adminSlice = createSlice({
       })
       .addCase(fetchReports.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.reports = action.payload;
+        state.reports = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchReports.rejected, (state, action) => {
         state.status = 'failed';
@@ -168,7 +185,7 @@ const adminSlice = createSlice({
       })
       .addCase(fetchRatings.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.ratings = action.payload;
+        state.ratings = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchRatings.rejected, (state, action) => {
         state.status = 'failed';
@@ -181,9 +198,16 @@ const adminSlice = createSlice({
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.comments = action.payload;
+        state.comments = action.payload;Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchComments.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        state.comments = state.comments.filter((comment) => comment.id !== action.payload);
+      })
+      .addCase(deleteComment.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });
