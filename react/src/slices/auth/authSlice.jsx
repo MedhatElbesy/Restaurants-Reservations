@@ -82,7 +82,7 @@ const authSlice = createSlice({
     user: null,
     userId: decryptData("userId"),
     token: decryptData("token"),
-    loggedIn: !!sessionStorage.getItem("token"),
+    loggedIn: !!decryptData("token"),
     status: "idle",
     loading: false,
     error: null,

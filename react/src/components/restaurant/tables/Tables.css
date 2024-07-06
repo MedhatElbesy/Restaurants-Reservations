@@ -91,16 +91,15 @@
   left: 0vw;
   width: 100vw;
   height: 90vh;
+  overflow: auto;
   background-color: #020708f8;
   z-index: 9999;
   border-top: 2px solid var(--secColor);
   h3 {
     margin: 0 auto;
     position: relative;
-    /* border-bottom: 1px solid var(--textColor); */
   }
   article {
-    height: 50vh;
     .details {
       padding: 0 1.8rem;
       p {
@@ -115,21 +114,9 @@
           letter-spacing: 2px;
         }
       }
-      .reserve-table {
-        border: none;
-        color: var(--textColor);
-        font-size: 1.3rem;
-        padding: 0.5rem;
-        margin-top: 2rem;
-        transition: var(--mainTransition);
-        background-color: #3137382d;
-        border: 1px solid #80808062;
-        &:hover {
-          background-color: #3137384d;
-        }
-      }
     }
     .gallery {
+      height: 60vh;
       .images {
         .image {
           position: relative;
@@ -175,6 +162,19 @@
       }
     }
   }
+  .reserve-table {
+    border: none;
+    color: var(--textColor);
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    transition: var(--mainTransition);
+    background-color: #3137382d;
+    border: 1px solid #80808062;
+    &:hover {
+      background-color: #3137384d;
+    }
+  }
   .close {
     position: absolute;
     top: 15px;
@@ -192,5 +192,24 @@
     font-weight: bold;
     vertical-align: middle;
     z-index: 9999;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  h3.tables-caption {
+    font-size: 1.5rem !important;
+  }
+  .table-details article .gallery {
+    height: 45vh;
+  }
+}
+@media screen and (min-width: 577px) and (max-width: 767px) {
+  .table-details article .gallery {
+    height: 50vh;
+  }
+}
+@media screen and (max-width: 991px) {
+  .table-details article .gallery {
+    height: 50vh;
   }
 }

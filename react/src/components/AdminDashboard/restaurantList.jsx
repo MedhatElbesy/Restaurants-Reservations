@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRestaurants, disableRestaurantById } from "../../slices/adminDashboard/adminSlice";
+import {
+  fetchRestaurants,
+  disableRestaurantById,
+} from "../../slices/adminDashboard/adminSlice";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import RestaurantModal from "./AddRestaurant";
 import { Typography } from "@mui/material";
 import Loader from "../../layouts/loader/loader";
-import './admin.css';
+import "./admin.css";
 
 const RestaurantList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { restaurants, status, error } = useSelector((state) => state.adminDashboard);
+  const { restaurants, status, error } = useSelector(
+    (state) => state.adminDashboard
+  );
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
 
@@ -49,7 +54,10 @@ const RestaurantList = () => {
         }}
       >
         Restaurant{" "}
-        <span onClick={() => navTo("/add-restaurant/{$id}")} style={{ cursor: "pointer" }}>
+        <span
+          onClick={() => navTo("/add-restaurant/{$id}")}
+          style={{ cursor: "pointer" }}
+        >
           <i className="bi bi-patch-plus-fill"></i>
         </span>
       </Typography>
@@ -87,7 +95,8 @@ const RestaurantList = () => {
                     <strong>Description: </strong> {restaurant.description}
                   </CardText>
                   <CardText>
-                    <strong>No. of Branches: </strong> {restaurant.locations_count}
+                    <strong>No. of Branches: </strong>{" "}
+                    {restaurant.locations_count}
                   </CardText>
                   <CardText>
                     <strong>Status: </strong> {restaurant.status}

@@ -10,7 +10,7 @@ export function Table({ table }) {
   }
 
   return (
-    <div className="branch-table col-4 px-4 py-4">
+    <div className="branch-table col-10 col-sm-7 col-md-5 col-lg-4 px-lg-3 px-xl-4 py-4">
       <figure className="table-cover">
         <span className="table-id text-danger">#{table.id}</span>
         <Image src={table.cover} fluid />
