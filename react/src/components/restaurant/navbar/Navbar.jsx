@@ -18,9 +18,9 @@ export default function Navbar() {
         <Nav.Link as={NavLink} to="tables">
           Tables
         </Nav.Link>
-        <Nav.Link as={NavLink} to="reservation">
+        {/* <Nav.Link as={NavLink} to="reservation">
           Reservations
-        </Nav.Link>
+        </Nav.Link> */}
       </Nav>
     </Row>
   );

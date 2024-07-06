@@ -91,13 +91,13 @@ function App() {
   const routes = createRoutesFromElements(
     <Route element={<Layout />}>
       {/* Auth Routes */}
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/specific" element={<SpecificCategories />} />
       <Route path="/verify" element={<Verify />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/" element={<Home />} />
 
       {/* User Routes */}
       <Route path="/userprofile" element={<UserProfile />} />
@@ -179,6 +179,7 @@ function App() {
 
       {/* Admin Dashboard */}
       <Route path="/admin" element={<AdminDashboard />}>
+        <Route index element={<Navigate to="categories" />} />
         <Route path="categories" element={<RestaurantList />} />
         <Route path="rating" element={<Ratings />} />
         <Route path="report" element={<ReportList />} />

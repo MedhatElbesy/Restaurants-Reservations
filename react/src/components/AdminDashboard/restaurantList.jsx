@@ -22,9 +22,10 @@ const RestaurantList = () => {
     setSelectedRestaurant(restaurant);
     toggleModal();
   };
-  const navTo= (link)=>{
-     navigate(link);    
-  }
+  
+  const navTo = (link) => {
+    navigate(link);
+  };
 
   useEffect(() => {
     if (status === "idle") {
@@ -69,7 +70,7 @@ const RestaurantList = () => {
                 <CardBody>
                   <CardTitle tag="h5">{restaurant.name}</CardTitle>
                   <CardText>{restaurant.description}</CardText>
-                  <div onClick={()=>navTo(`/restaurant/${restaurant.id}`)}>
+                  <div onClick={() => navTo(`/restaurant/${restaurant.id}`)}>
                     <Button className="rounded-circle m-2" color="success">
                       <i className="bi bi-eye-fill"></i>
                     </Button>

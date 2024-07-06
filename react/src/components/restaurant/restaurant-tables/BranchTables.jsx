@@ -3,7 +3,7 @@ import Slider from "react-slick";
 
 function BranchTables({ branch, restaurantId }) {
   const navigate = useNavigate();
-  var settings = {
+  const settings = {
     dots: false,
     arrows: false,
     infinite: true,
@@ -16,18 +16,18 @@ function BranchTables({ branch, restaurantId }) {
   };
 
   const allImages = branch.tables.reduce((accumulator, table) => {
-    accumulator.push(...table.images.map((image) => image));
+    accumulator.push(...table.images);
     return accumulator;
   }, []);
 
-  function handelShowTables() {
+  function handleShowTables() {
     navigate(`/restaurant/${restaurantId}/branches`, {
-      state: { branchId: 2, showBranchTables: true },
+      state: { branchId: branch.id, showBranchTables: true },
     });
   }
 
   return (
-    <div className="slider-container w-75 m-auto" onClick={handelShowTables}>
+    <div className="slider-container w-75 m-auto" onClick={handleShowTables}>
       <Slider {...settings}>
         {allImages.length > 0 &&
           allImages.map((image) => (
@@ -37,9 +37,13 @@ function BranchTables({ branch, restaurantId }) {
               className="d-flex justify-content-center align-items-center"
             >
               <img
-                src={image.image}
+                src={
+                  image.image
+                    ? image.image
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png"
+                }
                 className="px-1"
-                alt=""
+                alt="Table"
                 style={{ height: "300px", width: "100%", objectFit: "cover" }}
               />
             </div>

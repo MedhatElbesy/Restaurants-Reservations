@@ -2,6 +2,9 @@ import { useBranch } from "./BranchContext";
 import Image from "react-bootstrap/Image";
 export function BranchTables({ onShowTables }) {
   const { branch } = useBranch();
+  const availableTables = branch.tables.filter(
+    (table) => table.status === "available"
+  );
   return (
     <article className="mx-0 d-flex flex-wrap justify-content-center text-center text-lg-start justify-content-lg-between py-5 border-bottom">
       <div className="image d-none d-lg-block col-6">
@@ -18,13 +21,16 @@ export function BranchTables({ onShowTables }) {
           a delightful meal in an elegant and cozy atmosphere
         </p>
         <p className="text-main fs-4">
-          <span className="text-sec fs-2">{branch.number_of_tables}</span>{" "}
+          <span className="text-sec fs-2">{availableTables.length}</span>{" "}
           Avilable Tables
         </p>
         <div>
           <button
             onClick={() => onShowTables(true)}
-            className="reserver-button px-3 py-2 fs-6 mt-3"
+            className={`reserver-button px-3 py-2 fs-6 mt-3 ${
+              availableTables.length == 0 ? "disabled" : ""
+            }`}
+            disabled={availableTables.length == 0}
           >
             Reserve Table Now
           </button>

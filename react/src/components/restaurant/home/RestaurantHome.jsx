@@ -17,9 +17,9 @@ export default function Home() {
           {restaurant.description}{" "}
         </p>
         <div>
-          <NavLink to={`/restaurant/${restaurantId}/menu`}>
+          <NavLink to={`/restaurant/${restaurantId}/branches`}>
             <button className="more w-auto px-3 py-2 rounded-1 fs-5">
-              View More
+              Reserve Table Now
             </button>
           </NavLink>
         </div>
@@ -30,9 +30,9 @@ export default function Home() {
           <p className="text-sec fs-4">{restaurant.summary}</p>
         </div>
         <div>
-          <NavLink to={`/restaurant/${restaurantId}/branches`}>
+          <NavLink to={`/restaurant/${restaurantId}/menu`}>
             <button className="reserver-button px-3 py-2 fs-6 mt-3">
-              Reserve Table Now
+              View Menu
             </button>
           </NavLink>
         </div>

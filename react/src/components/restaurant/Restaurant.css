@@ -1,3 +1,5 @@
 .user-restaurant-container {
   background: var(--backgroundColor);
+  display: flex !important;
+  min-height: calc(100vh - 90px);
 }

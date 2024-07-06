@@ -99,6 +99,13 @@
       }
     }
   }
+  .reserver-button {
+    &.disabled {
+      background-color: rgba(26, 27, 27, 0.411) !important;
+      color: rgb(69, 69, 70);
+      border-color: rgb(69, 69, 70);
+    }
+  }
 }
 
 @media screen and (max-width: 710px) {

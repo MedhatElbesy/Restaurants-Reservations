@@ -65,3 +65,11 @@ body {
 a {
   text-decoration: none;
 }
+
+
+.full {
+  flex-grow: 1;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
