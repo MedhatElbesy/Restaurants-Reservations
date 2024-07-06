@@ -25,6 +25,7 @@ class StoreRestaurantLocationRequest extends FormRequest
             'address' => 'nullable|string|max:255',
             'country_id' => 'required|exists:countries,id',
             'governorate_id' => 'required|exists:governorates,id',
+            'restaurant_id' => 'required|exists:restaurants,id',
             'city_id' => 'required|exists:cities,id',
             'state_id' => 'required|exists:states,id',
             'zip' => 'nullable|integer',
