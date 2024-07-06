@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Restaurant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -32,7 +32,7 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'longitude' => 'nullable|numeric',
             'opening_time' => 'nullable|string',
             'closed_time' => 'nullable|string',
-            'closed_days' => 'nullable',
+            'closed_days' => 'nullable|array',
             'hot_line' => 'nullable|string',
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',

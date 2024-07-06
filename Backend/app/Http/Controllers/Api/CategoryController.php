@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Helpers\ApiResponse;
-use App\Http\Requests\StoreCategory;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Models\Category;
-use App\Models\User;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 
 class CategoryController extends Controller
@@ -24,7 +21,7 @@ class CategoryController extends Controller
         return Category::all();
     }
 
-    public function store(StoreCategory $request)
+    public function store(StoreCategoryRequest $request)
     {
         $data = $request->except('cover', '_token', '_method');
         $data['cover'] = $this->uploadImage($request, 'cover', 'categories');

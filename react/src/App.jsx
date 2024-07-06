@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 
-
-
 // Store
 import store from "./store/Store.jsx";
 
@@ -65,7 +63,6 @@ import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaura
 import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
 import Ratings from "./components/AdminDashboard/ratings.jsx";
 import ReportList from "./components/AdminDashboard/reports.jsx";
-// import  Category from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
 import Verify from "./components/auth/register/verifyPage.jsx";
 import AddTableImage from "./components/userDashboard/add/AddTableImage.jsx";
@@ -123,137 +120,75 @@ function App() {
       <Route path="/add-address" element={<AddUserAddress />} />
       <Route path="/edit-address/:addressId" element={<EditUserAddress />} />
       <Route path="/availability/:tableId" element={<TableAvailability />} />
-      <Route path="/add-availability/:tableId" element={<AddAvailabilityForm />} />
-
-   <Route path="/user-dashboard/restaurant/:restaurantId" element={<Restaurant />}>
-
-   <Route
-        path="main"
-        element={<UserDashboardHome />}
+      <Route
+        path="/add-availability/:tableId"
+        element={<AddAvailabilityForm />}
       />
 
       <Route
-        path="details"
-        element={<DetailsTable />}
-      />
+        path="/user-dashboard/restaurant/:restaurantId"
+        element={<Restaurant />}
+      >
+        <Route path="main" element={<UserDashboardHome />} />
 
-     <Route
-        path="locations"
-        element={<LocationsTable />}
-      />
+        <Route path="details" element={<DetailsTable />} />
 
-     <Route
-        path="tables"
-        element={<LocationTablesTable />}
-      />
+        <Route path="locations" element={<LocationsTable />} />
 
-    <Route
-        path="menu-category"
-        element={<MenuCategoriesTable />}
-      />
+        <Route path="tables" element={<LocationTablesTable />} />
 
-     <Route
-        path="category"
-        element={<SpecificCategories />}
-      />
+        <Route path="menu-category" element={<MenuCategoriesTable />} />
 
-    <Route
-        path="restaurant-category"
-        element={<RestaurantCategory />}
-      />
+        <Route path="category" element={<SpecificCategories />} />
 
-     <Route
-        path="location-table/:locationId"
-        element={<RestaurantCategory />}
-      />
+        <Route path="restaurant-category" element={<RestaurantCategory />} />
 
-
+        <Route
+          path="location-table/:locationId"
+          element={<RestaurantCategory />}
+        />
       </Route>
 
-      <Route
-        path="/edit-restaurant/:restaurantId"
-        element={<EditDetails />}
-      />
-      <Route
-        path="/edit-category/:categoryId"
-        element={<EditCategory />}
-      />
-      <Route
-        path="/edit-location/:locationId"
-        element={<EditLocation />}
-      />
+      <Route path="/edit-restaurant/:restaurantId" element={<EditDetails />} />
+      <Route path="/edit-category/:categoryId" element={<EditCategory />} />
+      <Route path="/edit-location/:locationId" element={<EditLocation />} />
 
       <Route
         path="/edit-menu-category/:menuCategoryId"
         element={<MenuCategory />}
       />
-      <Route
-        path="/edit-item/:menuItemId"
-        element={<MenuItem />}
-      />
-      <Route
-        path="/add-item/:menuCategoryId"
-        element={<AddMenuItem />}
-      />
-      <Route
-        path="/add-category/:restaurantId"
-        element={<AddMenuCategory />}
-      />
+      <Route path="/edit-item/:menuItemId" element={<MenuItem />} />
+      <Route path="/add-item/:menuCategoryId" element={<AddMenuItem />} />
+      <Route path="/add-category/:restaurantId" element={<AddMenuCategory />} />
+
+      <Route path="/add-location/:restaurantId" element={<AddLocation />} />
+
+      <Route path="/add-table/:locationId" element={<AddTableForm />} />
+
+      <Route path="/edit-table/:tableId" element={<EditTableForm />} />
+
+      <Route path="/add-restaurant/:userId" element={<AddRestaurant />} />
+
+      <Route path="/add-special-category" element={<AddCategoryForm />} />
 
       <Route
-        path="/add-location/:restaurantId" 
-        element={<AddLocation />} 
+        path="/add-restaurant-category/:restaurantId"
+        element={<AddRestaurantCategory />}
       />
 
-      <Route 
-        path="/add-table/:locationId" 
-        element={<AddTableForm />} 
+      <Route
+        path="/edit-restaurant-category/:categoryId"
+        element={<EditRestaurantCategory />}
       />
 
-      <Route 
-        path="/edit-table/:tableId"
-        element={<EditTableForm />} 
+      <Route path="/add-table-image/:tableId" element={<AddTableImage />} />
+
+      <Route path="/edit-table-image/:imageId" element={<EditTableImage />} />
+
+      <Route
+        path="/edit-availability/:availableId"
+        element={<EditTableAvailability />}
       />
-
-      <Route 
-        path="/add-restaurant/:userId"
-        element={<AddRestaurant />} 
-      />
-
-  
-    
-
-     <Route 
-        path="/add-special-category" 
-        element={<AddCategoryForm />} 
-      />
-
-    <Route 
-        path="/add-restaurant-category/:restaurantId" 
-        element={<AddRestaurantCategory />} 
-      />
-
-     <Route 
-        path="/edit-restaurant-category/:categoryId" 
-        element={<EditRestaurantCategory />} 
-      />
-
-
-      <Route 
-        path="/add-table-image/:tableId" 
-        element={<AddTableImage />} 
-      /> 
-
-      <Route 
-        path="/edit-table-image/:imageId" 
-        element={<EditTableImage />} 
-      />  
-
-     <Route 
-        path="/edit-availability/:availableId" 
-        element={<EditTableAvailability />} 
-      />  
-
 
       {/* AdminDashboard */}
       <Route path="/admin" element={<AdminDashboard />} />

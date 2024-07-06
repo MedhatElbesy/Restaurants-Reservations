@@ -10,13 +10,14 @@ import './userProfile.css';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { deleteUserAddressAsync } from '../../../slices/user/userAddressSlice';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 const ITEMS_PER_PAGE = 3;
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.userId);
-  const role = useSelector((state) => state.auth.role);
+  const userId = decryptData('userId'); 
+  const role = decryptData('role'); 
   const userData = useSelector((state) => state.user.data);
   const userDataStatus = useSelector((state) => state.user.status);
   const userDataError = useSelector((state) => state.user.error);

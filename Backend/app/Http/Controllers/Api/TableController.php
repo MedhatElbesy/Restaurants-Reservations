@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTable;
-use App\Http\Requests\UpdateTable;
+use App\Http\Requests\Table\StoreTableRequest;
+use App\Http\Requests\Table\UpdateTableRequest;
+use App\Http\Resources\TableResource;
 use App\Models\Table;
 use App\Traits\UploadImageTrait;
-use Illuminate\Http\Request;
-use App\Http\Resources\TableResource;
-use App\Helpers\ApiResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
@@ -23,7 +22,7 @@ class TableController extends Controller
         return TableResource::collection(Table::all());
     }
 
-    public function store(StoreTable $request)
+    public function store(StoreTableRequest $request)
     {
 
         $data = $request->all();
@@ -43,7 +42,7 @@ class TableController extends Controller
         return new TableResource($table);
     }
 
-    public function update(UpdateTable $request, Table $table)
+    public function update(UpdateTableRequest $request, Table $table)
     {
         $data = $request->all();
 
