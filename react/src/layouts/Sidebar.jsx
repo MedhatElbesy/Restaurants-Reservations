@@ -26,6 +26,7 @@ const Sidebar = () => {
         <li><Link  to={`menu-category`} >Menu Categories</Link></li>
         <li><Link  to={`category`} >Specific Category</Link></li>
         <li><Link  to={`restaurant-category`} >Restaurant Caregory</Link></li>
+        <li><Link  to={`reservation`} >Reservation</Link></li>
       </ul>
     </nav>
   );

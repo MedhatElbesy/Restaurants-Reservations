@@ -23,7 +23,8 @@ class ForgotPasswordController extends Controller
                 'email' => 'required|email|exists:users,email'
             ]);
 
-            $token = rand(111111, 999999) * 111111;
+//            $token = rand(111111, 999999) * 111111;
+            $token = 123456;
             DB::table('password_reset_tokens')->insert([
                 'email' => $request->email,
                 'token' => $token,

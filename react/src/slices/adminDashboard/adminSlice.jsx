@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getReports, getRatings, getComments,getRestaurants, updateRestaurant, deleteRestaurant } from '../../api/adminDashboard/adminDashboard';
+import { getReports, getRatings, getComments,getRestaurants, updateRestaurant, disableRestaurant } from '../../api/adminDashboard/adminDashboard';
 
 // Restaurant Categories
 export const fetchRestaurants = createAsyncThunk(
@@ -41,12 +41,12 @@ export const updateExistingRestaurant = createAsyncThunk(
   }
 );
 
-export const removeRestaurant = createAsyncThunk(
-  'restaurants/removeRestaurant',
+export const disableRestaurantById = createAsyncThunk(
+  "restaurants/disableRestaurantById",
   async (id, { rejectWithValue }) => {
     try {
-      const data = await deleteRestaurant(id);
-      return data;
+      const response = await disableRestaurant(id);
+      return response;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -161,8 +161,21 @@ const adminSlice = createSlice({
           state.restaurants[updatedIndex] = action.payload;
         }
       })
-      .addCase(removeRestaurant.fulfilled, (state, action) => {
-        state.restaurants = state.restaurants.filter((item) => item.id !== action.payload.id);
+      .addCase(disableRestaurantById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(disableRestaurantById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const index = state.restaurants.findIndex(
+          (restaurant) => restaurant.id === action.meta.arg
+        );
+        if (index !== -1) {
+          state.restaurants[index].status = "inactive";
+        }
+      })
+      .addCase(disableRestaurantById.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       })
 
       // Reports

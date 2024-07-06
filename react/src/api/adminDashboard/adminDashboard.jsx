@@ -35,16 +35,18 @@ export const updateRestaurant = async (id, restaurantData) => {
   }
 };
 
-// Delete a restaurant
-export const deleteRestaurant = async (id) => {
+
+// Disable a restaurant
+export const disableRestaurant = async (id) => {
   try {
-    const response = await axios.delete(`/restaurants/${id}`);
+    const response = await axios.put(`/restaurants/${id}/update-status`);
     return response.data;
   } catch (error) {
-    console.error(`Failed to delete restaurant with id ${id}`, error);
+    console.error(`Failed to disable restaurant with id ${id}`, error);
     throw error;
   }
 };
+
 
 // Reports
 export const getReports = async () => {
@@ -80,4 +82,3 @@ export const getComments = async () => {
   }
 };
 
-//delete comments

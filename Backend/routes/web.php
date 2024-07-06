@@ -29,9 +29,6 @@ Route::get('/pusher', function () {
 // Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('payment.success');
 
 
-
-
-
 Route::controller(StripePaymentController::class)->group(function(){
     Route::get('stripe', 'stripe')->name('stripe.index');
 

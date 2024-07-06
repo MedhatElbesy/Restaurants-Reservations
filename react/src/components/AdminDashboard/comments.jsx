@@ -56,7 +56,7 @@ const CommentsAdmin = () => {
                         {new Date(comment.created_at).toLocaleDateString()}
                       </Card.Subtitle>
                     </Box>
-                    <IconButton
+                    {/* <IconButton
                       aria-label="delete"
                       onClick={() => handleDelete(comment.id)}
                       sx={{
@@ -69,7 +69,7 @@ const CommentsAdmin = () => {
                       }}
                     >
                       <DeleteIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </Box>
                 </Card.Body>
               </Box>
