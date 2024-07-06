@@ -16,13 +16,12 @@ import {
   InputAdornment,
   IconButton,
   FormGroup,
-  
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload"
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
@@ -38,7 +37,6 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
-
 
 const defaultTheme = createTheme();
 
@@ -78,17 +76,17 @@ const Register = () => {
       return;
     }
 
-    if (!formData.role_name) {
-      Swal.fire({
-        title: "Oops...",
-        text: "Please select you want to register as a user or an admin.",
-      });
-      return;
-    }
+    // if (!formData.roles_name) {
+    //   Swal.fire({
+    //     title: "Oops...",
+    //     text: "Please select you want to register as a user or an admin.",
+    //   });
+    //   return;
+    // }
 
     try {
       const response = await dispatch(registerUser(formData)).unwrap();
-      localStorage.setItem("token", response.token);
+      sessionStorage.setItem("token", response.token);
       Swal.fire({
         icon: "success",
         title: "Registration successful!",
@@ -371,7 +369,7 @@ const Register = () => {
                     </TextField>
                   </Grid>
                   <Grid item xs={12}>
-                    {/* <TextField
+                    <TextField
                       margin="normal"
                       required
                       fullWidth
@@ -384,8 +382,8 @@ const Register = () => {
                         shrink: true,
                       }}
                       onChange={handleChange}
-                    /> */}
-
+                    />
+                    {/* 
                     <Button
                       component="label"
                       role={undefined}
@@ -395,7 +393,7 @@ const Register = () => {
                     >
                       Upload file
                       <VisuallyHiddenInput type="file" />
-                    </Button>
+                    </Button> */}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -405,9 +403,14 @@ const Register = () => {
                       size="small"
                       select
                       id="roles-select"
-                      value={formData.role_name}
+                      value={formData.roles_name}
                       label="Role"
-                      name="role_name"
+                      name="roles_name"
+                      {...register("roles_name", {
+                        required: "role is required",
+                      })}
+                      error={!!errors.roles_name}
+                      helperText={errors.roles_name?.message}
                       onChange={handleChange}
                     >
                       <MenuItem value="user">User</MenuItem>

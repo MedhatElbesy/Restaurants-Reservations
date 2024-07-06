@@ -17,7 +17,6 @@ export const addUserRating = async (rate, branchId) => {
     const response = await axios.post(`/ratings`, {
       restaurant_location_id: branchId,
       rate,
-      user_id: 2,
     });
     return response;
   } catch (error) {

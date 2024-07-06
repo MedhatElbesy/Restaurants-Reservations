@@ -13,7 +13,7 @@
   --secFont: "Bad Script", cursive;
   ::-webkit-scrollbar {
     width: 8px;
-    height: 0px;
+    height: 8px;
   }
   ::-webkit-scrollbar-thumb {
     background: #9999993d;
@@ -35,7 +35,6 @@
 }
 
 body {
- 
   font-family: "Playfair Display", serif;
   transition: .3s ease-in-out;
 }

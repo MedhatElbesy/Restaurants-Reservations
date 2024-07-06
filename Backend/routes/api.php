@@ -132,7 +132,7 @@ Route::get('comments/{restaurantId}', [CommentController::class, 'show']);
 Route::post('/reports', [ReportController::class, 'store']);
 Route::get('/reports', [ReportController::class, 'show']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
-Route::post('/ratings', [RatingController::class, 'store']);
+Route::post('/ratings', [RatingController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/ratings', [RatingController::class, 'show']);
 
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
@@ -141,7 +141,7 @@ Route::get('/table-availability/{id}', [TableAvailabilityController::class, 'sho
 Route::get('/top-rated-restaurants/{limit?}', [RatingController::class, 'topRatedRestaurants']);
 Route::get('/restaurant-locations/{id}/average-rating', [RatingController::class, 'averageRating']);
 
-
+//Route::put('table-images/{id}',[TableImageController::class,'update']);
 Route::apiResource('table-images',TableImageController::class);
 
 Route::apiResource('restaurant-images',RestaurantImagesController::class);

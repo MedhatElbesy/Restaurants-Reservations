@@ -21,7 +21,7 @@ export const registerUser = async (userData) => {
   data.append("gender", userData.gender);
   data.append("profile_image", userData.profile_image);
   data.append("birth_date", userData.birth_date);
-  data.append("role_name", userData.role_name);
+  data.append("roles_name", userData.roles_name);
   try {
 
     for (let pair of data.entries()) {

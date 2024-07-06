@@ -3,7 +3,7 @@ import { getReports, getRatings, getComments,getRestaurants, updateRestaurant, d
 
 // Restaurant Categories
 export const fetchRestaurants = createAsyncThunk(
-  "admin/category",
+  "admin/restaurants",
   async (_, { rejectWithValue }) => {
     try {
       const data = await getRestaurants();
@@ -176,15 +176,15 @@ const adminSlice = createSlice({
       })
       // Comments
       .addCase(fetchComments.pending, (state) => {
-        state.loading = true;
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.comments = action.payload;
-        state.loading = false;
       })
       .addCase(fetchComments.rejected, (state, action) => {
-        state.loading = false;
+        state.status = 'failed';
         state.error = action.payload;
       });
   },
