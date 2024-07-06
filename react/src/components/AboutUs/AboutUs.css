@@ -1,0 +1,46 @@
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  transition: all 0.1s ease-in-out !important;
+}
+
+.about-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+
+.about-title {
+  font-family: "Bad Script", cursive;
+  font-size: 4.2rem;
+}
+
+.text-yello-var{
+    color: #ffd28d !important;
+}
+
+/* .about-title.light {
+  color: gray;
+} */
+
+.about-description {
+  font-size: 1.25rem;
+  margin-top: 1.2rem; 
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  line-height: 2.5rem;
+}
+.about-description strong{
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.about-container::before {
+  content: "";
+  background-image: url('../../images/img3.jpg');
+  background-size:contain;
+  flex: 1;
+  height: 100%;
+}

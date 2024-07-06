@@ -41,7 +41,7 @@ import RestaurantHome from "./components/restaurant/home/RestaurantHome.jsx";
 import Reservation from "./components/restaurant/reservation/Reservation.jsx";
 import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
-import Tables from "./components/restaurant/restaurant-tables/Tables.jsx";
+// import Tables from "./components/restaurant/tables/Tables.jsx";
 
 // Checkout Details
 import Checkout from "./components/checkout/Checkout.jsx";
@@ -79,6 +79,11 @@ import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
 import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
 import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
 import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
+import ShowReservation from "./components/userDashboard/show/ShowReservation.jsx";
+
+// notifaication and about us
+import RestaurantLocationNotifications from "./components/Notification/RestaurantLocationNotifications.jsx";
+import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
 const Layout = () => (
   <>
@@ -91,13 +96,13 @@ function App() {
   const routes = createRoutesFromElements(
     <Route element={<Layout />}>
       {/* Auth Routes */}
-      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/specific" element={<SpecificCategories />} />
+      <Route path="/verify" element={<Verify />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/verify" element={<Verify />} />
+      <Route path="/" element={<Home />} />
 
       {/* User Routes */}
       <Route path="/userprofile" element={<UserProfile />} />
@@ -109,7 +114,7 @@ function App() {
         <Route path="branches" element={<Branches />} />
         <Route path="menu" element={<Menu />} />
         <Route path="reservation/:tableId" element={<Reservation />} />
-        <Route path="tables" element={<Tables />} />
+        {/* <Route path="tables" element={<Tables />} /> */}
       </Route>
 
       {/* Reservation Checkout */}
@@ -150,6 +155,8 @@ function App() {
           path="location-table/:locationId"
           element={<RestaurantCategory />}
         />
+
+        <Route path="reservation" element={<ShowReservation />} />
       </Route>
 
       <Route path="/edit-restaurant/:restaurantId" element={<EditDetails />} />
@@ -199,14 +206,39 @@ function App() {
       />
 
       {/* AdminDashboard */}
-      <Route path="/admin" element={<AdminDashboard />} />
+      {/*<Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/rating" element={<Ratings />} />
       <Route path="/admin/report" element={<ReportList />} />
       <Route path="/admin/about" element={<About />} />
       <Route path="/admin/comments" element={<CommentsAdmin />} />
       <Route path="/admin/restaurants" element={<RestaurantList />} />
-      <Route path="/add-restaurant/:id" element={<AddRest />} />
       <Route path="/restaurant/:id" element={<RestaurantShow />} />
+      </Route> */}
+
+      {/* AdminDashboard */}
+      {/* <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/rating" element={<Ratings />} />
+      <Route path="/admin/report" element={<ReportList />} />
+      <Route path="/admin/category" element={<Category/>} />
+      <Route path="/admin/about" element={<About />} />
+      <Route path="/admin/restaurant" element={<RestaurantList />} />
+      <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
+
+      {/* Admin Routes  Edited By : Nagy*/}
+      <Route path="/admin" element={<AdminDashboard />}>
+        <Route path="rating" element={<Ratings />} />
+        <Route path="report" element={<ReportList />} />
+        <Route path="about" element={<About />} />
+        <Route path="comments" element={<CommentsAdmin />} />
+        <Route path="restaurants" element={<RestaurantList />} />
+      </Route>
+      <Route path="/add-restaurant/:id" element={<AddRest />} />
+
+      <Route path="/notify" element={<RestaurantLocationNotifications />} />
+
+      <Route path="/restaurant/:id" element={<RestaurantShow />} />
+
+      <Route path="/about-us" element={<AboutUs />} />
     </Route>
   );
 
