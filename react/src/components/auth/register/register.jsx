@@ -433,7 +433,7 @@ const Register = () => {
                       onChange={handleChange}
                     >
                       <MenuItem value="user">User</MenuItem>
-                      <MenuItem value="admin">Admin</MenuItem>
+                      <MenuItem value="owner">Ownner</MenuItem>
                     </TextField>
                   </Grid>
                 </Grid>
