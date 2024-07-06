@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRestaurantAsync } from '../../slices/restaurant/restaurantSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import './admin.css';
 
 const AddRest = () => {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ const AddRest = () => {
 
   return (
     <main className="container ">
-      <section className='w-50 '>
+      <section className='w-50 m-auto formAdd'>
         <h2 className='text-center my-5'>Add New Restaurant</h2>
         {errorMessage && (
           <div className="alert alert-danger" role="alert">
@@ -223,9 +224,11 @@ const AddRest = () => {
               onChange={handleFileChange} />
           </div>
 
-          <button type="submit" className="btn btn-warning my-3 col-12">
-            Submit
-          </button>
+          <div className=" text-center">
+            <button type="submit" className="btn btn-dark my-3 ">
+                Submit
+            </button>
+          </div>
         </form>
       </section>
     </main>

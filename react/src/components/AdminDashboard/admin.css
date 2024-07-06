@@ -93,3 +93,16 @@ strong{
 }
 
 /* ======================================= */
+.formAdd{
+    background-color: #ffd28d;
+    padding:20px;
+    color: #000000;
+    border-radius: 20px;
+}
+.formAdd h2{
+    font-family:"Bad Script", cursive ;
+    font-weight: bolder;
+}
+.formAdd label{
+    color:#000000;
+}
