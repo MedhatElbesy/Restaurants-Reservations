@@ -4,6 +4,7 @@
   justify-content: center;
   padding: 20px;
   overflow-x: hidden;
+ 
 }
 
 .static-container img {
@@ -11,10 +12,12 @@
   height: 100%;
   border-radius: 5px;
   z-index: 0;
+  margin-top: 30%;
 }
 
 
 .slide-content {
+  margin-top: 21%;
   opacity: 0;
   display: flex;
   flex-direction: column;
