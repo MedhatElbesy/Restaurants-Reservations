@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../../slices/adminDashboard/adminSlice';
 import { Spinner, Alert, Card, Container } from 'react-bootstrap';
 
-const Comments = () => {
+const CommentsAdmin = () => {
   const dispatch = useDispatch();
   const { comments, loading, error } = useSelector((state) => state.adminDashboard);
 
@@ -34,4 +34,4 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default CommentsAdmin;
