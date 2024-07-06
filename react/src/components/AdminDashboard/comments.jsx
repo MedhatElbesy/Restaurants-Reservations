@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchComments, deleteComment } from '../../slices/adminDashboard/adminSlice';
+import { fetchComments } from '../../slices/adminDashboard/adminSlice';
+import {deleteComment } from '../../slices/review/commentsSlice'
 import { Alert, Card, Container } from 'react-bootstrap';
 import Loader from '../../layouts/loader/loader';
 import { Box, Typography, Grid, IconButton } from '@mui/material';

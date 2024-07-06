@@ -79,3 +79,5 @@ export const getComments = async () => {
     throw error;
   }
 };
+
+//delete comments

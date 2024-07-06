@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
-
+.container-fluid{
+    overflow-x: hidden;
+}
   
-h2{
+.side h1{
     font-family: "Fugaz One", sans-serif;
-    color: rgb(255, 152, 27);
+    color: #ffd28d;
+    text-align: center;
+    padding-top: 50px;
 }
-.bg{
-    background-color: #ffd28d;
-}
+
 h3{
     
     font-family: "Bad Script", cursive;
@@ -17,19 +19,71 @@ h3{
     padding-top: 15px;
     font-size: 50px;
 }
+nav{
+    padding-top: 100px; 
+}
 .side{
-    background-color: #ffd28d;
+    background-color: #000000;
     min-height: 100vh;
+    position: fixed;
+    top: 9%;
+    left: 0;
+    bottom: 0;
+    min-width: 300px;
+    overflow-y: auto;
 }
 
 .menuadmin{
     font-family: "Bad Script", cursive;
-    padding: 50px 0;
+    padding: 15px 0;
+    display: block;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
     
 }
 .menuadmin span{
     font-size: 35px;
 }
 .menuadmin span:hover{
-    color:black;
+    color:#ffd28d;
+}
+
+.mainview{
+    margin-left: 320px; 
+    padding: 20px;
+    position: relative;
+    overflow: hidden; 
+    background-image: url('../../../public/images/1 (1).jpg'); 
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+.mainview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    z-index: 1; /* Ensure overlay is above background */
+}
+
+.main-content {
+    position: relative;
+    z-index: 2; /* Ensures content is above the overlay */
+}
+
+@media (max-width: 768px) {
+    .side {
+        width: 100%;
+        z-index: 1000;
+    }
+    .mainview {
+        margin-left: 0;
+        padding: 20px;
+    }
 }

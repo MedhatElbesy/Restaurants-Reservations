@@ -63,7 +63,6 @@ import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaura
 import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
 import Ratings from "./components/AdminDashboard/ratings.jsx";
 import ReportList from "./components/AdminDashboard/reports.jsx";
-// import  Category from "./components/AdminDashboard/Category.jsx";
 import About from "./components/AdminDashboard/About.jsx";
 import Verify from "./components/auth/register/verifyPage.jsx";
 import AddTableImage from "./components/userDashboard/add/AddTableImage.jsx";
