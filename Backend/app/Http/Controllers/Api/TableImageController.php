@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\TableImageResource;
 use App\Helpers\ApiResponse;
+use Illuminate\Support\Str;
 
 class TableImageController extends Controller
 {
@@ -25,7 +26,7 @@ class TableImageController extends Controller
         $request->validate([
             'table_id' => 'required|exists:tables,id',
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         DB::beginTransaction();
@@ -56,21 +57,30 @@ class TableImageController extends Controller
         return new TableImageResource($tableImage);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'table_id' => 'required|exists:table_images,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        $tableImage = TableImage::findOrFail($request->id);
+        $tableImage = TableImage::findOrFail($id);
 
         DB::beginTransaction();
         try {
-            Storage::disk('public')->delete('table_images/' . $tableImage->image);
 
-            $imagePath = $this->uploadImage($request, 'image', 'table_images');
-            $tableImage->image = basename($imagePath);
+            if ($tableImage->image || !(Str::startsWith($this->image, ['http://', 'https://']))) {
+                Storage::disk('public')->delete('table_images/' . $tableImage->image);
+            }
+
+            if ($request->hasFile('image')) {
+                $imagePath = $this->uploadImage($request, 'image', 'table_images');
+                if (!$imagePath) {
+                    throw new \Exception('Failed to upload the image');
+                }
+                $tableImage->image = basename($imagePath);
+            }
+
+            // Save the updated table image record
             $tableImage->save();
 
             DB::commit();
