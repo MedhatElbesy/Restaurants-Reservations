@@ -46,6 +46,7 @@ const AddUserAddress = () => {
     longitude: '',
     user_id: userId, 
   });
+  const [zipError, setZipError] = useState('');
 
   useEffect(() => {
     dispatch(fetchCountriesAsync());
@@ -75,10 +76,20 @@ const AddUserAddress = () => {
       ...formData,
       [name]: value,
     });
+    if (name === 'zip' && value.length !== 5) {
+      setZipError('The zip code must be 5 digits.');
+    } else {
+      setZipError('');
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.zip.length !== 5) {
+      setZipError('The zip code must be 5 digits.');
+      return;
+    }
 
     try {
       await dispatch(addUserAddressAsync({ userId, addressData: formData }))
@@ -94,148 +105,134 @@ const AddUserAddress = () => {
 
   return (
     <main className="container">
+      <section className='formUserDashboard'>
+        <h2 className='text-center my-4'>Add User Address</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="country_id" className="form-label">Country</label>
+            <select
+              className="form-control"
+              id="country_id"
+              name="country_id"
+              value={formData.country_id}
+              onChange={handleChange}
+            >
+              <option value="">Select Country</option>
+              {countries && countries.map(country => (
+                <option key={country.id} value={country.id}>{country.name}</option>
+              ))}
+            </select>
+          </div>
 
-     <section className='formUserDashboard'>
+          <div className="mb-3">
+            <label htmlFor="governorate_id" className="form-label">Governorate</label>
+            <select
+              className="form-control"
+              id="governorate_id"
+              name="governorate_id"
+              value={formData.governorate_id}
+              onChange={handleChange}
+            >
+              <option value="">Select Governorate</option>
+              {governorates && governorates.map(governorate => (
+                <option key={governorate.id} value={governorate.id}>{governorate.name}</option>
+              ))}
+            </select>
+          </div>
 
-       <h2 className='text-center my-4'>Add User Address</h2>
+          <div className="mb-3">
+            <label htmlFor="city_id" className="form-label">City</label>
+            <select
+              className="form-control"
+              id="city_id"
+              name="city_id"
+              value={formData.city_id}
+              onChange={handleChange}
+            >
+              <option value="">Select City</option>
+              {cities && cities.map(city => (
+                <option key={city.id} value={city.id}>{city.name}</option>
+              ))}
+            </select>
+          </div>
 
-       <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="state_id" className="form-label">State</label>
+            <select
+              className="form-control"
+              id="state_id"
+              name="state_id"
+              value={formData.state_id}
+              onChange={handleChange}
+            >
+              <option value="">Select State</option>
+              {states && states.map(state => (
+                <option key={state.id} value={state.id}>{state.name}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="country_id" className="form-label">Country</label>
-          <select
-            className="form-control"
-            id="country_id"
-            name="country_id"
-            value={formData.country_id}
-            onChange={handleChange}
-          >
-            <option value="">Select Country</option>
-            {countries && countries.map(country => (
-              <option key={country.id} value={country.id}>{country.name}</option>
-            ))}
-          </select>
-        </div>
-
-        
-        <div className="mb-3">
-          <label htmlFor="governorate_id" className="form-label">Governorate</label>
-          <select
-            className="form-control"
-            id="governorate_id"
-            name="governorate_id"
-            value={formData.governorate_id}
-            onChange={handleChange}
-          >
-            <option value="">Select Governorate</option>
-            {governorates && governorates.map(governorate => (
-              <option key={governorate.id} value={governorate.id}>{governorate.name}</option>
-            ))}
-          </select>
-        </div>
-
-       
-        <div className="mb-3">
-          <label htmlFor="city_id" className="form-label">City</label>
-          <select
-            className="form-control"
-            id="city_id"
-            name="city_id"
-            value={formData.city_id}
-            onChange={handleChange}
-          >
-            <option value="">Select City</option>
-            {cities && cities.map(city => (
-              <option key={city.id} value={city.id}>{city.name}</option>
-            ))}
-          </select>
-        </div>
-
-       
-        <div className="mb-3">
-          <label htmlFor="state_id" className="form-label">State</label>
-          <select
-            className="form-control"
-            id="state_id"
-            name="state_id"
-            value={formData.state_id}
-            onChange={handleChange}
-          >
-            <option value="">Select State</option>
-            {states && states.map(state => (
-              <option key={state.id} value={state.id}>{state.name}</option>
-            ))}
-          </select>
-        </div>
-
-       
-        <div className="mb-3">
-          <label htmlFor="address" className="form-label">Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="address"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-          />
-        </div>
-
-        
-        <div className="mb-3">
-          <label htmlFor="zip" className="form-label">Zip Code</label>
-          <input
-            type="number"
-            className="form-control"
-            id="zip"
-            name="zip"
-            value={formData.zip}
-            onChange={handleChange}
-          />
-        </div>
-
-       
-        <div className="mb-3">
-          <label htmlFor="latitude" className="form-label">Latitude</label>
-          <input
-            type="text"
-            className="form-control"
-            id="latitude"
-            name="latitude"
-            value={formData.latitude}
-            onChange={handleChange}
-          />
-        </div>
-
-       
-        <div className="mb-3">
-          <label htmlFor="longitude" className="form-label">Longitude</label>
-          <input
-            type="text"
-            className="form-control"
-            id="longitude"
-            name="longitude"
-            value={formData.longitude}
-            onChange={handleChange}
-          />
-        </div>
-
-      
-        <section className="mb-3">
-          <MapContainer center={position || [51.505, -0.09]} zoom={13} style={{ height: '300px' }}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          <div className="mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
             />
-            <LocationMarker position={position} setPosition={setPosition} setFormData={setFormData} />
-          </MapContainer>
-        </section>
+          </div>
 
-       
-        <button type="submit" className="btn btn-warning my-4 col-12">Add Address</button>
+          <div className="mb-3">
+            <label htmlFor="zip" className="form-label">Zip Code</label>
+            <input
+              type="number"
+              className="form-control"
+              id="zip"
+              name="zip"
+              value={formData.zip}
+              onChange={handleChange}
+            />
+            {zipError && <div className="text-danger">{zipError}</div>}
+          </div>
 
-      </form>
+          <div className="mb-3">
+            <label htmlFor="latitude" className="form-label">Latitude</label>
+            <input
+              type="text"
+              className="form-control"
+              id="latitude"
+              name="latitude"
+              value={formData.latitude}
+              onChange={handleChange}
+            />
+          </div>
 
+          <div className="mb-3">
+            <label htmlFor="longitude" className="form-label">Longitude</label>
+            <input
+              type="text"
+              className="form-control"
+              id="longitude"
+              name="longitude"
+              value={formData.longitude}
+              onChange={handleChange}
+            />
+          </div>
+
+          <section className="mb-3">
+            <MapContainer center={position || [51.505, -0.09]} zoom={13} style={{ height: '300px' }}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              <LocationMarker position={position} setPosition={setPosition} setFormData={setFormData} />
+            </MapContainer>
+          </section>
+
+          <button type="submit" className="btn btn-warning my-4 col-12">Add Address</button>
+        </form>
       </section>
     </main>
   );
