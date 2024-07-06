@@ -25,14 +25,30 @@ export default function AboutUs() {
           convenient and user-friendly platform to streamline your dining
           experience.
           <br />
-          <strong> Make Reservations with Ease:</strong> Our website allows you
-          to effortlessly search for restaurants, browse menus, and secure
-          reservations at your desired time and date. You can even manage your
-          reservations and receive confirmation notifications all in one place.
-          <strong>Dedicated to Your Satisfaction:</strong> We are committed to
-          providing a seamless and enjoyable reservation process. Whether you're
-          planning a special occasion or a casual night out, our website
-          empowers you to make the most of your dining experience.
+          <strong
+            className={`p-1 about-description text-${
+              bodyColor === "light" ? "dark" : "light"
+            }`}
+          >
+            {" "}
+            Make Reservations with Ease:
+          </strong>
+          Our website allows you to effortlessly search for restaurants, browse
+          menus, and secure reservations at your desired time and date. You can
+          even manage your reservations and receive confirmation notifications
+          all in one place.
+          <br/>
+          <strong
+            className={` mt-1 p-1 about-description text-${
+              bodyColor === "light" ? "dark" : "light"
+            }`}
+          >
+            Dedicated to Your Satisfaction:  
+          </strong>
+           We are committed to providing a seamless and enjoyable reservation
+          process. Whether you're planning a special occasion or a casual night
+          out, our website empowers you to make the most of your dining
+          experience.
         </p>
       </div>
     </div>
