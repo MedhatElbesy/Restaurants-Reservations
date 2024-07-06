@@ -1,26 +1,18 @@
-import { NavLink, Route} from "react-router-dom";
+
+import { NavLink, Outlet } from "react-router-dom";
 import React from "react";
-import './admin.css';
+import "./admin.css";
 import {
-  
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Dropdown,
-
 } from "reactstrap";
-// import CommentsAdmin from "./comments";
-// import About from './About';
-// import Ratings from './ratings';
-// import Reports from './reports';
-// import RestaurantList from "./restaurantList";
+
 
 function AdminDashboard() {
-  // const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
-
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  
 
   return (
     <div className="container-fluid">
@@ -63,35 +55,44 @@ function AdminDashboard() {
             />
           </div>
           <nav className="nav flex-column text-center text-white">
-            <NavLink to="/admin/restaurant" className="nav-link text-white py-4 h1 menuadmin">
+            <NavLink
+              to="/admin/categories"
+              className="nav-link text-white py-4 h1 menuadmin"
+            >
               <span>Categories</span>
             </NavLink>
-            <NavLink to="/admin/rating" className="nav-link text-white py-4 menuadmin">
+            <NavLink
+              to="/admin/rating"
+              className="nav-link text-white py-4 menuadmin"
+            >
               <span>Ratings</span>
             </NavLink>
-            <NavLink to="/admin/report" className="nav-link text-white py-4 menuadmin">
+            <NavLink
+              to="/admin/report"
+              className="nav-link text-white py-4 menuadmin"
+            >
               <span>Reports</span>
             </NavLink>
-            <NavLink to="/admin/comments" className="nav-link text-white py-4 menuadmin">
+            <NavLink
+              to="/admin/comments"
+              className="nav-link text-white py-4 menuadmin"
+            >
               <span>Comments</span>
             </NavLink>
-            <NavLink to="/admin/about" className="nav-link text-white py-4 menuadmin">
+            <NavLink
+              to="/admin/about"
+              className="nav-link text-white py-4 menuadmin"
+            >
               <span>About</span>
             </NavLink>
           </nav>
         </div>
 
-         {/* <div className="col-10"> 
-          <Routes>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/restaurants" element={<RestaurantList />} />
-            <Route path="/admin/rating" element={<Ratings />} />
-            <Route path="/admin/report" element={<Reports />} />
-            <Route path="/admin/comments" element={<CommentsAdmin />}/>
-            <Route path="/admin/about" element={<About />} />
-         
-          </Routes>
-        </div>  */}
+
+        <div className="col-10">
+          <Outlet />
+        </div>
+
       </div>
     </div>
   );
