@@ -25,7 +25,7 @@ class Category extends Model
         if (Str::startsWith($this->cover, ['http://', 'https://'])) {
             return $this->cover;
         }
-        return url('storage/table_cover_images/' . $this->cover);
+        return url('storage/' . $this->cover);
     }
     public function user(): BelongsTo
     {

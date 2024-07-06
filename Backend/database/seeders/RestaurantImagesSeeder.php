@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ResturantImages;
+use App\Models\RestaurantImages;
 use Illuminate\Support\Facades\DB;
 
 class RestaurantImagesSeeder extends Seeder
@@ -29,7 +29,7 @@ class RestaurantImagesSeeder extends Seeder
 
         foreach ($restaurantIds as $restaurantId) {
             foreach ($imageUrls as $imageUrl) {
-                ResturantImages::create([
+                RestaurantImages::create([
                     'restaurant_id' => $restaurantId,
                     'image' => $imageUrl,
                 ]);

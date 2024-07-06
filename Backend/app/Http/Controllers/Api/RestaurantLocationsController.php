@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Events\ReservationCreated;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRestaurantLocationRequest;
-use App\Http\Requests\UpdateRestaurantLocationsRequest;
+use App\Http\Requests\Restaurant\StoreRestaurantLocationRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantLocationsRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantLocation;
 use App\Models\RestaurantLocationImage;
-use App\Models\User;
 use App\Notifications\RestaurantLocationCreated;
 use App\Traits\UploadImageTrait;
 use Exception;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
-use Illuminate\Support\Facades\Auth;
 
-class RestaurantlocationsController extends Controller
+class RestaurantLocationsController extends Controller
 {
     use UploadImageTrait;
 
@@ -52,7 +49,7 @@ class RestaurantlocationsController extends Controller
 
             $restaurantLocation = RestaurantLocation::create($validatedData);
             if ($images = $request->file('images')) {
-                $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
+                $uploadedImages = $this->uploadMultipleImages($images, 'locations_images');
 
                 foreach ($uploadedImages as $imageName) {
                     RestaurantLocationImage::create([
@@ -105,7 +102,7 @@ class RestaurantlocationsController extends Controller
             $location->update($request->validated());
 
             if ($images = $request->file('images')) {
-            $uploadedImages = $this->uploadMultipleImages($images, 'product_images');
+            $uploadedImages = $this->uploadMultipleImages($images, 'locations_images');
 
             foreach ($location->images as $image) {
                 Storage::disk('public')->delete($image->image);

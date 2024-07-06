@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRestaurantCategory extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,7 @@ class StoreRestaurantCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'restaurant_id' => 'required|exists:restaurants,id',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:enabled,disabled,deleted',
+            //
         ];
     }
 }

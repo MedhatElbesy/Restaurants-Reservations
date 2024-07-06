@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Restaurant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategory extends FormRequest
+class UpdateRestaurantCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,9 @@ class StoreCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:categories,name',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-            'status' => 'required|in:Enabled,Disabled,Deleted',
+            'restaurant_id' => 'required|exists:restaurants,id',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'required|in:enabled,disabled,deleted',
         ];
     }
 }

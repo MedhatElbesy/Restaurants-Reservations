@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRestaurantRequest;
-use App\Http\Requests\UpdateRestaurantLocationsRequest;
-use App\Http\Requests\UpdateRestaurantRequest;
+use App\Http\Requests\Restaurant\StoreRestaurantLocationRequest;
+use App\Http\Requests\Restaurant\StoreRestaurantRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantLocationsRequest;
+use App\Http\Requests\Restaurant\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantCategoryResource;
 use App\Http\Resources\RestaurantResource;
 use App\Http\Resources\MenuCategoryResource;
@@ -14,33 +15,41 @@ use App\Models\Category;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use App\Models\RestaurantLocation;
+use App\Traits\UploadImageTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RestaurantController extends Controller
 {
+    use UploadImageTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $restaurants = Restaurant::select('name','description', 'cover','status')->withCount('locations')->get();
-        if ($restaurants) {
+        $restaurants = Restaurant::select('name', 'description', 'cover', 'status')->withCount('locations')->get();
+
+        // Transform the result to include cover_url
+        $restaurants->each(function ($restaurant) {
+            $restaurant->cover_url = $restaurant->cover_url;
+        });
+
+        if ($restaurants->isNotEmpty()) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
         }
-        return ApiResponse::sendResponse(404, 'There are no  restaurants');
+        return ApiResponse::sendResponse(404, 'There are no restaurants');
     }
 
     /**
      * Store a newly created resource in storage.
      */
 
-    public function store(StoreRestaurantRequest $request)
+    public function store(StoreRestaurantRequest $request) : JsonResponse
     {
         try {
             $validatedData = $request->validated();
-            $logoPath = null;
-            $coverPath = null;
 
             DB::beginTransaction();
 
@@ -51,10 +60,15 @@ class RestaurantController extends Controller
                 'summary' => $validatedData['summary'],
                 'description' => $validatedData['description'],
                 'status' => $validatedData['status'] ?? 'Active',
+                'logo'=> $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null,
+                'cover'=> $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
             ]);
 
             if ($request->has('locations')) {
-                foreach ($validatedData['locations'] as $locationData) {
+                foreach ($request->locations as $locationData) {
+                    $locationRequest = new Request($locationData);
+                    $locationRequest->validate((new StoreRestaurantLocationRequest())->rules());
+
                     RestaurantLocation::create([
                         'restaurant_id' => $restaurant->id,
                         'address' => $locationData['address'],
@@ -76,34 +90,7 @@ class RestaurantController extends Controller
                     ]);
                 }
             }
-
-            if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $logoName = time() . '_logo.' . $logo->getClientOriginalExtension();
-
-                if (!$logo->move(public_path('images'), $logoName)) {
-                    DB::rollback();
-                    return ApiResponse::sendResponse(500, 'Failed to upload logo');
-                }
-
-                $logoPath = $logoName;
-                $restaurant->logo = $logoPath;
-            }
-
-            if ($request->hasFile('cover')) {
-                $cover = $request->file('cover');
-                $coverName = time() . '_cover.' . $cover->getClientOriginalExtension();
-
-                if (!$cover->move(public_path('images'), $coverName)) {
-                    DB::rollback();
-                    return ApiResponse::sendResponse(500, 'Failed to upload cover');
-                }
-
-                $coverPath = $coverName;
-                $restaurant->cover = $coverPath;
-            }
-
-            $restaurant->save();
+            $restaurant->load('restaurant_images', 'locations');
             DB::commit();
             return ApiResponse::sendResponse(201, 'Restaurant Created Successfully', new RestaurantResource($restaurant));
         } catch (\Throwable $e) {
@@ -122,7 +109,7 @@ class RestaurantController extends Controller
             'locations.tables.images',
             'locations',
             'categories',
-            'resturant_images',
+            'restaurant_images',
             'menuCategories.menuItems'
 
         ])->findOrFail($id);

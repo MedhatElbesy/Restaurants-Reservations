@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTableAvailabilityRequest;
-use App\Http\Requests\UpdateTableAvailabilityRequest;
+use App\Http\Requests\Table\StoreTableAvailabilityRequest;
+use App\Http\Requests\Table\UpdateTableAvailabilityRequest;
 use App\Models\TableAvailability;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TableAvailabilityController extends Controller
 {
@@ -32,7 +30,7 @@ class TableAvailabilityController extends Controller
         }
         return ApiResponse::sendResponse(200, 'Table availability retrieved successfully.',$availability );
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */

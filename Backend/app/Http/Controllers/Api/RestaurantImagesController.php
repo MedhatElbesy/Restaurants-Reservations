@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\ResturantImages;
+use App\Models\RestaurantImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ResturantImagesController extends Controller
+class RestaurantImagesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $images = ResturantImages::all();
+        $images = RestaurantImages::all();
         return response()->json($images);
     }
 
@@ -32,12 +32,12 @@ class ResturantImagesController extends Controller
             $image = $request->file('image');
             $imagePath = $image->store('images/restaurant_images/', 'public');
 
-            $resturantImage = ResturantImages::create([
+            $restaurantImage = RestaurantImages::create([
                 'restaurant_id' => $request->input('restaurant_id'),
                 'image' => $imagePath,
             ]);
 
-            return response()->json($resturantImage, 201);
+            return response()->json($restaurantImage, 201);
         }
 
         return response()->json(['error' => 'Image upload failed'], 500);
@@ -48,7 +48,7 @@ class ResturantImagesController extends Controller
      */
     public function show(string $id)
     {
-        $image = ResturantImages::find($id);
+        $image = RestaurantImages::find($id);
         if ($image) {
             return response()->json($image);
         }
@@ -64,7 +64,7 @@ class ResturantImagesController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $image = ResturantImages::find($id);
+        $image = RestaurantImages::find($id);
         if (!$image) {
             return response()->json(['error' => 'Image not found'], 404);
         }
@@ -90,7 +90,7 @@ class ResturantImagesController extends Controller
      */
     public function destroy(string $id)
     {
-        $image = ResturantImages::find($id);
+        $image = RestaurantImages::find($id);
         if (!$image) {
             return response()->json(['error' => 'Image not found'], 404);
         }
