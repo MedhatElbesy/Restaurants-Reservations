@@ -153,6 +153,7 @@ Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
 
+Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
+Route::get('cancel', [PayPalController::class, 'paymentCancel'])->name('payment.cancel');
+Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('payment.success');
 
-// Route::get('payment/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');
-// Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');

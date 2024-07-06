@@ -5,31 +5,43 @@ namespace App\Http\Controllers;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
+use Srmklive\PayPal\Facades\PayPal;
 class PayPalController extends Controller
 {
 
-    public function index()
-    {
-        return view('auth.paypal');
-    }
-
-
     public function payment(Request $request)
     {
-        $data = [];
-        $data['items'] = [];
+        $provider = PayPal::setProvider();
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
 
+        $order = [
+            "intent" => "CAPTURE",
+            "application_context" => [
+                "return_url" => route('payment.success'),
+                "cancel_url" => 'http://localhost:4200/owner/payment/paypal',
+            ],
+            "purchase_units" => [
+                [
+                    "reference_id" => 1,
+                    "description" => "Reservation payment",
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => 50
+                        ]
+                ]
+            ]
+        ];
+        $response = $provider->createOrder($order);
 
-
-        $data['invoice_id'] = 1;
-        $data['invoice_description']= "desi";
-        $data['return_url'] = 'http://127.0.0.1:8000/payment/success';
-        $data['cancel_url'] = 'http://127.0.0.1:8000/cancel';
-        $data['total'] = 1000;
-        $provider = new ExpressCheckout;
-        $response = $provider->setExpressCheckout($data, true);
-        dd($response);
-        return redirect($response['paypal_link']);
+        if (isset($response['id'])) {
+            foreach ($response['links'] as $link) {
+                if ($link['rel'] === 'approve') {
+                    return ["link"=>$link['href']];
+                }
+            }
+        }
+        return redirect()->route('paypal.cancel');
     }
 
 
@@ -41,13 +53,16 @@ class PayPalController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        $provider = new ExpressCheckout;
-        $response = $provider->getExpressCheckoutDetails($request->token);
+        $provider = PayPal::setProvider();
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
 
-        if(in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])){
+    $response = $provider->capturePaymentOrder($request->token);
+            // dd($response);
+    if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+        return response()->json(['message' => 'Payment successful'], 200);
 
-            return response()->json($response);
-        }
-            return response()->json("fail payment",402);
+    }
+        return response()->json(['message' => 'Payment failed'], 400);
     }
 }
