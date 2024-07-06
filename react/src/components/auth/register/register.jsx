@@ -25,6 +25,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
+import "./register.css"
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -103,7 +104,7 @@ const Register = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh" }} className="register">
         <CssBaseline />
         <Grid
           item
