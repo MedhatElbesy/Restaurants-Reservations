@@ -24,12 +24,9 @@ Route::get('/pusher', function () {
 });
 
 // Route::get('paypal', [PayPalController::class, 'index'])->name('paypal');
-Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
-Route::get('cancel', [PayPalController::class, 'paymentCancel'])->name('payment.cancel');
-Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('payment.success');
-
-
-
+// Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
+// Route::get('cancel', [PayPalController::class, 'paymentCancel'])->name('payment.cancel');
+// Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('payment.success');
 
 
 Route::controller(StripePaymentController::class)->group(function(){

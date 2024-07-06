@@ -76,7 +76,9 @@ import EditTableAvailability from "./components/userDashboard/edit/EditTableAvai
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
 import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome.jsx";
 import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
-import RestaurantShow from "./components/AdminDashboard/RestaurantDetails.jsx";
+import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
+import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
+import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
 
 const Layout = () => (
   <>
@@ -200,9 +202,10 @@ function App() {
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/rating" element={<Ratings />} />
       <Route path="/admin/report" element={<ReportList />} />
-      {/* <Route path="/admin/category" element={<Category/>} /> */}
       <Route path="/admin/about" element={<About />} />
-      <Route path="/admin/restaurant" element={<RestaurantList />} />
+      <Route path="/admin/comments" element={<CommentsAdmin />} />
+      <Route path="/admin/restaurants" element={<RestaurantList />} />
+      <Route path="/add-restaurant/:id" element={<AddRest />} />
       <Route path="/restaurant/:id" element={<RestaurantShow />} />
     </Route>
   );

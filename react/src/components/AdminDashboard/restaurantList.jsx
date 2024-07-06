@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRestaurants } from "../../slices/adminDashboard/adminSlice";
+import {
+  fetchRestaurants,
+  disableRestaurantById,
+} from "../../slices/adminDashboard/adminSlice";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import RestaurantModal from "./RestaurantDetails";
+import RestaurantModal from "./AddRestaurant";
 import { Typography } from "@mui/material";
 import Loader from "../../layouts/loader/loader";
+import "./admin.css";
 
 const RestaurantList = () => {
   const dispatch = useDispatch();
@@ -18,10 +22,6 @@ const RestaurantList = () => {
 
   const toggleModal = () => setModalOpen(!modalOpen);
 
-  // const handleShowDetails = (restaurant) => {
-  //   setSelectedRestaurant(restaurant);
-  //   toggleModal();
-  // };
   const navTo = (link) => {
     navigate(link);
   };
@@ -32,9 +32,14 @@ const RestaurantList = () => {
     }
   }, [dispatch, status]);
 
-  useEffect(() => {
-    console.log("Restaurants data:", restaurants);
-  }, [restaurants]);
+  const handleDisable = (id) => {
+    dispatch(disableRestaurantById(id));
+  };
+
+  const openRestaurantModal = (restaurant) => {
+    setSelectedRestaurant(restaurant);
+    toggleModal();
+  };
 
   return (
     <div className="container">
@@ -48,7 +53,13 @@ const RestaurantList = () => {
           margin: "20px",
         }}
       >
-        Restaurant
+        Restaurant{" "}
+        <span
+          onClick={() => navTo("/add-restaurant/{$id}")}
+          style={{ cursor: "pointer" }}
+        >
+          <i className="bi bi-patch-plus-fill"></i>
+        </span>
       </Typography>
       {status === "loading" && <Loader size={25} />}
       {status === "failed" && <p>Error: {error.message}</p>}
@@ -56,7 +67,17 @@ const RestaurantList = () => {
         {restaurants && restaurants.length > 0 ? (
           restaurants.map((restaurant) => (
             <div key={restaurant.id} className="col-md-4 mb-4">
-              <Card style={{ width: "18rem" }}>
+              <Card
+                sx={{
+                  boxShadow: "none",
+                  margin: "20px",
+                  width: "19rem",
+                  transition: "box-shadow 0.3s ease-in-out",
+                  "&:hover": {
+                    boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)",
+                  },
+                }}
+              >
                 <img
                   alt="Sample"
                   src={restaurant.cover}
@@ -67,41 +88,52 @@ const RestaurantList = () => {
                   }}
                 />
                 <CardBody>
-                  <CardTitle tag="h5">{restaurant.name}</CardTitle>
-                  <CardText>{restaurant.description}</CardText>
-                  <div onClick={() => navTo(`/restaurant/${restaurant.id}`)}>
+                  <CardTitle tag="h5">
+                    <strong>Restaurant Name: </strong> {restaurant.name}
+                  </CardTitle>
+                  <CardText>
+                    <strong>Description: </strong> {restaurant.description}
+                  </CardText>
+                  <CardText>
+                    <strong>No. of Branches: </strong>{" "}
+                    {restaurant.locations_count}
+                  </CardText>
+                  <CardText>
+                    <strong>Status: </strong> {restaurant.status}
+                  </CardText>
+                  <span onClick={() => navTo(`/restaurant/${restaurant.id}`)}>
                     <Button className="rounded-circle m-2" color="success">
                       <i className="bi bi-eye-fill"></i>
                     </Button>
-                  </div>
-                  <Link
-                    to={`/edit-restaurant/${restaurant.id}`}
+                  </span>
+                  <span
+                    onClick={() => navTo(`/edit-restaurant/${restaurant.id}`)}
                     className="ml-2"
                   >
                     <Button color="warning" className="rounded-circle m-2">
                       <i className="bi bi-pencil-square"></i>
                     </Button>
-                  </Link>
-                  <Link>
+                  </span>
+                  <span onClick={() => handleDisable(restaurant.id)}>
                     <Button color="danger" className="rounded-circle m-2">
                       <i className="bi bi-trash3-fill"></i>
                     </Button>
-                  </Link>
+                  </span>
                 </CardBody>
               </Card>
-              {selectedRestaurant && (
-                <RestaurantModal
-                  isOpen={modalOpen}
-                  toggle={toggleModal}
-                  restaurant={selectedRestaurant}
-                />
-              )}
             </div>
           ))
         ) : (
           <p>No restaurants available</p>
         )}
       </div>
+      {selectedRestaurant && (
+        <RestaurantModal
+          isOpen={modalOpen}
+          toggle={toggleModal}
+          restaurant={selectedRestaurant}
+        />
+      )}
     </div>
   );
 };
