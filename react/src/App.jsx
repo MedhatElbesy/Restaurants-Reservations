@@ -80,6 +80,12 @@ import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
 import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
 import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
 
+
+// notifaication and about us
+import RestaurantLocationNotifications from './components/Notification/RestaurantLocationNotifications.jsx';
+import AboutUs from './components/AboutUs/AboutUs.jsx'
+
+
 const Layout = () => (
   <>
     <MyNavbar />
@@ -260,7 +266,7 @@ function App() {
 
 
       {/* AdminDashboard */}
-      <Route path="/admin" element={<AdminDashboard />} />
+      {/*<Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/rating" element={<Ratings />} />
       <Route path="/admin/report" element={<ReportList />} />
       <Route path="/admin/about" element={<About />} />
@@ -268,7 +274,35 @@ function App() {
       <Route path="/admin/restaurants" element={<RestaurantList />} />
       <Route path="/add-restaurant/:id" element={<AddRest />} />
       <Route path="/restaurant/:id" element={<RestaurantShow />} />
-    </Route>
+    </Route> */}
+
+          {/* AdminDashboard */}
+      {/* <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/admin/rating" element={<Ratings />} />
+      <Route path="/admin/report" element={<ReportList />} />
+      <Route path="/admin/category" element={<Category/>} />
+      <Route path="/admin/about" element={<About />} />
+      <Route path="/admin/restaurant" element={<RestaurantList />} />
+      <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
+
+      {/* Admin Routes  Edited By : Nagy*/}
+      <Route path="/admin" element={<AdminDashboard />}>
+        <Route path="rating" element={<Ratings />} />
+        <Route path="report" element={<ReportList />} />
+        <Route path="about" element={<About />} />
+        <Route path="restaurants" element={<RestaurantList />} />
+      </Route>
+       
+
+      <Route path='/notify' element={<RestaurantLocationNotifications/>}/>
+
+
+      <Route path="/restaurant/:id" element={<RestaurantShow />} />
+      
+       <Route path='/about-us' element = {<AboutUs/>}/>
+       </Route>
+
+
   );
 
   const router = createBrowserRouter(routes);
