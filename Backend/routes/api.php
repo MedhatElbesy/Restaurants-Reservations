@@ -151,5 +151,5 @@ Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
 
-
+Route::post('reservations/{reservation}/change-status', [CategoryController::class, 'changeStatus']);
 
