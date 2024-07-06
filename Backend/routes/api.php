@@ -150,6 +150,8 @@ Route::apiResource('reservations', ReservationController::class)->middleware('au
 Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
+Route::put('/restaurants/{id}/update-status', [RestaurantController::class, 'updateStatus']);
 
 
-
+// Route::get('payment/cancel', [PayPalController::class, 'paymentCancel'])->name('paypal.cancel');
+// Route::get('payment/success', [PayPalController::class, 'paymentSuccess'])->name('paypal.success');

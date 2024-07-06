@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('total_price', 10, 2)->default(0.00);
             $table->text('notes')->nullable();
             $table->boolean('terms_and_conditions')->default(false);
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
