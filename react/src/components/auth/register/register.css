@@ -7,4 +7,11 @@
     font-family: "Fugaz One", sans-serif;
     letter-spacing: 0.3rem;
   }
+  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #632e1579 !important;
+  }
+
+  .Mui-focused {
+    color: #7b3b1ea4 !important;
+  }
 }

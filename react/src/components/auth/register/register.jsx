@@ -25,7 +25,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { register as registerUser } from "../../../slices/auth/authSlice";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
-import "./register.css"
+import "./register.css";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -77,23 +77,14 @@ const Register = () => {
       return;
     }
 
-    // if (!formData.roles_name) {
-    //   Swal.fire({
-    //     title: "Oops...",
-    //     text: "Please select you want to register as a user or an admin.",
-    //   });
-    //   return;
-    // }
-
     try {
-      const response = await dispatch(registerUser(formData)).unwrap();
-      sessionStorage.setItem("token", response.token);
+      await dispatch(registerUser(formData)).unwrap();
       Swal.fire({
         icon: "success",
         title: "Registration successful!",
         text: "A verification email has been sent to your email address.",
       });
-      navigate("/verify/:token");
+      navigate("/verify");
     } catch (err) {
       Swal.fire({
         title: "Oops...",
@@ -104,7 +95,12 @@ const Register = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh" }} className="register">
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh" }}
+        className="register"
+      >
         <CssBaseline />
         <Grid
           item
@@ -252,6 +248,28 @@ const Register = () => {
                       })}
                       error={!!errors.email}
                       helperText={errors.email?.message}
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      size="small"
+                      id="mobile_number"
+                      label="Mobile Number"
+                      name="mobile_number"
+                      autoComplete="tel"
+                      {...register("mobile_number", {
+                        required: "Mobile number is required",
+                        pattern: {
+                          value: /^01\d{9}$/,
+                          message: "Invalid mobile number",
+                        },
+                      })}
+                      error={!!errors.mobile_number}
+                      helperText={errors.mobile_number?.message}
                       onChange={handleChange}
                     />
                   </Grid>
@@ -437,7 +455,18 @@ const Register = () => {
                   </Button>
                   <Grid container justifyContent="flex-end">
                     <Grid item>
-                      <Link href="/login" variant="body2">
+                      <Link
+                        href="/login"
+                        variant="body2"
+                        sx={{
+                          color: "#7B3C1E",
+                          textDecorationColor: "#7B3C1E",
+                          "&:hover": {
+                            color: "#ac603c",
+                            textDecorationColor: "#ac603c",
+                          },
+                        }}
+                      >
                         Already have an account? Sign in
                       </Link>
                     </Grid>

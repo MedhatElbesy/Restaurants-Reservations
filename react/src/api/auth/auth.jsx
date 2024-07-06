@@ -23,10 +23,6 @@ export const registerUser = async (userData) => {
   data.append("birth_date", userData.birth_date);
   data.append("roles_name", userData.roles_name);
   try {
-
-    for (let pair of data.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
     const response = await axios.post(`/register`, data, {
       headers: {
         "Content-Type": "multipart/form-data",

@@ -19,7 +19,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { login } from "../../../slices/auth/authSlice";
-
+import "./login.css"
 const defaultTheme = createTheme();
 
 const Login = () => {
@@ -46,19 +46,18 @@ const Login = () => {
     try {
       await dispatch(login(data)).unwrap();
       navigate("/");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Invalid email or password",
+        // title: "Oops...",
+        text: error.message.msg,
       });
     }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh" }} className="login-page">
         <CssBaseline />
         <Grid
           item
@@ -191,7 +190,14 @@ const Login = () => {
                   <Link
                     href="/forget-password"
                     variant="body2"
-                    sx={{ color: "#7B3C1E" }}
+                    sx={{
+                      color: "#7B3C1E",
+                      textDecorationColor: "#7B3C1E",
+                      "&:hover": {
+                        color: "#ac603c",
+                        textDecorationColor: "#ac603c",
+                      },
+                    }}
                   >
                     Forgot password?
                   </Link>
@@ -200,19 +206,26 @@ const Login = () => {
                   <Link
                     href="/register"
                     variant="body2"
-                    sx={{ color: "#7B3C1E" }}
+                    sx={{
+                      color: "#7B3C1E",
+                      textDecorationColor: "#7B3C1E",
+                      "&:hover": {
+                        color: "#ac603c",
+                        textDecorationColor: "#ac603c",
+                      },
+                    }}
                   >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center">
+              {/* <Grid container justifyContent="center">
                 <Grid item>
                   <Link href="/" variant="body2" sx={{ color: "#7B3C1E" }}>
                     Go Back
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
             </Box>
           </Box>
         </Grid>
