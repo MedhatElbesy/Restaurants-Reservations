@@ -30,7 +30,7 @@ use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TableImageController;
 use App\Http\Controllers\PayPalController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Api\ReportController;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -132,7 +132,7 @@ Route::get('comments/{restaurantId}', [CommentController::class, 'show']);
 Route::post('/reports', [ReportController::class, 'store']);
 Route::get('/reports', [ReportController::class, 'show']);
 Route::put('/reports/{reportId}/update-status', [ReportController::class, 'updateStatus']);
-Route::post('/ratings', [RatingController::class, 'store']);
+Route::post('/ratings', [RatingController::class, 'store'])->middleware('auth:sanctum');
 Route::get('/ratings', [RatingController::class, 'show']);
 
 Route::put('/ratings/{id}', [RatingController::class, 'update']);
