@@ -9,6 +9,7 @@ import CustomCalendar from "./Calender";
 import TimeAndAdditional from "./TimeAndAdditional";
 import ReservationForm from "./ReservationForm";
 import { useForm } from "react-hook-form";
+import { decryptData } from "../../../helpers/cryptoUtils";
 
 import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
 import "./Reservation.css";
@@ -99,9 +100,18 @@ const Reservation = () => {
       branchId: branch.id,
       tableId: table.id,
     };
-    navigate(`/reservation/checkout`, {
-      state: { reservationData },
-    });
+    if (decryptData("token")) {
+      navigate(`/reservation/checkout`, {
+        state: { reservationData },
+      });
+    } else {
+      Swal.fire({
+        title: "You need to login first",
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      navigate("/login");
+    }
   };
 
   const showError = (message) => {
@@ -115,7 +125,6 @@ const Reservation = () => {
       className="reservation d-flex flex-wrap justify-content-center"
       style={{ backgroundColor: "#edededf0" }}
     >
-
       {/* Map */}
       <div className="map col-12 col-sm-12 col-lg-4 order-1 order-lg-0">
         <MapContainer

@@ -7,7 +7,7 @@ import { useBranch } from "./BranchContext";
 import { BranchAddress } from "./BranchAddress";
 import { BranchOpening } from "./BranchOpening";
 import { BranchTables } from "./BranchTables";
-import  BranchComments from "../../review/comments/BranchComments"
+import BranchComments from "../../review/comments/BranchComments";
 import Tables from "../tables/TablesCollection";
 import "./Branches.css";
 
@@ -15,6 +15,14 @@ const Branches = () => {
   const { locations: branches } = useSelector((state) => state.restaurant);
   const [showTables, setShowTables] = useState(false);
   const { branch, setBranch } = useBranch();
+  let { branchId = "", showBranchTables = false } = location.state || {};
+  console.log(branchId);
+
+  useEffect(() => {
+    if (showBranchTables) {
+      setShowTables(showBranchTables);
+    }
+  }, [showBranchTables]);
 
   useEffect(() => {
     if (branches.length > 0 && !branch) {
@@ -41,8 +49,7 @@ const Branches = () => {
       >
         {branches.length > 0 ? (
           branches.map((branch) => (
-            <Tab key={branch.id} eventKey={branch.id} title={branch.city.name}
-            >
+            <Tab key={branch.id} eventKey={branch.id} title={branch.city.name}>
               <h2 className="text-sec text-center sec-font mt-4">
                 {branch.city.name}
               </h2>
@@ -66,12 +73,10 @@ const Branches = () => {
 const BranchDetails = ({ onShowTables }) => {
   const { branch } = useBranch();
 
-  // Check if branch is null or undefined, show loader if true
   if (!branch) {
     return <Loader />;
   }
 
-  // Render branch details once branch data is available
   return (
     <div className="row justify-content-md-between justify-content-center p-3">
       <BranchTables onShowTables={onShowTables} />
@@ -81,6 +86,5 @@ const BranchDetails = ({ onShowTables }) => {
     </div>
   );
 };
-
 
 export default Branches;

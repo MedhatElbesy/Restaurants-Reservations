@@ -43,7 +43,7 @@ import RestaurantHome from "./components/restaurant/home/RestaurantHome.jsx";
 import Reservation from "./components/restaurant/reservation/Reservation.jsx";
 import Branches from "./components/restaurant/branches/Branches.jsx";
 import Menu from "./components/restaurant/menu/Menu.jsx";
-// import Tables from "./components/restaurant/tables/Tables.jsx";
+import Tables from "./components/restaurant/restaurant-tables/Tables.jsx";
 
 // Checkout Details
 import Checkout from "./components/checkout/Checkout.jsx";
@@ -110,7 +110,7 @@ function App() {
         <Route path="branches" element={<Branches />} />
         <Route path="menu" element={<Menu />} />
         <Route path="reservation/:tableId" element={<Reservation />} />
-        {/* <Route path="tables" element={<Tables />} /> */}
+        <Route path="tables" element={<Tables />} />
       </Route>
 
       {/* Reservation Checkout */}

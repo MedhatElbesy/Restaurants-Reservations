@@ -8,6 +8,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     const token = decryptData("token");
+    console.log(token)
     config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
