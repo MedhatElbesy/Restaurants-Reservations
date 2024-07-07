@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/resources/views/emails/reservation.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720324870_668a13060a966.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720325567_668a15bfc8b51.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720325652_668a1614241af.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
@@ -157,18 +161,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Restaurants-Reservations/Backend/resources/views/emails",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -177,6 +182,11 @@
         <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Restaurants-Reservations\Backend\resources\views\emails" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -195,18 +205,33 @@
       <updated>1720319611143</updated>
       <workItem from="1720319624543" duration="2972000" />
       <workItem from="1720323878560" duration="214000" />
+      <workItem from="1720324211097" duration="662000" />
+      <workItem from="1720325215382" duration="1825000" />
     </task>
+    <task id="LOCAL-00001" summary="edits">
+      <option name="closed" value="true" />
+      <created>1720325752181</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720325752181</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="edits" />
+    <option name="LAST_COMMIT_MESSAGE" value="edits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
-          <line>26</line>
+          <line>27</line>
           <properties>
             <option name="className" value="\App\Http\Controllers\Api\ReservationController" />
             <option name="methodName" value="index" />
@@ -215,7 +240,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
-          <line>60</line>
+          <line>57</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
