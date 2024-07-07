@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { makeCheckout, getAllReservations } from "../../api/checkout/checkout";
+import {
+  makeCheckout,
+  getAllReservations,
+  updateUserReservationStatus,
+} from "../../api/checkout/checkout";
 
 export const checkoutReservation = createAsyncThunk(
   "checkout/checkoutResevation",
@@ -19,9 +23,26 @@ export const checkoutReservation = createAsyncThunk(
 
 export const getAllRestaurantReservations = createAsyncThunk(
   "checkout/getAllRestaurantReservations",
-  async (checkoutData, { rejectWithValue }) => {
+  async (restaurantId, { rejectWithValue }) => {
     try {
-      const data = await getAllReservations(checkoutData);
+      const data = await getAllReservations(restaurantId);
+      return data;
+    } catch (error) {
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.message,
+      });
+    }
+  }
+);
+
+export const updateReservationStatus = createAsyncThunk(
+  "checkout/updateReservationStatus",
+  async ({ reservationId, status }, { rejectWithValue }) => {
+    console.log(reservationId, status);
+    try {
+      const data = await updateUserReservationStatus(reservationId, status);
       return data;
     } catch (error) {
       return rejectWithValue({
@@ -48,6 +69,11 @@ const checkoutSlice = createSlice({
         state.loading = false;
         console.log(action.payload.data);
         state.reservations = action.payload.data;
+        state.status = "succeeded";
+      })
+      .addCase(updateReservationStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log(action.payload.data);
         state.status = "succeeded";
       })
       .addCase(checkoutReservation.fulfilled, (state) => {
