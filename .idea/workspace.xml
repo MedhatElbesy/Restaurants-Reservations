@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/resources/views/emails/reservation.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720324870_668a13060a966.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720325567_668a15bfc8b51.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720325652_668a1614241af.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,19 +157,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Restaurants-Reservations/Backend/resources/views/emails",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Restaurants-Reservations/Backend/resources/views/emails&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -207,6 +203,7 @@
       <workItem from="1720323878560" duration="214000" />
       <workItem from="1720324211097" duration="662000" />
       <workItem from="1720325215382" duration="1825000" />
+      <workItem from="1720332584280" duration="2015000" />
     </task>
     <task id="LOCAL-00001" summary="edits">
       <option name="closed" value="true" />
@@ -225,25 +222,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edits" />
     <option name="LAST_COMMIT_MESSAGE" value="edits" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
-          <line>27</line>
-          <properties>
-            <option name="className" value="\App\Http\Controllers\Api\ReservationController" />
-            <option name="methodName" value="index" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
-          <line>57</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

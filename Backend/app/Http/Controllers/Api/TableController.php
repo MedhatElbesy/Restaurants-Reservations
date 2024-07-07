@@ -19,7 +19,8 @@ class TableController extends Controller
 
     public function index()
     {
-        return TableResource::collection(Table::all());
+        $tables = Table::with('images')->get();
+        return TableResource::collection($tables);
     }
 
     public function store(StoreTableRequest $request)
@@ -39,6 +40,7 @@ class TableController extends Controller
 
     public function show(Table $table)
     {
+        $table->load('images');
         return new TableResource($table);
     }
 
