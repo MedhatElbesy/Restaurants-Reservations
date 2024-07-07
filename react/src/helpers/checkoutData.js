@@ -27,7 +27,9 @@ export const handelCheckoutData = (reservationData, paymentData) => {
   );
   checkoutData.append("payment_method", paymentData.gateway.type);
   checkoutData.append("gateway_id", paymentData.gateway.id);
-  checkoutData.append("transaction_image", paymentData.paymentProof);
+  if (paymentData.gateway.type == "cash") {
+    checkoutData.append("transaction_image", paymentData.paymentProof);
+  }
   checkoutData.append(
     "transaction_phone_number",
     paymentData.transaction_phone_number

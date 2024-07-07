@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutAmount } from "../../helpers/utils";
 import CashGateways from "./gateways/CashGateways";
+import PayPal from "./gateways/PayPal";
 import PaymentDetails from "./PaymentDetails";
 import { getGateways } from "../../slices/checkout/gatewaysSlice";
+import Loader from '../../layouts/loader/loader';
+
 
 const Payment = ({
   table,
@@ -15,7 +18,7 @@ const Payment = ({
   errors,
 }) => {
   const dispatch = useDispatch();
-  const { gateways } = useSelector((state) => state.gateways);
+  const { gateways, state: gatewayState } = useSelector((state) => state.gateways);
   const { selectedData } = details;
   const amount = checkoutAmount(table, selectedData);
   const [selectedGatewayId, setSelectedGatewayId] = useState(null);
@@ -26,8 +29,7 @@ const Payment = ({
 
   useEffect(() => {
     if (gateways) {
-      const selected = gateways.find((gateway) => gateway.type === "cash");
-      setSelectedGatewayId(selected.id);
+      setSelectedGatewayId(gateways[0].id);
     }
   }, [dispatch, gateways]);
 
@@ -50,7 +52,7 @@ const Payment = ({
         <div className="gateway-images d-flex justify-content-center">
           {gateways &&
             gateways.map((gateway) => {
-              if (gateway.type === "cash") {
+              if (gateway.type != "credit_card") {
                 return (
                   <figure className="mb-5 mx-2" key={gateway.id}>
                     <img
@@ -66,6 +68,7 @@ const Payment = ({
               }
             })}
         </div>
+        {gatewayState == "loading" && <Loader />}
         {gateways &&
           gateways.map((gateway) => {
             if (gateway.type === "cash") {
@@ -85,7 +88,22 @@ const Payment = ({
                 )
               );
             }
-            return null; // Add return null to handle other gateway types
+            if (gateway.type === "paypal") {
+              return (
+                selectedGatewayId === gateway.id && (
+                  <div key={gateway.id} className="selected-gateway">
+                    <PayPal
+                      amount={amount}
+                      branch={branch}
+                      paymentData={paymentData}
+                      setPaymentData={setPaymentData}
+                      gateway={gateway}
+                    />
+                  </div>
+                )
+              );
+            }
+            return null;
           })}
       </div>
     </article>

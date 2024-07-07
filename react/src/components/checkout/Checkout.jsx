@@ -3,12 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { handelCheckoutData } from "../../helpers/checkoutData";
-import { checkoutResevation } from "../../slices/checkout/checkoutSlice";
+import { checkoutReservation } from "../../slices/checkout/checkoutSlice";
 import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
 import Payment from "./Payment";
 import Done from "./Done";
+
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -76,16 +77,22 @@ const Checkout = () => {
       prevStep();
     }
   };
+
   const handlePlaceOrder = async () => {
+    console.log(paymentData);
     const checkoutData = handelCheckoutData(reservationData, paymentData);
-    for (let pair of checkoutData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
     try {
       const response = await dispatch(
-        checkoutResevation(checkoutData)
+        checkoutReservation(checkoutData)
       ).unwrap();
       console.log(response);
+      if (paymentData.gateway.type === "paypal") {
+        window.open(
+          response.data,
+          "_blank",
+          "width=1200,height=800"
+        );
+      }
       nextStep();
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
