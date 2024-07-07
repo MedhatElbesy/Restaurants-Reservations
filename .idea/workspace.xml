@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="" />
+    <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +203,7 @@
       <workItem from="1720323878560" duration="214000" />
       <workItem from="1720324211097" duration="662000" />
       <workItem from="1720325215382" duration="1825000" />
-      <workItem from="1720332584280" duration="1365000" />
+      <workItem from="1720332584280" duration="2015000" />
     </task>
     <task id="LOCAL-00001" summary="edits">
       <option name="closed" value="true" />

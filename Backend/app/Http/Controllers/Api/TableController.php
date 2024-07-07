@@ -40,6 +40,7 @@ class TableController extends Controller
 
     public function show(Table $table)
     {
+        $table->load('images');
         return new TableResource($table);
     }
 
