@@ -1,11 +1,13 @@
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import "./RestaurantHome.css";
+import { decryptData } from "../../../helpers/cryptoUtils";
 
 export default function Home() {
   const { restaurant } = useSelector((state) => state.restaurant);
   const { restaurantId } = useParams();
 
+  console.log(decryptData("token"));
   return (
     <section>
       <article className="header row flex-column justify-content-between p-md-5 p-3"

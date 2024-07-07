@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function Circles() {
   const navigate = useNavigate();
   const handleNavigate = (num) => {
-    navigate(`/restaurant/${num}`);
+    navigate(`/restaurant/${num}/home`);
   };
   return (
     <main className="circle-container my-5 mx-2">

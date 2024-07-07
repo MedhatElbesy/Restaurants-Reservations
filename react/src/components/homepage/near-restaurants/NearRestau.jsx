@@ -14,6 +14,7 @@ const NearRestau = () => {
   const userData = useSelector((state) => state.user.data);
   const { data: nearestRestaurantsData, status } = useSelector(state => state.nearestRestaurants);
   const userId = decryptData('userId');
+  console.log(nearestRestaurantsData);
 
   useEffect(() => {
    
@@ -31,10 +32,12 @@ const NearRestau = () => {
   }
 
   return (
-    <main className='restau'>
+    <main className="restau">
       {nearestRestaurantsData.length > 0 && (
         <>
-          <h1 className='text-center col-8 offset-2 custom-color my-5'>Nearest Restaurants</h1>
+          <h1 className="text-center col-8 offset-2 custom-color my-5 text-sec sec-font">
+            Nearest Restaurants
+          </h1>
           <CardSlick>
             {nearestRestaurantsData.map((restaurant, index) => (
               <div key={index} className="restaurant-slide">

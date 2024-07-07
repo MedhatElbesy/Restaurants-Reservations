@@ -24,7 +24,7 @@ const AllRestaurants = () => {
     <main className='restau'>
       {restaurants.length > 0 && (
         <>
-          <h1 className='text-center  col-10 offset-1 text-sec custom-color my-5'>Elegant Dining Venue</h1>
+          <h1 className='text-center  col-10 offset-1 text-sec custom-color my-5 sec-font'>Elegant Dining Venue</h1>
           <CardSlick>
             {restaurants.map((restaurant, index) => (
               <div key={index} className="restaurant-slide">
