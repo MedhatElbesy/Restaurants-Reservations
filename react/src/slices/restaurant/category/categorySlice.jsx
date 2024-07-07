@@ -11,7 +11,12 @@ export const fetchCategoryByIdAsync = createAsyncThunk(
       const data = await categoryById(categoryId);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -23,7 +28,12 @@ export const fetchSpecificCategoryAsync = createAsyncThunk(
       const response = await specificCategory();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -35,7 +45,12 @@ export const updateCategoryAsync = createAsyncThunk(
       const data = await updateRestaurantCategory(categoryId, formData);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+    return rejectWithValue({
+      status: error.response.status,
+      data: error.response.data,
+      message: error.response.data,
+    });
     }
   }
 );
@@ -47,7 +62,12 @@ export const addCategoryAsync = createAsyncThunk(
       const data = await addCategory(formData);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -59,7 +79,12 @@ export const deleteCategoryAsync = createAsyncThunk(
       const data = await deleteSpecificCategory(categoryId);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+    return rejectWithValue({
+      status: error.response.status,
+      data: error.response.data,
+      message: error.response.data,
+    });
     }
   }
 );

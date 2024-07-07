@@ -40,3 +40,58 @@
 .restaurant-slide a {
   text-decoration: none;
 }
+
+
+
+.circle-container {
+  display: flex;
+  justify-content: space-around;
+ overflow-x: hidden;
+}
+
+.circle {
+  position: relative;
+  margin-top:10%;
+  height: 65vh; 
+  width: 35vw; 
+  border: 1px white solid;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease; 
+}
+
+.circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.562); 
+  border-radius: 50%;
+  opacity: 0; 
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.circle:hover::before {
+  width: 100%; 
+  height: 100%;
+  opacity: 1; 
+ 
+}
+
+
+.circle:hover::after {
+  content: "Flavorsome Dining Experience"; 
+  position: absolute;
+  font-family: "Bad Script", cursive;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px; 
+  z-index: 2; 
+}
