@@ -107,7 +107,6 @@ const authSlice = createSlice({
         state.loading = false;
         const data = action.payload.data;
         state.status = "succeeded";
-
         // Encrypt sensitive data
         sessionStorage.setItem("token", encryptData(data.token));
         sessionStorage.setItem("userId", encryptData(data.user.id));

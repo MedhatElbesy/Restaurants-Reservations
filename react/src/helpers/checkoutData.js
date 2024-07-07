@@ -1,8 +1,9 @@
-export const handelCheckoutData = (reservationData, paymentData) => {
+export const handelCheckoutData = (reservationData, paymentData, restaurant) => {
   const checkoutData = new FormData();
 
   checkoutData.append("total_price", paymentData.total_price);
   checkoutData.append("notes", reservationData.userData.notes);
+  checkoutData.append("restaurant_id", restaurant.id);
   checkoutData.append(
     "terms_and_conditions",
     reservationData.userData.terms_and_conditions ? 1 : 0

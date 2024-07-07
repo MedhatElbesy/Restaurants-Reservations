@@ -15,3 +15,15 @@ export const makeCheckout = async (checkoutData) => {
     throw error;
   }
 };
+
+export const getAllReservations = async (restaurantId) => {
+  try {
+    const response = await axios.post(
+      `getReservationsByRestaurantId/${restaurantId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred during making reservation", error);
+    throw error;
+  }
+};

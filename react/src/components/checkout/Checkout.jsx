@@ -80,7 +80,11 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     console.log(paymentData);
-    const checkoutData = handelCheckoutData(reservationData, paymentData);
+    const checkoutData = handelCheckoutData(
+      reservationData,
+      paymentData,
+      restaurant
+    );
     try {
       const response = await dispatch(
         checkoutReservation(checkoutData)

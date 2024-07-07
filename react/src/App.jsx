@@ -76,7 +76,7 @@ import EditTableAvailability from "./components/userDashboard/edit/EditTableAvai
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
 import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome.jsx";
 import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
-import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
+// import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
 import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
 import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
 import ShowReservation from "./components/userDashboard/show/ShowReservation.jsx";
