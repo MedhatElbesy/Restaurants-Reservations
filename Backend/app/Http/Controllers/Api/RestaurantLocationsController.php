@@ -84,7 +84,7 @@ class RestaurantLocationsController extends Controller
 //         return response()->json(['message' => 'Restaurant location created successfully', 'restaurantLocation' => $restaurantLocation], 201);
 
             // event(new ReservationCreated($restaurantLocation));
-            // return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
+            return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);
         }
