@@ -107,7 +107,17 @@ class RestaurantController extends Controller
             DB::beginTransaction();
 
             $restaurant = Restaurant::findOrFail($id);
+            $validatedData['logo'] = $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null;
+            $validatedData['cover'] = $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null;
 
+            if (!$request->hasFile('logo')) {
+                unset($validatedData['logo']);
+
+            }
+            if (!$request->hasFile('cover')) {
+                unset($validatedData['cover']);
+
+            }
             $restaurant->fill([
                 'user_id' => $validatedData['user_id'],
                 'title' => $validatedData['title'],
@@ -115,35 +125,9 @@ class RestaurantController extends Controller
                 'summary' => $validatedData['summary'],
                 'description' => $validatedData['description'],
                 'status' => $validatedData['status'] ?? 'Active',
+                'logo'=> $validatedData['logo'],
+                'cover'=> $validatedData['cover'],
             ]);
-
-            $restaurant->save();
-
-            if ($request->hasFile('logo')) {
-                $logo = $request->file('logo');
-                $logoName = time() . '_logo.' . $logo->getClientOriginalExtension();
-
-                if (!$logo->move(public_path('images'), $logoName)) {
-                    DB::rollback();
-                    return ApiResponse::sendResponse(500, 'Failed to upload logo');
-                }
-
-                $logoPath = $logoName;
-                $restaurant->logo = $logoPath;
-            }
-
-            if ($request->hasFile('cover')) {
-                $cover = $request->file('cover');
-                $coverName = time() . '_cover.' . $cover->getClientOriginalExtension();
-
-                if (!$cover->move(public_path('images'), $coverName)) {
-                    DB::rollback();
-                    return ApiResponse::sendResponse(500, 'Failed to upload cover');
-                }
-
-                $coverPath = $coverName;
-                $restaurant->cover = $coverPath;
-            }
 
             $restaurant->save();
 
