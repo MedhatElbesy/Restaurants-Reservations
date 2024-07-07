@@ -150,10 +150,12 @@ Route::apiResource('table-images',TableImageController::class);
 Route::apiResource('restaurant-images',RestaurantImagesController::class);
 
 Route::apiResource('reservations', ReservationController::class)->middleware('auth:sanctum');
+Route::get('getReservationsByRestaurantId/{restaurant_id}', [ReservationController::class, 'getReservationRestaurant'])->middleware('auth:sanctum');
+Route::post('reservations/{reservation}/change-status', [ReservationController::class, 'changeStatus']);
 Route::get('gateways', [GatewayController::class, 'getAllGateways']);
 
 Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory']);
-Route::post('reservations/{reservation}/change-status', [ReservationController::class, 'changeStatus']);
 
 Route::get('payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
 Route::get('payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
+
