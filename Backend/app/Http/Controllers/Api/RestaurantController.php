@@ -101,8 +101,6 @@ class RestaurantController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            $logoPath = null;
-            $coverPath = null;
 
             DB::beginTransaction();
 

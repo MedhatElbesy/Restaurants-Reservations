@@ -19,7 +19,7 @@ class PaymentResource extends JsonResource
             'user_id' => $this->user_id,
             'amount' => $this->amount,
             'gateway_id' => $this->gateway_id,
-            'transaction_image' => $this->transaction_image,
+            'transaction_image' => $this->transaction_image_url,
             'transaction_phone_number' => $this->transaction_phone_number,
             'transaction_id' => $this->transaction_id,
             'customer_name' => $this->customer_name,
