@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,10 +7,26 @@ import Swal from 'sweetalert2';
 import Loader from '../../layouts/loader/loader';
 import { fetchAllCategoryAsync } from '../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { deleteCategoryAsync } from '../../slices/restaurant/category/categorySlice';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Box,
+  TablePagination,
+  CircularProgress,
+} from '@mui/material';
 
 export default function AdminCategories() {
   const dispatch = useDispatch();
   const { categories, status, error } = useSelector((state) => state.restaurantCategory);
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     dispatch(fetchAllCategoryAsync());
@@ -48,59 +64,111 @@ export default function AdminCategories() {
     });
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   if (status === 'loading') {
-    return <Loader />;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (status === 'failed') {
-    return <div>Error: {error?.message || JSON.stringify(error)}</div>;
+    return <Typography variant="body1" color="error">{error}</Typography>;
   }
 
+  const paginatedCategories = categories.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
   return (
-    <main className="container admin">
-      <h1 className="text-center  mb-4 my-5">
-        Categories
-        <Link to={`/add-special-category`} className="float-end">
-          <FontAwesomeIcon icon={faPlus} className="text-warning mx-3" />
-        </Link>
-      </h1>
-      <table className="my-5 col-12 location-container">
-        <thead>
-          <tr className="text-center my-5">
-            <th>Name</th>
-            <th>Cover</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories && categories.length > 0 ? (
-            categories.map((cat) => (
-              <tr key={cat.id} className="text-center my-5">
-                <td>{cat.name}</td>
-                <td>{cat.cover ? <img src={cat.cover} alt="Cover" width="100" /> : 'N/A'}</td>
-                <td>{cat.description}</td>
-                <td>{cat.status}</td>
-                <td>
-                  <Link to={`/edit-category/${cat.id}`}>
-                    <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
-                  </Link>
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleDeleteCategory(cat.id)}
-                    className="text-danger"
-                  />
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="text-center">........</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </main>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h2" gutterBottom sx={{ color: '#ffd28d', textAlign: 'center', fontFamily: '"Bad Script", cursive' }}>
+      Categories{" "}
+        <span
+          onClick={() => window.location.href = "/add-special-category"}
+          style={{ cursor: "pointer" }}
+        >
+          <i className="bi bi-patch-plus-fill"></i>
+        </span>
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align='center'>Name</TableCell>
+              <TableCell align='center'>Cover</TableCell>
+              <TableCell align='center'>Description</TableCell>
+              <TableCell align='center'>Status</TableCell>
+              <TableCell align='center'>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {paginatedCategories.length > 0 ? (
+              paginatedCategories.map((cat) => (
+                <TableRow key={cat.id} className="text-center my-5">
+                  <TableCell align='center'>{cat.name}</TableCell>
+                  <TableCell align='center'>
+                    {cat.cover ? (
+                      <img
+                        src={cat.cover}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "http://images.huffingtonpost.com/2015-06-10-1433951445-8676535-item8.rendition.slideshowHorizontal.mostbeautifulrestaurants09.jpg";
+                        }}
+                        alt="Cover"
+                        width="100"
+                        height="100"
+                        className='rounded-circle'
+                      />
+                    ) : (
+                      <img
+                        src="http://images.huffingtonpost.com/2015-06-10-1433951445-8676535-item8.rendition.slideshowHorizontal.mostbeautifulrestaurants09.jpg"
+                        alt="Cover"
+                        width="100"
+                        height="100"
+                        className='rounded-circle'
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell align='center'>{cat.description}</TableCell>
+                  <TableCell align='center'>{cat.status}</TableCell>
+                  <TableCell align='center'>
+                    <Link to={`/edit-category/${cat.id}`}>
+                      <FontAwesomeIcon icon={faEdit} className="me-2 text-primary" />
+                    </Link>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => handleDeleteCategory(cat.id)}
+                      className="text-danger"
+                    />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan="5" align='center'>No categories available</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        sx={{ bgcolor: '#ffd28d', borderRadius: '0px 5px' }}
+        rowsPerPageOptions={[5, 10, 25, 30, 35]}
+        component="div"
+        count={categories.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Box>
   );
 }

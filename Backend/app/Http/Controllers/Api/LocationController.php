@@ -32,6 +32,7 @@ class LocationController extends Controller
                             ->having('distance', '<', $radius)
                             ->orderBy('distance')
                             ->get();
+                            
         return ApiResponse::sendResponse(200,"Nearest",$nearestLocations );
     }
 }

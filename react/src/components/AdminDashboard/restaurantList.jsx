@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchRestaurants,
-  disableRestaurantById,
+  updateRestaurantStatus,
 } from "../../slices/adminDashboard/adminSlice";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -32,13 +32,16 @@ const RestaurantList = () => {
     }
   }, [dispatch, status]);
 
-  const handleDisable = (id) => {
-    dispatch(disableRestaurantById(id));
-  };
-
-  const openRestaurantModal = (restaurant) => {
-    setSelectedRestaurant(restaurant);
-    toggleModal();
+  const handleStatusToggle = (restaurant) => {
+    const newStatus = restaurant.status === 'Active' ? 'Inactive' : 'Active';
+    dispatch(updateRestaurantStatus({ id: restaurant.id, status: newStatus }))
+      .unwrap()
+      .then(() => {
+        console.log(`Restaurant with id ${restaurant.id} successfully updated to ${newStatus}.`);
+      })
+      .catch((error) => {
+        console.error(`Failed to update restaurant with id ${restaurant.id}`, error.response ? error.response.data : error.message);
+      });
   };
 
   return (
@@ -72,6 +75,7 @@ const RestaurantList = () => {
                   boxShadow: "none",
                   margin: "20px",
                   width: "19rem",
+                  height:"400px",
                   transition: "box-shadow 0.3s ease-in-out",
                   "&:hover": {
                     boxShadow: "0px 4px 8px rgba(255, 255, 255, 0.5)",
@@ -114,9 +118,12 @@ const RestaurantList = () => {
                       <i className="bi bi-pencil-square"></i>
                     </Button>
                   </span>
-                  <span onClick={() => handleDisable(restaurant.id)}>
+                  <span onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleStatusToggle(restaurant);
+                  }}>
                     <Button color="danger" className="rounded-circle m-2">
-                      <i className="bi bi-trash3-fill"></i>
+                      <i className={`bi ${restaurant.status === 'Active' ? 'bi-toggle-on' : 'bi-toggle-off'}`}></i>
                     </Button>
                   </span>
                 </CardBody>
