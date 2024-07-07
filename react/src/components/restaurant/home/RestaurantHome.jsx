@@ -8,7 +8,9 @@ export default function Home() {
 
   return (
     <section>
-      <article className="header row flex-column justify-content-between p-md-5 p-3">
+      <article className="header row flex-column justify-content-between p-md-5 p-3"
+      style={{  background: `url(${restaurant.cover})
+    center center/cover`}}>
         <div className="">
           <h1 className="text-sec">{restaurant.name}</h1>
           <p className="text-main mx-5 w-75 fs-4">{restaurant.slug}</p>

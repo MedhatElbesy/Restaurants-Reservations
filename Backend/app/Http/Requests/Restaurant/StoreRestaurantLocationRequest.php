@@ -33,7 +33,7 @@ class StoreRestaurantLocationRequest extends FormRequest
             'longitude' => 'nullable|numeric',
             'opening_time' => 'nullable|date_format:H:i:s',
             'closed_time' => 'nullable|date_format:H:i:s',
-            'closed_days' => 'nullable|array',
+            'closed_days' => 'nullable',
             'number_of_tables' => 'required|integer|min:0',
             'phone_number' => 'nullable|string|unique:restaurant_locations,phone_number',
             'mobile_number' => 'nullable|string|unique:restaurant_locations,mobile_number',

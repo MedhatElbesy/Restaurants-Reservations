@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CardSlick from '../card/CardSlick';
 import Card from '../card/Card';
@@ -9,19 +9,20 @@ import {
   selectTopRatedRestaurantsStatus,
 } from '../../../slices/restaurant/top-restaurants/topRestaurantSlice'; 
 import './TopRestau.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export default function TopRestau() {
   const dispatch = useDispatch();
   const restaurants = useSelector(selectTopRatedRestaurants);
+  console.log(restaurants);
   const status = useSelector(selectTopRatedRestaurantsStatus);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchTopRatedRestaurants());
     }
-  }, [status]);
+  }, [dispatch, status]);
 
   if (status === 'loading') {
     return <Loader />;

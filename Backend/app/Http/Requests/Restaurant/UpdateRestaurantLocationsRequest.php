@@ -32,7 +32,7 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'longitude' => 'nullable|numeric',
             'opening_time' => 'nullable|string',
             'closed_time' => 'nullable|string',
-            'closed_days' => 'nullable|array',
+            'closed_days' => 'nullable',
             'hot_line' => 'nullable|string',
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',
