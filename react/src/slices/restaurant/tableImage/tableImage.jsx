@@ -6,48 +6,68 @@ import { deleteTableImages } from '../../../api/restaurant/delete';
 
 export const addTableImageAsync = createAsyncThunk(
   'tableImage/addTableImage',
-  async (data, thunkAPI) => {
+  async (data, rejectWithValue) => {
     try {
       const response = await addTableImage(data);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
 
 export const updateTableImageAsync = createAsyncThunk(
   'tableImage/updateTableImage',
-  async ({ imageId, data }, thunkAPI) => {
+  async ({ imageId, data }, rejectWithValue) => {
     try {
       const response = await updateTableImage(imageId, data);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
 
 export const fetchTableImageByIdAsync = createAsyncThunk(
   'tableImage/fetchTableImageById',
-  async (imageId, thunkAPI) => {
+  async (imageId, rejectWithValue) => {
     try {
       const response = await fetchTableImageById(imageId);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
 
 export const deleteTableImageAsync = createAsyncThunk(
   'tableImage/deleteTableImage',
-  async (imageId, thunkAPI) => {
+  async (imageId, rejectWithValue) => {
     try {
       const response = await deleteTableImages(imageId);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
