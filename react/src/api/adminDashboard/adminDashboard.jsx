@@ -4,7 +4,6 @@ import axios from "../../axios";
 export const getRestaurants = async () => {
   try {
     const response = await axios.get('/restaurants');
-    console.log('line seven');
     console.log(response.data.data);
     return response.data.data;
   } catch (error) {
@@ -13,16 +12,7 @@ export const getRestaurants = async () => {
   }
 };
 
-// // Create a restaurant
-// export const createRestaurant = async (restaurantData) => {
-//   try {
-//     const response = await axios.post('/restaurants', restaurantData);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Failed to create restaurant", error);
-//     throw error;
-//   }
-// };
+
 
 // Update a restaurant
 export const updateRestaurant = async (id, restaurantData) => {
@@ -37,15 +27,7 @@ export const updateRestaurant = async (id, restaurantData) => {
 
 
 // Disable a restaurant
-export const disableRestaurant = async (id) => {
-  try {
-    const response = await axios.put(`/restaurants/${id}/update-status`);
-    return response.data;
-  } catch (error) {
-    console.error(`Failed to disable restaurant with id ${id}`, error);
-    throw error;
-  }
-};
+
 
 
 // Reports

@@ -23,6 +23,12 @@ function AdminDashboard() {
               to="/admin/restaurants"
               className="nav-link text-white py-4 h1 menuadmin"
             >
+              <span>Restaurants</span>
+            </NavLink>
+            <NavLink
+              to="/admin/category"
+              className="nav-link text-white py-4 h1 menuadmin"
+            >
               <span>Categories</span>
             </NavLink>
             <NavLink
