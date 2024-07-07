@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::table('reservations', function (Blueprint $table) {
             $table->foreignId('restaurant_id')
                 ->nullable()
+                ->after('notes')
                 ->constrained('restaurants')
                 ->references('id')
                 ->onUpdate('cascade')
-                ->onDelete('cascade')->after('notes');
+                ->onDelete('cascade');
         });
     }
 

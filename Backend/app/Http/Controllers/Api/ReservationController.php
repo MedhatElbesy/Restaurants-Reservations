@@ -30,7 +30,8 @@ class ReservationController extends Controller
         return ApiResponse::sendResponse(200, 'Reservations Fetched Successfully', ReservationResource::collection($reservations));
     }
 
-    public function getReservationRestaurant($restaurant_id): JsonResponse {
+    public function getReservationRestaurant($restaurant_id): JsonResponse
+    {
         if (!is_numeric($restaurant_id) || $restaurant_id <= 0) {
             return ApiResponse::sendResponse(400, 'Invalid resturant ID.');
         }
@@ -180,5 +181,23 @@ class ReservationController extends Controller
     public function paymentCancel(): JsonResponse
     {
         return ApiResponse::sendResponse(401, 'Payment cancelled');
+    }
+
+
+
+    public function changeStatus(Request $request, Payment $payment)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,success,failed,rejected,cancelled',
+        ]);
+
+        try {
+            $payment->status = $request->status;
+            $payment->save();
+
+            return ApiResponse::sendResponse(200, 'Reservation status updated successfully.');
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(400, 'Failed to update user status.');
+        }
     }
 }
