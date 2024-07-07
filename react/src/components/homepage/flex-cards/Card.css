@@ -1,5 +1,6 @@
 .flex-card {
     display: flex;
+    
   }
   
   .flex-card section {
@@ -51,5 +52,6 @@
   .image-container:hover img {
     transform: scale(1.1);
   }
+
   
   

@@ -106,3 +106,15 @@ strong{
 .formAdd label{
     color:#000000;
 }
+
+
+.admin h1 {
+    color: #ffd28d;
+}
+
+
+.admin tr  {
+ font-size: larger;
+ padding: 5px;
+ border-bottom: 1px  #ffd28d solid;
+}

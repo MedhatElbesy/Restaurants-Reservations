@@ -30,7 +30,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::select('name', 'description', 'cover', 'status')->withCount('locations')->get();
+        $restaurants = Restaurant::select('id','name', 'description', 'cover', 'status')->withCount('locations')->get();
 
         // Transform the result to include cover_url
         $restaurants->each(function ($restaurant) {

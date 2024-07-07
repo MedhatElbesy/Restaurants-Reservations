@@ -28,26 +28,14 @@ class ReservationCreated implements ShouldBroadcast
         $this->restaurantLocation = $restaurantLocation;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('my-channel'),
-        ];
+        return new Channel('notifications');
     }
 
-    public function broadcastWith(): array
+    public function broadcastAs()
     {
-        return [
-            'restaurantLocation' => $this->restaurantLocation,
-        ];
-    }
-    public function broadcastAs(): string
-    {
-        return 'RestaurantLocationCreated';
+        return 'ReservationCreated';
     }
 }

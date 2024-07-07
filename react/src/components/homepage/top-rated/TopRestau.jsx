@@ -33,15 +33,15 @@ export default function TopRestau() {
     <main className='restau'>
     {restaurants.length > 0 && (
       <>
-        <h1 className='row text-center custom-color my-5'>
+        <h1 className='row text-center  col-8 offset-2 custom-color my-5'>
           Top Rated Restaurants
         </h1>
         <CardSlick>
           {restaurants.map((restaurant, index) => (
             <div key={index} className="restaurant-slide">
-              <Link to={`/restaurant/${restaurant.restaurant_id}`}>
+              <NavLink to={`/restaurant/${restaurant.restaurant_id}`}>
               <Card name={restaurant.restaurant_name} image={restaurant.location_image} />
-              </Link>
+              </NavLink>
             </div>
           ))}
         </CardSlick>

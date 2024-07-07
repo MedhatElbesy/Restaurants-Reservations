@@ -9,7 +9,11 @@ export const fetchNearestRestaurants = createAsyncThunk(
       return data;
     } catch (error) {
       console.error('An error occurred during fetching nearest restaurant data', error);
-      return rejectWithValue(error.response?.data || 'An error occurred');
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -35,7 +39,7 @@ const nearestRestaurantsSlice = createSlice({
       })
       .addCase(fetchNearestRestaurants.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload || action.error.message;
+        state.error = action.payload;
       });
   }
 });

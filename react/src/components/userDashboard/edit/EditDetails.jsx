@@ -181,6 +181,37 @@ const EditDetails = () => {
             </textarea>
           </div>
 
+        
+
+          <div className="mb-3">
+            <label htmlFor="logo" className="form-label">
+              Logo
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control"
+              id="logo"
+              name="logo"
+              onChange={handleFileChange}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="cover" className="form-label">
+              Cover
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control"
+              id="cover"
+              name="cover"
+              onChange={handleFileChange}
+            />
+          </div>
+
+
           <section className="mb-3">
             <label className="form-label">Status</label>
             <div>
@@ -228,34 +259,6 @@ const EditDetails = () => {
               </div>
             </div>
           </section>
-
-          <div className="mb-3">
-            <label htmlFor="logo" className="form-label">
-              Logo
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              className="form-control"
-              id="logo"
-              name="logo"
-              onChange={handleFileChange}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="cover" className="form-label">
-              Cover
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              className="form-control"
-              id="cover"
-              name="cover"
-              onChange={handleFileChange}
-            />
-          </div>
 
           <button type="submit" className="btn btn-warning my-3 col-12">
             Submit

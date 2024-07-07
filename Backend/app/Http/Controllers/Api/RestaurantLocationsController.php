@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ReservationCreated;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\StoreRestaurantLocationRequest;
@@ -64,7 +65,23 @@ class RestaurantLocationsController extends Controller
             //     $user->notify(new RestaurantLocationCreated($restaurantLocation));
             // }
             // event(new ReservationCreated($restaurantLocation));
-            Notification::send(auth()->user(), new RestaurantLocationCreated($restaurantLocation));
+            // Notification::send(auth()->user(), new RestaurantLocationCreated($restaurantLocation));
+            // $user = auth()->user(); // Assuming notification should go to the authenticated user
+            // $user->notify(new RestaurantLocationCreated($restaurantLocation));
+            // $restaurantLocation->notify(new RestaurantLocationCreated($restaurantLocation));
+            // return response()->json([
+            //     'message' => 'Restaurant location created successfully',
+            //     'location' => $restaurantLocation,
+            // ], 201);
+            // event(new ReservationCreated($restaurantLocation));
+            // return response()->json($restaurantLocation, 201);
+
+            event(new ReservationCreated($restaurantLocation));
+            $restaurantLocation->notify(new RestaurantLocationCreated($restaurantLocation));
+
+// $user->notify(new RestaurantLocationCreated($restaurantLocation, $user));
+
+//         return response()->json(['message' => 'Restaurant location created successfully', 'restaurantLocation' => $restaurantLocation], 201);
 
             // event(new ReservationCreated($restaurantLocation));
             return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);

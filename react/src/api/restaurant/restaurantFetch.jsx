@@ -10,6 +10,16 @@ export const getRestaurantById = async (restaurantId) => {
   }
 };
 
+export const getAllRestaurant = async () => {
+  try {
+    const response = await axios.get(`/restaurants`);
+    return response.data;
+  } catch (error) {
+    console.error("An error occurred during fetching restaurant data", error);
+    throw error;
+  }
+};
+
 export const categoryById = async (categoryId) => {
   try {
     const response = await axios.get(`/categories/${categoryId}`);

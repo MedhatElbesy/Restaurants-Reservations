@@ -1,13 +1,16 @@
-.custom-color{
-    background-color: #ca8e46 ;
+.custom-color {
     min-height: 13vh;
+    border-bottom: 2px solid rgba(234, 129, 9, 0.708);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-top: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: aliceblue;
+   color: rgba(246, 164, 70, 0.708);
+   font-family: "Bad Script", cursive;
+   font-weight: 800;
+   font-size: 3em;
     text-shadow: 8px 8px 14px rgba(17, 17, 11, 0.616),
                  2px -2px 2px rgba(17, 17, 11, 0.616);
-    box-shadow: 4px 5px 14px rgba(234, 129, 9, 0.708);
-  
 }
-

@@ -10,8 +10,12 @@ export const fetchTopRatedRestaurants = createAsyncThunk(
       const response = await topRestaurants();
       return response.data; 
     } catch (error) {
-      console.error('An error occurred during fetching top rated restaurant data', error);
-      return rejectWithValue(error.response?.data || 'An error occurred');
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );

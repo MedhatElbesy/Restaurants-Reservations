@@ -10,8 +10,12 @@ export const fetchLocationByIdAsync = createAsyncThunk(
       const response = await locationById(locationId);
       return response.data;
     } catch (error) {
-      console.log(error);
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -19,8 +23,16 @@ export const fetchLocationByIdAsync = createAsyncThunk(
 export const updateLocationAsync = createAsyncThunk(
   "location/updateLocation",
   async ({ locationId, data }) => {
-    const updatedData = await updateLocation(locationId, data);
+   try{const updatedData = await updateLocation(locationId, data);
     return updatedData;
+   }catch (error) {
+    console.error('An error occurred during fetching nearest restaurant data', error);
+    return rejectWithValue({
+      status: error.response.status,
+      data: error.response.data,
+      message: error.response.data,
+    });
+  }
   }
 );
 
@@ -31,8 +43,12 @@ export const addLocationAsync = createAsyncThunk(
       const addedLocation = await addLocation(locationData);
       return addedLocation;
     } catch (error) {
-      console.log(error);
-      return rejectWithValue(error.response.data.errors);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+    return rejectWithValue({
+      status: error.response.status,
+      data: error.response.data,
+      message: error.response.data,
+    });
     }
   }
 );
@@ -56,7 +72,7 @@ const locationSlice = createSlice({
       })
       .addCase(fetchLocationByIdAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.payload;
       })
       .addCase(updateLocationAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -64,7 +80,7 @@ const locationSlice = createSlice({
       })
       .addCase(updateLocationAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message || "Failed to update location";
+        state.error = action.payload;
       })
       .addCase(addLocationAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -72,7 +88,7 @@ const locationSlice = createSlice({
       })
       .addCase(addLocationAsync.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message || "Failed to add location";
+        state.error = action.payload;
       });
   },
 });

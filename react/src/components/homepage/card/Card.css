@@ -45,4 +45,15 @@
 
   }
   
+
+  .home-card{
+   width:20vw;
+   height:2vh;
+  }
   
+  .restaurant-card{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
