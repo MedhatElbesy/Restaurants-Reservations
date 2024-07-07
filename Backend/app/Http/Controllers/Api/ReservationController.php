@@ -9,6 +9,8 @@ use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
 use App\Models\ReservationDetail;
 use App\Models\Payment;
+use App\Models\Restaurant;
+use App\Models\Table;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,10 +30,30 @@ class ReservationController extends Controller
         return ApiResponse::sendResponse(200, 'Reservations Fetched Successfully', ReservationResource::collection($reservations));
     }
 
+    public function getReservationRestaurant($restaurant_id): JsonResponse {
+        if (!is_numeric($restaurant_id) || $restaurant_id <= 0) {
+            return ApiResponse::sendResponse(400, 'Invalid resturant ID.');
+        }
+
+        $reservations = Reservation::where('restaurant_id', '=', $restaurant_id)
+            ->select('id', 'total_price', 'notes')
+            ->with('details', 'payments')
+            ->get();
+
+        if ($reservations->isEmpty()) {
+            return ApiResponse::sendResponse(404, 'No reservations found for this resturant.');
+        }
+        return ApiResponse::sendResponse(200, 'Governorates fetched successfully', $reservations);
+    }
+
     public function store(StoreReservationRequest $request): JsonResponse
     {
         $auth_user = Auth::guard('sanctum')->user();
         $validated = $request->validated();
+        $table = Table::with(['restaurantLocation', 'restaurantLocation.restaurant'])
+            ->select('id', 'restaurant_location_id')
+            ->where('id', $validated['table_id'])
+            ->first();
 
         DB::beginTransaction();
         try {
@@ -41,6 +63,7 @@ class ReservationController extends Controller
                 'total_price' => $validated['total_price'],
                 'notes' => $validated['notes'] ?? null,
                 'terms_and_conditions' => $validated['terms_and_conditions'],
+                'restaurant_id' => $table->id
             ]);
 
             // Create reservation details
