@@ -87,6 +87,7 @@ import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
 // Protected Routes
 import { ProtectedRoute, PublicRoute } from "./helpers/ProotectedRoutes.jsx";
+import AdminCategories from "./components/AdminDashboard/AdminCategories.jsx";
 
 const Layout = () => (
   <>
@@ -134,10 +135,7 @@ function App() {
         {/* Restaurant Owner Routes */}
         <Route path="/specific" element={<SpecificCategories />} />
         <Route path="/availability/:tableId" element={<TableAvailability />} />
-        <Route
-          path="/add-availability/:tableId"
-          element={<AddAvailabilityForm />}
-        />
+        
         <Route
           path="/user-dashboard/restaurant/:restaurantId"
           element={<Restaurant />}
@@ -207,6 +205,11 @@ function App() {
           path="/edit-availability/:availableId"
           element={<EditTableAvailability />}
         />
+
+       <Route
+          path="/add-availability/:tableId"
+          element={<AddAvailabilityForm />}
+        />
       </Route>
       {/* AdminDashboard */}
       {/*<Route path="/admin" element={<AdminDashboard />} />
@@ -227,13 +230,14 @@ function App() {
       <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
       {/* Admin Routes  Edited By : Nagy*/}
       {/* Admin Only */}
-      <Route element={<ProtectedRoute owner={true} admin={true} />}>
+      <Route element={<ProtectedRoute  admin={true} />}>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route path="rating" element={<Ratings />} />
           <Route path="report" element={<ReportList />} />
           <Route path="about" element={<About />} />
           <Route path="comments" element={<CommentsAdmin />} />
           <Route path="restaurants" element={<RestaurantList />} />
+          <Route path="category" element={<AdminCategories />} />
         </Route>
         <Route path="/add-restaurant/:id" element={<AddRest />} />
       </Route>

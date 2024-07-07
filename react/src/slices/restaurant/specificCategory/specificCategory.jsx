@@ -10,7 +10,12 @@ export const fetchSpecificCategoryAsync = createAsyncThunk(
       const response = await specificCategory();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
@@ -21,7 +26,12 @@ export const deleteCategoryAsync = createAsyncThunk(
     try {
       await deleteSpecificCategory(categoryId);
     } catch (error) {
-      return rejectWithValue(error);
+      console.error('An error occurred during fetching nearest restaurant data', error);
+      return rejectWithValue({
+        status: error.response.status,
+        data: error.response.data,
+        message: error.response.data,
+      });
     }
   }
 );
