@@ -181,4 +181,22 @@ class ReservationController extends Controller
     {
         return ApiResponse::sendResponse(401, 'Payment cancelled');
     }
+
+
+
+    public function changeStatus(Request $request, Payment $payment)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,success,failed,rejected,cancelled',
+        ]);
+
+        try {
+            $payment->status = $request->status;
+            $payment->save();
+
+            return ApiResponse::sendResponse(200, 'Reservation status updated successfully.');
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(400, 'Failed to update user status.');
+        }
+    }
 }
