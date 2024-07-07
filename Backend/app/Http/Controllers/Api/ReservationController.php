@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ReservationController extends Controller
@@ -181,17 +182,27 @@ class ReservationController extends Controller
 
 
 
-    public function changeStatus(Request $request, ق $payment)
+    public function changeStatus(Request $request, Reservation $reservation)
     {
         $request->validate([
-            'status' => 'required|string|in:pending,success,failed,rejected,cancelled',
+            'status' => 'required|in:pending,success,failed,rejected,cancelled',
         ]);
 
         try {
+            $reservation->status = $request->status;
+            $payment = Payment::where('reservation_id', $reservation->id)->first();
             $payment->status = $request->status;
+            $reservation->save();
             $payment->save();
+            $user = $reservation->user;
 
-            return ApiResponse::sendResponse(200, 'Reservation status updated successfully.');
+            Mail::send('emails.reservation', ['user' => $user, 'status' => $reservation->status] , function ($message) use ($user) {
+                $message->from('noreply@example.com', config('app.name'));
+                $message->to($user['email']);
+                $message->subject('Reservation Confirmation');
+            });
+
+            return ApiResponse::sendResponse(200, 'Reservation status updated successfully, Check your email.');
         } catch (\Exception $e) {
             return ApiResponse::sendResponse(400, 'Failed to update user status.');
         }
