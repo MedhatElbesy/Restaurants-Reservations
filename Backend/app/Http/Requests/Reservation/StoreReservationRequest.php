@@ -28,6 +28,7 @@ class StoreReservationRequest extends FormRequest
 
             //'details' => 'required|array',
             'table_id' => 'required|exists:tables,id',
+            'restaurant_id' => 'required|exists:restaurants,id',
             'table_availability_id' => 'required|exists:table_availabilities,id',
             'reservation_date' => 'required|date',
             //'reservation_time' => 'nullable|date_format:H:i',

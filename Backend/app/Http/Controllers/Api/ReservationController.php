@@ -51,10 +51,6 @@ class ReservationController extends Controller
     {
         $auth_user = Auth::guard('sanctum')->user();
         $validated = $request->validated();
-        $table = Table::with(['restaurantLocation', 'restaurantLocation.restaurant'])
-            ->select('id', 'restaurant_location_id')
-            ->where('id', $validated['table_id'])
-            ->first();
 
         DB::beginTransaction();
         try {
@@ -64,7 +60,7 @@ class ReservationController extends Controller
                 'total_price' => $validated['total_price'],
                 'notes' => $validated['notes'] ?? null,
                 'terms_and_conditions' => $validated['terms_and_conditions'],
-                'restaurant_id' => $table->id
+                'restaurant_id' => $validated['restaurant_id']
             ]);
 
             // Create reservation details
@@ -185,7 +181,7 @@ class ReservationController extends Controller
 
 
 
-    public function changeStatus(Request $request, Payment $payment)
+    public function changeStatus(Request $request, ق $payment)
     {
         $request->validate([
             'status' => 'required|string|in:pending,success,failed,rejected,cancelled',
