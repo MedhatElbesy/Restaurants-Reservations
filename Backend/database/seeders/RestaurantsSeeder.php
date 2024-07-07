@@ -19,7 +19,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 1,
                 'logo' => 'logos/restaurant1.png',
-                'cover' => 'covers/restaurant1.jpg',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => 'The Great Restaurant',
                 'slug' => str::slug('The Great Restaurant'),
                 'title' => 'Best Dining Experience',

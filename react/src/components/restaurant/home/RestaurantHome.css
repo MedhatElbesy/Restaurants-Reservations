@@ -1,6 +1,5 @@
 .header {
-  background: url("https://media.licdn.com/dms/image/D4D12AQHJ76RoLk41qg/article-cover_image-shrink_600_2000/0/1662609219432?e=2147483647&v=beta&t=UBrHwuJkYoGGnY77Ylx-s3q6lV7US0-6tfFqWe2dU-Q")
-    center center/cover;
+
   position: relative;
   min-height: 60vh;
 }
