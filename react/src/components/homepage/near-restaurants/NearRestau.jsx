@@ -8,7 +8,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { decryptData } from '../../../helpers/cryptoUtils';
 import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 
-
 const NearRestau = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.data);
@@ -17,18 +16,15 @@ const NearRestau = () => {
   console.log(nearestRestaurantsData);
 
   useEffect(() => {
-   
-      dispatch(fetchUserDataById(userId)).then(() => {
-        if (userData && userData.addresses && userData.addresses.length > 0) {
-          dispatch(fetchNearestRestaurants(userId));
-        }
-      });
-    
-  }, [ ]);
-
+    dispatch(fetchUserDataById(userId)).then(() => {
+      if (userData && userData.addresses && userData.addresses.length > 0) {
+        dispatch(fetchNearestRestaurants(userId));
+      }
+    });
+  }, []);
 
   if (status === 'loading') {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (
@@ -40,14 +36,16 @@ const NearRestau = () => {
           </h1>
           <CardSlick>
             {nearestRestaurantsData.map((restaurant, index) => (
-              <div key={index} className="restaurant-slide">
-                <NavLink to={`/restaurant/${restaurant.restaurant_id}`}>
-                  <Card
-                    name={restaurant.restaurant_name}
-                    image={restaurant.image}
-                  />
-                </NavLink>
-              </div>
+              restaurant.image && (
+                <div key={index} className="restaurant-slide">
+                  <NavLink to={`/restaurant/${restaurant.restaurant_id}`}>
+                    <Card
+                      name={restaurant.restaurant_name}
+                      image={restaurant.image}
+                    />
+                  </NavLink>
+                </div>
+              )
             ))}
           </CardSlick>
         </>
