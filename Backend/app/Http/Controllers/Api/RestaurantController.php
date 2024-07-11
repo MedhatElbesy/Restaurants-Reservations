@@ -30,12 +30,27 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::select('id','name', 'description', 'cover', 'status')->withCount('locations')->get();
+        $restaurants = Restaurant::select('id', 'name', 'description', 'cover', 'status')
+        ->with(['locations:id,restaurant_id,address'])
+        ->withCount('locations')
+        ->get();
 
-        // Transform the result to include cover_url
-        $restaurants->each(function ($restaurant) {
-            $restaurant->cover_url = $restaurant->cover_url;
-        });
+    $restaurants->each(function ($restaurant) {
+        $restaurant->cover_url = $restaurant->cover_url;
+
+        $totalRating = 0;
+        $count = 0;
+
+        foreach ($restaurant->locations as $location) {
+            $avgRating = $location->averageRating();
+            if ($avgRating !== null) {
+                $totalRating += $avgRating;
+                $count++;
+            }
+        }
+            $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
+
+    });
 
         if ($restaurants->isNotEmpty()) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
