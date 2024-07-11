@@ -30,13 +30,13 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::select('id','name', 'description', 'cover', 'status')->withCount('locations')->get();
+        $restaurants = Restaurant::select('id', 'name', 'description', 'cover', 'status')->withCount('locations')->get();
 
         // Transform the result to include cover_url
         $restaurants->each(function ($restaurant) {
             $restaurant->cover_url = $restaurant->cover_url;
         });
-
+        dd($restaurants);
         if ($restaurants->isNotEmpty()) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
         }
@@ -47,7 +47,7 @@ class RestaurantController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(StoreRestaurantRequest $request) : JsonResponse
+    public function store(StoreRestaurantRequest $request): JsonResponse
     {
         try {
             $validatedData = $request->validated();
@@ -61,8 +61,8 @@ class RestaurantController extends Controller
                 'summary' => $validatedData['summary'],
                 'description' => $validatedData['description'],
                 'status' => $validatedData['status'] ?? 'Active',
-                'logo'=> $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null,
-                'cover'=> $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
+                'logo' => $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null,
+                'cover' => $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
             ]);
 
             DB::commit();
@@ -110,11 +110,9 @@ class RestaurantController extends Controller
 
             if (!$request->hasFile('logo')) {
                 unset($validatedData['logo']);
-
             }
             if (!$request->hasFile('cover')) {
                 unset($validatedData['cover']);
-
             }
             $restaurant->fill([
                 'user_id' => $validatedData['user_id'],
@@ -123,8 +121,8 @@ class RestaurantController extends Controller
                 'summary' => $validatedData['summary'],
                 'description' => $validatedData['description'],
                 'status' => $validatedData['status'] ?? 'Active',
-                'logo'=> $validatedData['logo'],
-                'cover'=> $validatedData['cover'],
+                'logo' => $validatedData['logo'],
+                'cover' => $validatedData['cover'],
             ]);
 
             $restaurant->save();
@@ -240,7 +238,4 @@ class RestaurantController extends Controller
             return ApiResponse::sendResponse(500, 'Failed to update restaurant status', null, $e->getMessage());
         }
     }
-
-
-
 }

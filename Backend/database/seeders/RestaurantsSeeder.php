@@ -18,7 +18,7 @@ class RestaurantsSeeder extends Seeder
         DB::table('restaurants')->insert([
             [
                 'user_id' => 1,
-                'logo' => 'logos/restaurant1.png',
+                'logo' => 'https://tinyurl.com/344r9u35',
                 'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => 'The Great Restaurant',
                 'slug' => str::slug('The Great Restaurant'),
@@ -33,8 +33,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => 'logos/restaurant2.png',
-                'cover' => 'covers/restaurant2.jpg',
+                'logo' => 'https://tinyurl.com/mphexb9b',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => 'Nrban Eats',
                 'slug' => Str::slug('Nrban Eats'),
                 'title' => 'Delicious Urban Cuisine',
@@ -48,8 +48,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => 'logos/restaurant3.png',
-                'cover' => 'covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/y4ty8acw',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => 'Urban Eats',
                 'slug' => Str::slug('Urban Eats'),
                 'title' => '3Delicious Urban Cuisine',
@@ -63,8 +63,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => '4logos/restaurant3.png',
-                'cover' => '4covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/39ywyfed',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => '4Urban Eats',
                 'slug' => Str::slug('4Urban Eats'),
                 'title' => '4Delicious Urban Cuisine',
@@ -78,8 +78,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => '5logos/restaurant3.png',
-                'cover' => '5covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/bdhj2z9y',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => '5Urban Eats',
                 'slug' => Str::slug('5Urban Eats'),
                 'title' => '5Delicious Urban Cuisine',
@@ -93,8 +93,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'logo' => '6logos/restaurant3.png',
-                'cover' => '6covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/2eye84mw',
+                'cover' => 'https://tinyurl.com/mphexb9b',
                 'name' => '6Urban Eats',
                 'slug' => Str::slug('6Urban Eats'),
                 'title' => '6Delicious Urban Cuisine',
@@ -108,8 +108,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'logo' => '7logos/restaurant3.png',
-                'cover' => '7covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/jb2f4fxr',
+                'cover' => 'https://tinyurl.com/jb2f4fxr',
                 'name' => '7Urban Eats',
                 'slug' => Str::slug('7Urban Eats'),
                 'title' => '7Delicious Urban Cuisine',
@@ -123,8 +123,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 1,
-                'logo' => '8logos/restaurant3.png',
-                'cover' => '8covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/5n7nrhkp',
+                'cover' => 'https://tinyurl.com/579mmhx6',
                 'name' => '8Urban Eats',
                 'slug' => Str::slug('8Urban Eats'),
                 'title' => '8Delicious Urban Cuisine',
@@ -138,8 +138,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => '9logos/restaurant3.png',
-                'cover' => '9covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/579mmhx6',
+                'cover' => 'https://tinyurl.com/5n7nrhkp',
                 'name' => '9Urban Eats',
                 'slug' => Str::slug('9Urban Eats'),
                 'title' => '9Delicious Urban Cuisine',
@@ -153,8 +153,8 @@ class RestaurantsSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'logo' => '10logos/restaurant3.png',
-                'cover' => '10covers/restaurant3.jpg',
+                'logo' => 'https://tinyurl.com/jb2f4fxr',
+                'cover' => 'https://tinyurl.com/mphexb9b',
                 'name' => '10Urban Eats',
                 'slug' => Str::slug('10Urban Eats'),
                 'title' => '10Delicious Urban Cuisine',
