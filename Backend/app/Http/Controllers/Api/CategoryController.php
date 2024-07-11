@@ -6,6 +6,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Models\Category;
+use App\Models\Restaurant;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,11 +93,14 @@ class CategoryController extends Controller
 
     public function showCategoriesByName($name)
     {
-        $categories = Category::whereRaw('LOWER(name) = ?', [strtolower($name)])->get();
-        if(!$categories){
+        $restaurants = Restaurant::whereHas('categories', function ($query) use ($name) {
+        $query->whereRaw('LOWER(name) = ?', [strtolower($name)]);
+            })->get();
+
+        if(!$restaurants){
             return ApiResponse::sendResponse(500, 'Failed to get category');
         }
-            return ApiResponse::sendResponse(200, 'Category updated successfully', $categories);
+            return ApiResponse::sendResponse(200, 'Category updated successfully', $restaurants);
     }
 
 
