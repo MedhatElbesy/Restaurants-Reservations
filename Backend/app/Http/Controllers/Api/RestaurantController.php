@@ -241,6 +241,26 @@ class RestaurantController extends Controller
         }
     }
 
+    public function getAverageRating($restaurantId)
+    {
+        $restaurant = Restaurant::with('locations')->findOrFail($restaurantId);
+        $locations = $restaurant->locations;
+        if ($locations->isEmpty()) {
+            return ApiResponse::sendResponse(200, 'average_rating', 0);
+        }
+        $totalRating = 0;
+        $count = 0;
+
+        foreach ($locations as $location) {
+            $avgRating = $location->averageRating();
+            if ($avgRating !== null) {
+                $totalRating += $avgRating;
+                $count++;
+            }
+        }
+        $averageRating = $count > 0 ? $totalRating / $count : 0;
+            return ApiResponse::sendResponse(200, 'average_rating', $averageRating);
+    }
 
 
 }
