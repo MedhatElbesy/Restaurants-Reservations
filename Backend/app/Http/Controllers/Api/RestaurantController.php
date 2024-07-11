@@ -30,13 +30,27 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::select('id', 'name', 'description', 'cover', 'status')->withCount('locations')->get();
+        $restaurants = Restaurant::select('id', 'name', 'description', 'cover', 'status')
+            ->with(['locations:id,restaurant_id,address'])
+            ->withCount('locations')
+            ->get();
 
-        // Transform the result to include cover_url
         $restaurants->each(function ($restaurant) {
             $restaurant->cover_url = $restaurant->cover_url;
+
+            $totalRating = 0;
+            $count = 0;
+
+            foreach ($restaurant->locations as $location) {
+                $avgRating = $location->averageRating();
+                if ($avgRating !== null) {
+                    $totalRating += $avgRating;
+                    $count++;
+                }
+            }
+            $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
         });
-        dd($restaurants);
+
         if ($restaurants->isNotEmpty()) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
         }
@@ -237,5 +251,26 @@ class RestaurantController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to update restaurant status', null, $e->getMessage());
         }
+    }
+
+    public function getAverageRating($restaurantId)
+    {
+        $restaurant = Restaurant::with('locations')->findOrFail($restaurantId);
+        $locations = $restaurant->locations;
+        if ($locations->isEmpty()) {
+            return ApiResponse::sendResponse(200, 'average_rating', 0);
+        }
+        $totalRating = 0;
+        $count = 0;
+
+        foreach ($locations as $location) {
+            $avgRating = $location->averageRating();
+            if ($avgRating !== null) {
+                $totalRating += $avgRating;
+                $count++;
+            }
+        }
+        $averageRating = $count > 0 ? $totalRating / $count : 0;
+        return ApiResponse::sendResponse(200, 'average_rating', $averageRating);
     }
 }

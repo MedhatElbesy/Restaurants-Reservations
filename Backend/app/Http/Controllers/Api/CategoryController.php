@@ -6,6 +6,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use App\Models\Category;
+use App\Models\Restaurant;
 use App\Traits\UploadImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,46 @@ class CategoryController extends Controller
             return ApiResponse::sendResponse(500, 'Failed to update category', ['error' => $e->getMessage()]);
         }
     }
+
+    public function showCategoriesByName($name)
+    {
+        $restaurants = Restaurant::whereHas('categories', function ($query) use ($name) {
+            $query->whereRaw('LOWER(name) = ?', [strtolower($name)]);
+        })
+        ->with(['locations' => function ($query) {
+            $query->select('id', 'restaurant_id', 'address')
+                ->withAvg('ratings', 'rate');
+        }])
+        ->select('id', 'user_id', 'logo', 'cover', 'name', 'slug', 'title', 'summary', 'description', 'rating', 'hot_line', 'status', 'deleted_at', 'created_at', 'updated_at')
+        ->get();
+
+    if ($restaurants->isEmpty()) {
+        return ApiResponse::sendResponse(404, 'No restaurants found for category');
+    }
+    $transformedRestaurants = $restaurants->map(function ($restaurant) {
+        $totalRating = 0;
+        $count = 0;
+
+        foreach ($restaurant->locations as $location) {
+            if ($location->ratings_avg_rate) {
+                $totalRating += $location->ratings_avg_rate;
+                $count++;
+            }
+        }
+        $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
+        $restaurant->location_addresses = $restaurant->locations->map(function ($location) {
+            return [
+                'address' => $location->address
+            ];
+        });
+        unset($restaurant->locations);
+        return $restaurant;
+    });
+    return ApiResponse::sendResponse(200, 'Restaurants with category ' . $name, $transformedRestaurants);
+}
+
+
+
 
     public function destroy(Category $category)
     {
