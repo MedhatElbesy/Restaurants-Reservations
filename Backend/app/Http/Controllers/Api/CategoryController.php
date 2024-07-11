@@ -90,6 +90,18 @@ class CategoryController extends Controller
         }
     }
 
+    public function showCategoriesByName($name)
+    {
+        $categories = Category::whereRaw('LOWER(name) = ?', [strtolower($name)])->get();
+        if(!$categories){
+            return ApiResponse::sendResponse(500, 'Failed to get category');
+        }
+            return ApiResponse::sendResponse(200, 'Category updated successfully', $categories);
+    }
+
+
+
+
     public function destroy(Category $category)
     {
 //           //validate user

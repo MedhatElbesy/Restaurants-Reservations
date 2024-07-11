@@ -159,3 +159,4 @@ Route::get('/restaurant/{id}/category',[RestaurantController::class,'getcategory
 Route::get('payment/cancel', [ReservationController::class, 'paymentCancel'])->name('payment.cancel');
 Route::get('payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
 
+Route::get('/categories/name/{name}', [CategoryController::class, 'showCategoriesByName']);
