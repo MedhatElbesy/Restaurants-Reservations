@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\GatewayController;
 use App\Http\Controllers\Api\GovernorateController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\OwnersController;
 use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\RestaurantCategoryController;
 use App\Http\Controllers\Api\RestaurantController;
@@ -161,3 +162,7 @@ Route::get('payment/cancel', [ReservationController::class, 'paymentCancel'])->n
 Route::get('payment/success', [ReservationController::class, 'paymentSuccess'])->name('payment.success');
 
 Route::get('/categories/name/{name}', [CategoryController::class, 'showCategoriesByName']);
+
+
+
+Route::apiResource('/users/owner',OwnersController::class);
