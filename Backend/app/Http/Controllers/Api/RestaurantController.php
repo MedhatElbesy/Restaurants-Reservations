@@ -93,22 +93,23 @@ class RestaurantController extends Controller
     public function show(string $id)
     {
         $restaurant = Restaurant::with([
-            'locations.country',
-            'locations.governorate',
-            'locations.city',
-            'locations.state',
-            'locations.tables.images',
-            'locations',
-            'categories',
+            // 'locations.country',
+            // 'locations.governorate',
+            // 'locations.city',
+            // 'locations.state',
+            // 'locations.tables.images',
+            // 'locations',
+            // 'categories',
             'restaurant_images',
-            'menuCategories.menuItems'
-        ])->with(['locations' => function($query) {
+            'locations' => function ($query) {
             $query->withCount('comments');
-        }])->findOrFail($id);
+            },
+            'locations.ratings'
+        ])->findOrFail($id);
 
         $restaurant->locations->each(function ($location) {
-            $location->average_rating = $location->ratings->avg('rate');
-            unset($location->ratings);
+        $location->average_rating = $location->ratings->avg('rate');
+        unset($location->ratings);
         });
 
         $totalRating = $restaurant->locations->sum('average_rating');
@@ -116,7 +117,7 @@ class RestaurantController extends Controller
         $restaurant->average_rating = $locationCount > 0 ? $totalRating / $locationCount : 0;
 
         if ($restaurant) {
-            return ApiResponse::sendResponse(200, 'Restaurant', $restaurant);
+            return ApiResponse::sendResponse(200, 'Restaurant', new RestaurantResource($restaurant));
         }
         return ApiResponse::sendResponse(404, 'Can`t find this Restaurant');
     }

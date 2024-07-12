@@ -73,6 +73,8 @@ Route::apiResource('user/{user}/addresses', UserAddressController::class)
     ->middleware('auth:sanctum');
 
 Route::get('countries', [CountryController::class, 'getAllCountries']);
+Route::get('countries/{location_id}', [CountryController::class, 'show']);
+
 Route::get('countries/{id}', [CountryController::class, 'getCountryById']);
 Route::get('governorates', [GovernorateController::class, 'getAllGovernorates']);
 Route::get('governorates/{id}', [GovernorateController::class, 'getGovernoratesByCountryId']);
@@ -125,6 +127,9 @@ Route::get('/restaurantslocations/{restaurantId}', [RestaurantLocationsControlle
 Route::post('/restaurantslocations',[RestaurantLocationsController::class,'store'])->middleware('auth:sanctum');
 Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
+Route::get('/locations/{location_id}', [RestaurantLocationsController::class,'show']);
+
+
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
 Route::resource('/table-availabilities',TableAvailabilityController::class);
 Route::get('/nearest-locations/{userId}/{radius?}', [LocationController::class, 'getNearestLocations']);

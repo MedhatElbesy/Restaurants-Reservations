@@ -59,31 +59,9 @@ class RestaurantLocationsController extends Controller
                     ]);
                 }
             }
-            // $user = Auth::user();
-            // $user = auth()->user();
-            // if ($user) {
-            //     $user->notify(new RestaurantLocationCreated($restaurantLocation));
-            // }
-            // event(new ReservationCreated($restaurantLocation));
-            // Notification::send(auth()->user(), new RestaurantLocationCreated($restaurantLocation));
-            // $user = auth()->user(); // Assuming notification should go to the authenticated user
-            // $user->notify(new RestaurantLocationCreated($restaurantLocation));
-            // $restaurantLocation->notify(new RestaurantLocationCreated($restaurantLocation));
-            // return response()->json([
-            //     'message' => 'Restaurant location created successfully',
-            //     'location' => $restaurantLocation,
-            // ], 201);
-            // event(new ReservationCreated($restaurantLocation));
-            // return response()->json($restaurantLocation, 201);
-
             event(new ReservationCreated($restaurantLocation));
             $restaurantLocation->notify(new RestaurantLocationCreated($restaurantLocation));
 
-// $user->notify(new RestaurantLocationCreated($restaurantLocation, $user));
-
-//         return response()->json(['message' => 'Restaurant location created successfully', 'restaurantLocation' => $restaurantLocation], 201);
-
-            // event(new ReservationCreated($restaurantLocation));
             return ApiResponse::sendResponse(201, "Restaurant location created successfully", $restaurantLocation);
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to create Restaurant location', ['error' => $e->getMessage()]);
@@ -96,11 +74,16 @@ class RestaurantLocationsController extends Controller
     public function show($locationId)
     {
         try {
-        $location = RestaurantLocation::with('tables.images')::findOrFail($locationId);
-        return ApiResponse::sendResponse(200, 'Location Retrieved Successfully', $location);
-    } catch (Throwable $e) {
-        return ApiResponse::sendResponse(404, 'Location not found', ['error' => $e->getMessage()]);
-    }
+            $location = RestaurantLocation::with([
+            'country:id,name',
+            'governorate:id,name',
+            'city:id,name',
+            'state:id,name'
+        ])->findOrFail($locationId);
+            return ApiResponse::sendResponse(200, 'Location Retrieved Successfully', $location);
+        } catch (Throwable $e) {
+            return ApiResponse::sendResponse(404, 'Location not found', ['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -161,4 +144,6 @@ class RestaurantLocationsController extends Controller
             return ApiResponse::sendResponse(500, 'Failed to delete restaurant', ['error' => $e->getMessage()]);
         }
     }
+
+
 }

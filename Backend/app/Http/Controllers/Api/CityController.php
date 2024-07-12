@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Governorate;
+use App\Models\RestaurantLocation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -35,5 +36,20 @@ class CityController extends Controller
             return ApiResponse::sendResponse(404, 'No cities found for this governorate.');
         }
         return ApiResponse::sendResponse(200, 'Cities fetched successfully', $cities);
+    }
+
+    public function show($location_id)
+    {
+        try {
+            $location = RestaurantLocation::findOrFail($location_id);
+            $cities = $location->city;
+
+            if (!$cities) {
+                return ApiResponse::sendResponse(404, 'cities not found for the given location');
+            }
+            return ApiResponse::sendResponse(200, 'cities fetched successfully', $cities);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to retrieve cities information',['error' => $e->getMessage()]);
+        }
     }
 }

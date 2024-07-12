@@ -43,9 +43,11 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
 
-    public function show(Category $category)
+    public function show($restaurant_id)
     {
-        return $category;
+        $restaurant = Restaurant::findOrFail($restaurant_id);
+        $categories = $restaurant->categories()->get();
+            return ApiResponse::sendResponse(200, 'categories', $categories);
     }
 
 

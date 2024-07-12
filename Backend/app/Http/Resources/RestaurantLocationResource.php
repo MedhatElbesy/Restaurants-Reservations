@@ -18,10 +18,10 @@ class RestaurantLocationResource extends JsonResource
             'id' => $this->id,
             'restaurant' => $this->restaurant->name,
             'address' => $this->address,
-            'country' => $this->country,
-            'governorate' => $this->governorate,
-            'city' => $this->city,
-            'state' => $this->state,
+            // 'country' => $this->country,
+            // 'governorate' => $this->governorate,
+            // 'city' => $this->city,
+            // 'state' => $this->state,
             'zip' => $this->zip,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
@@ -34,7 +34,8 @@ class RestaurantLocationResource extends JsonResource
             'status' => $this->status,
             'images' => RestaurantLocationImageResource::collection($this->whenLoaded('images')),
             'tables' => TableResource::collection($this->whenLoaded('tables')),
-            
+            'average_rating' => $this->when(isset($this->average_rating), $this->average_rating),
+
         ];
     }
 }
