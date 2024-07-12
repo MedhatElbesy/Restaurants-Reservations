@@ -100,7 +100,7 @@ class CategoryController extends Controller
             $query->select('id', 'restaurant_id', 'address')
                 ->withAvg('ratings', 'rate');
         }])
-        ->select('id', 'user_id', 'logo', 'cover', 'name', 'slug', 'title', 'summary', 'description', 'rating', 'hot_line', 'status', 'deleted_at', 'created_at', 'updated_at')
+        ->select('id', 'user_id', 'logo', 'cover', 'name', 'slug', 'title', 'summary', 'description', 'rating', 'hot_line', 'status')
         ->get();
 
     if ($restaurants->isEmpty()) {

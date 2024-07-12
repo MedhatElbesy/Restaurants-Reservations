@@ -100,11 +100,17 @@ class RestaurantController extends Controller
             'categories',
             'restaurant_images',
             'menuCategories.menuItems'
-
         ])->findOrFail($id);
+            $restaurant->locations->each(function ($location) {
+        $location->average_rating = $location->ratings->avg('rate');
+    });
+
+        $totalRating = $restaurant->locations->sum('average_rating');
+        $locationCount = $restaurant->locations->count();
+        $restaurant->average_rating = $locationCount > 0 ? $totalRating / $locationCount : 0;
 
         if ($restaurant) {
-            return ApiResponse::sendResponse(200, 'Restaurant', new RestaurantResource($restaurant));
+            return ApiResponse::sendResponse(200, 'Restaurant', $restaurant);
         }
         return ApiResponse::sendResponse(404, 'Can`t find this Restaurant');
     }
