@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\owner\StoreOwnerRequest;
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,33 +21,25 @@ class OwnersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOwnerRequest $request)
     {
-        //
+        //store the user data
+        $new_owner = $request->except('restaurant_id');
+
+
+        //new owner of a restaurant
+        $restaurant = Restaurant::where('id',$request['restaurant_id'])->first();
+        $restaurant['owner_id'] = $new_owner['id'];
+
+
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }
@@ -63,6 +57,6 @@ class OwnersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }
