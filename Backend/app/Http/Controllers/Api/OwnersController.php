@@ -17,7 +17,7 @@ class OwnersController extends Controller
     public function index()
     {
         $owners = User::where('roles_name','owner')->get();
-        return ApiResponse::sendResponse(201,"Owners",$owners);
+        return ApiResponse::sendResponse(200,"Owners",$owners);
     }
 
     /**
@@ -25,15 +25,16 @@ class OwnersController extends Controller
      */
     public function store(StoreOwnerRequest $request)
     {
-        //store the user data
+        //store the owner data
         $new_owner = $request->except('restaurant_id');
-
+        $new_owner['roles_name'] = 'owner';
+        User::create($new_owner);
 
         //new owner of a restaurant
         $restaurant = Restaurant::where('id',$request['restaurant_id'])->first();
         $restaurant['owner_id'] = $new_owner['id'];
 
-
+        return ApiResponse::sendResponse(201,'owner',$request);
     }
 
     /**
@@ -41,7 +42,15 @@ class OwnersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::where('id',$id);
+
+        //check the role of the user
+        if($user['roles_name']=='owner'){
+            return ApiResponse::sendResponse(200,"owner",$user);
+        }
+        else{
+            return ApiResponse::sendResponse(404,"owner is not found");
+        }
     }
 
     /**
