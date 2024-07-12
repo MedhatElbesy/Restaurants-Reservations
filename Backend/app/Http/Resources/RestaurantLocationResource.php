@@ -34,6 +34,7 @@ class RestaurantLocationResource extends JsonResource
             'status' => $this->status,
             'images' => RestaurantLocationImageResource::collection($this->whenLoaded('images')),
             'tables' => TableResource::collection($this->whenLoaded('tables')),
+            
         ];
     }
 }

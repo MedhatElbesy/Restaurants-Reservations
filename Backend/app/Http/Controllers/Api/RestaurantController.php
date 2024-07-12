@@ -87,6 +87,8 @@ class RestaurantController extends Controller
         }
     }
 
+
+
     public function show(string $id)
     {
         $restaurant = Restaurant::with([
@@ -99,10 +101,14 @@ class RestaurantController extends Controller
             'categories',
             'restaurant_images',
             'menuCategories.menuItems'
-        ])->findOrFail($id);
-            $restaurant->locations->each(function ($location) {
-        $location->average_rating = $location->ratings->avg('rate');
-    });
+        ])->with(['locations' => function($query) {
+            $query->withCount('comments');
+        }])->findOrFail($id);
+
+        $restaurant->locations->each(function ($location) {
+            $location->average_rating = $location->ratings->avg('rate');
+            unset($location->ratings);
+        });
 
         $totalRating = $restaurant->locations->sum('average_rating');
         $locationCount = $restaurant->locations->count();
