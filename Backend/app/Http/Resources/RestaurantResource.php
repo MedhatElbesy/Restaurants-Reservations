@@ -30,6 +30,7 @@ class RestaurantResource extends JsonResource
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'menu_categories' => MenuCategoryResource::collection($this->whenLoaded('menuCategories')),
             'status' => $this->status,
+            
         ];
     }
 }
