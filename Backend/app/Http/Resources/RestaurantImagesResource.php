@@ -17,7 +17,7 @@ class RestaurantImagesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image_url' => Storage::disk('public')->url($this->image),
+            'image_url' => image_url,
         ];
     }
 }
