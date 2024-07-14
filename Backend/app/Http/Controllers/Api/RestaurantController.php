@@ -93,13 +93,7 @@ class RestaurantController extends Controller
     public function show(string $id)
     {
         $restaurant = Restaurant::with([
-            // 'locations.country',
-            // 'locations.governorate',
-            // 'locations.city',
-            // 'locations.state',
             // 'locations.tables.images',
-            // 'locations',
-            // 'categories',
             'restaurant_images',
             'locations' => function ($query) {
             $query->withCount('comments');
