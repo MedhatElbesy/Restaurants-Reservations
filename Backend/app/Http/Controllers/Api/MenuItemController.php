@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Models\MenuCategory;
 use App\Models\MenuItem;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class MenuItemController extends Controller
@@ -61,5 +63,17 @@ class MenuItemController extends Controller
         $menuItem->delete();
 
         return ApiResponse::sendResponse(200, 'Menu item deleted successfully');
+    }
+
+
+    public function getMenuItemByMenuCategoryId($menuCategoryId)
+    {
+        try {
+            $restaurant = MenuCategory::findOrFail($menuCategoryId);
+            $menuItems = MenuItem::where('menu_category_id', $menuCategoryId)->get();
+            return ApiResponse::sendResponse(200,"menu Items for Category",$menuItems);
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::sendResponse(404, 'Menu Item not found',  $e->getMessage());
+        }
     }
 }

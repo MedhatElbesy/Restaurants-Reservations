@@ -129,6 +129,7 @@ Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/locations/{location_id}', [RestaurantLocationsController::class,'show']);
 Route::get('restaurants/{id}/menu-categories', [MenuCategoryController::class, 'getMenuCategoryByRestaurantId']);
+Route::get('menucategories/{id}/menu-item', [MenuItemController::class, 'getMenuItemByMenuCategoryId']);
 
 
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
