@@ -128,6 +128,7 @@ Route::post('/restaurantslocations',[RestaurantLocationsController::class,'store
 Route::put('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'update']);
 Route::delete('/restaurantslocations/{location_id}', [RestaurantLocationsController::class,'destroy']);
 Route::get('/locations/{location_id}', [RestaurantLocationsController::class,'show']);
+Route::get('restaurants/{id}/menu-categories', [MenuCategoryController::class, 'getMenuCategoryByRestaurantId']);
 
 
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
