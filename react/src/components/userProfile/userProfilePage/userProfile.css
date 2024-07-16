@@ -1,98 +1,129 @@
-img[alt="Profile"] {
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  bottom: -75px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid white;
-  border-radius: 50%; 
+.custom-border{
+    border: 1px  #e8e4e273 solid;
+    margin-top: 1.5%;
+    
+    font-size: 1.2em;
+    background-color: rgba(241, 241, 241, 0.642);
 }
 
 
-.userProfile{
-  overflow-x: hidden;
+.custom-text{
+    font-size:smaller;
 }
 
-.userProfile h2 {
-  color: #ffd28d;
-  font-family: "Playfair Display", serif;
+
+.custom-card{
+    box-shadow: 0 0 8px rgba(181, 178, 178, 0.623);
+    padding-left: 1.2%;
+    padding-right: 1.2%;
+    padding-bottom: 0.5%;
+    padding-top: 0.5%;
+    border-radius: 10px;
+}
+
+.profile-image-container {
+    width: 100px; 
+    height: 100px; 
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+
+
+
+
+/* UserRestaurant */
+
+.restaurant-dashboard {
+    margin-top: 7.5%;
+    box-shadow: 0 0 10px rgb(212, 210, 210);
+    padding: 14px;
+    min-height: 80vh;
+    background-color: rgba(228, 227, 227, 0.468);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .restaurant-dashboard .custom-header {
+    background-color: #FF6B16;
+    position: relative;
+    padding: 10px;
+    box-shadow: 0 0 15px rgba(180, 179, 179, 0.904);
+  }
+  
+  .restaurant-dashboard .custom-header h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0;
+  }
+  
+  .restaurant-dashboard .custom-header .roof {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #FF6B16;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
  
-}
+  .my-btn {
+    border: 1px #FF6B16 solid;
+    padding: 4px;
+    text-decoration: none;
+    border-radius: 7px;
+    color: #FF6B16;
+    font-size: medium;
+  }
+  
+  .my-btn:hover {
+    background-color: #FF6B16;
+    color: white;
+  }
+  
 
-.custom-border-bottom{
-  border-bottom: 2px #ffd28d solid ;
-  border-radius: 15px;
-}
-
-
-
-.aside-data {
-  border-radius: 8px;
-  height: 100%; 
-  padding-top: 5%;
-
-}
-
-
-
-.icon-wrapper{
-  font-family: 'Times New Roman', Times, serif;
-  font-size: larger;
-}
-
-
-.userProfile h1{
-  font-family: 'Playfair Display', serif;
-  text-shadow: 8px 8px 14px rgba(96, 95, 95, 0.988);
-}
-
-.userProfile h3{
-  font-family: 'Playfair Display', serif;
-  color: #ffd28d;
-  text-shadow: 8px 8px 14px rgba(96, 95, 95, 0.988);
-}
-
-.custom-font {
-  color: #ffd28d;
-  font-size: larger;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-.custom-border {
-  border-top: 2px solid #ffd28d; 
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-
-}
-
-
-
-
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
-  color: white;
-  opacity: 1; 
  
-}
+  
+  .fixed-size-img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+  }
+  
+ 
+  
+  .custom-card-body  {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
 
 
-.caption{
-  z-index: 10;
-  margin-top: 20%;
-}
 
-.caption p {
-  color: #ca8e46;
-  font-size: xx-large;
-  font-family:"Bad Script", cursive; 
-  text-shadow: 8px 8px 14px rgba(113, 77, 19, 0.988);
-  z-index:8;
-}
+  .userdash-restaurant{
+    box-shadow: 0 0 7px rgb(187, 186, 186);
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 7px;
+  }
 
 
+  .formEditProfile{
+    width:65vw;
+    box-shadow: 0 0 10px rgb(243, 168, 131);
+    background-color: rgba(226, 226, 226, 0.392);
+    padding: 10px;
+    padding-left: 4%;
+    padding-right: 4%;
+    color: black;
+    border: 2px dashed #FF6B16;
+  }
