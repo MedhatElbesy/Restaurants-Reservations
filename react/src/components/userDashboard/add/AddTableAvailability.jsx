@@ -35,7 +35,7 @@ const AddAvailabilityForm = () => {
   };
 
   return (
-    <section className='formUserDashboard my-5 col-6 offset-3'>
+    <section className='availability  col-6 offset-3'>
 
       <form onSubmit={handleSubmit}>
         <h1 className='text-center my-5'>Table Availability</h1>

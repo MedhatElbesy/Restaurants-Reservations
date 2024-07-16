@@ -92,9 +92,9 @@ const AddTableForm = () => {
 
         <div className="col-md-6">
 
-          <div className="card">
+          <div>
 
-            <div className="card-body table-card">
+            <div className=" table-card">
 
               <h2 className="card-title text-center mb-4">Add Table</h2>
 
