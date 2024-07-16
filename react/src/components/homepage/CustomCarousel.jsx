@@ -9,8 +9,8 @@ const CustomCarousel = () => {
 
       <video className="video-element" autoPlay loop muted>
         <source
-          src="./images/header_video_ January_2022.mp4"
-          type="video/mp4"
+          src="https://americasbestrestaurants.com/assets/u/video/header_video_%20January_2022.mp4"
+          
         />
         Your browser does not support the video tag.
       </video>
