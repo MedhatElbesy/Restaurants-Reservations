@@ -1,32 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPlus, faEye, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Modal, Card, Container, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import Swal from 'sweetalert2';
-import { useRestaurantContext } from '../RestaurantContext';
+import Paper from '@mui/material/Paper';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import { InputAdornment, TablePagination, TextField } from '@mui/material';
 import Loader from '../../../layouts/loader/loader';
+import { fetchRestaurantMenuCategories } from '../../../slices/restaurant/menuCategory/fetchRestaurantMenuCaegory';
+import { fetchMenuCategoryItemsAsync } from '../../../slices/restaurant/menuItem/fetchMenuCategoryItems';
+import { deleteMenuItemThunk } from '../../../slices/restaurant/menuItem/deleteMenuItemSlice';
+import Swal from 'sweetalert2';
 import { deleteMenuCategoryThunk } from '../../../slices/restaurant/menuCategory/deleteMenuCategorySlice';
-import { deleteMenuItemThunk } from '../../../slices/restaurant/menuItem/deleteMenuItemSlice'; 
-import { fetchRestaurantById } from '../../../slices/restaurant/restaurantSlice';
 
-const MenuCategoriesTable = () => {
-  const { restaurant } = useRestaurantContext();
-  const [showItemsModal, setShowItemsModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+export default function MenuCategoriesTable() {
   const dispatch = useDispatch();
+  const { restaurantId } = useParams();
+  const { allMenuCategory, status } = useSelector((state) => state.restaurantMenuCategories);
+  const { items: menuItems, status: menuItemsStatus } = useSelector((state) => state.menuCategoryItems);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showMenuItems, setShowMenuItems] = useState(false);
+  const [currentMenuCategoryId, setCurrentMenuCategoryId] = useState(null);
 
-  const handleModalShow = (category) => {
-    setSelectedCategory(category);
-    setShowItemsModal(true);
+  useEffect(() => {
+    if (restaurantId) {
+      dispatch(fetchRestaurantMenuCategories(restaurantId));
+    }
+  }, [restaurantId]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handleModalClose = () => {
-    setSelectedCategory(null);
-    setShowItemsModal(false);
+  const handleShowMenuItems = (menuCategoryId) => {
+    setCurrentMenuCategoryId(menuCategoryId);
+    dispatch(fetchMenuCategoryItemsAsync(menuCategoryId));
+    setShowMenuItems(true);
   };
 
+  const handleBackToList = () => {
+    setShowMenuItems(false);
+    setCurrentMenuCategoryId(null);
+  };
   const handleDelete = (categoryId) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -41,7 +62,7 @@ const MenuCategoriesTable = () => {
         dispatch(deleteMenuCategoryThunk(categoryId))
           .unwrap()
           .then(() => {
-            dispatch(fetchRestaurantById(restaurant.id))
+            dispatch(fetchRestaurantMenuCategories(restaurantId))
               .unwrap()
               .then(() => {
                 Swal.fire(
@@ -80,7 +101,7 @@ const MenuCategoriesTable = () => {
         dispatch(deleteMenuItemThunk(itemId))
           .unwrap()
           .then(() => {
-            dispatch(fetchRestaurantById(restaurant.id))
+            dispatch(fetchMenuCategoryItemsAsync(currentMenuCategoryId))
               .unwrap()
               .then(() => {
                 Swal.fire(
@@ -106,128 +127,180 @@ const MenuCategoriesTable = () => {
     });
   };
 
-  if (!restaurant || !restaurant.menu_categories) {
+
+  if (status === 'loading' || !allMenuCategory) {
     return <Loader />;
   }
 
-  return (
-    <section className='location-container container my-5'>
-
-      <Container>
-
-        <h2 className='text-center mb-5'>
-          Menu Categories
-          <span>
-            <Link to={`/add-category/${restaurant.id}`}>
-              <FontAwesomeIcon icon={faPlus} className="text-warning mx-3" />
-            </Link>
-          </span>
-        </h2>
-
-        <Row xs={1} md={3} className="g-4">
-
-          {restaurant.menu_categories.map((category) => (
-
-            <Col key={category.id}>
-
-              <div className="h-100 card-color">
-
-                <Card.Body>
-                  <section className="d-flex justify-content-between align-items-center">
-
-                    <Card.Title>{category.name}</Card.Title>
-
-                    <span className="ms-auto">
-
-                      <Link to={`/edit-menu-category/${category.id}`} className="text-success me-3">
-                        <FontAwesomeIcon icon={faEdit} className="text-primary" />
-                      </Link>
-
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        className="text-danger me-3"
-                        onClick={() => handleDelete(category.id)}
-                      />
-
-                      <Link to="#" onClick={() => handleModalShow(category)}>
-                        <FontAwesomeIcon icon={faEye} className="text-warning" />
-                      </Link>
-
-                    </span>
-
-                  </section>
-
-                  <span className="ms-auto">
-
-                    <p className='my-4 h6 text-light'>
-                      Add Menu Item 
-                      <Link to={`/add-item/${category.id}`} className="me-3 mx-2">
-                        <FontAwesomeIcon icon={faPlus} className="text-warning" />
-                      </Link>
-                    </p>
-
-                  </span>
-
-                </Card.Body>
-
-              </div>
-
-            </Col>
-          ))}
-        </Row>
-
-        <Modal show={showItemsModal} onHide={handleModalClose} dialogClassName="modal-fullscreen location-container">
-
-          <Modal.Header closeButton>
-            <Modal.Title className='text-dark'>{selectedCategory && selectedCategory.name} Menu Items</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            {selectedCategory && selectedCategory.menu_items && selectedCategory.menu_items.length > 0 ? (
-              <table className="table">
-
-                <thead>
-                  <tr className='text-dark'>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Sale Price</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {selectedCategory.menu_items.map((item) => (
-                    <tr key={item.id} className='text-dark'>
-                      <td>{item.name}</td>
-                      <td>{item.description}</td>
-                      <td>{item.price}</td>
-                      <td>{item.sale_price}</td>
-                      <td>{item.status}</td>
-                      <td>
-                        <Link to={`/edit-item/${item.id}`} className="text-primary me-3">
-                          <FontAwesomeIcon icon={faEdit} className="text-primary" />
-                        </Link>
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className="text-danger"
-                          onClick={() => handleDeleteItem(item.id)} 
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-                
-              </table>
-            ) : (
-              <p className='text-dark'>No menu items available</p>
-            )}
-          </Modal.Body>
-        </Modal>
-      </Container>
-    </section>
+  const filteredCategories = allMenuCategory.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    category.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
-};
 
-export default MenuCategoriesTable;
+  const filteredMenuItems = menuItems.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.price.toString().includes(searchTerm) ||
+    item.sale_price.toString().includes(searchTerm) ||
+    item.status.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <main className="container-fluid restaurant-dashboards mx-5">
+
+      <section className="custom-header">
+        <h3 className="text-center">Restaurant Menu Categories</h3>
+        <div className="roof"></div>
+      </section>
+
+      <Paper sx={{ width: '100%', marginTop: '10px' }}>
+
+      <div className="float-end my-4" style={{ zIndex: 10, position: 'relative' }}>
+
+          <Link to={`/add-category/${restaurantId}`} className="btn btn-outline-warning mx-2 text-dark">
+            <FontAwesomeIcon icon={faPlus} /> Add Menu Category
+          </Link>
+
+          {showMenuItems && (
+
+         <Link to={`/add-item/${currentMenuCategoryId}`} className="btn btn-outline-warning mx-2 text-dark">
+          <FontAwesomeIcon icon={faPlus} /> Add Menu Item
+         </Link>
+          )}
+
+     </div>
+
+        <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          className='my-3'
+          value={searchTerm}
+          onChange={handleSearch}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FontAwesomeIcon icon={faSearch} />
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        {showMenuItems && (
+          <div className="float-start my-4" style={{ zIndex: 10, position: 'relative' }}>
+            <button className="btn mx-3 btn-outline-primary btn-sm" onClick={handleBackToList}>
+              Back to Menu Categories
+            </button>
+          </div>
+        )}
+
+        <TableContainer sx={{ maxHeight: 440, overflowY: 'auto' }}>
+
+          <Table aria-label="sticky table">
+
+            <TableHead className="table-head">
+
+              <TableRow>
+
+                <TableCell className="text-center table-cell">Name</TableCell>
+                <TableCell className="text-center table-cell">Description</TableCell>
+                {showMenuItems && (
+                  <>
+                    <TableCell className="text-center table-cell">Price</TableCell>
+                    <TableCell className="text-center table-cell">Sale Price</TableCell>
+                    <TableCell className="text-center table-cell">Status</TableCell>
+                  </>
+                )}
+                {!showMenuItems && (
+                  <>
+                    <TableCell className="text-center table-cell">Status</TableCell>
+                  </>
+                )}
+                <TableCell className="text-center table-cell">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {showMenuItems ? (
+                <>
+                  {menuItemsStatus === 'loading' ? (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center">
+                        <Loader />
+                      </TableCell>
+                    </TableRow>
+                  ) : filteredMenuItems.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center">
+                        No items found.
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    filteredMenuItems.map((item) => (
+                      <TableRow key={item.id} hover={true}>
+                        <TableCell className="text-center">{item.name}</TableCell>
+                        <TableCell className="text-center">{item.description}</TableCell>
+                        <TableCell className="text-center">{item.price}</TableCell>
+                        <TableCell className="text-center">{item.sale_price}</TableCell>
+                        <TableCell className="text-center">{item.status}</TableCell>
+                        <TableCell className="d-flex align-items-center justify-content-center">
+                          <Link
+                            to={`/edit-item/${item.id}`}
+                            className="btn btn-outline-primary btn-sm me-2"
+                          >
+                            <FontAwesomeIcon icon={faEdit} /> Edit
+                          </Link>
+                          <button className="btn btn-outline-danger btn-sm" onClick={() => handleDeleteItem(item.id)} >
+                            <FontAwesomeIcon icon={faTrash} /> Delete
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </>
+              ) : (
+                filteredCategories.map((category) => (
+                  <TableRow key={category.id} hover={true}>
+                    <TableCell className="text-center">{category.name}</TableCell>
+                    <TableCell className="text-center">{category.description}</TableCell>
+                    <TableCell className="text-center">{category.status}</TableCell>
+                    <TableCell className="d-flex align-items-center justify-content-center">
+                     <div className="btn-group" role="group">
+                      <button className="btn btn-outline-success btn-sm" onClick={() => handleShowMenuItems(category.id)}>
+                       <FontAwesomeIcon icon={faEye} /> Show Items
+                      </button>
+                      <Link
+                       to={`/edit-menu-category/${category.id}`}
+                       className="btn btn-outline-primary ps-4 pe-4 btn-sm"
+                      >
+                        <FontAwesomeIcon icon={faEdit} /> Edit
+                      </Link>
+                      <button 
+                        className="btn btn-outline-danger ps-4 pe-4 btn-sm"  
+                        onClick={() => handleDelete(category.id)}>
+                       <FontAwesomeIcon icon={faTrash} /> Delete
+                      </button>
+                     </div>
+                   </TableCell>
+
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+
+          </Table>
+          
+        </TableContainer>
+
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={showMenuItems ? filteredMenuItems.length : filteredCategories.length}
+          rowsPerPage={10}
+          page={0}
+          onPageChange={() => {}}
+          onRowsPerPageChange={() => {}}
+        />
+      </Paper>
+    </main>
+  );
+}
