@@ -15,11 +15,9 @@ const NearRestau = () => {
   const userId = decryptData('userId');
 
   useEffect(() => {
-    dispatch(fetchUserDataById(userId)).then(() => {
-      if (userData && userData.addresses && userData.addresses.length > 0) {
+    
         dispatch(fetchNearestRestaurants(userId));
-      }
-    });
+    
   }, []);
 
   if (status === 'loading') {
@@ -29,13 +27,13 @@ const NearRestau = () => {
   return (
     <main className='restau'>
       {nearestRestaurantsData.length > 0 && (
-        <>
-          <h1 className='text-center col-8 offset-2 custom-color my-5'>Nearest Restaurants</h1>
+        <div className='row my-5'>
+          <h1 className='col-10 mx-3 my-5'>Nearest Restaurants</h1>
           <CardSlick>
             {nearestRestaurantsData.map((restaurant, index) => (
               restaurant.image && (
                 <div key={index} className="restaurant-slide">
-                  <NavLink to={`/restaurant/${restaurant.restaurant_id}`}>
+                  <NavLink to={`/restaurant/${restaurant.restaurant_id}`} className="nav-link">
                     <Card
                       name={restaurant.restaurant_name}
                       image={restaurant.image}
@@ -45,7 +43,7 @@ const NearRestau = () => {
               )
             ))}
           </CardSlick>
-        </>
+        </div>
       )}
     </main>
   );
