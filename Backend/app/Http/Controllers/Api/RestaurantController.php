@@ -49,6 +49,10 @@ class RestaurantController extends Controller
             }
         }
             $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
+            $restaurant->location_addresses = $restaurant->locations;
+
+        
+            unset($restaurant->locations);
 
     });
 
