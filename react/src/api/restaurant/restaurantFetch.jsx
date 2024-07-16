@@ -155,10 +155,59 @@ export const nearestRestaurants = async (userId) => {
 
 export const topRestaurants = async () => {
   try {
-      const response = await axios.get(`/top-rated-restaurants`);
+      const response = await axios.get(`/top-rated-restaurants/6`);
       return response.data;
   } catch (error) {
       console.error("An error occurred during fetching top restaurant data", error);
+      throw error;
+  }
+};
+
+
+
+export const fetchRestaurantByCategory = async (categoryName) => {
+  try {
+      const response = await axios.get(`/categories/name/${categoryName}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching  restaurant data", error);
+      throw error;
+  }
+};
+
+
+
+
+export const FetchRestaurantMenuCategory = async (restaurantId) => {
+  try {
+      const response = await axios.get(`/restaurants/${restaurantId}/menu-categories`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching  menu category data", error);
+      throw error;
+  }
+};
+
+
+
+
+export const FetchMenuCategoryItems = async (menuCategoryId) => {
+  try {
+      const response = await axios.get(`/menucategories/${menuCategoryId}/menu-item`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching  menu item data", error);
+      throw error;
+  }
+};
+
+
+export const FetchRestaurantTables = async (locationId) => {
+  try {
+      const response = await axios.get(`/tables/${locationId}`);
+      return response.data;
+  } catch (error) {
+      console.error("An error occurred during fetching  tables data", error);
       throw error;
   }
 };
