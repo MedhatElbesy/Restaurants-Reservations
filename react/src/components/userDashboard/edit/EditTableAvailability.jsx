@@ -86,7 +86,7 @@ const EditTableAvailability = () => {
   }
 
   return (
-    <main className='formUserDashboard col-6 offset-3 my-5'>
+    <main className='availability col-6 offset-3'>
 
       <form onSubmit={handleSubmit}>
         <h1 className='text-center my-4'>Edit Table Availability</h1>

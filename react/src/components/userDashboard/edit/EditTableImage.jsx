@@ -53,11 +53,11 @@ const EditTableImage = () => {
   }
 
   return (
-    <main className="container col-6  my-5">
+    <main className="container col-6">
 
-      <section className='formUserDashboard'>
+      <section className='formUserDashboardimg'>
 
-        <h1 className='text-light text-center my-4'>Update Table Image</h1>
+        <h1 className='text-dark text-center my-4'>Update Table Image</h1>
 
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
 
