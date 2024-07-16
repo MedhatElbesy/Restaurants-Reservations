@@ -1,42 +1,46 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {Outlet, useParams } from 'react-router-dom';
-import Loader from '../../layouts/loader/loader';
-import { fetchRestaurantById } from '../../slices/restaurant/restaurantSlice';
-import Sidebar from '../../layouts/Sidebar';
-import './Restaurant.css';
-import { RestaurantProvider } from './RestaurantContext';
+import { fetchRestaurantById } from "../../slices/restaurant/restaurantSlice";
+import { useParams, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { Container } from "react-bootstrap";
 
-const Restaurant = () => {
+import Navbar from "./navbar/Navbar";
+import Footer from "./home/Footer";
+import Loader from "../../layouts/loader/loader";
+import "./Restaurant.css"
+
+
+export default function RestaurantDetails() {
   const { restaurantId } = useParams();
   const dispatch = useDispatch();
-  const restaurant = useSelector((state) => state.restaurant.restaurant);
-  const status = useSelector((state) => state.restaurant.status);
- 
-  useEffect(() => {
-    if (restaurantId) {
-      dispatch(fetchRestaurantById(restaurantId));
-    }
-  }, [restaurantId]);
+  const { restaurant, status, error } = useSelector(
+    (state) => state.restaurant
+  );
 
-  if (status === 'loading') {
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (restaurantId && isFirstRender.current) {
+      dispatch(fetchRestaurantById(restaurantId));
+      isFirstRender.current = false;
+    }
+  }, [dispatch, restaurantId]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  if (!restaurant && status === "loading") {
     return <Loader />;
   }
 
- 
-
   return (
-    <RestaurantProvider restaurantId={restaurantId} restaurant={restaurant} >
-      <div className="restaurant-container row">
-        <Sidebar />
-        <main className="container-fluid restaurant col-10 offset-2">
-          <div className="restaurant-content">
-            <Outlet />
-          </div>
-        </main>
-      </div>
-    </RestaurantProvider>
+    <Container fluid className="user-restaurant-container display-flex flex-column">
+      <Navbar />
+      {restaurant && (
+        <>
+          <Outlet />
+          <Footer restaurant={restaurant} />
+        </>
+      )}
+    </Container>
   );
-};
-
-export default Restaurant;
+}
