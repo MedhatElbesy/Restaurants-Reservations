@@ -79,7 +79,7 @@ export const locationById = async (locationId) => {
 
 export const tableById = async (tableId) => {
   try {
-      const response = await axios.get(`/tables/${tableId}`);
+      const response = await axios.get(`/get-table/${tableId}`);
       return response.data;
   } catch (error) {
       console.error("An error occurred during fetching table data", error);
