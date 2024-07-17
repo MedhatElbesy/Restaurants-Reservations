@@ -22,7 +22,7 @@ export default function Home() {
           <p className="text-main mx-5 w-75 fs-4">{restaurant.slug}</p>
         </div>
         <p className="text-light w-75 sec-font fs-3">
-          {restaurant.description}{" "}
+          {restaurant.description}
         </p>
         <div>
           <NavLink to={`/restaurant/${restaurantId}/branches`}>
@@ -33,27 +33,20 @@ export default function Home() {
         </div>
       </article>
       <article className="my-5 gallery">
-        {restaurant.restaurant_images.map((image) => {
-          return (
-            <>
-              <figure
-                key={image.id}
-                onClick={() => setClickedImage(image.image)}
-              >
-                <img src={image.image} alt="restaurant images" />
-              </figure>
-              {clickedImage && (
-                <div
-                  className="show-image"
-                  onClick={() => setClickedImage(null)}
-                >
-                  <span onClick={() => setClickedImage(null)}>X</span>
-                  <img src={clickedImage} alt="restaurant images" />
-                </div>
-              )}
-            </>
-          );
-        })}
+        {restaurant.images.map((image) => (
+          <figure
+            key={image.id}
+            onClick={() => setClickedImage(image.image_url)}
+          >
+            <img src={image.image_url} alt="restaurant images" />
+          </figure>
+        ))}
+        {clickedImage && (
+          <div className="show-image" onClick={() => setClickedImage(null)}>
+            <span onClick={() => setClickedImage(null)}>X</span>
+            <img src={clickedImage} alt="restaurant images" />
+          </div>
+        )}
       </article>
       <article className="reserve row flex-column justify-content-between p-md-5 p-3">
         <div className="">

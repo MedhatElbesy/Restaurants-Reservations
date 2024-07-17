@@ -1,9 +1,27 @@
+import { useEffect, useState } from "react";
+import { decryptData } from "../../../helpers/cryptoUtils";
+
 const ReservationForm = ({ formData, setFormData, register, errors }) => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    setUser(decryptData("user"));
+    if (user) {
+      setFormData({
+        name: `${user.first_name || ""} ${user.last_name || ""}`,
+        email: user.email || "",
+        telephone: user.mobile_number || "",
+      });
+    }
+  }, [setFormData, user]);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: newValue,
     });
   };
 
@@ -15,6 +33,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           className="form-input form-control"
           id="name"
           name="name"
+          value={formData.name || ""}
           {...register("name", { required: "Full Name is required" })}
           onChange={handleChange}
         />
@@ -27,6 +46,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           className="form-input form-control"
           id="email"
           name="email"
+          value={formData.email || ""}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -45,6 +65,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           className="form-input form-control"
           id="telephone"
           name="telephone"
+          value={formData.telephone || ""}
           {...register("telephone", {
             required: "Phone number is required",
             minLength: {
@@ -61,6 +82,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-11">
         <textarea
+          value={formData.notes || ""}
           className="form-input form-control"
           id="notes"
           name="notes"
@@ -76,6 +98,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           className="form-check-input"
           id="terms_and_conditions"
           name="terms_and_conditions"
+          checked={formData.terms_and_conditions || false}
           {...register("terms_and_conditions", {
             required: "You must accept the terms and conditions",
           })}

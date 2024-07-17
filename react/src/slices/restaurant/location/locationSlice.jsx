@@ -22,7 +22,7 @@ export const fetchLocationByIdAsync = createAsyncThunk(
 
 export const updateLocationAsync = createAsyncThunk(
   "location/updateLocation",
-  async ({ locationId, data }) => {
+  async ({ locationId, data }, {rejectWithValue}) => {
    try{const updatedData = await updateLocation(locationId, data);
     return updatedData;
    }catch (error) {

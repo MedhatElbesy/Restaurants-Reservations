@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useBranch } from "../branches/BranchContext";
 import Swal from "sweetalert2";
 import MapContainer from "../../Map/Map";
-import CustomCalendar from "./Calender";
+import CustomCalendar from "./Calendar";
 import TimeAndAdditional from "./TimeAndAdditional";
 import ReservationForm from "./ReservationForm";
 import { useForm } from "react-hook-form";
-import { decryptData } from "../../../helpers/cryptoUtils";
 import Loader from "../../../layouts/loader/loader";
 import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
 import "./Reservation.css";
@@ -19,11 +18,13 @@ const Reservation = () => {
   const dispatch = useDispatch();
   const { tableId } = useParams();
   const { branch } = useBranch();
-  const table = branch.tables.find((table) => table.id == tableId);
+  const { tables } = useSelector((state) => state.restaurantTables);
+  const table = tables.find((table) => table.id == tableId);
   const { restaurant } = useSelector((state) => state.restaurant);
   const { tableAvailability, status: tableAvailabilityStatus } = useSelector(
     (state) => state.tableAvailability
   );
+
 
   useEffect(() => {
     dispatch(getTableAvailability(tableId));
@@ -36,7 +37,7 @@ const Reservation = () => {
     extraSeats: null,
     childSeats: null,
   });
-  const [reservationDate, setreservationDate] = useState(null);
+  const [reservationDate, setReservationDate] = useState(null);
 
   const {
     register,
@@ -49,7 +50,7 @@ const Reservation = () => {
       component: (
         <CustomCalendar
           reservationDate={reservationDate}
-          setreservationDate={setreservationDate}
+          setReservationDate={setReservationDate}
           branch={branch}
         />
       ),
@@ -103,18 +104,9 @@ const Reservation = () => {
       branchId: branch.id,
       tableId: table.id,
     };
-    if (decryptData("token")) {
-      navigate(`/reservation/checkout`, {
-        state: { reservationData },
-      });
-    } else {
-      Swal.fire({
-        title: "You need to login first",
-        timer: 3000,
-        showConfirmButton: false,
-      });
-      navigate("/login");
-    }
+    navigate(`/reservation/checkout`, {
+      state: { reservationData },
+    });
   };
 
   const showError = (message) => {
@@ -149,8 +141,14 @@ const Reservation = () => {
             {/* Reservation Details */}
             <div className="col-12 col-sm-11 col-lg-8 px-lg-4 mt-4 mt-lg-0 p-4">
               <div>
-                <h4 className="mb-0 fs-1">Reserve Table <strong className="text-color">No.{table.id}</strong></h4>
-                <p>or Call us at <strong className="text-color">{branch.mobile_number}</strong></p>
+                <h4 className="mb-0 fs-1">
+                  Reserve Table{" "}
+                  <strong className="text-color">No.{table.id}</strong>
+                </h4>
+                <p>
+                  or Call us at{" "}
+                  <strong className="text-color">{branch.mobile_number}</strong>
+                </p>
               </div>
               <div className="p-3" style={{ backgroundColor: "#f4f4f4" }}>
                 <div className="head pb-4">

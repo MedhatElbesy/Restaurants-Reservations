@@ -115,16 +115,18 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
       {/* User Routes */}
+
+      <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
+        <Route index element={<Navigate to="home" />} />
+        <Route path="home" element={<RestaurantHome />} />
+        <Route path="branches" element={<Branches />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="tables" element={<Tables />} />
+      </Route>
       <Route element={<ProtectedRoute />}>
         {/* Restaurant Details Routes */}
         <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="home" element={<RestaurantHome />} />
-
-          <Route path="branches" element={<Branches />} />
-          <Route path="menu" element={<Menu />} />
           <Route path="reservation/:tableId" element={<Reservation />} />
-          <Route path="tables" element={<Tables />} />
         </Route>
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}

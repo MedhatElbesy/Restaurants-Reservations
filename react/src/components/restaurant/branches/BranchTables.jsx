@@ -1,13 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useBranch } from "./BranchContext";
 import Image from "react-bootstrap/Image";
+import { useEffect, useMemo } from "react";
+import { fetchRestaurantTablesAsync } from "../../../slices/restaurant/table/restaurantTablesSlice";
+import Loader from "../../../layouts/loader/loader";
+
 export function BranchTables({ onShowTables }) {
   const { branch } = useBranch();
-  const availableTables = branch.tables.filter(
-    (table) => table.status === "available"
-  );
+  const dispatch = useDispatch();
+  const { tables, status } = useSelector((state) => state.restaurantTables);
+  
+  useEffect(() => {
+    dispatch(fetchRestaurantTablesAsync(branch.id)).unwrap();
+  },[dispatch, branch.id]);
+
+  const availableTables = useMemo(() => {
+    return tables.filter((table) => table.status === "available");
+  }, [tables]);
+
+  if(status === "loading") {
+    return <Loader />
+  }
+
   return (
     <article className="mx-0 d-flex flex-wrap justify-content-center text-center text-lg-start justify-content-lg-between pb-5 border-bottom">
-      <div className="image d-none d-lg-block col-6">
+      <div className="d-none d-lg-block col-6">
         <Image
           src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_open_hour.jpg"
           style={{ height: "350px", width: "100%" }}
@@ -26,8 +43,8 @@ export function BranchTables({ onShowTables }) {
         </p>
         <div>
           <button
-            onClick={() => onShowTables(true)}
-            className={`reserver-button px-3 py-2 fs-6 mt-3 ${
+            onClick={() => onShowTables(tables)}
+            className={`reserver-button btn-menu px-3 py-2 fs-6 mt-3 ${
               availableTables.length == 0 ? "disabled" : ""
             }`}
             disabled={availableTables.length == 0}

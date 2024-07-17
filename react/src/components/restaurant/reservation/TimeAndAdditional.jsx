@@ -3,18 +3,28 @@ import { formatTime } from "../../../helpers/utils";
 
 const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
+
   const handleSelectTime = (id) => {
-    const updatedData = { ...selectedData, availabilityId: id };
+    const updatedData = {
+      ...selectedData,
+      availabilityId: selectedData.availabilityId === id ? null : id, // Toggle selection
+    };
     setSelectedData(updatedData);
   };
 
   const handleSelectSeats = (extraSeats) => {
-    const updatedData = { ...selectedData, extraSeats };
+    const updatedData = {
+      ...selectedData,
+      extraSeats: selectedData.extraSeats === extraSeats ? null : extraSeats, // Toggle selection
+    };
     setSelectedData(updatedData);
   };
 
   const handleSelectChildSeats = (childSeats) => {
-    const updatedData = { ...selectedData, childSeats };
+    const updatedData = {
+      ...selectedData,
+      childSeats: selectedData.childSeats === childSeats ? null : childSeats, // Toggle selection
+    };
     setSelectedData(updatedData);
   };
 
@@ -28,12 +38,9 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
               <p
                 key={available.id}
                 onClick={() => handleSelectTime(available.id)}
-                className={`
-                    ${
-                      selectedData.availabilityId === available.id
-                        ? "selected"
-                        : ""
-                    }`}
+                className={`${
+                  selectedData.availabilityId === available.id ? "selected" : ""
+                }`}
               >
                 {`${formatTime(available.start_time)} `}-
                 {`${formatTime(available.end_time)} `}
@@ -76,8 +83,9 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
                 <p
                   key={i}
                   onClick={() => handleSelectChildSeats(i + 1)}
-                  className={`
-                    ${selectedData.childSeats === i + 1 ? "selected" : ""} `}
+                  className={`${
+                    selectedData.childSeats === i + 1 ? "selected" : ""
+                  }`}
                 >
                   {i + 1}
                 </p>

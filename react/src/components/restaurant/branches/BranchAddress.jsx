@@ -11,6 +11,7 @@ import {
 export function BranchAddress() {
   const { restaurant } = useSelector((state) => state.restaurant);
   const { branch } = useBranch();
+  console.log(branch)
   return (
     <article className="address mx-0 d-flex justify-content-center justify-content-lg-between flex-wrap py-5 border-bottom">
       <div className="branch-map col-12 col-lg-6 order-1 order-lg-0 mt-5 mt-lg-0">
@@ -30,8 +31,8 @@ export function BranchAddress() {
             </p>
             <pre className="fs-4">
               {"   "}
-              {branch.city.name}, {branch.governorate.name},{" "}
-              {branch.country.name}.
+              {/* {branch.city.name}, {branch.governorate.name},{" "}
+              {branch.country.name}. */}
             </pre>
           </div>
           <div className="phone text-center">

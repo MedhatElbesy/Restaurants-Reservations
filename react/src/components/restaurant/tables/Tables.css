@@ -92,7 +92,7 @@
   width: 100vw;
   height: 90vh;
   overflow: auto;
-  background-color: #020708f8;
+  background-color: #e4e4e4;
   z-index: 9999;
   border-top: 2px solid var(--secColor);
   h3 {
@@ -110,6 +110,10 @@
         border-bottom: 1px solid var(--textColor);
         font-family: "'Margarine', cursive";
         span {
+          svg {
+            width: 2rem;
+            padding-right: .5rem;
+          }
           color: var(--secColor);
           letter-spacing: 2px;
         }

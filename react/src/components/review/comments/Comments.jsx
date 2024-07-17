@@ -55,7 +55,8 @@ const Comments = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  if (!branchComments && status === "loading") {
+
+  if (status === "loading") {
     return <Loader size={100} />;
   }
 

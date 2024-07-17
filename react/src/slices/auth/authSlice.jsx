@@ -110,6 +110,7 @@ const authSlice = createSlice({
         // Encrypt sensitive data
         sessionStorage.setItem("token", encryptData(data.token));
         sessionStorage.setItem("userId", encryptData(data.user.id));
+        sessionStorage.setItem("user", encryptData(data.user));
         sessionStorage.setItem("role", encryptData(data.user.roles_name));
 
         state.loggedIn = true;

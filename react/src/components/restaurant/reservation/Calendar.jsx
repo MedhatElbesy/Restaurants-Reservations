@@ -1,8 +1,8 @@
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./Calender.css";
+import "./Calendar.css";
 
-const CustomCalendar = ({ reservationDate, setreservationDate, branch }) => {
+const CustomCalendar = ({ reservationDate, setReservationDate, branch }) => {
   const tileDisabled = ({ date, view }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -18,14 +18,18 @@ const CustomCalendar = ({ reservationDate, setreservationDate, branch }) => {
     return false;
   };
 
-  const handleDateChange = (newDate) => {
-    setreservationDate(newDate);
+  const handleDateClick = (date) => {
+    if (reservationDate && reservationDate.getTime() === date.getTime()) {
+      setReservationDate(null);
+    } else {
+      setReservationDate(date);
+    }
   };
 
   return (
     <div>
       <Calendar
-        onChange={handleDateChange}
+        onClickDay={handleDateClick}
         value={reservationDate}
         tileDisabled={tileDisabled}
       />

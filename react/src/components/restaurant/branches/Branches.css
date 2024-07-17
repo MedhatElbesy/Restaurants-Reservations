@@ -108,6 +108,11 @@
     }
   }
   .reserver-button {
+    background-color: transparent !important;
+    border-style: solid;
+    border-color: #e0b370;
+    border-width: 1px 0;
+    color: var(--textColor);
     &.disabled {
       background-color: rgba(26, 27, 27, 0.411) !important;
       color: rgb(69, 69, 70);

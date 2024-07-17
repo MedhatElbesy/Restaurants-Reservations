@@ -18,8 +18,8 @@
       font-weight: bold;
       padding: 0.4rem 0.8rem;
       border-radius: 0.4rem;
-      color: var(--mainColor);
-      background-color: #8b6c33;
+      color: var(--backgroundColor);
+      background-color: var(--secColor)
     }
   }
   .map {
@@ -30,7 +30,6 @@
     }
   }
   .additional {
-    /* background-color: var(--mainColor); */
     & > div {
       border: 1px solid #c9c9c956;
       border-radius: 0.4rem;
@@ -57,13 +56,13 @@
         transition: 0.2s ease-in-out;
         &:hover {
           cursor: pointer;
-          color: var(--mainColor);
-          background-color: #8b6c33;
+          color: var(--backgroundColor);
+          background-color: var(--secColor)
         }
       }
       .selected {
-        color: var(--mainColor);
-        background-color: #8b6c33;
+        color: var(--backgroundColor);
+        background-color: var(--secColor)
       }
     }
   }

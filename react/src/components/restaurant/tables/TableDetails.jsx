@@ -48,5 +48,5 @@ export function TableDetails({ table, onClose }) {
         </NavLink>
       </div>
     </div>
-  );
+  )
 }

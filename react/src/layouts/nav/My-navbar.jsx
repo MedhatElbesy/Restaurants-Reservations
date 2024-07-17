@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { NavLink, useLocation } from 'react-router-dom';
-import './navbar-style.css';
-import { fetchUserDataById } from '../../slices/user/fetchUserSlice';
-import { decryptData } from '../../helpers/cryptoUtils';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { NavLink, useLocation } from "react-router-dom";
+import "./navbar-style.css";
+import { fetchUserDataById } from "../../slices/user/fetchUserSlice";
+import { decryptData } from "../../helpers/cryptoUtils";
 
 const MyNavbar = () => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -13,7 +13,7 @@ const MyNavbar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const userId = decryptData('userId');
+  const userId = decryptData("userId");
   const userData = useSelector((state) => state.user.data);
 
   const toggleSearch = () => {
@@ -28,9 +28,9 @@ const MyNavbar = () => {
         setScrolled(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -38,60 +38,95 @@ const MyNavbar = () => {
     if (userId) {
       dispatch(fetchUserDataById(userId));
     }
-  }, [userId]);
+  }, [dispatch, userId]);
 
-  
-  const isHomeRoute = location.pathname === '/' || location.pathname === '/home';
+  const isHomeRoute =
+    location.pathname === "/" || location.pathname === "/home";
 
-
-  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard');
+  const shouldHideNavbar = location.pathname.startsWith("/user-dashboard");
 
   if (shouldHideNavbar) {
     return null;
   }
 
   return (
-    <nav 
-    className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${scrolled ? 'bg-white' : ''} ${isHomeRoute ? 'navbar-transparent' : 'bg-white'}`}
+    <nav
+      className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${
+        scrolled ? "bg-white" : ""
+      } ${isHomeRoute ? "navbar-transparent" : "bg-white"}`}
     >
       <div className="container-fluid">
-
         <div className="navbar-left">
           <img
             src="./images/logo-white.png"
             className="profile-image rounded-circle"
             alt="Logo"
-            style={{ width: '40px', height: '5vh' }}
+            style={{ width: "40px", height: "5vh" }}
           />
         </div>
 
         <section className="navbar-center">
-
           <ul className="navbar-nav my-3">
-
             <li className="nav-item mx-2">
-              <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Home</a>
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  } ${isActive ? "active" : ""}`
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
             </li>
 
             <li className="nav-item mx-2">
-              <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">About</a>
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  } ${isActive ? "active" : ""}`
+                }
+                to="/about"
+              >
+                About
+              </NavLink>
             </li>
 
             <li className="nav-item mx-2">
-              <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Contact</a>
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  } ${isActive ? "active" : ""}`
+                }
+                to="/contact"
+              >
+                Contact
+              </NavLink>
             </li>
 
             <li className="nav-item mx-2">
-              <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Login</a>
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  } ${isActive ? "active" : ""}`
+                }
+                to="/login"
+              >
+                Login
+              </NavLink>
             </li>
-
           </ul>
-
         </section>
 
         <div className="navbar-right">
-
-          <FontAwesomeIcon icon={faSearch} onClick={toggleSearch} className="search-icon mx-3 my-4" />
+          <FontAwesomeIcon
+            icon={faSearch}
+            onClick={toggleSearch}
+            className="search-icon mx-3 my-4"
+          />
 
           {searchVisible && (
             <input
@@ -106,14 +141,12 @@ const MyNavbar = () => {
                 src={userData.profile_image_url}
                 className="profile-image rounded-circle"
                 alt="Profile"
-                style={{ width: '40px', height: '5vh', marginRight: '10px' }}
+                style={{ width: "40px", height: "5vh", marginRight: "10px" }}
               />
             </NavLink>
           )}
         </div>
-
       </div>
-      
     </nav>
   );
 };

@@ -50,14 +50,11 @@
   .header {
     position: relative;
     min-height: 60vh;
+    z-index: 999;
     .btn-reserve {
       background-color: var(--secColor);
       border: 1px solid var(--secColor);
       color: var(--backgroundColor) !important;
-      &:active {
-        background-color: #e0b370;
-        border: 1px solid #e0b370;
-      }
     }
     &::before {
       content: "";
@@ -66,18 +63,18 @@
       top: 0;
       left: 0;
       position: absolute;
-      background-color: #5755556b;
-      z-index: 1;
+      background-color: #57555525;
+      z-index: -1;
     }
   }
-  .reserve {
-    min-height: 50vh;
-    .btn-menu {
-      background-color: transparent !important;
-      border-style: solid;
-      border-color: #e0b370;
-      border-width: 1px 0;
-      color: var(--textColor);
-    }
+}
+.reserve {
+  min-height: 50vh;
+  .btn-menu {
+    background-color: transparent !important;
+    border-style: solid;
+    border-color: #e0b370;
+    border-width: 1px 0;
+    color: var(--textColor);
   }
 }

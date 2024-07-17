@@ -47,7 +47,7 @@ export const BranchOpening = () => {
           </NavLink>
         </div>
       </div>
-      <div className="image d-none d-lg-block col-6">
+      <div className="d-none d-lg-block col-6">
         <Image
           src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_bg.jpg"
           style={{ height: "350px", width: "100%" }}

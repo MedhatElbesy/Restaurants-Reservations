@@ -14,20 +14,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-regular-svg-icons";
 import { faUtensils, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import "./Branches.css";
+// import { fetchLocationByIdAsync } from "../../../slices/restaurant/location/locationSlice";
 
 const Branches = () => {
+  const [showTables, setShowTables] = useState([]);
+  const { branch, setBranch } = useBranch();
   const { locations: branches, restaurant } = useSelector(
     (state) => state.restaurant
   );
-  const [showTables, setShowTables] = useState(false);
-  const { branch, setBranch } = useBranch();
-  let { branchId = "", showBranchTables = false } = location.state || {};
-  console.log(branchId);
-  useEffect(() => {
-    if (showBranchTables) {
-      setShowTables(showBranchTables);
-    }
-  }, [showBranchTables]);
+  // let { branchId = "", showBranchTables = false } = location.state || {};
+  console.log(branches);
+  console.log(restaurant);
+  // useEffect(() => {
+  //   if (showBranchTables) {
+  //     setShowTables(showBranchTables);
+  //   }
+  // }, [showBranchTables]);
 
   useEffect(() => {
     if (branches.length > 0 && !branch) {
@@ -54,9 +56,9 @@ const Branches = () => {
       >
         {branches.length > 0 ? (
           branches.map((branch) => (
-            <Tab key={branch.id} eventKey={branch.id} title={branch.city.name}>
+            <Tab key={branch.id} eventKey={branch.id} title={branch.address}>
               <h2 className="text-sec text-center sec-font mt-4">
-                {branch.city.name}
+                {branch.address}
               </h2>
               <div className="review py-4 d-flex justify-content-center align-items-center">
                 <StarRating
@@ -69,16 +71,18 @@ const Branches = () => {
                   <FontAwesomeIcon icon={faMessage} /> 4 Reviews
                 </p>
                 <p className="mx-2 mb-0">
-                  <FontAwesomeIcon icon={faUtensils} />{" "}
-                  {restaurant.categories[0].name}
+                  <FontAwesomeIcon icon={faUtensils} /> {restaurant.name}
                 </p>
                 <p className="mx-2 mb-0">
                   <FontAwesomeIcon icon={faBookmark} />
-                  <strong style={{marginLeft: ".4rem"}} >{branch.number_of_tables}</strong>  Available Tables
+                  <strong style={{ marginLeft: ".4rem" }}>
+                    {branch.number_of_tables}
+                  </strong>{" "}
+                  Available Tables
                 </p>
               </div>
-              {showTables ? (
-                <Tables tables={branch.tables} />
+              {showTables.length > 0 ? (
+                <Tables tables={showTables} />
               ) : (
                 <BranchDetails onShowTables={handleShowTables} />
               )}
