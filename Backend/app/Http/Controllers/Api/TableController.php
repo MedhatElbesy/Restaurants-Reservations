@@ -57,7 +57,10 @@ class TableController extends Controller
     public function getTableByTableId(Table $table)
     {
         $table->load('images');
-        return new TableResource($table);
+        if(!$table){
+            return ApiResponse::sendResponse(500, 'An error occurred while retrieving tables');
+        }
+            return ApiResponse::sendResponse(200, 'Tables', new TableResource($table));
     }
 
     public function update(UpdateTableRequest $request, Table $table)
