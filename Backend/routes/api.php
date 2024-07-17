@@ -117,6 +117,7 @@ Route::post('/restaurant-location-images', [RestaurantLocationImageController::c
 Route::apiResource('menu-categories', MenuCategoryController::class);
 Route::apiResource('menu-items', MenuItemController::class);
 Route::apiResource('tables',TableController::class);
+Route::post('/get-table/{id}', [TableController::class,'getTableByTableId']);
 
 
 Route::get('/location/{id}', [RestaurantController::class,'getLocation']);
