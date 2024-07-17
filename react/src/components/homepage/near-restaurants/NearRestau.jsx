@@ -26,7 +26,7 @@ const NearRestau = () => {
 
   return (
     <main className="restau">
-      {nearestRestaurantsData.length > 0 && (
+      {nearestRestaurantsData.length > 3 && (
         <div className="row my-5">
           <h1 className="col-10 mx-3 my-5">Nearest Restaurants</h1>
           <CardSlick>

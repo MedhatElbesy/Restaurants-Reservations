@@ -222,13 +222,8 @@ export default function MenuCategoriesTable() {
             <TableBody>
               {showMenuItems ? (
                 <>
-                  {menuItemsStatus === 'loading' ? (
-                    <TableRow>
-                      <TableCell colSpan={6} className="text-center">
-                        <Loader />
-                      </TableCell>
-                    </TableRow>
-                  ) : filteredMenuItems.length === 0 ? (
+                  
+                  {filteredMenuItems.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={6} className="text-center">
                         No items found.
