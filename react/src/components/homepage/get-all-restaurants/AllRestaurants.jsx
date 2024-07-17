@@ -24,7 +24,7 @@ const AllRestaurants = () => {
     <main className='restau'>
       {restaurants.length > 0 && (
         <>
-          <section className='d-flex justify-content-between align-items-center mx-4'>
+          <section className='d-flex justify-content-between align-items-center mx-1'>
 
             <h1 className='col-10'>Discover Our Restaurants</h1>
 
