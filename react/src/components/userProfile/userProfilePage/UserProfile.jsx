@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './userProfile.css'; 
@@ -8,16 +8,23 @@ import Loader from '../../../layouts/loader/loader';
 import Swal from 'sweetalert2';
 import { deleteUserAddressAsync } from '../../../slices/user/userAddressSlice';
 import { decryptData } from '../../../helpers/cryptoUtils';
-import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
+
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.data);
+  const [filteredUserData, setFilteredUserData] = useState(userData);
   const userId = decryptData('userId');
   const role = decryptData('role'); 
   
-  if (!userData) {
-    return <Loader/>;
+  useEffect(() => {
+    if (userData) {
+      setFilteredUserData(userData);
+    }
+  }, [userData]);
+
+  if (!filteredUserData) {
+    return <Loader />;
   }
 
   const handleDeleteAddress = (addressId) => {
@@ -33,9 +40,14 @@ const UserProfile = () => {
       if (result.isConfirmed) {
         dispatch(deleteUserAddressAsync({ userId, addressId }))
           .then(() => {
-          
-            dispatch(fetchUserDataById(userId)); 
-            
+            const updatedAddresses = filteredUserData.addresses.filter(
+              (address) => address.id !== addressId
+            );
+            setFilteredUserData({
+              ...filteredUserData,
+              addresses: updatedAddresses
+            });
+
             Swal.fire(
               'Deleted!',
               'The address has been deleted.',
@@ -53,7 +65,7 @@ const UserProfile = () => {
     });
   };
 
-  const [firstAddress] = userData.addresses;
+  const [firstAddress] = filteredUserData.addresses;
 
   return (
     <main className='user-profile my-5 p-5'>
@@ -68,15 +80,14 @@ const UserProfile = () => {
 
             <section className="profile-image-container">
               <img
-                src={userData.profile_image_url}
+                src={filteredUserData.profile_image_url}
                 className="profile-image rounded-circle"
                 alt="Profile"
               />
             </section>
 
             <section className="user-details  ms-3">
-              <p className='h2'>{userData.first_name} {userData.last_name}</p>
-              
+              <p className='h2'>{filteredUserData.first_name} {filteredUserData.last_name}</p>
               {firstAddress && (
                 <div className="mb-3">
                   <p className='custom-text'>{firstAddress.address}, {firstAddress.city}, {firstAddress.country}</p>
@@ -88,16 +99,18 @@ const UserProfile = () => {
 
           <div className='my-3'>
 
-          <NavLink to={`/change-password`}  className="text-decoration-none d-flex align-items-center">
-            <FontAwesomeIcon icon={faLock} className='text-dark me-2' />
-            <span>Change Password</span>
-          </NavLink>
-          {role === 'owner' && (
-          <NavLink to="/user-restaurants" className="text-decoration-none d-flex align-items-center my-2">
-            <FontAwesomeIcon icon={faCube} className='text-dark me-2' />
-            <span>Dashboard</span>
-          </NavLink>
-          )}
+            <NavLink to={`/change-password`} className="text-decoration-none d-flex align-items-center">
+              <FontAwesomeIcon icon={faLock} className='text-dark me-2' />
+              <span>Change Password</span>
+            </NavLink>
+
+            {role === 'owner' && (
+              <NavLink to="/user-restaurants" className="text-decoration-none d-flex align-items-center my-2">
+                <FontAwesomeIcon icon={faCube} className='text-dark me-2' />
+                <span>Dashboard</span>
+              </NavLink>
+            )}
+
           </div>
 
         </section>
@@ -106,7 +119,7 @@ const UserProfile = () => {
 
           <div className="card-header h5 d-flex justify-content-between align-items-center">
             <span><p className='my-3 h2'>Personal Information</p></span>
-            <NavLink to={`/edit-profile`}  className="btn btn-outline-primary d-flex align-items-center" title="Edit">
+            <NavLink to={`/edit-profile`} className="btn btn-outline-primary d-flex align-items-center" title="Edit">
               <FontAwesomeIcon icon={faEdit} className='me-2' />
               <span>Edit</span>
             </NavLink>
@@ -118,12 +131,12 @@ const UserProfile = () => {
 
               <div className="col-md-4">
                 <p className='h5'>First Name</p>
-                <p>{userData.first_name}</p>
+                <p>{filteredUserData.first_name}</p>
               </div>
 
               <div className="col-md-4">
                 <p className='h5'>Last Name</p>
-                <p>{userData.last_name}</p>
+                <p>{filteredUserData.last_name}</p>
               </div>
 
             </section>
@@ -132,32 +145,36 @@ const UserProfile = () => {
 
               <div className="col-md-4">
                 <p className='h5'>Email</p>
-                <p>{userData.email}</p>
+                <p>{filteredUserData.email}</p>
               </div>
 
               <div className="col-md-4">
                 <p className='h5'>Phone</p>
-                <p>{userData.mobile_number || 'N/A'}</p>
+                <p>{filteredUserData.mobile_number || 'N/A'}</p>
               </div>
 
             </section>
 
           </div>
-          
+
         </section>
 
         <section className="custom-card mb-3">
 
           <div className="card-header h5 d-flex justify-content-between align-items-center">
+
             <span><p className='my-3 h2'>Addresses</p></span>
+
             <NavLink to={`/add-address`} className="btn btn-outline-warning d-flex align-items-center" title="Add">
               <FontAwesomeIcon icon={faPlus} className='me-2' />
               <span>Add</span>
             </NavLink>
+
           </div>
-          
+
           <div className="card-body my-4">
-            {userData.addresses.map((address) => (
+
+            {filteredUserData.addresses.map((address) => (
               <div key={address.id} className="custom-card p-3 mb-3">
 
                 <section className="row">
@@ -173,7 +190,7 @@ const UserProfile = () => {
                   </div>
 
                 </section>
-
+                
                 <section className="row mb-2">
 
                   <div className="col-md-4">
@@ -198,33 +215,31 @@ const UserProfile = () => {
                   <div className="col-md-4">
 
                     <NavLink 
-                    to={`/edit-address/${address.id}`} 
-                    className="btn btn-outline-primary btn-sm pe-3 ps-3" 
-                    title="Edit">
+                      to={`/edit-address/${address.id}`} 
+                      className="btn btn-outline-primary btn-sm pe-3 ps-3" 
+                      title="Edit">
                       <FontAwesomeIcon icon={faEdit} />
                       <span>Edit</span>
                     </NavLink>
 
                     <button 
-                     onClick={() => handleDeleteAddress(address.id)} 
-                     className="btn btn-outline-danger btn-sm mx-2" 
-                     title="Delete"
+                      onClick={() => handleDeleteAddress(address.id)} 
+                      className="btn btn-outline-danger btn-sm mx-2" 
+                      title="Delete"
                     >
                       <FontAwesomeIcon icon={faTrash} />
                       <span>Delete</span>
                     </button>
+
                   </div>
 
                 </section>
-
+                
               </div>
             ))}
           </div>
-
         </section>
-
       </section>
-
     </main>
   );
 };
