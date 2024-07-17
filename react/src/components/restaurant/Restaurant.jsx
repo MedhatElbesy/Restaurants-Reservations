@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 
 import Navbar from "./navbar/Navbar";
-import Footer from "./home/Footer";
+import Footer from "./footer/Footer";
 import Loader from "../../layouts/loader/loader";
 import "./Restaurant.css"
 

@@ -14,7 +14,7 @@ class RestaurantImagesSeeder extends Seeder
     public function run(): void
     {
         $imageUrls = [
-            'https://elegencia-react-ejev.vercel.app/assets/img/a/aboboutut_bg.jpg',
+            'https://elegencia-react-ejev.vercel.app/assets/img/portfolio/portfolio_8.jpg',
             'https://elegencia-react-ejev.vercel.app/assets/img/about/about_open_hour.jpg',
             'https://elegencia-react-ejev.vercel.app/assets/img/portfolio/portfolio_2.jpg',
             'https://elegencia-react-ejev.vercel.app/assets/img/portfolio/portfolio_9.jpg',

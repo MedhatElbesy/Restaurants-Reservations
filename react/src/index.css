@@ -4,10 +4,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 :root {
-  --backgroundColor: #020a0c;
-  --mainColor: #f8f9fae0;
-  --secColor: #ffd28d;
-  --textColor: #a1a1a1;
+  --backgroundColor: #F0FFFF;
+  --mainColor: #9c9c9c;
+  --secColor: #FF6B16;
+  --secColor: #993400;
+  --textColor: #4e4e4e;
   --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
   --secFont: "Bad Script", cursive;
@@ -16,15 +17,15 @@
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #9999993d;
-    border: 1px solid #ffd18d36;
+    background: #c24b143d;
+    border: 1px solid #e6691636;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background-color: #ffffff;
   }
   ::selection {
-    background-color: #fad9a84f;
+    background-color: #ff5e002c;
   }
 }
 

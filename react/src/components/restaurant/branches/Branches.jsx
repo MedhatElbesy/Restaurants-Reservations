@@ -9,15 +9,20 @@ import { BranchOpening } from "./BranchOpening";
 import { BranchTables } from "./BranchTables";
 import BranchComments from "../../review/comments/BranchComments";
 import Tables from "../tables/TablesCollection";
+import StarRating from "../../review/rating/Rating";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMessage } from "@fortawesome/free-regular-svg-icons";
+import { faUtensils, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import "./Branches.css";
 
 const Branches = () => {
-  const { locations: branches } = useSelector((state) => state.restaurant);
+  const { locations: branches, restaurant } = useSelector(
+    (state) => state.restaurant
+  );
   const [showTables, setShowTables] = useState(false);
   const { branch, setBranch } = useBranch();
   let { branchId = "", showBranchTables = false } = location.state || {};
   console.log(branchId);
-
   useEffect(() => {
     if (showBranchTables) {
       setShowTables(showBranchTables);
@@ -53,6 +58,25 @@ const Branches = () => {
               <h2 className="text-sec text-center sec-font mt-4">
                 {branch.city.name}
               </h2>
+              <div className="review py-4 d-flex justify-content-center align-items-center">
+                <StarRating
+                  readOnly={true}
+                  initialRating={Number(branch.average_rating)}
+                  size={20}
+                  rate={branch.average_rating}
+                />
+                <p className="mx-2 mb-0">
+                  <FontAwesomeIcon icon={faMessage} /> 4 Reviews
+                </p>
+                <p className="mx-2 mb-0">
+                  <FontAwesomeIcon icon={faUtensils} />{" "}
+                  {restaurant.categories[0].name}
+                </p>
+                <p className="mx-2 mb-0">
+                  <FontAwesomeIcon icon={faBookmark} />
+                  <strong style={{marginLeft: ".4rem"}} >{branch.number_of_tables}</strong>  Available Tables
+                </p>
+              </div>
               {showTables ? (
                 <Tables tables={branch.tables} />
               ) : (

@@ -4,6 +4,14 @@
     font-size: 2rem;
     letter-spacing: .1rem;
   }
+  .review {
+    p {
+      color: var(--textColor);
+      svg {
+        color: var(--secColor);
+      }
+    }
+  }
   .br-tabs {
     width: fit-content;
     width: 90%;
@@ -105,6 +113,9 @@
       color: rgb(69, 69, 70);
       border-color: rgb(69, 69, 70);
     }
+  }
+  .style-module_starRatingWrap__q-lJC {
+    padding-bottom: 5px;
   }
 }
 

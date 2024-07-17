@@ -6,7 +6,7 @@ export function BranchTables({ onShowTables }) {
     (table) => table.status === "available"
   );
   return (
-    <article className="mx-0 d-flex flex-wrap justify-content-center text-center text-lg-start justify-content-lg-between py-5 border-bottom">
+    <article className="mx-0 d-flex flex-wrap justify-content-center text-center text-lg-start justify-content-lg-between pb-5 border-bottom">
       <div className="image d-none d-lg-block col-6">
         <Image
           src="https://elegencia-react-ejev.vercel.app/assets/img/about/about_open_hour.jpg"

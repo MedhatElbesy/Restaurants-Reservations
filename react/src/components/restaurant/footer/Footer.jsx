@@ -6,6 +6,7 @@ import {
   faClock,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import "./Footer.css"
 
 
 export default function Footer({ restaurant }) {
@@ -15,7 +16,7 @@ export default function Footer({ restaurant }) {
 
   return (
     <div className="footer row text-center">
-      <div className="d-flex flex-wrap rest-info justify-content-center pt-4 mb-2">
+      <div className="rest-info d-flex flex-wrap justify-content-center pt-4 mb-2">
         <div className="col-9 col-sm-6 col-md-3">
           <p>
             <FontAwesomeIcon icon={faMapMarkerAlt} /> Address

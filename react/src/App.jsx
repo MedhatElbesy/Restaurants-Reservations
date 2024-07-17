@@ -109,16 +109,18 @@ function App() {
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
+      <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
+        <Route index element={<Navigate to="home" />} />
+        <Route path="home" element={<RestaurantHome />} />
+        <Route path="branches" element={<Branches />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="tables" element={<Tables />} />
+      </Route>
       {/* User Routes */}
       <Route element={<ProtectedRoute />}>
         {/* Restaurant Details Routes */}
         <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="home" element={<RestaurantHome />} />
-          <Route path="branches" element={<Branches />} />
-          <Route path="menu" element={<Menu />} />
           <Route path="reservation/:tableId" element={<Reservation />} />
-          <Route path="tables" element={<Tables />} />
         </Route>
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}
@@ -135,7 +137,7 @@ function App() {
         {/* Restaurant Owner Routes */}
         <Route path="/specific" element={<SpecificCategories />} />
         <Route path="/availability/:tableId" element={<TableAvailability />} />
-        
+
         <Route
           path="/user-dashboard/restaurant/:restaurantId"
           element={<Restaurant />}
@@ -206,7 +208,7 @@ function App() {
           element={<EditTableAvailability />}
         />
 
-       <Route
+        <Route
           path="/add-availability/:tableId"
           element={<AddAvailabilityForm />}
         />
@@ -230,7 +232,7 @@ function App() {
       <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
       {/* Admin Routes  Edited By : Nagy*/}
       {/* Admin Only */}
-      <Route element={<ProtectedRoute  admin={true} />}>
+      <Route element={<ProtectedRoute admin={true} />}>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route path="rating" element={<Ratings />} />
           <Route path="report" element={<ReportList />} />

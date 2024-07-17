@@ -1,0 +1,31 @@
+
+.footer {
+  background-color: #26262633;
+  .rest-info {
+    border-bottom: 1px solid;
+    div {
+      p {
+        &:first-child {
+          font-family: "Montserrat", sans-serif;
+          color: var(--mainColor);
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+        &:last-child {
+          color: var(--textColor);
+        }
+        svg {
+          padding-right: 5px;
+          color: var(--textColor);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (width <= 576px) {
+  .rest-info div:not(:last-child) {
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
+  }
+}
