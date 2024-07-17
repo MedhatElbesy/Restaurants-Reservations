@@ -46,7 +46,7 @@ const MyNavbar = () => {
   }, [userId]);
 
   const isHomeRoute = location.pathname === '/' || location.pathname === '/home';
-  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard'||'/admin');
+  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard') || location.pathname.startsWith('/admin')  || location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
 
   if (shouldHideNavbar) {
     return null;
@@ -131,7 +131,7 @@ const MyNavbar = () => {
               <a href="#">Login</a>
             </li>
           </ul>
-          
+
         </section>
       )}
     </>
