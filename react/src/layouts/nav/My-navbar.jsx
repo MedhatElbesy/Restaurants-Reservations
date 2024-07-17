@@ -6,6 +6,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import './navbar-style.css';
 import { fetchUserDataById } from '../../slices/user/fetchUserSlice';
 import { decryptData } from '../../helpers/cryptoUtils';
+import { logout } from '../../slices/auth/authSlice';
 
 const MyNavbar = () => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -23,6 +24,10 @@ const MyNavbar = () => {
 
   const toggleSideNav = () => {
     setSideNavVisible(!sideNavVisible);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   useEffect(() => {
@@ -46,7 +51,7 @@ const MyNavbar = () => {
   }, [userId]);
 
   const isHomeRoute = location.pathname === '/' || location.pathname === '/home';
-  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard') || location.pathname.startsWith('/admin')  || location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
+  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
 
   if (shouldHideNavbar) {
     return null;
@@ -60,6 +65,7 @@ const MyNavbar = () => {
           className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${scrolled ? 'bg-white' : ''} ${isHomeRoute ? 'navbar-transparent' : 'bg-white'} d-none d-md-block`}
         >
           <div className="container-fluid">
+            
             <div className="navbar-left">
               <img
                 src="./images/logo-white.png"
@@ -73,17 +79,25 @@ const MyNavbar = () => {
 
               <ul className="navbar-nav my-3 d-flex flex-row">
                <li className="nav-item mx-2">
-                 <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Home</a>
+                 <NavLink to={"/"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Home</NavLink>
                </li>
                <li className="nav-item mx-2">
-                 <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">About</a>
+                 <NavLink to={"/about-us"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">About</NavLink>
                </li>
                <li className="nav-item mx-2">
-                 <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Contact</a>
+                 <NavLink to={"/userprofile"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Profile</NavLink>
                </li>
+               {!userId && (
                <li className="nav-item mx-2">
-                 <a className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Login</a>
+                 <NavLink to={"/login"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Login</NavLink>
                </li>
+              )}
+
+              {userId && (
+               <li className="nav-item mx-2">
+                 <button className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`}  onClick={handleLogout}>Logout</button>
+               </li>
+              )}
               </ul>
 
             </section>
@@ -119,17 +133,25 @@ const MyNavbar = () => {
 
           <ul className="side-nav-list">
             <li className="side-nav-item">
-              <a href="#">Home</a>
+              <NavLink to={"/"}>Home</NavLink>
             </li>
             <li className="side-nav-item">
-              <a href="#">About</a>
+              <NavLink to={"/about-us"}>About</NavLink>
             </li>
             <li className="side-nav-item">
-              <a href="#">Contact</a>
+              <NavLink to={"/userprofile"}>Profile</NavLink>
             </li>
+            {!userId && (
             <li className="side-nav-item">
-              <a href="#">Login</a>
+              <NavLink to={"/login"}>Login</NavLink>
             </li>
+            )}
+
+         {userId && (
+            <li className="side-nav-item">
+              <button className='nav-link' onClick={handleLogout}>Logout</button>
+            </li>
+            )}
           </ul>
 
         </section>
