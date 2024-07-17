@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function RestaurantImages() {
+export default function LocationTables() {
   return (
     <div>
       

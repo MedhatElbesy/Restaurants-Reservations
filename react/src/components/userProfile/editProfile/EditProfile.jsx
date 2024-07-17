@@ -103,15 +103,15 @@ export default function EditProfile() {
   }
 
   return (
-    <main className="container mt-5">
+    <main className="container ">
 
-      <section className="row justify-content-center">
+      <section className="row my-5">
 
-        <div className="card col-12 table-card">
+        <div className=" col-6 my-5 offset-3 formEditProfile">
 
-          <h1 className="text-center">Edit Profile</h1>
+          <h1 className="text-center my-4">Edit Profile</h1>
 
-          <div className="card-body">
+          <div className="">
 
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 

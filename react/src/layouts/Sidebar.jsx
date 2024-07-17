@@ -1,50 +1,53 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import "./Sidebar.css";
-import { BodyColorContext } from "../BodyColorContext";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Outlet, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell} from '@fortawesome/free-solid-svg-icons';
+import './Sidebar.css';
+import { fetchRestaurantById } from '../slices/restaurant/restaurantSlice';
 
-const Sidebar = () => {
-  const { bodyColor } = useContext(BodyColorContext);
+function Sidebar() {
+  const dispatch = useDispatch();
+  const { restaurantId } = useParams();
+  const restaurant = useSelector((state) => state.restaurant.restaurant);
 
-  const handleScroll = (e, targetId) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (restaurantId) {
+      dispatch(fetchRestaurantById(restaurantId));
     }
-  };
+  }, [restaurantId]);
 
   return (
-    <nav
-      className={`sidebar ${
-        bodyColor === "light" ? "sidebar-light" : "sidebar-dark"
-      } col-2`}
-    >
-      <ul>
-        <li>
-          <Link to={`details`}>Details</Link>
-        </li>
-        <li>
-          <Link to={`locations`}>Locations</Link>
-        </li>
-        <li>
-          <Link to={`tables`}>Location Tables</Link>
-        </li>
-        <li>
-          <Link to={`menu-category`}>Menu Categories</Link>
-        </li>
-        <li>
-          <Link to={`category`}>Specific Category</Link>
-        </li>
-        <li>
-          <Link to={`restaurant-category`}>Restaurant Caregory</Link>
-        </li>
-        <li>
-          <Link to={`reservation`}>Reservation</Link>
-        </li>
-      </ul>
-    </nav>
+    <main className="sidebar-container">
+    
+      <section className="upperbar my-2">
+       
+       {restaurant && <p>{restaurant.name} Dashboard</p>}
+       
+        <div className="ms-auto">
+          <FontAwesomeIcon icon={faBell} className="custom-notification-icon " />
+        </div>
+
+      </section>
+
+   
+      <aside className="sidebar col-md-2 col-3">
+        <Link to="main" className="sidebar-link">Restaurant Dashboard</Link>
+        <Link to="details" className="sidebar-link">Restaurant Details</Link>
+        <Link to="locations" className="sidebar-link">Restaurant Locations</Link>
+        <Link to="menu-category" className="sidebar-link">Menu Category</Link>
+        <Link to="restaurant-category" className="sidebar-link">Restaurant Category</Link>
+        <Link to="category" className="sidebar-link">Specific Category</Link>
+      </aside>
+
+    
+      <div className="content col-8 my-5 offset-2">
+        <Outlet context={{ restaurant }} />
+      </div>
+
+    </main>
+    
   );
-};
+}
 
 export default Sidebar;

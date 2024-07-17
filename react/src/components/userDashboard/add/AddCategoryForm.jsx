@@ -84,7 +84,7 @@ const AddCategoryForm = () => {
   return (
     <main>
 
-      <section className='formUserDashboard col-6 offset-3'>
+      <section className='category col-6 offset-3'>
 
         <h2 className='text-center my-5'>Add Category</h2>
 

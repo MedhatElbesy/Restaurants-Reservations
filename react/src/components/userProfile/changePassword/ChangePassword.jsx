@@ -4,9 +4,11 @@ import { changePasswordAsync } from '../../../slices/user/changePasswordSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { decryptData } from '../../../helpers/cryptoUtils';
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
+  const userId = decryptData('userId');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     current_password: '',
@@ -65,11 +67,11 @@ const ChangePassword = () => {
 
       <section className="row justify-content-center">
 
-        <div className="col-md-6">
+        <div className="col-md-6 my-4">
 
-          <div className="card">
+        
 
-            <div className="card-body table-card">
+            <div className=" table-card">
 
               <h2 className="card-title text-center mb-4">Change Password</h2>
 
@@ -165,7 +167,7 @@ const ChangePassword = () => {
               </form>
               
             </div>
-          </div>
+       
         </div>
       </section>
     </main>

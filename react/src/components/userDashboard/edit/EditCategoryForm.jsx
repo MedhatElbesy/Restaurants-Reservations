@@ -22,7 +22,7 @@ const EditCategoryForm = () => {
     if (categoryId) {
       dispatch(fetchCategoryByIdAsync(categoryId));
     }
-  }, [categoryId]);
+  }, [categoryId, dispatch]);
 
   useEffect(() => {
     if (category) {
@@ -83,31 +83,40 @@ const EditCategoryForm = () => {
     return <Loader />;
   }
 
+  if (!category) {
+    return (
+      <main className='my-2'>
+        <section className=' col-6 offset-3'>
+          <Alert variant="danger">
+            <p>Failed to load category. Please try again later</p>
+          </Alert>
+        </section>
+      </main>
+    );
+  }
+
   return (
-    <main className='my-2'>
-
-      <section className='formUserDashboard col-6 offset-3'>
-
-        <h2 className='text-center my-4'>Edit Category</h2>
+    <main >
+      <section className=' col-6  category offset-3'>
+        <h2 className='text-center'>Edit Category</h2>
 
         {status === 'failed' && (
           <Alert variant="danger">
             <p>Failed to load category. Please try again later</p>
           </Alert>
         )}
- 
+
         <Form onSubmit={handleSubmit}>
-          
           <div className="mb-3">
             <Form.Label htmlFor="name">Name:</Form.Label>
             <Form.Control
               type="text"
               id="name"
+              className='text-dark'
               name="name"
               value={formData.name} 
               onChange={handleChange} />
           </div>
-
 
           <div className="mb-3">
             <Form.Label htmlFor="cover">Cover:</Form.Label>
@@ -118,13 +127,14 @@ const EditCategoryForm = () => {
               name="cover" 
               onChange={handleFileChange} />
             {category.cover && 
-            <p className="text-light">Current Cover: {category.cover}</p>}
+              <p className="">Current Cover: {category.cover}</p>}
           </div>
 
           <div className="mb-3">
             <Form.Label htmlFor="description">Description:</Form.Label>
             <Form.Control 
               as="textarea" 
+              className='text-dark'
               id="description" 
               rows={3} 
               name="description" 

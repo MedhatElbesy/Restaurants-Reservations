@@ -16,7 +16,7 @@ class RestaurantLocationImagesSeeder extends Seeder
         DB::table('restaurant_location_images')->insert([
             [
                 'restaurant_location_id' => 1,
-                'image' => 'https://elegencia-react-ejev.vercel.app/assets/img/about/about_open_hour.jpg',
+                'image' => 'https://images.unsplash.com/photo-1598452498494-bbbee8093d3f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTIzfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -28,7 +28,7 @@ class RestaurantLocationImagesSeeder extends Seeder
             ],
             [
                 'restaurant_location_id' => 1,
-                'image' => 'https://images.unsplash.com/photo-1579648207097-edbc62b94930?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAwfHxyZXN0YXVyYW50c3xlbnwwfHwwfHx8MA%3D%3D',
+                'image' => 'https://images.unsplash.com/photo-1602753874857-7c740decfdc3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDYzfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -52,7 +52,7 @@ class RestaurantLocationImagesSeeder extends Seeder
             ],
             [
                 'restaurant_location_id' => 3,
-                'image' => 'https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHJlc3RhdXJhbnRzfGVufDB8fDB8fHww',
+                'image' => 'https://images.unsplash.com/photo-1602232037779-30b01ac3c457?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTV8fHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -76,7 +76,7 @@ class RestaurantLocationImagesSeeder extends Seeder
             ],
             [
                 'restaurant_location_id' => 6,
-                'image' => 'https://images.unsplash.com/photo-1528735000313-039ec3a473b0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTN8fHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D',
+                'image' => 'https://images.unsplash.com/photo-1548230676-6983ce26146a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjY2fHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

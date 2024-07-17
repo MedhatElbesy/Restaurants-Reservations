@@ -49,6 +49,10 @@ class RestaurantController extends Controller
                 }
             }
             $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
+            $restaurant->location_addresses = $restaurant->locations;
+
+
+            unset($restaurant->locations);
         });
 
         if ($restaurants->isNotEmpty()) {
@@ -95,14 +99,14 @@ class RestaurantController extends Controller
             // 'locations.tables.images',
             'restaurant_images',
             'locations' => function ($query) {
-            $query->withCount('comments');
+                $query->withCount('comments');
             },
             'locations.ratings'
         ])->findOrFail($id);
 
         $restaurant->locations->each(function ($location) {
-        $location->average_rating = $location->ratings->avg('rate');
-        unset($location->ratings);
+            $location->average_rating = $location->ratings->avg('rate');
+            unset($location->ratings);
         });
 
         $totalRating = $restaurant->locations->sum('average_rating');

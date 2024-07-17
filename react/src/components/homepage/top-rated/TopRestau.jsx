@@ -1,53 +1,57 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CardSlick from '../card/CardSlick';
-import Card from '../card/Card';
-import Loader from '../../../layouts/loader/loader';
 import {
   fetchTopRatedRestaurants,
   selectTopRatedRestaurants,
   selectTopRatedRestaurantsStatus,
 } from '../../../slices/restaurant/top-restaurants/topRestaurantSlice'; 
-import './TopRestau.css';
+import './TopRestau.css'; 
 import { NavLink } from 'react-router-dom';
-
+import Loader from '../../../layouts/loader/loader';
 
 export default function TopRestau() {
   const dispatch = useDispatch();
   const restaurants = useSelector(selectTopRatedRestaurants);
-  console.log(restaurants);
   const status = useSelector(selectTopRatedRestaurantsStatus);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchTopRatedRestaurants());
     }
-  }, [dispatch, status]);
+  }, [status]);
 
   if (status === 'loading') {
-    return <Loader />;
+    return <Loader/>;
   }
 
-
+  if (restaurants.length === 0) {
+    return null; 
+  }
 
   return (
-    <main className='restau'>
-    {restaurants.length > 0 && (
-      <>
-        <h1 className='row text-center  col-8 offset-2 custom-color my-5'>
-          Top Rated Restaurants
-        </h1>
-        <CardSlick>
-          {restaurants.map((restaurant, index) => (
-            <div key={index} className="restaurant-slide">
-              <NavLink to={`/restaurant/${restaurant.restaurant_id}`}>
-              <Card name={restaurant.restaurant_name} image={restaurant.location_image} />
-              </NavLink>
-            </div>
-          ))}
-        </CardSlick>
-      </>
-    )}
-  </main>
+    <main className="top-restau">
+
+      {restaurants.length > 0 && <h1 className="title my-5">Explore Highly Acclaimed Restaurants</h1>}
+
+      <section className="restaurant-grid">
+
+        {restaurants.map((restaurant, index) => (
+          <NavLink 
+            key={restaurant.restaurant_location_id} 
+            to={`/restaurant/${restaurant.restaurant_location_id}`} 
+            className={`restaurant-card my-5 card-${index + 1}`}
+          >
+            <img 
+              src={restaurant.location_image} 
+              alt={restaurant.restaurant_name} 
+              className="restaurant-image" 
+            />
+            <div className="restaurant-name">{restaurant.restaurant_name}</div>
+          </NavLink>
+        ))}
+
+      </section>
+      
+    </main>
   );
 }

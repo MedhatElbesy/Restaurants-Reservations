@@ -33,7 +33,10 @@ import topRatedRestaurantsReducer from "../slices/restaurant/top-restaurants/top
 import adminReducer from "../slices/adminDashboard/adminSlice";
 import commentsReducer from "../slices/review/commentsSlice";
 import ratingReducer from "../slices/review/ratingSlice";
-
+import restaurantsCategoryDataReducer from "../slices/fetchRestaurantByCategory";
+import restaurantMenuCategoriesReducer from "../slices/restaurant/menuCategory/fetchRestaurantMenuCaegory";
+import menuCategoryItemsReducer from '../slices/restaurant/menuItem/fetchMenuCategoryItems';
+import restaurantTablesReducer from '../slices/restaurant/table/restaurantTablesSlice';
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -70,6 +73,10 @@ const store = configureStore({
     rating: ratingReducer,
     nearestRestaurants: nearestRestaurantsReducer,
     topRatedRestaurants: topRatedRestaurantsReducer,
+    restaurantsCategoryData:restaurantsCategoryDataReducer,
+    restaurantMenuCategories:restaurantMenuCategoriesReducer,
+    menuCategoryItems: menuCategoryItemsReducer,
+    restaurantTables: restaurantTablesReducer,
   },
 });
 

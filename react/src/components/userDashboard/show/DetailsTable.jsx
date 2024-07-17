@@ -1,72 +1,88 @@
 import React from 'react';
-import { useRestaurantContext } from '../RestaurantContext';
+import { useOutletContext, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import '../userDashboardRestaurant.css';
 import Loader from '../../../layouts/loader/loader';
 
-const DetailsTable = () => {
-  const { restaurant } = useRestaurantContext();
+export default function DetailsTable() {
+  const { restaurant } = useOutletContext();
+  const status = restaurant ? 'succeeded' : 'loading';
 
-  if (!restaurant) {
-    return <Loader />;
+  if (status === 'loading') {
+    return <Loader/>;
   }
 
   return (
-    <main className="details-section my-5 col-10 offset-1">
+    <main className="container-fluid restaurant-dashboards mx-5">
 
-       <h2 className="my-4 text-center" style={{ fontSize: '2rem' }}>
-            {restaurant.name}
-            <Link 
-             to={`/edit-restaurant/${restaurant.id}`} 
-             className="float-end text-white"
-            >
+      <section className="custom-header">
 
-              <FontAwesomeIcon icon={faEdit} className="me-2 text-warning" />
-            
-            </Link>
-       </h2>
+        <h3 className="text-center">Restaurant Details</h3>
 
-      <div
-        className="cover-image position-relative"
-        style={{
-          backgroundImage: `url(${restaurant.cover})`,
-          backgroundSize: 'cover',
-          height: '80vh',
-        }}
-      >
-        <div className="overlay-content position-absolute top-0 start-0 end-0 bottom-0">
-          
+        <div className="roof"></div>
 
-          <section className="details-section text-center text-white">
+        <section 
+         className="float-end my-4" 
+         style={{ zIndex: 10, position: 'relative' }}
+        >
+          <Link  
+           to={`/edit-restaurant/${restaurant.id}`}  
+           className="btn btn-outline-primary"
+          >
+            <FontAwesomeIcon icon={faEdit} /> Edit
+          </Link>
+        </section>
 
-              <h3>{restaurant.title}</h3>
-              <p>{restaurant.summary}</p>
-              <p>{restaurant.description}</p>
-            
-            <div
-              className=" details-color  mb-3"
-              style={{ position: 'absolute', bottom: '20px', left: '20px' }}
-            >
-              <p>{restaurant.hot_line}</p>
-            </div>
+      </section>
 
-            
-          </section>
+      <section className="restaurant-details position-relative">
 
-        </div>
+        <table className="table my-4 table-bordered">
 
-        <div className="logo-image position-absolute top-0 start-0">
-         {restaurant.logo && (
-          <img src={restaurant.logo} alt="Logo" className="img-fluid " />
-          )}
-        </div>
+          <tbody>
 
+            <tr>
+              <th>Cover</th>
+              <td><img 
+                  src={restaurant.cover} 
+                  alt={`${restaurant.name} cover`} 
+                  style={{ height: '25vh' }} 
+                  className="img-fluid" />
+              </td>
+            </tr>
 
-      </div>
+            <tr>
+              <th>Name</th>
+              <td>{restaurant.name}</td>
+            </tr>
 
+            <tr>
+              <th>Title</th>
+              <td>{restaurant.title}</td>
+            </tr>
+
+            <tr>
+              <th>Summary</th>
+              <td>{restaurant.summary}</td>
+            </tr>
+
+            <tr>
+              <th>Description</th>
+              <td>{restaurant.description}</td>
+            </tr>
+
+            <tr>
+              <th>Hotline</th>
+              <td>{restaurant.hot_line}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </section>
+      
     </main>
   );
-};
-
-export default DetailsTable;
+}
