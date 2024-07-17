@@ -54,6 +54,12 @@ class TableController extends Controller
     }
 
 
+    public function getTableByTableId(Table $table)
+    {
+        $table->load('images');
+        return new TableResource($table);
+    }
+
     public function update(UpdateTableRequest $request, Table $table)
     {
         $data = $request->all();
