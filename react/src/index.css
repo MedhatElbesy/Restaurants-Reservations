@@ -11,6 +11,7 @@
   --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
   --secFont: "Bad Script", cursive;
+  --navbarMaxHeight: 14vh;
   ::-webkit-scrollbar {
     width: 8px;
     height: 0px;
