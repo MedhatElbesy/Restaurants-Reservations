@@ -35,6 +35,9 @@ export default function Locations() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  if (!restaurant) {
+    return <Loader />;
+  }
 
   const handleShowTables = (locationId) => {
     setSelectedLocationId(locationId);

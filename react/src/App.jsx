@@ -52,7 +52,6 @@ import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
 import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
 import DetailsTable from "./components/userDashboard/show/DetailsTable.jsx";
 import Locations from "./components/userDashboard/show/Locations.jsx";
-import LocationTables from "./components/userDashboard/show/LocationTables.jsx";
 import MenuCategoriesTable from "./components/userDashboard/show/MenuCategoriesTable.jsx";
 import ChangePassword from "./components/userProfile/changePassword/ChangePassword.jsx";
 import AddCategoryForm from "./components/userDashboard/add/AddCategoryForm.jsx";
@@ -70,7 +69,7 @@ import EditTableImage from "./components/userDashboard/edit/EditTableImage.jsx";
 import AddUserAddress from "./components/userProfile/userAddress/AddUserAddress.jsx";
 import EditUserAddress from "./components/userProfile/userAddress/EditUserAddress.jsx";
 import SpecificCategories from "./components/userDashboard/show/SpecificCategories.jsx";
-import TableAvailability from "./components/userDashboard/show/TableAvailability.jsx";
+
 import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailability.jsx";
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
@@ -144,7 +143,6 @@ function App() {
     
         {/* Restaurant Owner Routes */}
         <Route path="/specific" element={<SpecificCategories />} />
-        <Route path="/availability/:tableId" element={<TableAvailability />} />
         <Route path="/user-restaurants" element={<UserRestaurant />} />
         
         <Route
@@ -156,8 +154,6 @@ function App() {
           <Route path="details" element={<DetailsTable />} />
 
           <Route path="locations" element={<Locations />} />
-
-          <Route path="tables" element={<LocationTables />} />
 
           <Route path="menu-category" element={<MenuCategoriesTable />} />
 
