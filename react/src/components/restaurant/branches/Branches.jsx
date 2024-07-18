@@ -60,20 +60,20 @@ const Branches = () => {
               <h2 className="text-sec text-center sec-font mt-4">
                 {branch.address}
               </h2>
-              <div className="review py-4 d-flex justify-content-center align-items-center">
+              <div className="review py-4 flex-column flex-md-row d-flex justify-content-center align-items-center">
                 <StarRating
                   readOnly={true}
                   initialRating={Number(branch.average_rating)}
                   size={20}
                   rate={branch.average_rating}
                 />
-                <p className="mx-2 mb-0">
+                <p className="mx-2 m-2">
                   <FontAwesomeIcon icon={faMessage} /> 4 Reviews
                 </p>
-                <p className="mx-2 mb-0">
+                <p className="mx-2 m-2">
                   <FontAwesomeIcon icon={faUtensils} /> {restaurant.name}
                 </p>
-                <p className="mx-2 mb-0">
+                <p className="mx-2 m-2">
                   <FontAwesomeIcon icon={faBookmark} />
                   <strong style={{ marginLeft: ".4rem" }}>
                     {branch.number_of_tables}

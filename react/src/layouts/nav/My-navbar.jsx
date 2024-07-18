@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars, faClose } from "@fortawesome/free-solid-svg-icons";
@@ -165,7 +165,6 @@ const MyNavbar = () => {
             onClick={toggleSideNav}
             className="menu-icon float-end mx-3 my-4 d-lg-none"
           />
-
           <ul className="side-nav-list">
             <li className="side-nav-item">
               <a href="#">Home</a>

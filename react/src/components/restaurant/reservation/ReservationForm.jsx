@@ -1,39 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { decryptData } from "../../../helpers/cryptoUtils";
 
 const ReservationForm = ({ formData, setFormData, register, errors }) => {
-  const [user, setUser] = useState({});
-
   useEffect(() => {
-    setUser(decryptData("user"));
-    if (user) {
-      setFormData({
-        name: `${user.first_name || ""} ${user.last_name || ""}`,
-        email: user.email || "",
-        telephone: user.mobile_number || "",
-      });
+    const decryptedUser = decryptData("user");
+    if (decryptedUser) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        name: `${decryptedUser.first_name || ""} ${
+          decryptedUser.last_name || ""
+        }`,
+        email: decryptedUser.email || "",
+        telephone: decryptedUser.mobile_number || "",
+      }));
     }
-  }, [setFormData, user]);
+  }, [setFormData]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
-
-    setFormData({
-      ...formData,
-      [name]: newValue,
-    });
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   return (
     <form className="user-data d-flex flex-wrap">
       <div className="form-floating mb-3 col-11">
         <input
+          value={formData.name || ""}
           type="text"
           className="form-input form-control"
           id="name"
           name="name"
-          value={formData.name || ""}
           {...register("name", { required: "Full Name is required" })}
           onChange={handleChange}
         />
@@ -42,11 +41,11 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-5">
         <input
+          value={formData.email || ""}
           type="email"
           className="form-input form-control"
           id="email"
           name="email"
-          value={formData.email || ""}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -61,11 +60,11 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-5 offset-1">
         <input
+          value={formData.telephone || ""}
           type="tel"
           className="form-input form-control"
           id="telephone"
           name="telephone"
-          value={formData.telephone || ""}
           {...register("telephone", {
             required: "Phone number is required",
             minLength: {
@@ -98,7 +97,6 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
           className="form-check-input"
           id="terms_and_conditions"
           name="terms_and_conditions"
-          checked={formData.terms_and_conditions || false}
           {...register("terms_and_conditions", {
             required: "You must accept the terms and conditions",
           })}

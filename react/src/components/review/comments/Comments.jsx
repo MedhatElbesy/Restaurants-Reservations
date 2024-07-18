@@ -56,7 +56,7 @@ const Comments = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (status === "loading") {
+  if ((branch.id !== prevBranchId.current && status) === "loading") {
     return <Loader size={100} />;
   }
 
