@@ -54,6 +54,18 @@ const EditDetails = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
+   
+    const validExtensions = ['jpg', 'png'];
+
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+   
+    if (!validExtensions.includes(fileExtension)) {
+      alert('Invalid file type. Please choose a file with extension: .jpg or .png');
+      e.target.value = null; 
+      return;
+    }
+
     
     if (file.size > 2097152) {
       alert('File size exceeds 2 MB limit. Please choose a smaller file.');
@@ -61,15 +73,18 @@ const EditDetails = () => {
       return;
     }
 
+  
     setFormData({
       ...formData,
       [e.target.name]: file,
     });
   };
+  
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,20 +111,16 @@ const EditDetails = () => {
       });
   };
 
- 
   if (status === 'loading') {
     return <Loader />;
   }
 
   return (
     <main className="container">
-
       <section className='formUserDashboard'>
-
         <h2 className='text-center my-4'>
           Edit Restaurant Details
         </h2>
-
         <form 
           onSubmit={handleSubmit} 
           className="text-light" 
@@ -134,7 +145,6 @@ const EditDetails = () => {
               required
             />
           </div>
-
 
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
@@ -181,8 +191,6 @@ const EditDetails = () => {
             </textarea>
           </div>
 
-        
-
           <div className="mb-3">
             <label htmlFor="logo" className="form-label">
               Logo
@@ -210,7 +218,6 @@ const EditDetails = () => {
               onChange={handleFileChange}
             />
           </div>
-
 
           <section className="mb-3">
             <label className="form-label">Status</label>

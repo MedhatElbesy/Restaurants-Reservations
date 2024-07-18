@@ -30,7 +30,6 @@ export default function Locations() {
   const status = restaurant ? 'succeeded' : 'loading';
   const { tables: restaurantTables = [] } = useSelector((state) => state.restaurantTables);
   const { tableAvailability, loading, error } = useSelector((state) => state.tableAvailability);
-  const [localAvailability, setLocalAvailability] = useState([]);
   const [showAvailability, setShowAvailability] = useState(false); 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -109,7 +108,7 @@ export default function Locations() {
     );
   });
 
-  const filteredTables = restaurantTables.filter((table) => {
+  const filteredTables = (restaurantTables || []).filter((table) => {
     const description = table.description || '';
     const numberOfChairs = table.number_of_chairs || '';
     const maxNumberOfPersons = table.max_number_of_persons || '';
@@ -217,8 +216,7 @@ export default function Locations() {
       if (result.isConfirmed) {
         dispatch(deleteTableAvailability(availabilityId))
           .then(() => {
-            const updatedAvailability = localAvailability.filter(avail => avail.id !== availabilityId);
-            setLocalAvailability(updatedAvailability);
+            dispatch(getTableAvailability(SelectedTableId));
             Swal.fire(
               'Deleted!',
               'The availability has been deleted.',
@@ -241,8 +239,7 @@ export default function Locations() {
     return <Loader />;
   }
 
-  const paginatedLocations = filteredLocations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
+  const paginatedLocations = (filteredLocations || []).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   return (
 
     <main className="container-fluid restaurant-dashboards mx-5">
@@ -310,7 +307,7 @@ export default function Locations() {
                   <TableCell className='text-center'>{location.zip}</TableCell>
                   <TableCell className='text-center'>{location.opening_time}</TableCell>
                   <TableCell className='text-center'>{location.closed_time}</TableCell>
-                  <TableCell className='text-center'>{location.closed_days.join(', ')}</TableCell>
+                  <TableCell className='text-center'>{Array.isArray(location.closed_days) ? location.closed_days.join(', ') : location.closed_days}</TableCell>
                   <TableCell className='text-center'>{location.number_of_tables}</TableCell>
                   <TableCell className='text-center'>{location.phone_number}</TableCell>
                   <TableCell className='text-center'>{location.mobile_number}</TableCell>

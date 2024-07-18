@@ -195,6 +195,7 @@ function App() {
         <Route path="/add-table/:locationId" element={<AddTableForm />} />
         <Route path="/edit-table/:tableId" element={<EditTableForm />} />
         <Route path="/add-restaurant" element={<AddRestaurant />} />
+       
         <Route path="/add-special-category" element={<AddCategoryForm />} />
         <Route
           path="/add-restaurant-category/:restaurantId"

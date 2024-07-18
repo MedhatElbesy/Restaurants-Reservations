@@ -50,6 +50,11 @@ const MyNavbar = () => {
     }
   }, [userId]);
 
+  useEffect(() => {
+    console.log('User Data:', userData);
+    console.log('Profile Image URL:', userData?.profile_image_url);
+  }, [userData]);
+
   const isHomeRoute = location.pathname === '/' || location.pathname === '/home';
   const shouldHideNavbar = location.pathname.startsWith('/user-dashboard') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
 
@@ -60,7 +65,7 @@ const MyNavbar = () => {
   return (
     <>
       <FontAwesomeIcon icon={faBars} onClick={toggleSideNav} className="menu-icon mx-3 my-4 d-lg-none d-md-none " />
-      {!sideNavVisible && (
+   
         <nav
           className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${scrolled ? 'bg-white' : ''} ${isHomeRoute ? 'navbar-transparent' : 'bg-white'} d-none d-md-block`}
         >
@@ -71,7 +76,7 @@ const MyNavbar = () => {
                 src="./images/logo-white.png"
                 className="profile-image my-2 rounded-circle"
                 alt="Logo"
-                style={{ width: '2.5vw', height: '5vh' }}
+                style={{ width: '50px', height: '50px' }}
               />
             </div>
 
@@ -118,16 +123,16 @@ const MyNavbar = () => {
                     src={userData.profile_image_url}
                     className="profile-image rounded-circle"
                     alt="Profile"
-                    style={{ width: '2.5vw', height: '5vh', marginRight: '10px',objectFit:'cover' }}
+                    style={{ width: '50px', height: '50px', marginRight: '10px',objectFit:'cover' }}
                   />
                 </NavLink>
               )}
             </div>
           </div>
         </nav>
-      )}
+      
       {sideNavVisible && (
-        <section className="side-nav d-block">
+        <section className="side-nav d-block d-md-none  d-lg-none">
 
           <FontAwesomeIcon icon={faClose} onClick={toggleSideNav} className="menu-icon float-end mx-3 my-4 d-lg-none" />
 

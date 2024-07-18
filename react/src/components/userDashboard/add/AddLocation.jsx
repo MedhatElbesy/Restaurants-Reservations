@@ -41,7 +41,7 @@ const AddLocation = () => {
   const locationStatus = useSelector((state) => state.location.status);
   const {error} = useSelector((state) => state.location);
   const navigate = useNavigate();
-
+  const [isFormValid, setIsFormValid] = useState(true);
   const [position, setPosition] = useState(null);
   const [openingTime, setOpeningTime] = useState(null);
   const [closingTime, setClosingTime] = useState(null);
@@ -130,27 +130,35 @@ const AddLocation = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    const maxSizeInBytes = 2048 * 1024; 
   
-    const isValidFiles = files.every(file => {
-      const sizeInBytes = file.size;
-      return sizeInBytes <= maxSizeInBytes;
-    });
-  
-    if (!isValidFiles) {
-      alert('Please upload images with size up to 2 MB.');
-      return;
-    }
-  
-   
     setImages(files);
   };
+  
   
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
+    const maxSizeInBytes = 2048 * 1024; 
+  
+    const isValidFiles = images.every(file => {
+      const { size, type } = file;
+      const extension = type.split('/').pop(); 
+      return size <= maxSizeInBytes && allowedExtensions.includes(extension);
+    });
+  
+    if (!isValidFiles) {
+      alert('Please upload images with types: jpeg, jpg, png, gif, svg and size up to 2 MB.');
+      setIsFormValid(false);
+      return;
+    }
+  
+   
+    setIsFormValid(true);
+  
+   
     const formDataToSend = new FormData();
     formDataToSend.append('address', formData.address);
     formDataToSend.append('zip', formData.zip);
@@ -176,16 +184,14 @@ const AddLocation = () => {
       const resultAction = await dispatch(addLocationAsync(formDataToSend));
   
       if (resultAction.meta.requestStatus === 'fulfilled') {
-        navigate(-1);
+        navigate(-1); 
       } else {
-          
-         alert('An error occurred ,please enter unique number'); 
-        
+        alert('please enter unique number.'); 
       }
-    }  catch (error) {
+    } catch (error) {
       console.error('Error adding location:', error);
+      alert('please enter unique number.');
     }
-    
   };
   
   if (locationStatus === 'loading') {
