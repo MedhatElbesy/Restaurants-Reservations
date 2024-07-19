@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
 import { formatTime } from "../../helpers/utils";
 
 const TableDetials = ({ table, details }) => {
-  const { tableAvailability } = useSelector((state) => state.tableAvailability);
+  const tableAvailability = JSON.parse(
+    sessionStorage.getItem("tableAvailability")
+  );
   const { selectedData, reservationDate } = details;
   const time = tableAvailability.find(
     (available) => available.id == selectedData.availabilityId
   );
+  console.log(tableAvailability);
 
-  const date = reservationDate.toLocaleDateString("en-US", {
+  const date = new Date(reservationDate).toLocaleDateString("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",

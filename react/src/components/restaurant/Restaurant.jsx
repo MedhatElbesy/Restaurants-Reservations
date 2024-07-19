@@ -16,7 +16,7 @@ export default function RestaurantDetails() {
   const { restaurant, status, error } = useSelector(
     (state) => state.restaurant
   );
-
+  sessionStorage.setItem(`restaurant`, JSON.stringify(restaurant));
   const isFirstRender = useRef(true);
   useEffect(() => {
     if (restaurantId && isFirstRender.current) {

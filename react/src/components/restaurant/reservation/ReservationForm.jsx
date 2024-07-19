@@ -3,6 +3,11 @@ import { decryptData } from "../../../helpers/cryptoUtils";
 
 const ReservationForm = ({ formData, setFormData, register, errors }) => {
   useEffect(() => {
+    const savedFormData = sessionStorage.getItem("formData");
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
+    }
+
     const decryptedUser = decryptData("user");
     if (decryptedUser) {
       setFormData((prevFormData) => ({
@@ -15,6 +20,10 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       }));
     }
   }, [setFormData]);
+
+  useEffect(() => {
+    sessionStorage.setItem("formData", JSON.stringify(formData));
+  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

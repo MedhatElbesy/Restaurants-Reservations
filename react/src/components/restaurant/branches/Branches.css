@@ -68,12 +68,12 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    gap: 12px;
+    /* gap: 12px; */
     .hex {
       position: relative;
-      width: 120px;
-      height: 135px;
-      /* margin: 8px; */
+      width: 140px;
+      height: 130px;
+      margin-bottom: 12px;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       overflow: hidden;
       transition: transform 0.3s;

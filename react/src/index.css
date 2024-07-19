@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 :root {
-  --backgroundColor: #F0FFFF;
+  --backgroundColor: #ffffff;
   --mainColor: #9c9c9c;
   --secColor: #FF6B16;
   --secColor: #993400;
@@ -68,6 +68,9 @@ a {
   text-decoration: none;
 }
 
+.nav-height {
+  margin-top: var(--navbarMaxHeight);
+}
 
 .full {
   flex-grow: 1;

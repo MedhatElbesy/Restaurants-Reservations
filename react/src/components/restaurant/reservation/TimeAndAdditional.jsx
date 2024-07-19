@@ -1,13 +1,31 @@
 import { useSelector } from "react-redux";
 import { formatTime } from "../../../helpers/utils";
+import { useEffect } from "react";
 
 const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
 
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("selectedData");
+    if (savedData) {
+      setSelectedData(JSON.parse(savedData));
+    }
+  }, [setSelectedData]);
+
+  useEffect(() => {
+    if (
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.availabilityId ||
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.childSeats ||
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.extraSeats
+    ) {
+      sessionStorage.setItem("selectedData", JSON.stringify(selectedData));
+    }
+  }, [selectedData]);
+
   const handleSelectTime = (id) => {
     const updatedData = {
       ...selectedData,
-      availabilityId: selectedData.availabilityId === id ? null : id, // Toggle selection
+      availabilityId: selectedData.availabilityId === id ? null : id,
     };
     setSelectedData(updatedData);
   };
@@ -15,7 +33,7 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const handleSelectSeats = (extraSeats) => {
     const updatedData = {
       ...selectedData,
-      extraSeats: selectedData.extraSeats === extraSeats ? null : extraSeats, // Toggle selection
+      extraSeats: selectedData.extraSeats === extraSeats ? null : extraSeats,
     };
     setSelectedData(updatedData);
   };
@@ -23,8 +41,8 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const handleSelectChildSeats = (childSeats) => {
     const updatedData = {
       ...selectedData,
-      childSeats: selectedData.childSeats === childSeats ? null : childSeats, // Toggle selection
-    };
+      childSeats: selectedData.childSeats === childSeats ? null : childSeats,
+    };  
     setSelectedData(updatedData);
   };
 

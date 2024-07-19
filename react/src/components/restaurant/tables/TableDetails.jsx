@@ -1,10 +1,18 @@
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { TableGallery } from "./TableGallery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChair, faUsers, faChild } from "@fortawesome/free-solid-svg-icons";
 
 export function TableDetails({ table, onClose }) {
+  const navigate = useNavigate();
   const { restaurantId } = useParams();
+  const handelReserveTable = () => {
+    sessionStorage.removeItem("reservationDate");
+    sessionStorage.removeItem("formData");
+    sessionStorage.removeItem("selectedData");
+    sessionStorage.setItem("table", JSON.stringify(table));
+    navigate(`/restaurant/${restaurantId}/reservation/${table.id}`);
+  };
   return (
     <div className="table-details">
       <div className="close" onClick={() => onClose(false)}>
@@ -43,10 +51,10 @@ export function TableDetails({ table, onClose }) {
         {table.images.length > 0 && <TableGallery gallery={table.images} />}
       </article>
       <div className="text-center mb-4">
-        <NavLink to={`/restaurant/${restaurantId}/reservation/${table.id}`}>
-          <button className="reserve-table">Reserve Now</button>
-        </NavLink>
+        <button onClick={handelReserveTable} className="reserve-table">
+          Reserve Now
+        </button>
       </div>
     </div>
-  )
+  );
 }

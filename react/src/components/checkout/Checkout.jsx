@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { handelCheckoutData } from "../../helpers/checkoutData";
 import { checkoutReservation } from "../../slices/checkout/checkoutSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
@@ -16,14 +18,13 @@ const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { reservationData } = location.state;
+  const { reservationDetails } = location.state;
+  sessionStorage.setItem("reservationData", JSON.stringify(reservationDetails));
+  const reservationData = JSON.parse(sessionStorage.getItem("reservationData"));
+  // const reservationData = reservationDetails;
   const { restaurant } = useSelector((state) => state.restaurant);
-  const branch = restaurant.locations.find(
-    (branch) => branch.id == reservationData.branchId
-  );
-  const table = branch.tables.find(
-    (table) => table.id == reservationData.tableId
-  );
+  const branch = reservationData.branch;
+  const table = reservationData.table;
 
   const [currentStep, setCurrentStep] = useState(0);
   const [paymentData, setPaymentData] = useState({});
@@ -79,7 +80,6 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    console.log(paymentData);
     const checkoutData = handelCheckoutData(
       reservationData,
       paymentData,
@@ -91,13 +91,10 @@ const Checkout = () => {
       ).unwrap();
       console.log(response);
       if (paymentData.gateway.type === "paypal") {
-        window.open(
-          response.data,
-          "_blank",
-          "width=1200,height=800"
-        );
+        const iframe = document.getElementById("paypalIframe");
+        iframe.src = response.data;
       }
-      nextStep();
+      // nextStep();
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
     }
@@ -105,6 +102,13 @@ const Checkout = () => {
 
   return (
     <section className="checkout p-sm-5 p-3 m-lg-5">
+      <FontAwesomeIcon
+        onClick={() =>
+          navigate(`/restaurant/${restaurant.id}/reservation/${table.id}`)
+        }
+        className="back"
+        icon={faArrowLeft}
+      />{" "}
       <div className="head text-center mb-5">
         <h1 className="text-sec">Checkout</h1>
         <p className="text-color">{table.description}</p>

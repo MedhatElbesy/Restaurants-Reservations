@@ -1,8 +1,24 @@
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./Calendar.css";
+import { useEffect } from "react";
 
 const CustomCalendar = ({ reservationDate, setReservationDate, branch }) => {
+  useEffect(() => {
+    const savedDate = sessionStorage.getItem("reservationDate");
+    if (savedDate) {
+      setReservationDate(new Date(savedDate));
+    }
+  }, [setReservationDate]);
+
+  useEffect(() => {
+    if (reservationDate) {
+      sessionStorage.setItem("reservationDate", reservationDate.toISOString());
+    } else {
+      sessionStorage.removeItem("reservationDate");
+    }
+  }, [reservationDate]);
+
   const tileDisabled = ({ date, view }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);

@@ -19,17 +19,10 @@ import "./Branches.css";
 const Branches = () => {
   const [showTables, setShowTables] = useState([]);
   const { branch, setBranch } = useBranch();
+  sessionStorage.setItem("branch", JSON.stringify(branch));
   const { locations: branches, restaurant } = useSelector(
     (state) => state.restaurant
   );
-  // let { branchId = "", showBranchTables = false } = location.state || {};
-  console.log(branches);
-  console.log(restaurant);
-  // useEffect(() => {
-  //   if (showBranchTables) {
-  //     setShowTables(showBranchTables);
-  //   }
-  // }, [showBranchTables]);
 
   useEffect(() => {
     if (branches.length > 0 && !branch) {
@@ -44,6 +37,7 @@ const Branches = () => {
   const handleSelect = (key) => {
     const selectedBranch = branches.find((branch) => branch.id == key);
     setBranch(selectedBranch);
+    sessionStorage.setItem("branch", JSON.stringify(branch))
     setShowTables(false);
   };
 
@@ -68,7 +62,8 @@ const Branches = () => {
                   rate={branch.average_rating}
                 />
                 <p className="mx-2 m-2">
-                  <FontAwesomeIcon icon={faMessage} /> 4 Reviews
+                  <FontAwesomeIcon icon={faMessage} /> {branch.comments_count}{" "}
+                  Reviews
                 </p>
                 <p className="mx-2 m-2">
                   <FontAwesomeIcon icon={faUtensils} /> {restaurant.name}

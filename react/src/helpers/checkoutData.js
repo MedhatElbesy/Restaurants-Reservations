@@ -1,6 +1,9 @@
-export const handelCheckoutData = (reservationData, paymentData, restaurant) => {
+export const handelCheckoutData = (
+  reservationData,
+  paymentData,
+  restaurant
+) => {
   const checkoutData = new FormData();
-
   checkoutData.append("total_price", paymentData.total_price);
   checkoutData.append("notes", reservationData.userData.notes);
   checkoutData.append("restaurant_id", restaurant.id);
@@ -8,7 +11,7 @@ export const handelCheckoutData = (reservationData, paymentData, restaurant) => 
     "terms_and_conditions",
     reservationData.userData.terms_and_conditions ? 1 : 0
   );
-  checkoutData.append("table_id", reservationData.tableId);
+  checkoutData.append("table_id", reservationData.table.id);
   checkoutData.append(
     "table_availability_id",
     reservationData.selectedData.availabilityId
@@ -38,6 +41,5 @@ export const handelCheckoutData = (reservationData, paymentData, restaurant) => 
   checkoutData.append("customer_name", reservationData.userData.name);
   checkoutData.append("customer_email", reservationData.userData.email);
   checkoutData.append("customer_phone", reservationData.userData.telephone);
-
   return checkoutData;
 };

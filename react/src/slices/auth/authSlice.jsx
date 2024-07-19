@@ -95,9 +95,7 @@ const authSlice = createSlice({
       state.token = null;
       state.loggedIn = false;
       state.role = null;
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("userId");
-      sessionStorage.removeItem("role");
+      sessionStorage.clear();
     },
   },
   extraReducers: (builder) => {

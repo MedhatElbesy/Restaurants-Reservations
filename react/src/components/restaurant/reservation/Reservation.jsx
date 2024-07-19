@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import { useDispatch, useSelector } from "react-redux";
-import { useBranch } from "../branches/BranchContext";
 import Swal from "sweetalert2";
 import MapContainer from "../../Map/Map";
 import CustomCalendar from "./Calendar";
@@ -17,16 +16,21 @@ const Reservation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { tableId } = useParams();
-  const { branch } = useBranch();
-  const { tables } = useSelector((state) => state.restaurantTables);
-  const table = tables.find((table) => table.id == tableId);
-  const { restaurant } = useSelector((state) => state.restaurant);
+  const branch = JSON.parse(sessionStorage.getItem("branch"));
+  const table = JSON.parse(sessionStorage.getItem("table"));
+  const { restaurant } = useSelector((state) => state.restaurant) || JSON.parse(sessionStorage.getItem("restaurant"))
+  console.log(restaurant)
+;
   const { tableAvailability, status: tableAvailabilityStatus } = useSelector(
     (state) => state.tableAvailability
   );
-
+  sessionStorage.setItem(
+    "tableAvailability",
+    JSON.stringify(tableAvailability)
+  );
 
   useEffect(() => {
+    console.log(tableId);
     dispatch(getTableAvailability(tableId));
   }, [dispatch, tableId]);
 
@@ -97,15 +101,15 @@ const Reservation = () => {
 
   const onSubmit = (userData) => {
     setFormData(userData);
-    const reservationData = {
+    const reservationDetails = {
       userData,
       selectedData,
       reservationDate,
-      branchId: branch.id,
-      tableId: table.id,
+      branch: branch,
+      table: table,
     };
     navigate(`/reservation/checkout`, {
-      state: { reservationData },
+      state: { reservationDetails },
     });
   };
 

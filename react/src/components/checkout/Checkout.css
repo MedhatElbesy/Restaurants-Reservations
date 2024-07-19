@@ -1,5 +1,10 @@
 .checkout {
   background-color: var(--backgroundColor);
+  .back {
+    color: var(--secColor);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -12,7 +17,7 @@
         position: relative;
         flex: 1;
         .step-label {
-          /* color: var(--secColor); */
+          color:  #818485;
           margin-bottom: 10px;
         }
         .step-label.visited {
@@ -21,7 +26,7 @@
         .bar {
           height: 0.8rem;
           width: 100%;
-          background-color: #023c499c;
+          background-color: #8184859c;
         }
         .bar.visited {
           background-color: var(--secColor);
@@ -54,7 +59,7 @@
   }
   .payment {
     .table-payment-details {
-      background-color: #011f25e0;
+      background-color: var(--backgroundColor);
       .head {
         padding: 1rem;
         background-color: #595b5c3d;
@@ -144,7 +149,7 @@
           padding: 1rem;
           color: var(--textColor);
           font-weight: bold;
-          background-color: #011f25e0;
+          background-color: #595b5c3d;
           span:first-child{
             font-size: 1.5rem;
           }

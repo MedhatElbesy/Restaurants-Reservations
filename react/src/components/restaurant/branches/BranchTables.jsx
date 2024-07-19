@@ -10,7 +10,6 @@ export function BranchTables({ onShowTables }) {
   const { branch } = useBranch();
   const dispatch = useDispatch();
   const { tables, status: tableStatus } = useSelector((state) => state.restaurantTables);
-  console.log(tables);
 
   const prevBranchId = useRef(null);
   useEffect(() => {
