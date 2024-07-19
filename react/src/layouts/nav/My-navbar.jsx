@@ -89,9 +89,13 @@ const MyNavbar = () => {
                <li className="nav-item mx-2">
                  <NavLink to={"/about-us"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">About</NavLink>
                </li>
+
+               {userId && (
                <li className="nav-item mx-2">
                  <NavLink to={"/userprofile"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Profile</NavLink>
                </li>
+               )}
+
                {!userId && (
                <li className="nav-item mx-2">
                  <NavLink to={"/login"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Login</NavLink>
@@ -143,9 +147,13 @@ const MyNavbar = () => {
             <li className="side-nav-item">
               <NavLink to={"/about-us"}>About</NavLink>
             </li>
+            
+            {userId && (
             <li className="side-nav-item">
               <NavLink to={"/userprofile"}>Profile</NavLink>
             </li>
+            )}
+
             {!userId && (
             <li className="side-nav-item">
               <NavLink to={"/login"}>Login</NavLink>

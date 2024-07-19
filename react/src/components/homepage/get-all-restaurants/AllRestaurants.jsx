@@ -8,6 +8,7 @@ import { fetchRestaurants } from '../../../slices/adminDashboard/adminSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+
 const AllRestaurants = () => {
   const dispatch = useDispatch();
   const { restaurants, status } = useSelector(state => state.adminDashboard);
@@ -27,17 +28,18 @@ const AllRestaurants = () => {
           <section className='d-flex justify-content-between align-items-center mx-1'>
 
             <h1 className='col-10'>Discover Our Restaurants</h1>
+            
 
             <NavLink 
              to="all-restaurants" 
-             className="nav-link text-primary" 
+             className="customColor col-3 offset-md-1 offset-0 " 
              style={{ textDecoration: 'none' }}
             >
               View All
 
               <FontAwesomeIcon 
                icon={faArrowRight} 
-               className='text-primary mx-1'>
+               className='customColor  mx-1 '>
                </FontAwesomeIcon>
             </NavLink>
 
