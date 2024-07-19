@@ -209,3 +209,9 @@
   font-size: 18px; 
   z-index: 2; 
 }
+
+
+.customColor{
+  color:#FF6B16;
+  font-size: large;
+}

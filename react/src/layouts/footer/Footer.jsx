@@ -31,45 +31,34 @@ export default function Footer() {
             </a>
           </section>
 
-          <section className="row">
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-           
-              <ul className="list-unstyled mb-0">
-                
-                <li><a href="#!" className="text-dark text-decoration-none">Email</a></li>
-                <li><a href="#!" className="text-dark text-decoration-none">Restau@gmail.com</a></li>
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-         
-              <ul className="list-unstyled mb-0 ">
-                
-                <li><a href="#!" className="text-dark text-decoration-none">Contact Us</a></li>
-                <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-           
-              <ul className="list-unstyled mb-0">
-                
-                <li><a href="#!" className="text-dark text-decoration-none">Help Center</a></li>
-                <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
-              </ul>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-            
-              <ul className="list-unstyled mb-0">
-                <li><a href="#!" className="text-dark text-decoration-none">Follow Us</a></li>
-                <li><a href="#!" className="text-dark text-decoration-none">Facebook</a></li>
-                
-              </ul>
-            </div>
-          </section>
+          <section className="row footer-section text-center">
+           <div className=" col-md-3 ">
+            <ul className="list-unstyled mb-0  ">
+             <li><a href="#!" className="text-dark text-decoration-none">Email</a></li>
+             <li><a href="#!" className="text-dark text-decoration-none">Restau@gmail.com</a></li>
+            </ul>
+           </div>
+
+           <div className="col-md-3  ">
+            <ul className="list-unstyled mb-0 ">
+             <li><a href="#!" className="text-dark text-decoration-none">Contact Us</a></li>
+             <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
+            </ul>
+           </div>
+
+           <div className=" col-md-3 ">
+            <ul className="list-unstyled mb-0 ">
+             <li><a href="#!" className="text-dark text-decoration-none">Help Center</a></li>
+             <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
+            </ul>
+           </div>
+         </section>
+
         </div>
 
         <div className="text-center p-3 copyright">
             <p>
-          © 2020 Copyright:Restau
+          © 2024 Copyright:@Restau
           </p>
         </div>
       </footer>
