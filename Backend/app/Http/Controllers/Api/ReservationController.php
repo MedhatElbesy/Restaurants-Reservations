@@ -170,7 +170,9 @@ class ReservationController extends Controller
                     'status' => 'success'
                 ]);
             }
-            return ApiResponse::sendResponse(200, 'Payment successfull');
+
+            // return ApiResponse::sendResponse(200, 'Payment successfull');
+            return redirect("http://localhost:5173/reservation/done");
         }
         return ApiResponse::sendResponse(400, 'Payment failed');
     }
