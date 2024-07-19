@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useOutletContext } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,15 +27,59 @@ export default function Locations() {
   const [selectedLocationId, setSelectedLocationId] = useState(null);
   const [SelectedTableId, setSelectedTableId] = useState(null);
   const [imageIndices, setImageIndices] = useState({});
+  const [filteredTables, setFilteredTables] = useState(null);
   const status = restaurant ? 'succeeded' : 'loading';
+  const [tablesAvailability, setTablesAvailability] = useState(null);
   const { tables: restaurantTables = [] } = useSelector((state) => state.restaurantTables);
   const { tableAvailability, loading, error } = useSelector((state) => state.tableAvailability);
-  const [localAvailability, setLocalAvailability] = useState([]);
   const [showAvailability, setShowAvailability] = useState(false); 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
+
+  useEffect(() => {
+    const filteredTable = (restaurantTables || []).filter((table) => {
+      const description = table.description || '';
+      const numberOfChairs = table.number_of_chairs || '';
+      const maxNumberOfPersons = table.max_number_of_persons || '';
+      const extraNumberOfChairs = table.extra_number_of_chairs || '';
+      const price = table.price || '';
+      const salePrice = table.sale_price || '';
+      const extraNumberOfChildsChairs = table.extra_number_of_childs_chairs || '';
+      const extraChildChairPrice = table.extra_child_chair_price || '';
+      const status = table.status || '';
+
+      return (
+        description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        numberOfChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        maxNumberOfPersons.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        extraNumberOfChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        price.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        salePrice.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        extraNumberOfChildsChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        extraChildChairPrice.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        status.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+
+    setFilteredTables(filteredTable);
+  }, [searchTerm, restaurantTables]);
+
+
+  useEffect(() => {
+    if (tableAvailability) {
+      setTablesAvailability(tableAvailability);
+    }
+  }, [tableAvailability]);
+
+  if (!restaurant) {
+    return <Loader />;
+  }
+
+  
+ 
+  
   const handleShowTables = (locationId) => {
     setSelectedLocationId(locationId);
     dispatch(fetchRestaurantTablesAsync(locationId));
@@ -106,30 +150,8 @@ export default function Locations() {
     );
   });
 
-  const filteredTables = restaurantTables.filter((table) => {
-    const description = table.description || '';
-    const numberOfChairs = table.number_of_chairs || '';
-    const maxNumberOfPersons = table.max_number_of_persons || '';
-    const extraNumberOfChairs = table.extra_number_of_chairs || '';
-    const price = table.price || '';
-    const salePrice = table.sale_price || '';
-    const extraNumberOfChildsChairs = table.extra_number_of_childs_chairs || '';
-    const extraChildChairPrice = table.extra_child_chair_price || '';
-    const status = table.status || '';
-
-    return (
-      description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      numberOfChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      maxNumberOfPersons.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      extraNumberOfChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      price.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      salePrice.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      extraNumberOfChildsChairs.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      extraChildChairPrice.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      status.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
-
+  
+  
   const handleDeleteLocation = (locationId) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -169,7 +191,9 @@ export default function Locations() {
       if (result.isConfirmed) {
         dispatch(deleteTableAsync(tableId))
           .then(() => {
-            dispatch(fetchRestaurantTablesAsync(selectedLocationId));
+            setFilteredTables((prevTables) =>
+              prevTables.filter((table) => table.id !== tableId)
+            );
             Swal.fire('Deleted!', 'The table has been deleted.', 'success');
           })
           .catch((error) => {
@@ -214,8 +238,9 @@ export default function Locations() {
       if (result.isConfirmed) {
         dispatch(deleteTableAvailability(availabilityId))
           .then(() => {
-            const updatedAvailability = localAvailability.filter(avail => avail.id !== availabilityId);
-            setLocalAvailability(updatedAvailability);
+            setTablesAvailability((prevAvailability) =>
+              prevAvailability.filter((availability) => availability.id !== availabilityId)
+            );
             Swal.fire(
               'Deleted!',
               'The availability has been deleted.',
@@ -238,7 +263,7 @@ export default function Locations() {
     return <Loader />;
   }
 
-  const paginatedLocations = filteredLocations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const paginatedLocations = (filteredLocations || []).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
 
@@ -307,7 +332,7 @@ export default function Locations() {
                   <TableCell className='text-center'>{location.zip}</TableCell>
                   <TableCell className='text-center'>{location.opening_time}</TableCell>
                   <TableCell className='text-center'>{location.closed_time}</TableCell>
-                  <TableCell className='text-center'>{location.closed_days.join(', ')}</TableCell>
+                  <TableCell className='text-center'>{Array.isArray(location.closed_days) ? location.closed_days.join(', ') : location.closed_days}</TableCell>
                   <TableCell className='text-center'>{location.number_of_tables}</TableCell>
                   <TableCell className='text-center'>{location.phone_number}</TableCell>
                   <TableCell className='text-center'>{location.mobile_number}</TableCell>
@@ -552,7 +577,7 @@ export default function Locations() {
 
        {/* Availability table */}
 
-       {showAvailability && tableAvailability && (
+       {showAvailability && (
         <Paper sx={{ width: '100%', marginTop: '10px', display: showAvailability ? 'block' : 'none' }}>
 
           <section className="custom-header">
@@ -588,7 +613,8 @@ export default function Locations() {
               </TableHead>
 
               <TableBody>
-                {tableAvailability.map((availability) => (
+   
+                {tablesAvailability && tablesAvailability.map((availability) => (
                   <TableRow key={availability.id} hover={true}>
                     <TableCell className='text-center'>{availability.start_time}</TableCell>
                     <TableCell className='text-center'>{availability.end_time}</TableCell>

@@ -17,8 +17,10 @@ const NearRestau = () => {
   const userId = decryptData("userId");
 
   useEffect(() => {
-    dispatch(fetchNearestRestaurants(userId));
-  }, []);
+    if(userId){
+        dispatch(fetchNearestRestaurants(userId));
+    }
+  }, [userId]);
 
   if (status === "loading") {
     return <Loader />;

@@ -20,12 +20,21 @@ const RestaurantCategory = () => {
   const dispatch = useDispatch();
   const { restaurantCategory, status } = useSelector((state) => state.restaurantCategory);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredRestaurantCategory, setFilteredRestaurantCategory] = useState([]);
 
   useEffect(() => {
     if (restaurantId) {
       dispatch(fetchRestaurantCategoryAsync(restaurantId));
     }
   }, [restaurantId]);
+
+  useEffect(() => {
+    if (restaurantCategory) {
+      setFilteredRestaurantCategory(
+        restaurantCategory.filter((item) => item.status !== 'deleted')
+      );
+    }
+  }, [restaurantCategory]);
 
   if (status === 'loading' || !restaurantCategory) {
     return <Loader />;
@@ -47,14 +56,16 @@ const RestaurantCategory = () => {
       if (result.isConfirmed) {
         dispatch(deleteCategoryAsync(categoryId))
           .then(() => {
-            dispatch(fetchRestaurantCategoryAsync(restaurantId));
             Swal.fire(
               'Deleted!',
               'Your category has been deleted.',
               'success'
             );
+            setFilteredRestaurantCategory((prevCategories) =>
+              prevCategories.filter((category) => category.id !== categoryId)
+            );
           })
-          .catch(error => {
+          .catch((error) => {
             Swal.fire(
               'Error',
               'Failed to delete category.',
@@ -71,8 +82,7 @@ const RestaurantCategory = () => {
     });
   };
 
-  
-  const filteredCategories = restaurantCategory.filter((item) => {
+  const filteredCategories = filteredRestaurantCategory.filter((item) => {
     const name = item.category.name || '';
     const status = item.status || '';
 
@@ -91,7 +101,6 @@ const RestaurantCategory = () => {
       </section>
 
       <Paper sx={{ width: '100%', marginTop: '10px' }}>
-
         <div className="float-end my-4" style={{ zIndex: 10, position: 'relative' }}>
           <Link to={`/add-restaurant-category/${restaurantId}`} className="btn btn-outline-warning mx-2 text-dark">
             <FontAwesomeIcon icon={faPlus} /> Add
@@ -102,7 +111,7 @@ const RestaurantCategory = () => {
           label="Search"
           variant="outlined"
           size="small"
-          className='my-3'
+          className="my-3"
           value={searchTerm}
           onChange={handleSearch}
           InputProps={{
@@ -117,7 +126,7 @@ const RestaurantCategory = () => {
         <TableContainer sx={{ maxHeight: 440, overflowY: 'auto' }}>
 
           <Table aria-label="sticky table">
-            
+
             <TableHead className="table-head">
               <TableRow>
                 <TableCell className="text-center table-cell">Name</TableCell>
@@ -125,7 +134,7 @@ const RestaurantCategory = () => {
                 <TableCell className="text-center table-cell">Actions</TableCell>
               </TableRow>
             </TableHead>
-
+            
             <TableBody>
               {filteredCategories.length === 0 ? (
                 <TableRow>
@@ -139,10 +148,7 @@ const RestaurantCategory = () => {
                     <TableCell className="text-center">{item.category.name}</TableCell>
                     <TableCell className="text-center">{item.status}</TableCell>
                     <TableCell className="d-flex align-items-center justify-content-center">
-                      <Link
-                        to={`/edit-restaurant-category/${item.id}`}
-                        className="btn btn-outline-primary btn-sm me-2"
-                      >
+                      <Link to={`/edit-restaurant-category/${item.id}`} className="btn btn-outline-primary btn-sm me-2">
                         <FontAwesomeIcon icon={faEdit} /> Edit
                       </Link>
                       <button
@@ -174,4 +180,3 @@ const RestaurantCategory = () => {
 };
 
 export default RestaurantCategory;
-

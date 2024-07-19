@@ -172,12 +172,14 @@ const EditLocation = () => {
     const files = Array.from(e.target.files);
     let validFiles = [];
   
+    const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
+  
     files.forEach((file) => {
-      if (file.size <= 2 * 1024 * 1024) { 
+      const extension = file.name.split('.').pop().toLowerCase();
+      if (file.size <= 2 * 1024 * 1024 && allowedExtensions.includes(extension)) {
         validFiles.push(file);
       } else {
-       
-        console.log(`File ${file.name} exceeds the maximum size of 2MB.`);
+        alert(`img is not valid. Ensure it is an image with extension 'jpeg', 'jpg', 'png', 'gif', 'svg'  and does not exceed 2MB.`);
       }
     });
   
@@ -186,6 +188,7 @@ const EditLocation = () => {
       images: validFiles,
     });
   };
+  
   
 
   const handleSubmit = (e) => {

@@ -20,7 +20,7 @@ class TableImage extends Model
         if (Str::startsWith($this->image, ['http://', 'https://'])) {
             return $this->image;
         }
-        return url('storage/' . $this->image);
+        return url('storage/table_images/' . $this->image);
     }
 
     public function table() : BelongsTo

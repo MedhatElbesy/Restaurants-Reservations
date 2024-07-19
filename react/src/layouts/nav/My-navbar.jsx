@@ -50,13 +50,13 @@ const MyNavbar = () => {
     }
   }, [userId]);
 
-  const isHomeRoute =
-    location.pathname === "/" || location.pathname === "/home";
-  const shouldHideNavbar =
-    location.pathname.startsWith("/user-dashboard") ||
-    location.pathname.startsWith("/admin") ||
-    location.pathname.startsWith("/login") ||
-    location.pathname.startsWith("/register");
+  useEffect(() => {
+    console.log('User Data:', userData);
+    console.log('Profile Image URL:', userData?.profile_image_url);
+  }, [userData]);
+
+  const isHomeRoute = location.pathname === '/' || location.pathname === '/home';
+  const shouldHideNavbar = location.pathname.startsWith('/user-dashboard') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
 
   if (shouldHideNavbar) {
     return null;
@@ -64,12 +64,8 @@ const MyNavbar = () => {
 
   return (
     <>
-      <FontAwesomeIcon
-        icon={faBars}
-        onClick={toggleSideNav}
-        className="menu-icon mx-3 my-4 d-lg-none d-md-none "
-      />
-      {!sideNavVisible && (
+      <FontAwesomeIcon icon={faBars} onClick={toggleSideNav} className="menu-icon mx-3 my-4 d-lg-none d-md-none " />
+   
         <nav
           className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${
             scrolled ? "bg-white" : ""
@@ -83,58 +79,30 @@ const MyNavbar = () => {
                 src="./images/logo-white.png"
                 className="profile-image my-2 rounded-circle"
                 alt="Logo"
-                style={{ width: "2.5vw", height: "5vh" }}
+                style={{ width: '50px', height: '50px' }}
               />
             </div>
 
             <section className="navbar-center d-flex flex-row">
               <ul className="navbar-nav my-3 d-flex flex-row">
-                <li className="nav-item mx-2">
-                  <NavLink
-                    to={"/"}
-                    className={`nav-link ${
-                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
-                    }`}
-                    href="#"
-                  >
-                    Home
-                  </NavLink>
-                </li>
-                <li className="nav-item mx-2">
-                  <NavLink
-                    to={"/about-us"}
-                    className={`nav-link ${
-                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
-                    }`}
-                    href="#"
-                  >
-                    About
-                  </NavLink>
-                </li>
-                <li className="nav-item mx-2">
-                  <NavLink
-                    to={"/userprofile"}
-                    className={`nav-link ${
-                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
-                    }`}
-                    href="#"
-                  >
-                    Profile
-                  </NavLink>
-                </li>
-                {!userId && (
-                  <li className="nav-item mx-2">
-                    <NavLink
-                      to={"/login"}
-                      className={`nav-link ${
-                        scrolled || !isHomeRoute ? "text-dark" : "text-light"
-                      }`}
-                      href="#"
-                    >
-                      Login
-                    </NavLink>
-                  </li>
-                )}
+               <li className="nav-item mx-2">
+                 <NavLink to={"/"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Home</NavLink>
+               </li>
+               <li className="nav-item mx-2">
+                 <NavLink to={"/about-us"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">About</NavLink>
+               </li>
+
+               {userId && (
+               <li className="nav-item mx-2">
+                 <NavLink to={"/userprofile"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Profile</NavLink>
+               </li>
+               )}
+
+               {!userId && (
+               <li className="nav-item mx-2">
+                 <NavLink to={"/login"} className={`nav-link ${scrolled || !isHomeRoute ? 'text-dark' : 'text-light'}`} href="#">Login</NavLink>
+               </li>
+              )}
 
                 {userId && (
                   <li className="nav-item mx-2">
@@ -171,26 +139,18 @@ const MyNavbar = () => {
                     src={userData.profile_image_url}
                     className="profile-image rounded-circle"
                     alt="Profile"
-                    style={{
-                      width: "2.5vw",
-                      height: "5vh",
-                      marginRight: "10px",
-                      objectFit: "cover",
-                    }}
+                    style={{ width: '50px', height: '50px', marginRight: '10px',objectFit:'cover' }}
                   />
                 </NavLink>
               )}
             </div>
           </div>
         </nav>
-      )}
+      
       {sideNavVisible && (
-        <section className="side-nav d-block">
-          <FontAwesomeIcon
-            icon={faClose}
-            onClick={toggleSideNav}
-            className="menu-icon float-end mx-3 my-4 d-lg-none"
-          />
+        <section className="side-nav d-block d-md-none  d-lg-none">
+
+          <FontAwesomeIcon icon={faClose} onClick={toggleSideNav} className="menu-icon float-end mx-3 my-4 d-lg-none" />
 
           <ul className="side-nav-list">
             <li className="side-nav-item">
@@ -199,9 +159,13 @@ const MyNavbar = () => {
             <li className="side-nav-item">
               <NavLink to={"/about-us"}>About</NavLink>
             </li>
+            
+            {userId && (
             <li className="side-nav-item">
               <NavLink to={"/userprofile"}>Profile</NavLink>
             </li>
+            )}
+
             {!userId && (
               <li className="side-nav-item">
                 <NavLink to={"/login"}>Login</NavLink>
