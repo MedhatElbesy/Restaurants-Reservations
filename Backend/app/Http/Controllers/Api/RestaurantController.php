@@ -96,12 +96,12 @@ class RestaurantController extends Controller
     public function show(string $id)
     {
         $restaurant = Restaurant::with([
-            // 'locations.tables.images',
             'restaurant_images',
             'locations' => function ($query) {
                 $query->withCount('comments');
             },
-            'locations.ratings'
+            'locations.ratings',
+            'categories'
         ])->findOrFail($id);
 
         $restaurant->locations->each(function ($location) {
