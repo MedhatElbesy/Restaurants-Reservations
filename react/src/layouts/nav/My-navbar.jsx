@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars, faClose } from '@fortawesome/free-solid-svg-icons';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import './navbar-style.css';
 import { fetchUserDataById } from '../../slices/user/fetchUserSlice';
 import { decryptData } from '../../helpers/cryptoUtils';
@@ -13,6 +13,7 @@ const MyNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [sideNavVisible, setSideNavVisible] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const userId = decryptData('userId');
@@ -28,6 +29,7 @@ const MyNavbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/');
   };
 
   useEffect(() => {
@@ -147,7 +149,7 @@ const MyNavbar = () => {
             <li className="side-nav-item">
               <NavLink to={"/about-us"}>About</NavLink>
             </li>
-            
+
             {userId && (
             <li className="side-nav-item">
               <NavLink to={"/userprofile"}>Profile</NavLink>
