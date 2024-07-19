@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPlus, faEye, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -11,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import { InputAdornment, TablePagination, TextField } from '@mui/material';
+import { InputAdornment, TextField } from '@mui/material';
 import Loader from '../../../layouts/loader/loader';
 import { fetchRestaurantMenuCategories } from '../../../slices/restaurant/menuCategory/fetchRestaurantMenuCaegory';
 import { fetchMenuCategoryItemsAsync } from '../../../slices/restaurant/menuItem/fetchMenuCategoryItems';
@@ -27,12 +26,22 @@ export default function MenuCategoriesTable() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showMenuItems, setShowMenuItems] = useState(false);
   const [currentMenuCategoryId, setCurrentMenuCategoryId] = useState(null);
+  const [filteredMenuCategory, setFilteredMenuCategory] = useState([]);
+  const [filteredMenuItem, setFilteredMenuItem] = useState([]);
 
   useEffect(() => {
     if (restaurantId) {
       dispatch(fetchRestaurantMenuCategories(restaurantId));
     }
   }, [restaurantId]);
+
+  useEffect(() => {
+    setFilteredMenuCategory(allMenuCategory || []);
+  }, [allMenuCategory]);
+
+  useEffect(() => {
+    setFilteredMenuItem(menuItems || []);
+  }, [menuItems]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -48,6 +57,7 @@ export default function MenuCategoriesTable() {
     setShowMenuItems(false);
     setCurrentMenuCategoryId(null);
   };
+
   const handleDelete = (categoryId) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -62,18 +72,12 @@ export default function MenuCategoriesTable() {
         dispatch(deleteMenuCategoryThunk(categoryId))
           .unwrap()
           .then(() => {
-            dispatch(fetchRestaurantMenuCategories(restaurantId))
-              .unwrap()
-              .then(() => {
-                Swal.fire(
-                  'Deleted!',
-                  'The menu category has been deleted.',
-                  'success'
-                );
-              })
-              .catch((error) => {
-                console.error('Error fetching updated restaurant:', error);
-              });
+            setFilteredMenuCategory(filteredMenuCategory.filter(category => category.id !== categoryId));
+            Swal.fire(
+              'Deleted!',
+              'The menu category has been deleted.',
+              'success'
+            );
           })
           .catch((error) => {
             console.error('Error deleting category:', error);
@@ -101,19 +105,12 @@ export default function MenuCategoriesTable() {
         dispatch(deleteMenuItemThunk(itemId))
           .unwrap()
           .then(() => {
-            dispatch(fetchMenuCategoryItemsAsync(currentMenuCategoryId))
-              .unwrap()
-              .then(() => {
-                Swal.fire(
-                  'Deleted!',
-                  'The menu item has been deleted.',
-                  'success'
-                );
-                setShowItemsModal(false); 
-              })
-              .catch((error) => {
-                console.error('Error fetching updated restaurant:', error);
-              });
+            setFilteredMenuItem(filteredMenuItem.filter(item => item.id !== itemId));
+            Swal.fire(
+              'Deleted!',
+              'The menu item has been deleted.',
+              'success'
+            );
           })
           .catch((error) => {
             console.error('Error deleting menu item:', error);
@@ -127,17 +124,16 @@ export default function MenuCategoriesTable() {
     });
   };
 
-
   if (status === 'loading' || !allMenuCategory) {
     return <Loader />;
   }
 
-  const filteredCategories = allMenuCategory.filter((category) =>
+  const filteredCategories = filteredMenuCategory.filter((category) =>
     category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     category.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredMenuItems = menuItems.filter((item) =>
+  const filteredMenuItems = filteredMenuItem.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.price.toString().includes(searchTerm) ||
     item.sale_price.toString().includes(searchTerm) ||
@@ -148,32 +144,33 @@ export default function MenuCategoriesTable() {
     <main className="container-fluid restaurant-dashboards mx-5">
 
       <section className="custom-header">
-        <h3 className="text-center">Restaurant Menu Categories</h3>
+        <h3 className="text-center"> Menu Categories</h3>
         <div className="roof"></div>
       </section>
 
       <Paper sx={{ width: '100%', marginTop: '10px' }}>
 
-      <div className="float-end my-4" style={{ zIndex: 10, position: 'relative' }}>
-
+        <div 
+         className="float-end my-4" 
+         style={{ zIndex: 10, position: 'relative' }}
+        >
           <Link to={`/add-category/${restaurantId}`} className="btn btn-outline-warning mx-2 text-dark">
             <FontAwesomeIcon icon={faPlus} /> Add Menu Category
           </Link>
 
           {showMenuItems && (
-
-         <Link to={`/add-item/${currentMenuCategoryId}`} className="btn btn-outline-warning mx-2 text-dark">
-          <FontAwesomeIcon icon={faPlus} /> Add Menu Item
-         </Link>
+            <Link to={`/add-item/${currentMenuCategoryId}`} className="btn btn-outline-warning mx-2 text-dark">
+              <FontAwesomeIcon icon={faPlus} /> Add Menu Item
+            </Link>
           )}
 
-     </div>
+        </div>
 
         <TextField
           label="Search"
           variant="outlined"
           size="small"
-          className='my-3'
+          className="my-3"
           value={searchTerm}
           onChange={handleSearch}
           InputProps={{
@@ -200,7 +197,6 @@ export default function MenuCategoriesTable() {
             <TableHead className="table-head">
 
               <TableRow>
-
                 <TableCell className="text-center table-cell">Name</TableCell>
                 <TableCell className="text-center table-cell">Description</TableCell>
                 {showMenuItems && (
@@ -217,12 +213,12 @@ export default function MenuCategoriesTable() {
                 )}
                 <TableCell className="text-center table-cell">Actions</TableCell>
               </TableRow>
+
             </TableHead>
 
             <TableBody>
               {showMenuItems ? (
                 <>
-                  
                   {filteredMenuItems.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={6} className="text-center">
@@ -238,15 +234,26 @@ export default function MenuCategoriesTable() {
                         <TableCell className="text-center">{item.sale_price}</TableCell>
                         <TableCell className="text-center">{item.status}</TableCell>
                         <TableCell className="d-flex align-items-center justify-content-center">
+                          <div className='btn-group'>
                           <Link
                             to={`/edit-item/${item.id}`}
-                            className="btn btn-outline-primary btn-sm me-2"
+                            className="btn btn-outline-primary btn-sm pe-3 ps-3 "
+                            title="Edit Menu Item"
                           >
-                            <FontAwesomeIcon icon={faEdit} /> Edit
+                            <FontAwesomeIcon icon={faEdit} />
+                            Edit
                           </Link>
-                          <button className="btn btn-outline-danger btn-sm" onClick={() => handleDeleteItem(item.id)} >
-                            <FontAwesomeIcon icon={faTrash} /> Delete
+
+                          <button
+                            onClick={() => handleDeleteItem(item.id)}
+                            className="btn btn-outline-danger btn-sm "
+                            title="Delete Menu Item"
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                            Delete
                           </button>
+                        
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))
@@ -255,46 +262,47 @@ export default function MenuCategoriesTable() {
               ) : (
                 filteredCategories.map((category) => (
                   <TableRow key={category.id} hover={true}>
+
                     <TableCell className="text-center">{category.name}</TableCell>
                     <TableCell className="text-center">{category.description}</TableCell>
                     <TableCell className="text-center">{category.status}</TableCell>
                     <TableCell className="d-flex align-items-center justify-content-center">
-                     <div className="btn-group" role="group">
-                      <button className="btn btn-outline-success btn-sm" onClick={() => handleShowMenuItems(category.id)}>
-                       <FontAwesomeIcon icon={faEye} /> Show Items
+
+                      <div className='btn-group'>
+                      <button
+                        onClick={() => handleShowMenuItems(category.id)}
+                        className="btn btn-outline-success btn-sm"
+                        title="Show Menu Items"
+                      >
+                        <FontAwesomeIcon icon={faEye} />
+                        Menu Items
                       </button>
                       <Link
-                       to={`/edit-menu-category/${category.id}`}
-                       className="btn btn-outline-primary ps-4 pe-4 btn-sm"
+                        to={`/edit-category/${category.id}`}
+                        className="btn btn-outline-primary pe-4 ps-4 btn-sm"
+                        title="Edit Menu Category"
                       >
-                        <FontAwesomeIcon icon={faEdit} /> Edit
+                        <FontAwesomeIcon icon={faEdit} />
+                        Edit
                       </Link>
-                      <button 
-                        className="btn btn-outline-danger ps-4 pe-4 btn-sm"  
-                        onClick={() => handleDelete(category.id)}>
-                       <FontAwesomeIcon icon={faTrash} /> Delete
+                      <button
+                        onClick={() => handleDelete(category.id)}
+                        className="btn btn-outline-danger btn-sm pe-4 ps-4"
+                        title="Delete Menu Category"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                        Delete
                       </button>
-                     </div>
-                   </TableCell>
+                      </div>
 
+                    </TableCell>
+                    
                   </TableRow>
                 ))
               )}
             </TableBody>
-
           </Table>
-          
         </TableContainer>
-
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={showMenuItems ? filteredMenuItems.length : filteredCategories.length}
-          rowsPerPage={10}
-          page={0}
-          onPageChange={() => {}}
-          onRowsPerPageChange={() => {}}
-        />
       </Paper>
     </main>
   );
