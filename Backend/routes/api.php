@@ -86,6 +86,7 @@ Route::get('states/{id}', [StateController::class, 'getStateByCityId']);
 // Categories route with conditional middleware
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/{category}', [CategoryController::class, 'show']);
+Route::get('categories-restaurant/{id}', [CategoryController::class, 'showCategoryForRestaurant']);
 
 Route::middleware(['auth:sanctum', 'category.owner'])->group(function () {
     Route::post('categories', [CategoryController::class, 'store']);
