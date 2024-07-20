@@ -5,8 +5,8 @@ export const fetchTableByIdAsync = createAsyncThunk(
   "tables/fetchTableById",
   async (tableId, { rejectWithValue }) => {
     try {
-      const data = await tableById(tableId);
-      return data;
+      const response = await tableById(tableId);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.msg);
     }
