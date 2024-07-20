@@ -33,7 +33,7 @@ class RestaurantResource extends JsonResource
             'description' => $this->description,
             "hot_line"=>$this->hot_line,
             'images' => RestaurantImagesResource::collection($this->whenLoaded('restaurant_images')),
-            // 'locations' => RestaurantLocationResource::collection($this->whenLoaded('locations')),
+            'locations' => RestaurantLocationResource::collection($this->whenLoaded('locations')),
             'categories' => $this->categories->pluck('name'),
             // 'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             // 'menu_categories' => MenuCategoryResource::collection($this->whenLoaded('menuCategories')),
