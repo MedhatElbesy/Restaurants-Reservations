@@ -126,41 +126,35 @@ class RestaurantController extends Controller
     public function update(UpdateRestaurantRequest $request, $id)
     {
         try {
-            $validatedData = $request->validated();
+        $validatedData = $request->validated();
 
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            $restaurant = Restaurant::findOrFail($id);
-            $validatedData['logo'] = $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null;
-            $validatedData['cover'] = $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null;
+        $restaurant = Restaurant::findOrFail($id);
 
-            if (!$request->hasFile('logo')) {
-                unset($validatedData['logo']);
-
-            }
-            if (!$request->hasFile('cover')) {
-                unset($validatedData['cover']);
-
-            }
-            $restaurant->fill([
-                'user_id' => $validatedData['user_id'],
-                'title' => $validatedData['title'],
-                'name' => $validatedData['name'],
-                'summary' => $validatedData['summary'],
-                'description' => $validatedData['description'],
-                'status' => $validatedData['status'] ?? 'Active',
-                'logo'=> $validatedData['logo'],
-                'cover'=> $validatedData['cover'],
-            ]);
-
-            $restaurant->save();
-
-            DB::commit();
-            return ApiResponse::sendResponse(200, 'Restaurant Updated Successfully', new RestaurantResource($restaurant));
-        } catch (\Throwable $e) {
-            DB::rollback();
-            return ApiResponse::sendResponse(500, 'Failed to update restaurant', ['error' => $e->getMessage()]);
+        if ($request->hasFile('logo')) {
+            $validatedData['logo'] = $this->uploadImage($request, 'logo', 'restaurants_logos');
+        } else {
+            unset($validatedData['logo']);
         }
+
+        if ($request->hasFile('cover')) {
+            $validatedData['cover'] = $this->uploadImage($request, 'cover', 'restaurants_covers');
+        } else {
+            unset($validatedData['cover']);
+        }
+
+        $restaurant->fill($validatedData);
+        $restaurant->save();
+
+        DB::commit();
+
+        return ApiResponse::sendResponse(200, 'Restaurant Updated Successfully', new RestaurantResource($restaurant));
+    } catch (\Throwable $e) {
+        DB::rollback();
+
+        return ApiResponse::sendResponse(500, 'Failed to update restaurant', ['error' => $e->getMessage()]);
+    }
     }
 
     /**
