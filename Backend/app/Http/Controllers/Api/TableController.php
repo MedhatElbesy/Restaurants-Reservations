@@ -53,8 +53,9 @@ class TableController extends Controller
     }
 
 
-    public function getTableByTableId(Table $table)
+    public function getTableByTableId($id)
     {
+        $table = Table::findOrFail($id);
         $table->load('images');
         if(!$table){
             return ApiResponse::sendResponse(500, 'An error occurred while retrieving tables');
