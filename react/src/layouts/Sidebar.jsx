@@ -35,9 +35,10 @@ function Sidebar() {
         <Link to="main" className="sidebar-link">Restaurant Dashboard</Link>
         <Link to="details" className="sidebar-link">Restaurant Details</Link>
         <Link to="locations" className="sidebar-link">Restaurant Locations</Link>
-        <Link to="menu-category" className="sidebar-link">Menu Category</Link>
+        <Link to="menu-category" className="sidebar-link"> Show Menu Category</Link>
         <Link to="restaurant-category" className="sidebar-link">Restaurant Category</Link>
-        <Link to="category" className="sidebar-link">Specific Category</Link>
+        <Link to="category" className="sidebar-link">Show Specific Category</Link>
+        <Link to="reservation" className="sidebar-link"> Show Reservations</Link>
       </aside>
 
     
