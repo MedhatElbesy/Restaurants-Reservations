@@ -4,6 +4,7 @@ import { fetchCategoryByIdAsync, updateCategoryAsync } from '../../../slices/res
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 const EditCategoryForm = () => {
   const { categoryId } = useParams();
@@ -74,7 +75,14 @@ const EditCategoryForm = () => {
     dispatch(updateCategoryAsync({ categoryId, formData: formDataForSubmission }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
   };
@@ -165,12 +173,11 @@ const EditCategoryForm = () => {
             />
           </div>
 
-          <Button 
-            variant="warning"
+          <button 
             type="submit"
-            className='col-12 my-3'>
+            className='custom-button col-12 my-3'>
             Update Category
-          </Button>
+          </button>
         </Form>
       </section>
     </main>

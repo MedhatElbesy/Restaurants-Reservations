@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addTableAvailability } from '../../../slices/restaurant/table/availabilitySlice';
+import Swal from 'sweetalert2';
 
 const AddAvailabilityForm = () => {
   const { tableId } = useParams(); 
@@ -27,15 +28,23 @@ const AddAvailabilityForm = () => {
     console.log('Submitting availability data:', { tableId, availableData });
     
     dispatch(addTableAvailability(availableData))
-      .then((result) => {
-        if (result.meta.requestStatus === 'fulfilled') {
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Availability added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
           navigate(-1); 
-        }
-      });
+        });
+      }
+    });
   };
 
   return (
-    <section className='availability  col-6 offset-3'>
+    <section className='availability p-3 col-6 offset-3'>
 
       <form onSubmit={handleSubmit}>
         <h1 className='text-center my-5'>Table Availability</h1>
@@ -76,7 +85,7 @@ const AddAvailabilityForm = () => {
 
         {formError && <div className="alert alert-danger my-3">{formError}</div>}
 
-        <button className="btn btn-warning col-12 my-4" type="submit">Add Availability</button>
+        <button className="custom-button col-12 my-4" type="submit">Add Availability</button>
       </form>
     </section>
   );

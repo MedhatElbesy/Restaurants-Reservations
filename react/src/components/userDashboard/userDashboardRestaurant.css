@@ -134,3 +134,18 @@ color: black;
   color: black;
   border: 2px dashed #FF6B16;
 }
+
+.custom-button{
+  background-color: #FF6B16;
+  border: 2px dotted rgb(221, 219, 218);
+  padding: 5px;
+  color: white;
+  border-radius: 15px;
+}
+
+.custom-button:hover{
+  background-color: #ed5b06;
+  border: 2px dotted #FF6B16;
+  padding: 5px;
+  color:white;
+}

@@ -8,6 +8,7 @@ import Loader from '../../../layouts/loader/loader';
 import Swal from 'sweetalert2';
 import { deleteUserAddressAsync } from '../../../slices/user/userAddressSlice';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 
 
 const UserProfile = () => {
@@ -16,7 +17,12 @@ const UserProfile = () => {
   const [filteredUserData, setFilteredUserData] = useState(userData);
   const userId = decryptData('userId');
   const role = decryptData('role'); 
-  
+
+
+  useEffect(() => {
+    dispatch(fetchUserDataById(userId));
+  }, [userId]);
+
   useEffect(() => {
     if (userData) {
       setFilteredUserData(userData);

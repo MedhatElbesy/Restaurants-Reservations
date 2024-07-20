@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../../layouts/loader/loader';
 import { fetchMenuItemById } from '../../../slices/restaurant/menuItem/fetchMenuItemById';
-import { updateMenuItemThunk } from '../../../slices/restaurant/menuItem/updateMenuItem';
+import Swal from 'sweetalert2';
+import { updateMenuItemThunk } from '../../../slices/restaurant/menuItem/fetchMenuCategoryItems';
+
+
 
 const MenuItem = () => {
 
@@ -62,7 +65,14 @@ const MenuItem = () => {
     dispatch(updateMenuItemThunk({ menuItemId, data: { ...formData,menu_category_id: menuItem.menu_category_id } }))
     .then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated Successfully',
+          showConfirmButton: true,
+          timer: 9000,
+        }).then((result) => {
+            navigate(-1); 
+        });
       }
     });
   };
@@ -149,7 +159,7 @@ const MenuItem = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning my-4 col-12">Update</button>
+        <button type="submit" className="custom-button my-4 col-12">Update</button>
       </form>
 
       </section>

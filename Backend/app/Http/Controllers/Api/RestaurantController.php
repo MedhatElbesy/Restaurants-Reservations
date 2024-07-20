@@ -172,7 +172,7 @@ class RestaurantController extends Controller
             $restaurant->delete();
 
             DB::commit();
-            return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully');
+            return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully', ['deleted_id' => $id]);
         } catch (\Throwable $e) {
             DB::rollback();
             return ApiResponse::sendResponse(500, 'Failed to delete restaurant', ['error' => $e->getMessage()]);
