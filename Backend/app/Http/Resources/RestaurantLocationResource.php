@@ -33,7 +33,7 @@ class RestaurantLocationResource extends JsonResource
             'opening_time' => $this->opening_time,
             'closed_time' => $this->closed_time,
             'closed_days' => $this->closed_days,
-            'number_of_available_tables' => $this->number_of_available_tables, 
+            'number_of_available_tables' => $this->number_of_available_tables,
             // 'number_of_tables' => $this->number_of_tables,
             'phone_number' => $this->phone_number,
             'mobile_number' => $this->mobile_number,
@@ -42,6 +42,7 @@ class RestaurantLocationResource extends JsonResource
             'tables' => TableResource::collection($this->whenLoaded('tables')),
             'average_rating' => $this->when(isset($this->average_rating), $this->average_rating),
             'comments_count' => $this->commentsCount(),
+            
 
         ];
     }
