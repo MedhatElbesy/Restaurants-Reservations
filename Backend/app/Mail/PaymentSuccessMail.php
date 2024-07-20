@@ -40,7 +40,7 @@ class PaymentSuccessMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.payment.success',
+            view: 'emails.success_payment',
             with: [
                 'paymentAmount' => $this->payment->amount,
                 'paymentDate' => $this->payment->created_at,
