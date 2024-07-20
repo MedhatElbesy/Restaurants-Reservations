@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ItemStatus;
 use App\Events\ReservationCreated;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
@@ -30,9 +31,13 @@ class RestaurantLocationsController extends Controller
                 'locations.country',
                 'locations.governorate',
                 'locations.state',
-                'locations.city'
+                'locations.city',
                 ])->findOrFail($restaurantId);
-            $locations = $restaurant->locations;
+            $locations = $restaurant->locations()->withCount([
+            'tables as number_of_available_tables' => function ($query) {
+                $query->where('status', ItemStatus::Available);
+            }
+        ])->get();
 
             $locations->each(function ($location) {
                 $location->average_rating = $location->averageRating();
