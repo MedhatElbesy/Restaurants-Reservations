@@ -55,9 +55,21 @@ function Row(props) {
   };
 
   const handleUpdateStatus = () => {
-    dispatch(updateReservationStatus({ reservationId: row.id, status }));
+    if (status) {
+     
+      const payload = { reservationId: row.id, status: { status: status } };
+      console.log("Dispatching data:", payload);
+      dispatch(updateReservationStatus(payload));
+    }
   };
 
+  if (status === 'loading') {
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
+  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -110,9 +122,7 @@ function Row(props) {
                       <TableCell>{detail.reservation_date}</TableCell>
                       <TableCell>{detail.amount}</TableCell>
                       <TableCell>{detail.number_of_extra_chairs}</TableCell>
-                      <TableCell>
-                        {detail.number_of_extra_childs_chairs}
-                      </TableCell>
+                      <TableCell>{detail.number_of_extra_childs_chairs}</TableCell>
                       <TableCell>{row.notes}</TableCell>
                     </TableRow>
                   ))}
@@ -132,6 +142,7 @@ function Row(props) {
                     <TableCell>Transaction ID</TableCell>
                     <TableCell>Amount</TableCell>
                     <TableCell>Customer Name</TableCell>
+                    <TableCell>Image</TableCell>
                     <TableCell>Status</TableCell>
                   </TableRow>
                 </TableHead>
@@ -141,6 +152,17 @@ function Row(props) {
                       <TableCell>{payment.transaction_id}</TableCell>
                       <TableCell>{payment.amount}</TableCell>
                       <TableCell>{payment.customer_name}</TableCell>
+                      <TableCell>
+                      {payment.transaction_image ? (
+                        <img
+                        src={payment.transaction_image} 
+                        alt={`Transaction ${payment.transaction_id}`}
+                        style={{ width: '100px', height: '100px',objectFit:'cover' }} 
+                        />
+                        ) : (
+                        'No Image'
+                      )}
+                      </TableCell>
                       <TableCell>{payment.status}</TableCell>
                     </TableRow>
                   ))}
@@ -187,7 +209,7 @@ export default function CollapsibleTable() {
 
   useEffect(() => {
     dispatch(getAllRestaurantReservations(restaurantId));
-  }, [ restaurantId]);
+  }, [restaurantId]);
 
   const rows = reservations.map((reservation) =>
     createData(
@@ -203,7 +225,7 @@ export default function CollapsibleTable() {
 
   return (
     <div>
-      <main className="restaurant-dashboards">
+      <main className="restaurant-dashboards mx-5">
         <section className="custom-header">
           <h3 className="text-center">Reservations</h3>
           <div className="roof"></div>

@@ -28,6 +28,7 @@ export default function RestaurantDetails() {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
   if (!restaurant && status === "loading") {
     return <Loader />;
   }

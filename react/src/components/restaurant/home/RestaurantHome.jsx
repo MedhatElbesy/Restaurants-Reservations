@@ -31,7 +31,7 @@ export default function Home() {
           </NavLink>
         </div>
       </article>
-      <article className="my-5 gallery">
+      <article className="py-5 gallery">
         {restaurant.images.map((image) => (
           <figure
             key={image.id}

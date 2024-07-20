@@ -20,7 +20,7 @@ class LocationController extends Controller
                         ->first(['latitude', 'longitude']);
 
         if (!$userAddress) {
-            return ApiResponse::sendResponse(404,'User address not found');
+            return ApiResponse::sendResponse(204,'User address not found');
         }
 
         $latitude = $userAddress->latitude;

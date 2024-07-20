@@ -10,6 +10,7 @@ import "./Footer.css"
 
 
 export default function Footer({ restaurant }) {
+  // console.log(restaurant)
   const data = restaurant.locations[0];
 
   const { fromTo } = openingDays(data.closed_days);
