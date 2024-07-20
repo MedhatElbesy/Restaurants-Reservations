@@ -20,9 +20,7 @@ export default function TopRestau() {
     }
   }, [status]);
 
-  if (status === 'loading') {
-    return <Loader/>;
-  }
+ 
 
   if (restaurants.length === 0) {
     return null; 

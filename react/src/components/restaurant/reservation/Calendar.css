@@ -49,7 +49,7 @@
 .react-calendar__navigation button {
   min-width: 44px;
   background: none;
-  color: #978667;
+  color: var(--secColor);
   font-weight: bold;
 }
 
@@ -72,7 +72,7 @@
 
 .react-calendar__month-view__weekdays__weekday {
   padding: 0.5em;
-  color: #978667;
+  color: var(--secColor);
 }
 
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
@@ -108,7 +108,7 @@
   line-height: 16px;
   font: inherit;
   font-size: 0.833em;
-  color: #978667;
+  color: var(--secColor);
 }
 
 .react-calendar__tile:disabled {
@@ -124,17 +124,15 @@
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  color:var(--mainColor);
-  background-color: #8b6c33;
+  color: var(--backgroundColor) !important;
+  background-color: var(--secColor);
 }
 
 .react-calendar__tile--now {
-  /* background: #00344d; */
-  color: var(--backgroundColor);
+  color: var(--secColor);
   font-weight: bold;
   font-size: 1.3rem;
-  /* background: var(--secColor);
-  color: var(--backgroundColor); */
+
 }
 
 .react-calendar__tile--now:enabled:hover,
@@ -153,8 +151,8 @@
 }
 
 .react-calendar__tile--active {
-  background: #8b6c33;
-  color: var(--mainColor) !important;
+  background: var(--secColor);
+  color: var(--backgroundColor) !important;
 }
 
 .react-calendar__tile--active:enabled:hover,
@@ -163,5 +161,5 @@
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
-  background-color: #e6e6e6;
+  background-color: var(--backgroundColor);
 }

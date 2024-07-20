@@ -11,44 +11,44 @@ export default function Footer() {
       <footer className=" myfooter text-center text-white">
         <div className="container py-4 footer-data">
           <section className="mb-4">
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
-              <FontAwesomeIcon icon={faTwitter} />
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
+              <FontAwesomeIcon className="text-secandary"icon={faTwitter} />
             </a>
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
               <FontAwesomeIcon icon={faGoogle} />
             </a>
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
               <FontAwesomeIcon icon={faInfoCircle} />
             </a>
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
-            <a className="btn btn-outline-light m-1" href="#!" role="button">
+            <a className="btn btn-outline-secondary m-1" href="#!" role="button">
               <FontAwesomeIcon icon={faShieldAlt} />
             </a>
           </section>
 
-          <section className="row footer-section text-center">
+          <section className="row footer-section text-center my-4">
            <div className=" col-md-3 ">
             <ul className="list-unstyled mb-0  ">
-             <li><a href="#!" className="text-dark text-decoration-none">Email</a></li>
+             <li><a href="#!" className="text-decoration-none"><strong className='text-secondary'>Email</strong></a></li>
              <li><a href="#!" className="text-dark text-decoration-none">Restau@gmail.com</a></li>
             </ul>
            </div>
 
            <div className="col-md-3  ">
             <ul className="list-unstyled mb-0 ">
-             <li><a href="#!" className="text-dark text-decoration-none">Contact Us</a></li>
+             <li><a href="#!" className="text-decoration-none"><strong className='text-secondary '>Contact Us</strong></a></li>
              <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
             </ul>
            </div>
 
            <div className=" col-md-3 ">
             <ul className="list-unstyled mb-0 ">
-             <li><a href="#!" className="text-dark text-decoration-none">Help Center</a></li>
+             <li><a href="#!" className="text-decoration-none"><strong className='text-secondary'>Help Center</strong></a></li>
              <li><a href="#!" className="text-dark text-decoration-none">+44 20 7946 0958</a></li>
             </ul>
            </div>

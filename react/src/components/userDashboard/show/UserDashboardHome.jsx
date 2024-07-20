@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import Loader from '../../../layouts/loader/loader';
+import { Spinner } from 'react-bootstrap';
 
 export default function UserDashboardHome() {
   const { restaurant } = useOutletContext();
@@ -44,7 +45,11 @@ export default function UserDashboardHome() {
 
 
   if (status === 'loading') {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   return (

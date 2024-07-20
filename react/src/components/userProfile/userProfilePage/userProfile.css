@@ -127,3 +127,15 @@
     color: black;
     border: 2px dashed #FF6B16;
   }
+
+  .edit{
+    margin-top: 5%;
+  }
+
+
+
+  .restau-img {
+    border: 2px solid transparent;
+    margin-top: 2px;
+    border-radius: 10px;
+  }

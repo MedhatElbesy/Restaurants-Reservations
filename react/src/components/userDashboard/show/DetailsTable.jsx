@@ -4,13 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import '../userDashboardRestaurant.css';
 import Loader from '../../../layouts/loader/loader';
+import { Spinner } from 'react-bootstrap';
 
 export default function DetailsTable() {
   const { restaurant } = useOutletContext();
   const status = restaurant ? 'succeeded' : 'loading';
 
   if (status === 'loading') {
-    return <Loader/>;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   return (

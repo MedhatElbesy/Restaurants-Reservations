@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { handelCheckoutData } from "../../helpers/checkoutData";
 import { checkoutReservation } from "../../slices/checkout/checkoutSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
 import Payment from "./Payment";
-import Done from "./Done";
-
+// import Done from "./Done";
 import "./Checkout.css";
 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { reservationData } = location.state;
-  const { restaurant } = useSelector((state) => state.restaurant);
-  const branch = restaurant.locations.find(
-    (branch) => branch.id == reservationData.branchId
-  );
-  const table = branch.tables.find(
-    (table) => table.id == reservationData.tableId
-  );
+  const { reservationDetails } = location.state;
+  sessionStorage.setItem("reservationData", JSON.stringify(reservationDetails));
+  const reservationData = JSON.parse(sessionStorage.getItem("reservationData"));
+  // const reservationData = reservationDetails;
+  // const { restaurant } = useSelector((state) => state.restaurant);
+  const restaurant = JSON.parse(sessionStorage.getItem("restaurant"));
+  const branch = reservationData.branch;
+  const table = reservationData.table;
 
   const [currentStep, setCurrentStep] = useState(0);
   const [paymentData, setPaymentData] = useState({});
@@ -55,11 +56,12 @@ const Checkout = () => {
           errors={errors}
         />
       ),
-    },
-    {
-      name: "Done",
-      component: <Done />,
-    },
+    }
+    // ,
+    // {
+    //   name: "Done",
+    //   component: <Done />,
+    // },
   ];
 
   const nextStep = () => {
@@ -70,16 +72,7 @@ const Checkout = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handlePrevClick = () => {
-    if (currentStep === steps.length - 1) {
-      navigate("/");
-    } else {
-      prevStep();
-    }
-  };
-
   const handlePlaceOrder = async () => {
-    console.log(paymentData);
     const checkoutData = handelCheckoutData(
       reservationData,
       paymentData,
@@ -89,22 +82,25 @@ const Checkout = () => {
       const response = await dispatch(
         checkoutReservation(checkoutData)
       ).unwrap();
-      console.log(response);
-      if (paymentData.gateway.type === "paypal") {
-        window.open(
-          response.data,
-          "_blank",
-          "width=1200,height=800"
-        );
+      if(response.status == 200) {
+        window.location.href = response.data;
+      } else if (response.status == 201) {
+        navigate("/reservation/done");
       }
-      nextStep();
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
     }
   };
 
   return (
-    <section className="checkout p-sm-5 p-3 m-lg-5">
+    <section className="checkout px-sm-5 p-3 mx-lg-5 m-nav-height">
+      <FontAwesomeIcon
+        onClick={() =>
+          navigate(`/restaurant/${restaurant.id}/reservation/${table.id}`)
+        }
+        className="back"
+        icon={faArrowLeft}
+      />{" "}
       <div className="head text-center mb-5">
         <h1 className="text-sec">Checkout</h1>
         <p className="text-color">{table.description}</p>
@@ -113,14 +109,14 @@ const Checkout = () => {
       {steps[currentStep].component}
       <div className="navigation-buttons">
         {currentStep !== 0 && (
-          <button onClick={handlePrevClick}>
-            {currentStep === steps.length - 1 ? "Back to Home" : "Prev"}
+          <button onClick={prevStep}>
+            Prev
           </button>
         )}
-        {currentStep < steps.length - 2 && (
+        {currentStep < steps.length - 1 && (
           <button onClick={nextStep}>Next</button>
         )}
-        {currentStep === steps.length - 2 && (
+        {currentStep === steps.length - 1 && (
           <button onClick={handleSubmit(handlePlaceOrder)}>Place Order</button>
         )}
       </div>

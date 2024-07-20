@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserAddressAsync } from '../../../slices/user/userAddressSlice';
 import { fetchCountriesAsync, selectCountries } from '../../../slices/address/countrySlice';
 import { fetchGovernoratesAsync, selectGovernorates } from '../../../slices/address/governorateSlice';
 import { fetchCitiesAsync, selectCities } from '../../../slices/address/citySlice';
@@ -9,6 +8,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { addUserAddressAsync } from '../../../slices/user/fetchUserSlice';
+import Swal from 'sweetalert2';
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
   useMapEvents({
@@ -95,7 +96,14 @@ const AddUserAddress = () => {
       await dispatch(addUserAddressAsync({ userId, addressData: formData }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
+          Swal.fire({
+            icon: 'success',
+            title: 'Address Added Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
     } catch (error) {
@@ -105,9 +113,13 @@ const AddUserAddress = () => {
 
   return (
     <main className="container">
+
       <section className='formUserDashboard'>
+
         <h2 className='text-center my-4'>Add User Address</h2>
+
         <form onSubmit={handleSubmit}>
+          
           <div className="mb-3">
             <label htmlFor="country_id" className="form-label">Country</label>
             <select
@@ -231,7 +243,7 @@ const AddUserAddress = () => {
             </MapContainer>
           </section>
 
-          <button type="submit" className="btn btn-warning my-4 col-12">Add Address</button>
+          <button type="submit" className="custom-button my-4 col-12">Add Address</button>
         </form>
       </section>
     </main>

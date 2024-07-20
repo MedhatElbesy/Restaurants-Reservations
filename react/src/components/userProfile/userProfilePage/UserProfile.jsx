@@ -8,6 +8,7 @@ import Loader from '../../../layouts/loader/loader';
 import Swal from 'sweetalert2';
 import { deleteUserAddressAsync } from '../../../slices/user/userAddressSlice';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 
 
 const UserProfile = () => {
@@ -16,7 +17,12 @@ const UserProfile = () => {
   const [filteredUserData, setFilteredUserData] = useState(userData);
   const userId = decryptData('userId');
   const role = decryptData('role'); 
-  
+
+
+  useEffect(() => {
+    dispatch(fetchUserDataById(userId));
+  }, [userId]);
+
   useEffect(() => {
     if (userData) {
       setFilteredUserData(userData);
@@ -219,7 +225,7 @@ const UserProfile = () => {
                       className="btn btn-outline-primary btn-sm pe-3 ps-3" 
                       title="Edit">
                       <FontAwesomeIcon icon={faEdit} />
-                      <span>Edit</span>
+                      <span className='mx-1'>Edit</span>
                     </NavLink>
 
                     <button 
@@ -228,7 +234,7 @@ const UserProfile = () => {
                       title="Delete"
                     >
                       <FontAwesomeIcon icon={faTrash} />
-                      <span>Delete</span>
+                      <span  className='mx-1'>Delete</span>
                     </button>
 
                   </div>

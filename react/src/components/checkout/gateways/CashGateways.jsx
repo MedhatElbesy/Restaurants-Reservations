@@ -35,7 +35,7 @@ const VodafoneCash = ({
       <p className="amount mb-4 fs-4 rounded-3 col-12 col-sm-9 col-md-7 text-center">
         Transfer{" "}
         <span className="text-sec">
-          {formatPrice(amount.total, branch.country.country_code)}
+          {formatPrice(amount.total, "EG")}
         </span>{" "}
         <span className="d-block">
           To: <span className="text-sec">{branch.mobile_number}</span>

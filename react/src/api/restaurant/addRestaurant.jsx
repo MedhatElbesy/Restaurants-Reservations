@@ -1,4 +1,5 @@
 import axios from '../../axios';
+import restaurantSlice from '../../slices/restaurant/restaurantSlice';
 
 
 
@@ -26,9 +27,18 @@ export const addMenuItem = async (data) => {
     }
   };
   
+  export const getLocation = async (restaurantId) => {
+    try {
+      const response = await axios.get(`/restaurantslocations/${restaurantId}`);
+      return response.data;
+    } catch (error) {
+      console.error("An error occurred while fetching locations", error);
+      throw error;
+    }
+  };
+
   export const addLocation= async (data) => {
     try {
-  
       const response = await axios.post(`/restaurantslocations`, data);
       return response.data; 
     } catch (error) {

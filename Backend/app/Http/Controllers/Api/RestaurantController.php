@@ -31,30 +31,29 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::select('id', 'name', 'description', 'cover', 'status')
-        ->with(['locations:id,restaurant_id,address'])
-        ->withCount('locations')
-        ->get();
+            ->with(['locations:id,restaurant_id,address'])
+            ->withCount('locations')
+            ->get();
 
-    $restaurants->each(function ($restaurant) {
-        $restaurant->cover_url = $restaurant->cover_url;
+        $restaurants->each(function ($restaurant) {
+            $restaurant->cover_url = $restaurant->cover_url;
 
-        $totalRating = 0;
-        $count = 0;
+            $totalRating = 0;
+            $count = 0;
 
-        foreach ($restaurant->locations as $location) {
-            $avgRating = $location->averageRating();
-            if ($avgRating !== null) {
-                $totalRating += $avgRating;
-                $count++;
+            foreach ($restaurant->locations as $location) {
+                $avgRating = $location->averageRating();
+                if ($avgRating !== null) {
+                    $totalRating += $avgRating;
+                    $count++;
+                }
             }
-        }
             $restaurant->average_rating = $count > 0 ? $totalRating / $count : 0;
             $restaurant->location_addresses = $restaurant->locations;
 
 
             unset($restaurant->locations);
-
-    });
+        });
 
         if ($restaurants->isNotEmpty()) {
             return ApiResponse::sendResponse(200, 'All Restaurants', $restaurants);
@@ -66,7 +65,7 @@ class RestaurantController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(StoreRestaurantRequest $request) : JsonResponse
+    public function store(StoreRestaurantRequest $request): JsonResponse
     {
         try {
             $validatedData = $request->validated();
@@ -80,8 +79,8 @@ class RestaurantController extends Controller
                 'summary' => $validatedData['summary'],
                 'description' => $validatedData['description'],
                 'status' => $validatedData['status'] ?? 'Active',
-                'logo'=> $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null,
-                'cover'=> $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
+                'logo' => $this->uploadImage($request, 'logo', 'restaurants_logos') ?? null,
+                'cover' => $this->uploadImage($request, 'cover', 'restaurants_covers') ?? null,
             ]);
 
             DB::commit();
@@ -99,15 +98,15 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::with([
             'restaurant_images',
             'locations' => function ($query) {
-            $query->withCount('comments');
+                $query->withCount('comments');
             },
             'locations.ratings',
             'categories'
         ])->findOrFail($id);
 
         $restaurant->locations->each(function ($location) {
-        $location->average_rating = $location->ratings->avg('rate');
-        unset($location->ratings);
+            $location->average_rating = $location->ratings->avg('rate');
+            unset($location->ratings);
         });
 
         $totalRating = $restaurant->locations->sum('average_rating');
@@ -169,7 +168,7 @@ class RestaurantController extends Controller
             $restaurant->delete();
 
             DB::commit();
-            return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully');
+            return ApiResponse::sendResponse(200, 'Restaurant Deleted Successfully', ['deleted_id' => $id]);
         } catch (\Throwable $e) {
             DB::rollback();
             return ApiResponse::sendResponse(500, 'Failed to delete restaurant', ['error' => $e->getMessage()]);
@@ -279,8 +278,6 @@ class RestaurantController extends Controller
             }
         }
         $averageRating = $count > 0 ? $totalRating / $count : 0;
-            return ApiResponse::sendResponse(200, 'average_rating', $averageRating);
+        return ApiResponse::sendResponse(200, 'average_rating', $averageRating);
     }
-
-
 }

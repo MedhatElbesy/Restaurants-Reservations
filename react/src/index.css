@@ -4,28 +4,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 :root {
-  --backgroundColor: #020a0c;
-  --mainColor: #f8f9fae0;
-  --secColor: #ffd28d;
-  --textColor: #a1a1a1;
+  --backgroundColor: #ffffff;
+  --mainColor: #9c9c9c;
+  --secColor: #FF6B16;
+  --secColor: #993400;
+  --textColor: #4e4e4e;
   --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
   --secFont: "Bad Script", cursive;
-  --navbarMaxHeight: 14vh;
+  --navbarMaxHeight: 95px;
   ::-webkit-scrollbar {
     width: 8px;
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #9999993d;
-    border: 1px solid #ffd18d36;
+    background: #c24b143d;
+    border: 1px solid #e6691636;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background-color: #ffffff;
   }
   ::selection {
-    background-color: #fad9a84f;
+    background-color: #ff5e002c;
   }
 }
 
@@ -67,10 +68,27 @@ a {
   text-decoration: none;
 }
 
+.nav-height {
+  height: var(--navbarMaxHeight);
+}
+.m-nav-height {
+  margin-top: var(--navbarMaxHeight);
+}
+
+@media screen and (max-width: 776px) {
+  .m-nav-height {
+    margin-top: 0;
+  }
+}
 
 .full {
   flex-grow: 1;
   /* display: flex;
   justify-content: center;
   align-items: center; */
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

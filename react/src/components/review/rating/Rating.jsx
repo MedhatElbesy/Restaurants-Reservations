@@ -9,15 +9,14 @@ const StarRating = ({
   readOnly = false,
   initialRating = 0,
   size = 40,
+  rate,
 }) => {
   const dispatch = useDispatch();
   const [alertMessage, setAlertMessage] = useState("");
 
   const handleRating = async (rate) => {
     try {
-      await dispatch(
-        addRating({ rate, branchId: branch.id })
-      ).unwrap();
+      await dispatch(addRating({ rate, branchId: branch.id })).unwrap();
       setAlertMessage("Rating sent");
     } catch (err) {
       setAlertMessage("Failed to submit rating. Please try again.");
@@ -29,7 +28,7 @@ const StarRating = ({
   };
 
   return (
-    <div className="mb-2 star-rating-component position-relative">
+    <div className="star-rating-component position-relative d-flex align-items-center justify-content-center">
       <Rating
         onClick={handleRating}
         size={size}
@@ -39,7 +38,9 @@ const StarRating = ({
         iconsCount={5}
         readonly={readOnly}
         initialValue={initialRating}
+        allowFraction={true}
       />
+      {rate && <span className="px-2 fw-">{rate}</span>}
       {alertMessage && (
         <Alert
           variant={alertMessage.includes("successfully") ? "success" : "danger"}

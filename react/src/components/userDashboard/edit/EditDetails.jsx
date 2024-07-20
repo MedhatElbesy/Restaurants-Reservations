@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchRestaurantById, updateRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 const EditDetails = () => {
   const { restaurantId } = useParams();
@@ -106,7 +107,14 @@ const EditDetails = () => {
     dispatch(updateRestaurantAsync({ restaurantId, formData: formDataForSubmission }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
   };
@@ -267,7 +275,7 @@ const EditDetails = () => {
             </div>
           </section>
 
-          <button type="submit" className="btn btn-warning my-3 col-12">
+          <button type="submit" className="custom-button my-3 col-12">
             Submit
           </button>
         </form>

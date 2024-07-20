@@ -1,20 +1,48 @@
 import { useSelector } from "react-redux";
 import { formatTime } from "../../../helpers/utils";
+import { useEffect } from "react";
 
 const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
   const { tableAvailability } = useSelector((state) => state.tableAvailability);
+
+  useEffect(() => {
+    const savedData = sessionStorage.getItem("selectedData");
+    if (savedData) {
+      setSelectedData(JSON.parse(savedData));
+    }
+  }, [setSelectedData]);
+
+  useEffect(() => {
+    if (
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.availabilityId ||
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.childSeats ||
+      !JSON.parse(sessionStorage.getItem("selectedData"))?.extraSeats
+    ) {
+      sessionStorage.setItem("selectedData", JSON.stringify(selectedData));
+    }
+  }, [selectedData]);
+
   const handleSelectTime = (id) => {
-    const updatedData = { ...selectedData, availabilityId: id };
+    const updatedData = {
+      ...selectedData,
+      availabilityId: selectedData.availabilityId === id ? null : id,
+    };
     setSelectedData(updatedData);
   };
 
   const handleSelectSeats = (extraSeats) => {
-    const updatedData = { ...selectedData, extraSeats };
+    const updatedData = {
+      ...selectedData,
+      extraSeats: selectedData.extraSeats === extraSeats ? null : extraSeats,
+    };
     setSelectedData(updatedData);
   };
 
   const handleSelectChildSeats = (childSeats) => {
-    const updatedData = { ...selectedData, childSeats };
+    const updatedData = {
+      ...selectedData,
+      childSeats: selectedData.childSeats === childSeats ? null : childSeats,
+    };  
     setSelectedData(updatedData);
   };
 
@@ -28,12 +56,9 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
               <p
                 key={available.id}
                 onClick={() => handleSelectTime(available.id)}
-                className={`
-                    ${
-                      selectedData.availabilityId === available.id
-                        ? "selected"
-                        : ""
-                    }`}
+                className={`${
+                  selectedData.availabilityId === available.id ? "selected" : ""
+                }`}
               >
                 {`${formatTime(available.start_time)} `}-
                 {`${formatTime(available.end_time)} `}
@@ -76,8 +101,9 @@ const TimeAndAdditional = ({ table, selectedData, setSelectedData }) => {
                 <p
                   key={i}
                   onClick={() => handleSelectChildSeats(i + 1)}
-                  className={`
-                    ${selectedData.childSeats === i + 1 ? "selected" : ""} `}
+                  className={`${
+                    selectedData.childSeats === i + 1 ? "selected" : ""
+                  }`}
                 >
                   {i + 1}
                 </p>

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  fetchUserAddressAsync,
-  updateUserAddressAsync
+  fetchUserAddressAsync
 } from '../../../slices/user/userAddressSlice';
 import {
   fetchCountriesAsync,
@@ -25,6 +24,8 @@ import { MapContainer, TileLayer, Marker, ZoomControl, useMapEvents } from 'reac
 import 'leaflet/dist/leaflet.css';
 import Loader from '../../../layouts/loader/loader';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { updateUserAddressAsync } from '../../../slices/user/fetchUserSlice';
+import Swal from 'sweetalert2';
 
 
 const LocationMarker = ({ setFormData }) => {
@@ -141,7 +142,14 @@ const EditUserAddress = () => {
       await dispatch(updateUserAddressAsync({ userId, addressId, addressData: formData }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
     
@@ -286,7 +294,7 @@ const EditUserAddress = () => {
             </MapContainer>
           </section>
 
-          <button type="submit" className="btn btn-warning my-4 col-12">Update Address</button>
+          <button type="submit" className="custom-button my-4 col-12">Update Address</button>
 
         </form>
 

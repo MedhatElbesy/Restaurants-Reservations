@@ -76,13 +76,11 @@ export const updateRestaurantCategory = async (categoryId, data) => {
 
   export const updateLocation = async (locationId, data) => {
     try {
-  
       const response = await axios.post(`/restaurantslocations/${locationId}?_method=PUT`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
       return response.data; 
     } catch (error) {
       console.error("An error occurred while updating location", error);

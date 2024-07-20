@@ -22,6 +22,7 @@ const Payment = ({
   const { selectedData } = details;
   const amount = checkoutAmount(table, selectedData);
   const [selectedGatewayId, setSelectedGatewayId] = useState(null);
+  
 
   useEffect(() => {
     dispatch(getGateways());

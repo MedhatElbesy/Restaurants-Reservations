@@ -45,6 +45,7 @@ import Tables from "./components/restaurant/restaurant-tables/Tables.jsx";
 
 // Checkout Details
 import Checkout from "./components/checkout/Checkout.jsx";
+import Done from "./components/checkout/Done.jsx";
 
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
@@ -93,6 +94,9 @@ import UserRestaurant from "./components/userProfile/userProfilePage/UserRestaur
 import Sidebar from "./layouts/Sidebar.jsx";
 import EditCategoryForm from "./components/userDashboard/edit/EditCategoryForm.jsx";
 
+// Error
+import Error404 from "./components/error/Error404.jsx";
+import Error500 from "./components/error/Error500.jsx";
 
 const Layout = () => (
   <>
@@ -115,24 +119,24 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
       {/* User Routes */}
+      {/* Restaurant Details Routes */}
+      <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
+        <Route index element={<Navigate to="home" />} />
+        <Route path="home" element={<RestaurantHome />} />
+        <Route path="branches" element={<Branches />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="tables" element={<Tables />} />
+      </Route>
       <Route element={<ProtectedRoute />}>
         {/* Restaurant Details Routes */}
         <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="home" element={<RestaurantHome />} />
-          
-          <Route path="branches" element={<Branches />} />
-          <Route path="menu" element={<Menu />} />
           <Route path="reservation/:tableId" element={<Reservation />} />
-          <Route path="tables" element={<Tables />} />
         </Route>
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}
+        <Route path="/reservation/done" element={<Done />} />{" "}
         {/* all user logged  */}
-        <Route path="/userprofile" element={<UserProfile />} >
-
-      
-        </Route>
+        <Route path="/userprofile" element={<UserProfile />}></Route>
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/add-address" element={<AddUserAddress />} />
@@ -140,34 +144,33 @@ function App() {
       </Route>
 
       {/* Owner only */}
-    
-        {/* Restaurant Owner Routes */}
-        <Route path="/specific" element={<SpecificCategories />} />
-        <Route path="/user-restaurants" element={<UserRestaurant />} />
-        
+
+      {/* Restaurant Owner Routes */}
+      <Route path="/specific" element={<SpecificCategories />} />
+      <Route path="/user-restaurants" element={<UserRestaurant />} />
+
+      <Route
+        path="/user-dashboard/restaurant/:restaurantId"
+        element={<Sidebar />}
+      >
+        <Route path="main" element={<UserDashboardHome />} />
+
+        <Route path="details" element={<DetailsTable />} />
+
+        <Route path="locations" element={<Locations />} />
+
+        <Route path="menu-category" element={<MenuCategoriesTable />} />
+
+        <Route path="category" element={<SpecificCategories />} />
+
+        <Route path="restaurant-category" element={<RestaurantCategory />} />
+
         <Route
-          path="/user-dashboard/restaurant/:restaurantId"
-          element={<Sidebar />}
-        >
-          <Route path="main" element={<UserDashboardHome />} />
+          path="location-table/:locationId"
+          element={<RestaurantCategory />}
+        />
 
-          <Route path="details" element={<DetailsTable />} />
-
-          <Route path="locations" element={<Locations />} />
-
-          <Route path="menu-category" element={<MenuCategoriesTable />} />
-
-          <Route path="category" element={<SpecificCategories />} />
-
-          <Route path="restaurant-category" element={<RestaurantCategory />} />
-
-          <Route
-            path="location-table/:locationId"
-            element={<RestaurantCategory />}
-          />
-
-          <Route path="reservation" element={<ShowReservation />} />
-        
+        <Route path="reservation" element={<ShowReservation />} />
       </Route>
       {/* Owner and Admin */}
       <Route element={<ProtectedRoute owner={true} admin={true} />}>
@@ -175,7 +178,10 @@ function App() {
           path="/edit-restaurant/:restaurantId"
           element={<EditDetails />}
         />
-        <Route path="/edit-category/:categoryId" element={<EditCategoryForm />} />
+        <Route
+          path="/edit-category/:categoryId"
+          element={<EditCategoryForm />}
+        />
         <Route path="/edit-location/:locationId" element={<EditLocation />} />
         <Route
           path="/edit-restaurant/:restaurantId"
@@ -195,7 +201,7 @@ function App() {
         <Route path="/add-table/:locationId" element={<AddTableForm />} />
         <Route path="/edit-table/:tableId" element={<EditTableForm />} />
         <Route path="/add-restaurant" element={<AddRestaurant />} />
-       
+
         <Route path="/add-special-category" element={<AddCategoryForm />} />
         <Route
           path="/add-restaurant-category/:restaurantId"
@@ -212,7 +218,7 @@ function App() {
           element={<EditTableAvailability />}
         />
 
-       <Route
+        <Route
           path="/add-availability/:tableId"
           element={<AddAvailabilityForm />}
         />
@@ -236,7 +242,7 @@ function App() {
       <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
       {/* Admin Routes  Edited By : Nagy*/}
       {/* Admin Only */}
-      <Route element={<ProtectedRoute  admin={true} />}>
+      <Route element={<ProtectedRoute admin={true} />}>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route path="rating" element={<Ratings />} />
           <Route path="report" element={<ReportList />} />
@@ -249,7 +255,8 @@ function App() {
       </Route>
       <Route path="/notify" element={<RestaurantLocationNotifications />} />
       <Route path="all-restaurants" element={<AllRestaurantsPage />} />
-     
+      <Route path="/not-found" element={<Error404 />} />
+      <Route path="/server-error" element={<Error500 />} />
     </Route>
   );
 

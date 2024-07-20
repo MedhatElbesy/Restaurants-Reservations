@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getTableAvailabilityById, updateTableAvailability } from '../../../slices/restaurant/table/availabilitySlice';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 const EditTableAvailability = () => {
   const { availableId } = useParams(); 
@@ -54,7 +55,14 @@ const EditTableAvailability = () => {
       dispatch(updateTableAvailability({ availabilityId: updatedAvailability.id, availableData: updatedAvailability }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
     });
@@ -125,7 +133,7 @@ const EditTableAvailability = () => {
 
         {formError && <div className="alert alert-danger my-3">{formError}</div>}
 
-        <button className="btn btn-warning col-12 my-5" type="submit">Update Availability</button>
+        <button className="custom-button col-12 my-5" type="submit">Update Availability</button>
       </form>
     </main>
   );

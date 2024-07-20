@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Alert } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
@@ -211,7 +212,22 @@ const EditLocation = () => {
     dispatch(updateLocationAsync({ locationId, data: formDataWithImages }))
     .then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated Successfully',
+          showConfirmButton: true,
+          timer: 9000,
+        }).then((result) => {
+            navigate(-1); 
+        });
+      }else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Please enter unique number.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+      });
       }
     });
   };
@@ -426,7 +442,7 @@ const EditLocation = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning my-4 col-12">Update</button>
+        <button type="submit" className="custom-button my-4 col-12">Update</button>
 
       </form>
       </section>

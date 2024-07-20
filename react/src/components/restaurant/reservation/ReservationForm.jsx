@@ -1,16 +1,43 @@
+import { useEffect } from "react";
+import { decryptData } from "../../../helpers/cryptoUtils";
+
 const ReservationForm = ({ formData, setFormData, register, errors }) => {
+  useEffect(() => {
+    const savedFormData = sessionStorage.getItem("formData");
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
+    }
+
+    const decryptedUser = decryptData("user");
+    if (decryptedUser) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        name: `${decryptedUser.first_name || ""} ${
+          decryptedUser.last_name || ""
+        }`,
+        email: decryptedUser.email || "",
+        telephone: decryptedUser.mobile_number || "",
+      }));
+    }
+  }, [setFormData]);
+
+  useEffect(() => {
+    sessionStorage.setItem("formData", JSON.stringify(formData));
+  }, [formData]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+    }));
   };
 
   return (
     <form className="user-data d-flex flex-wrap">
       <div className="form-floating mb-3 col-11">
         <input
+          value={formData.name || ""}
           type="text"
           className="form-input form-control"
           id="name"
@@ -23,6 +50,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-5">
         <input
+          value={formData.email || ""}
           type="email"
           className="form-input form-control"
           id="email"
@@ -41,6 +69,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-5 offset-1">
         <input
+          value={formData.telephone || ""}
           type="tel"
           className="form-input form-control"
           id="telephone"
@@ -61,6 +90,7 @@ const ReservationForm = ({ formData, setFormData, register, errors }) => {
       </div>
       <div className="form-floating mb-3 col-11">
         <textarea
+          value={formData.notes || ""}
           className="form-input form-control"
           id="notes"
           name="notes"

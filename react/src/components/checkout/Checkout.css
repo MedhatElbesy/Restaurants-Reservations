@@ -1,5 +1,10 @@
 .checkout {
   background-color: var(--backgroundColor);
+  .back {
+    color: var(--secColor);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -12,7 +17,7 @@
         position: relative;
         flex: 1;
         .step-label {
-          /* color: var(--secColor); */
+          color: #818485;
           margin-bottom: 10px;
         }
         .step-label.visited {
@@ -21,7 +26,7 @@
         .bar {
           height: 0.8rem;
           width: 100%;
-          background-color: #023c499c;
+          background-color: #8184859c;
         }
         .bar.visited {
           background-color: var(--secColor);
@@ -54,7 +59,7 @@
   }
   .payment {
     .table-payment-details {
-      background-color: #011f25e0;
+      background-color: var(--backgroundColor);
       .head {
         padding: 1rem;
         background-color: #595b5c3d;
@@ -89,13 +94,13 @@
       .reciet {
         margin: auto;
         & > div {
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
           border-bottom: 1px solid #595b5c3a;
           p {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
           }
         }
         div:nth-child(2) {
@@ -119,13 +124,13 @@
           height: 60px;
           width: 100px;
           img {
-            background-color: #FFF;
+            background-color: #fff;
             width: 100%;
             height: 100%;
             cursor: pointer;
             transition: var(--mainTransition);
             object-fit: contain;
-            border-radius: .5rem;
+            border-radius: 0.5rem;
             border: 3px solid transparent;
           }
           .selected {
@@ -144,8 +149,8 @@
           padding: 1rem;
           color: var(--textColor);
           font-weight: bold;
-          background-color: #011f25e0;
-          span:first-child{
+          background-color: #595b5c3d;
+          span:first-child {
             font-size: 1.5rem;
           }
         }
@@ -153,7 +158,7 @@
           font-size: 1.2rem;
         }
         .form-control {
-          color: var(--backgroundColor);
+          color: var(--textColor);
           &:focus {
             border: rgba(3, 44, 54, 0.25);
             box-shadow: 0 0 0 0.25rem rgba(2, 53, 66, 0.25);
@@ -182,7 +187,6 @@
   }
 }
 
-
 @media screen and (max-width: 600px) {
   .step-wrapper {
     flex-direction: column; /* Stack steps vertically on small screens */
@@ -192,3 +196,9 @@
     margin-bottom: 20px; /* Add spacing between stacked steps */
   }
 }
+
+  .btn-back {
+    background-color: var(--secColor);
+    border: 1px solid var(--secColor);
+    color: var(--backgroundColor) !important;
+  }

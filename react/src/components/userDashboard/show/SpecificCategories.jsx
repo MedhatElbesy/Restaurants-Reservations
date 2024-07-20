@@ -7,6 +7,7 @@ import { faEdit, faTrash, faSearch, faPlus } from '@fortawesome/free-solid-svg-i
 import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, InputAdornment, TablePagination, TextField } from '@mui/material';
 import Swal from 'sweetalert2';
 import Loader from '../../../layouts/loader/loader';
+import { Spinner } from 'react-bootstrap';
 
 const SpecificCategories = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,11 @@ const SpecificCategories = () => {
   };
 
   if (status === 'loading') {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   return (
