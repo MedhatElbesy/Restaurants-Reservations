@@ -72,10 +72,6 @@ const Checkout = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handlePrevClick = () => {
-    prevStep();
-  };
-
   const handlePlaceOrder = async () => {
     const checkoutData = handelCheckoutData(
       reservationData,

@@ -27,13 +27,20 @@ const TableDetials = ({ table, details }) => {
           {table.max_number_of_persons > 1 && "s"}.
         </p>
         <p>
-          <span>Extra Seats : </span> {selectedData.extraSeats} Seat
-          {selectedData.extraSeats > 1 && "s"}.
+          <span>Extra Seats : </span>{" "}
+          {selectedData.extraSeats > 0
+            ? `${selectedData.extraSeats} Seat${
+                selectedData.extraSeats > 1 && "s"
+              }.`
+            : `No Extra Seats.`}
         </p>
         <p>
-          <span>Kiddy Seats : </span>
-          {selectedData.childSeats} Kiddy Seat
-          {selectedData.childSeats > 1 && "s"}.
+          <span>Kiddy Seats : </span>{" "}
+          {selectedData.childSeats > 0
+            ? `${selectedData.childSeats} Seat${
+                selectedData.childSeats > 1 && "s"
+              }.`
+            : `No Kiddy Seats.`}
         </p>
         <p>
           <span>Reservation Date : </span>

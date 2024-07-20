@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useBranch } from "./BranchContext";
-// import Image from "react-bootstrap/Image";
 import { useEffect, useMemo, useRef } from "react";
 import { fetchRestaurantTablesAsync } from "../../../slices/restaurant/table/restaurantTablesSlice";
 import Loader from "../../../layouts/loader/loader";

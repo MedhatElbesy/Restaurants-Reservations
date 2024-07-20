@@ -102,6 +102,7 @@
   article {
     .details {
       padding: 0 1.8rem;
+      border-right: 1px solid var(--textColor);
       p {
         color: var(--mainColor);
         font-size: 1.3rem;
@@ -112,7 +113,7 @@
         span {
           svg {
             width: 2rem;
-            padding-right: .5rem;
+            padding-right: 0.5rem;
           }
           color: var(--secColor);
           letter-spacing: 2px;
@@ -121,6 +122,7 @@
     }
     .gallery {
       height: 60vh;
+      padding-bottom: 50px;
       .images {
         .image {
           position: relative;
@@ -215,5 +217,9 @@
 @media screen and (max-width: 991px) {
   .table-details article .gallery {
     height: 50vh;
+  }
+  .table-details article .gallery .images {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
   }
 }

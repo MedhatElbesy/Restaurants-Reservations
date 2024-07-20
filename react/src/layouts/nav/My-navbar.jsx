@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars, faClose } from "@fortawesome/free-solid-svg-icons";
@@ -50,12 +50,7 @@ const MyNavbar = () => {
     if (userId) {
       dispatch(fetchUserDataById(userId));
     }
-  }, [userId]);
-
-  useEffect(() => {
-    console.log("User Data:", userData);
-    console.log("Profile Image URL:", userData?.profile_image_url);
-  }, [userData]);
+  }, [dispatch, userId]);
 
   const isHomeRoute =
     location.pathname === "/" || location.pathname === "/home";

@@ -21,11 +21,11 @@ export const handelCheckoutData = (
   checkoutData.append("amount", paymentData.total_price);
   checkoutData.append(
     "number_of_extra_chairs",
-    reservationData.selectedData.extraSeats
+    reservationData.selectedData.extraSeats || 0
   );
   checkoutData.append(
     "number_of_extra_childs_chairs",
-    reservationData.selectedData.childSeats
+    reservationData.selectedData.childSeats || 0
   );
   checkoutData.append("payment_method", paymentData.gateway.type);
   checkoutData.append("gateway_id", paymentData.gateway.id);

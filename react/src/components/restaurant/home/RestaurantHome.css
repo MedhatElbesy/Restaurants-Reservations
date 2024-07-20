@@ -49,7 +49,7 @@
   }
   .header {
     position: relative;
-    min-height: 50vh;
+    min-height: 60vh;
     z-index: 999;
     .btn-reserve {
       background-color: var(--secColor);

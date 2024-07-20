@@ -47,14 +47,14 @@ export function TableDetails({ table, onClose }) {
               {table.extra_number_of_childs_chairs} available.{" "}
             </p>
           )}
+          <div className="text-center mb-4">
+            <button onClick={handelReserveTable} className="reserve-table">
+              Reserve Now
+            </button>
+          </div>
         </div>
         {table.images.length > 0 && <TableGallery gallery={table.images} />}
       </article>
-      <div className="text-center mb-4">
-        <button onClick={handelReserveTable} className="reserve-table">
-          Reserve Now
-        </button>
-      </div>
     </div>
   );
 }

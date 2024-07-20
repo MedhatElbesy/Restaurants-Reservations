@@ -1,12 +1,20 @@
 .reservation {
   position: relative;
-   .back {
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  .back {
     color: var(--secColor);
     font-size: 1.5rem;
     cursor: pointer;
     position: absolute;
     left: 1rem;
     top: .75rem;
+    color: #FFF;
+    background-color: var(--secColor);
+    width: 20px;
+    height: 20px;
+    padding: .5rem;
+    border-radius: 50%;
   }
   .head {
     border-bottom: 1px solid rgb(139, 108, 51, 0.25);
@@ -28,7 +36,7 @@
       padding: 0.4rem 0.8rem;
       border-radius: 0.4rem;
       color: var(--backgroundColor);
-      background-color: var(--secColor)
+      background-color: var(--secColor);
     }
   }
   .map {
@@ -66,12 +74,31 @@
         &:hover {
           cursor: pointer;
           color: var(--backgroundColor);
-          background-color: var(--secColor)
+          background-color: var(--secColor);
         }
       }
       .selected {
         color: var(--backgroundColor);
-        background-color: var(--secColor)
+        background-color: var(--secColor);
+      }
+    }
+  }
+  .resrvation-details {
+    border-right: 1px solid #64646433;
+    p {
+      color: var(--mainColor);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #64646433;
+      font-family: "'Margarine', cursive";
+      span {
+        svg {
+          width: 2rem;
+          padding-right: 0.5rem;
+        }
+        color: var(--secColor);
+        letter-spacing: 2px;
       }
     }
   }
@@ -143,4 +170,10 @@ div:where(.swal2-container) .swal2-html-container {
   height: calc(3.5rem) !important;
   min-height: calc(2.5rem) !important;
   line-height: 1 !important;
+}
+
+@media screen and (max-width: 992px) {
+  .reservation .resrvation-details {
+    border: none;
+  }
 }

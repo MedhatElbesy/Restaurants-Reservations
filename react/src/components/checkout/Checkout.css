@@ -17,7 +17,7 @@
         position: relative;
         flex: 1;
         .step-label {
-          color:  #818485;
+          color: #818485;
           margin-bottom: 10px;
         }
         .step-label.visited {
@@ -94,13 +94,13 @@
       .reciet {
         margin: auto;
         & > div {
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
           border-bottom: 1px solid #595b5c3a;
           p {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
           }
         }
         div:nth-child(2) {
@@ -124,13 +124,13 @@
           height: 60px;
           width: 100px;
           img {
-            background-color: #FFF;
+            background-color: #fff;
             width: 100%;
             height: 100%;
             cursor: pointer;
             transition: var(--mainTransition);
             object-fit: contain;
-            border-radius: .5rem;
+            border-radius: 0.5rem;
             border: 3px solid transparent;
           }
           .selected {
@@ -150,7 +150,7 @@
           color: var(--textColor);
           font-weight: bold;
           background-color: #595b5c3d;
-          span:first-child{
+          span:first-child {
             font-size: 1.5rem;
           }
         }
@@ -187,7 +187,6 @@
   }
 }
 
-
 @media screen and (max-width: 600px) {
   .step-wrapper {
     flex-direction: column; /* Stack steps vertically on small screens */
@@ -197,3 +196,9 @@
     margin-bottom: 20px; /* Add spacing between stacked steps */
   }
 }
+
+  .btn-back {
+    background-color: var(--secColor);
+    border: 1px solid var(--secColor);
+    color: var(--backgroundColor) !important;
+  }
