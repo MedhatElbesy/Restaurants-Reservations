@@ -4,28 +4,28 @@ import CardSlick from "../card/CardSlick";
 import Card from "../card/Card";
 import { fetchNearestRestaurants } from "../../../slices/restaurant/nearest-restaurants/nearestRestaurants";
 import Loader from "../../../layouts/loader/loader";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { decryptData } from "../../../helpers/cryptoUtils";
-import { fetchUserDataById } from "../../../slices/user/fetchUserSlice";
 
 const NearRestau = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.data);
+  const userId = decryptData("userId");
   const { data: nearestRestaurantsData, status } = useSelector(
     (state) => state.nearestRestaurants
   );
-  const userId = decryptData("userId");
 
   useEffect(() => {
     if (userId) {
-      dispatch(fetchNearestRestaurants(userId));
+      dispatch(fetchNearestRestaurants());
     }
-  }, [dispatch, userId]);
+  }, [userId]);
 
-  if(nearestRestaurantsData.length === 0) {
+  
+
+  if (nearestRestaurantsData.length === 0) {
     return (
       <p className="text-center mb-5 text-sec fs-4">
-        Add Address To Get Restaurants Nearest You
+  
       </p>
     );
   }
@@ -33,27 +33,31 @@ const NearRestau = () => {
   return (
     <main className="restau">
       {nearestRestaurantsData.length > 3 && (
-        <div className="row my-5">
+        <section className="row my-5">
+
           <h1 className="col-10 mx-3 my-5">Nearest Restaurants</h1>
+
           <CardSlick>
-            {nearestRestaurantsData.map(
-              (restaurant, index) =>
-                restaurant.image && (
+            {nearestRestaurantsData.map((restaurant, index) => {
+              const restaurantImage = restaurant.images.length
+                ? restaurant.images[0].image
+                : null;
+              return (
+                restaurantImage && (
                   <div key={index} className="restaurant-slide">
                     <NavLink
-                      to={`/restaurant/${restaurant.restaurant_id}`}
+                      to={`/restaurant/${restaurant.id}`}
                       className="nav-link"
                     >
-                      <Card
-                        name={restaurant.restaurant_name}
-                        image={restaurant.image}
-                      />
+                      <Card name={restaurant.restaurant} image={restaurantImage} />
                     </NavLink>
                   </div>
                 )
-            )}
+              );
+            })}
           </CardSlick>
-        </div>
+          
+        </section>
       )}
     </main>
   );

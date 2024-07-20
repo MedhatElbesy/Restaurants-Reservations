@@ -145,9 +145,9 @@ export const restaurantCategory = async (restaurantId) => {
   }
 };
 
-export const nearestRestaurants = async (userId) => {
+export const nearestRestaurants = async () => {
   try {
-    const response = await axios.get(`/nearest-locations/${userId}`);
+    const response = await axios.get(`/restaurant-locations/user-city`);
     return response.data;
   } catch (error) {
     console.error(
