@@ -47,6 +47,7 @@ const Branches = () => {
     sessionStorage.setItem("branch", JSON.stringify(branch));
     setShowTables(false);
   };
+  console.log(branch)
 
   if (branchStatus === "loading" && !branch) {
     return <Loader />;
@@ -82,7 +83,7 @@ const Branches = () => {
                 <p className="mx-2 m-2">
                   <FontAwesomeIcon icon={faBookmark} />
                   <strong style={{ marginLeft: ".4rem" }}>
-                    {branch.number_of_tables}
+                    {branch.number_of_available_tables}
                   </strong>{" "}
                   Available Tables
                 </p>

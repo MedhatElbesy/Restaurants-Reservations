@@ -18,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchRestaurants());
-  }, []);
+  }, [dispatch]);
 
   if (status === "loading") {
     return <Loader />;

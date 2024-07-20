@@ -53,6 +53,7 @@
     color: var(--secColor);
     padding: 2.1rem;
     background-color: var(--backgroundColor);
+    background-color: #ececec;
     opacity: 0;
     span {
       font-size: 1rem;
@@ -102,7 +103,6 @@
   article {
     .details {
       padding: 0 1.8rem;
-      border-right: 1px solid var(--textColor);
       p {
         color: var(--mainColor);
         font-size: 1.3rem;

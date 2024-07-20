@@ -2,6 +2,7 @@
   .gallery {
     display: flex;
     justify-content: space-around;
+    border-bottom: 1px solid #0000001c;
     figure {
       transition: var(--mainTransition);
       transition-duration: 0.6s !important;
@@ -63,7 +64,7 @@
       top: 0;
       left: 0;
       position: absolute;
-      background-color: #57555525;
+      background-color: #0f0f0fb0;
       z-index: -1;
     }
   }

@@ -35,7 +35,8 @@ const nearestRestaurantsSlice = createSlice({
       })
       .addCase(fetchNearestRestaurants.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload.data;
+        console.log(action.payload.data);
+        state.data = action.payload.data || [];
       })
       .addCase(fetchNearestRestaurants.rejected, (state, action) => {
         state.status = 'failed';
