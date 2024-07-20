@@ -6,6 +6,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Reservation\StoreReservationRequest;
 use App\Http\Resources\ReservationResource;
+use App\Mail\PaymentSuccessMail;
 use App\Models\Reservation;
 use App\Models\ReservationDetail;
 use App\Models\Payment;
@@ -170,6 +171,12 @@ class ReservationController extends Controller
                     'status' => 'success'
                 ]);
             }
+
+            //send mail when success
+            Mail::to($payment->user->email)->send(new PaymentSuccessMail($payment));
+
+
+
             // return ApiResponse::sendResponse(200, 'Payment successfull');
             // ApiResponse::sendResponse(200, 'Payment successfull');
             return redirect("http://localhost:5173/reservation/done");
