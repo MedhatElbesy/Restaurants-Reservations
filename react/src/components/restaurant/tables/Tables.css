@@ -87,10 +87,10 @@
 
 .table-details {
   position: fixed;
-  top: 10vh;
+  top: 0vh;
   left: 0vw;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   overflow: auto;
   background-color: #e4e4e4;
   z-index: 9999;

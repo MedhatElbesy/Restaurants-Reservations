@@ -7,6 +7,8 @@ import MapContainer from "../../Map/Map";
 import CustomCalendar from "./Calendar";
 import TimeAndAdditional from "./TimeAndAdditional";
 import ReservationForm from "./ReservationForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import Loader from "../../../layouts/loader/loader";
 import { getTableAvailability } from "../../../slices/restaurant/table/availabilitySlice";
@@ -131,9 +133,14 @@ const Reservation = () => {
       {tableAvailabilityStatus == "succeeded" &&
         tableAvailability.length > 0 && (
           <section
-            className="reservation d-flex flex-wrap justify-content-center"
+            className="reservation pt-5 d-flex flex-wrap justify-content-center"
             style={{ backgroundColor: "#edededf0" }}
           >
+            <FontAwesomeIcon
+              onClick={() => navigate(`/restaurant/${restaurant.id}/branches`)}
+              className="back"
+              icon={faArrowLeft}
+            />{" "}
             {/* Map */}
             <div className="map col-12 col-sm-12 col-lg-4 order-1 order-lg-0">
               <MapContainer

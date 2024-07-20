@@ -33,7 +33,7 @@ export default function RestaurantDetails() {
   }
 
   return (
-    <Container fluid className="user-restaurant-container display-flex flex-column">
+    <Container fluid className="user-restaurant-container m-nav-height display-flex flex-column">
       <Navbar />
       {restaurant && (
         <>

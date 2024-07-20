@@ -68,11 +68,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    /* gap: 12px; */
     .hex {
       position: relative;
       width: 140px;
-      height: 130px;
+      height: 140px;
       margin-bottom: 12px;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       overflow: hidden;

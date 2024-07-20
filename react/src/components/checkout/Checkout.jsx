@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { handelCheckoutData } from "../../helpers/checkoutData";
 import { checkoutReservation } from "../../slices/checkout/checkoutSlice";
@@ -10,8 +10,7 @@ import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
 import Payment from "./Payment";
-import Done from "./Done";
-
+// import Done from "./Done";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -22,7 +21,8 @@ const Checkout = () => {
   sessionStorage.setItem("reservationData", JSON.stringify(reservationDetails));
   const reservationData = JSON.parse(sessionStorage.getItem("reservationData"));
   // const reservationData = reservationDetails;
-  const { restaurant } = useSelector((state) => state.restaurant);
+  // const { restaurant } = useSelector((state) => state.restaurant);
+  const restaurant = JSON.parse(sessionStorage.getItem("restaurant"));
   const branch = reservationData.branch;
   const table = reservationData.table;
 
@@ -56,11 +56,12 @@ const Checkout = () => {
           errors={errors}
         />
       ),
-    },
-    {
-      name: "Done",
-      component: <Done />,
-    },
+    }
+    // ,
+    // {
+    //   name: "Done",
+    //   component: <Done />,
+    // },
   ];
 
   const nextStep = () => {
@@ -72,11 +73,7 @@ const Checkout = () => {
   };
 
   const handlePrevClick = () => {
-    if (currentStep === steps.length - 1) {
-      navigate("/");
-    } else {
-      prevStep();
-    }
+    prevStep();
   };
 
   const handlePlaceOrder = async () => {
@@ -90,18 +87,22 @@ const Checkout = () => {
         checkoutReservation(checkoutData)
       ).unwrap();
       console.log(response);
-      if (paymentData.gateway.type === "paypal") {
-        const iframe = document.getElementById("paypalIframe");
-        iframe.src = response.data;
+      if(response.status == 200) {
+        window.location.href = response.data;
       }
+      // if (paymentData.gateway.type === "paypal") {
+      //   const iframe = document.getElementById("paypalIframe");
+      //   iframe.src = response.data;
+      // }
       // nextStep();
+      navigate("/reservation/done");
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
     }
   };
 
   return (
-    <section className="checkout p-sm-5 p-3 m-lg-5">
+    <section className="checkout px-sm-5 p-3 mx-lg-5 m-nav-height">
       <FontAwesomeIcon
         onClick={() =>
           navigate(`/restaurant/${restaurant.id}/reservation/${table.id}`)
@@ -117,14 +118,14 @@ const Checkout = () => {
       {steps[currentStep].component}
       <div className="navigation-buttons">
         {currentStep !== 0 && (
-          <button onClick={handlePrevClick}>
-            {currentStep === steps.length - 1 ? "Back to Home" : "Prev"}
+          <button onClick={prevStep}>
+            Prev
           </button>
         )}
-        {currentStep < steps.length - 2 && (
+        {currentStep < steps.length - 1 && (
           <button onClick={nextStep}>Next</button>
         )}
-        {currentStep === steps.length - 2 && (
+        {currentStep === steps.length - 1 && (
           <button onClick={handleSubmit(handlePlaceOrder)}>Place Order</button>
         )}
       </div>

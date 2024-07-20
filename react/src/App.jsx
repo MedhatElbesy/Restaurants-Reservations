@@ -45,6 +45,7 @@ import Tables from "./components/restaurant/restaurant-tables/Tables.jsx";
 
 // Checkout Details
 import Checkout from "./components/checkout/Checkout.jsx";
+import Done from "./components/checkout/Done.jsx";
 
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
@@ -129,6 +130,8 @@ function App() {
         </Route>
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}
+        <Route path="/reservation/done" element={<Done />} />{" "}
+
         {/* all user logged  */}
         <Route path="/userprofile" element={<UserProfile />}></Route>
         <Route path="/edit-profile" element={<EditProfile />} />

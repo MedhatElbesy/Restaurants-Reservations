@@ -38,6 +38,7 @@ const StarRating = ({
         iconsCount={5}
         readonly={readOnly}
         initialValue={initialRating}
+        allowFraction={true}
       />
       {rate && <span className="px-2 fw-">{rate}</span>}
       {alertMessage && (

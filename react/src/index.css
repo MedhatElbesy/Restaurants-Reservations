@@ -12,7 +12,7 @@
   --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
   --secFont: "Bad Script", cursive;
-  --navbarMaxHeight: 14vh;
+  --navbarMaxHeight: 95px;
   ::-webkit-scrollbar {
     width: 8px;
     height: 0px;
@@ -69,7 +69,16 @@ a {
 }
 
 .nav-height {
+  height: var(--navbarMaxHeight);
+}
+.m-nav-height {
   margin-top: var(--navbarMaxHeight);
+}
+
+@media screen and (max-width: 776px) {
+  .m-nav-height {
+    margin-top: 0;
+  }
 }
 
 .full {
@@ -77,4 +86,9 @@ a {
   /* display: flex;
   justify-content: center;
   align-items: center; */
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

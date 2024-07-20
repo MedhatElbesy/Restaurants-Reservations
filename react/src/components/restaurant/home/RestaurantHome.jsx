@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function Home() {
   const { restaurant } = useSelector((state) => state.restaurant);
-  console.log(restaurant);
   const { restaurantId } = useParams();
   const [clickedImage, setClickedImage] = useState(null);
 

@@ -78,11 +78,11 @@ const MyNavbar = () => {
       />
 
       <nav
-        className={`navbar navbar-expand-lg shadow-5-strong fixed-top ${
+        className={`navbar nav-height navbar-expand-lg shadow-5-strong fixed-top ${
           scrolled ? "bg-white" : ""
         } ${isHomeRoute ? "navbar-transparent" : "bg-white"} d-none d-md-block`}
       >
-        <div className="container-fluid">
+        <div className="container-fluid align-items-center">
           <div className="navbar-left">
             <img
               src="./images/logo-white.png"

@@ -3,6 +3,7 @@ export const handelCheckoutData = (
   paymentData,
   restaurant
 ) => {
+  const date = new Date(reservationData.reservationDate);
   const checkoutData = new FormData();
   checkoutData.append("total_price", paymentData.total_price);
   checkoutData.append("notes", reservationData.userData.notes);
@@ -16,10 +17,7 @@ export const handelCheckoutData = (
     "table_availability_id",
     reservationData.selectedData.availabilityId
   );
-  checkoutData.append(
-    "reservation_date",
-    reservationData.reservationDate.toLocaleDateString("en-CA")
-  );
+  checkoutData.append("reservation_date", date.toLocaleDateString("en-CA"));
   checkoutData.append("amount", paymentData.total_price);
   checkoutData.append(
     "number_of_extra_chairs",

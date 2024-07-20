@@ -25,7 +25,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      background-color: #24232321;
+      background-color: #464242ab;
       width: 100%;
       height: 100%;
       z-index: 9999;
@@ -49,7 +49,7 @@
   }
   .header {
     position: relative;
-    min-height: 60vh;
+    min-height: 50vh;
     z-index: 999;
     .btn-reserve {
       background-color: var(--secColor);
@@ -69,7 +69,7 @@
   }
 }
 .reserve {
-  min-height: 50vh;
+  /* min-height: 50vh; */
   .btn-menu {
     background-color: transparent !important;
     border-style: solid;

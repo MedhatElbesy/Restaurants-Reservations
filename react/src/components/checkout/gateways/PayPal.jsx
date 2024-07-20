@@ -26,10 +26,10 @@ const PayPal = ({
         <span className="text-sec mt-3 d-block">
           Click Place Order To Complete Payment
         </span>
-        <iframe
+        {/* <iframe
           id="paypalIframe"
           style={{ width: "100%", height: "500px", border: "none" }}
-        ></iframe>
+        ></iframe> */}
       </p>
     </div>
   );

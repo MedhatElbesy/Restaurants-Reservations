@@ -23,8 +23,8 @@ export function BranchAddress() {
             </p>
             <pre className="fs-4">
               {"   "}
-              {/* {branch.city.name}, {branch.governorate.name},{" "}
-              {branch.country.name}. */}
+              {branch.city_name}, {branch.governorate_name},{" "}
+              {branch.country_name}
             </pre>
           </div>
           <div className="phone text-center">

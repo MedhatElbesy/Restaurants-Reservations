@@ -1,4 +1,13 @@
 .reservation {
+  position: relative;
+   .back {
+    color: var(--secColor);
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    left: 1rem;
+    top: .75rem;
+  }
   .head {
     border-bottom: 1px solid rgb(139, 108, 51, 0.25);
     color: #494949;
