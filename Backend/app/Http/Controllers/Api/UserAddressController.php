@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddress\StoreUserAddressRequest;
 use App\Http\Requests\UserAddress\UpdateUserAddressRequest;
 use App\Http\Resources\UserAddressResource;
+use App\Models\RestaurantLocation;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UserAddressController extends Controller
 {
@@ -58,4 +60,7 @@ class UserAddressController extends Controller
         $userAddress->delete();
         return ApiResponse::sendResponse(200, 'User address deleted successfully');
     }
+
+    
+
 }
