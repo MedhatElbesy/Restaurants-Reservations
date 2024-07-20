@@ -149,3 +149,11 @@ color: black;
   padding: 5px;
   color:white;
 }
+
+
+.centered-flex {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Takes full viewport height */
+}

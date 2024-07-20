@@ -225,7 +225,7 @@ const UserProfile = () => {
                       className="btn btn-outline-primary btn-sm pe-3 ps-3" 
                       title="Edit">
                       <FontAwesomeIcon icon={faEdit} />
-                      <span>Edit</span>
+                      <span className='mx-1'>Edit</span>
                     </NavLink>
 
                     <button 
@@ -234,7 +234,7 @@ const UserProfile = () => {
                       title="Delete"
                     >
                       <FontAwesomeIcon icon={faTrash} />
-                      <span>Delete</span>
+                      <span  className='mx-1'>Delete</span>
                     </button>
 
                   </div>

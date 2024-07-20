@@ -17,6 +17,7 @@ import { fetchMenuCategoryItemsAsync } from '../../../slices/restaurant/menuItem
 import { deleteMenuItemThunk } from '../../../slices/restaurant/menuItem/deleteMenuItemSlice';
 import Swal from 'sweetalert2';
 import { deleteMenuCategoryThunk } from '../../../slices/restaurant/menuCategory/deleteMenuCategorySlice';
+import { Spinner } from 'react-bootstrap';
 
 export default function MenuCategoriesTable() {
   const dispatch = useDispatch();
@@ -125,7 +126,11 @@ export default function MenuCategoriesTable() {
   };
 
   if (status === 'loading' || !allMenuCategory) {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   const filteredCategories = filteredMenuCategory.filter((category) =>
@@ -275,7 +280,7 @@ export default function MenuCategoriesTable() {
                         title="Show Menu Items"
                       >
                         <FontAwesomeIcon icon={faEye} />
-                        Menu Items
+                       <span className='mx-1'>Menu Items</span> 
                       </button>
                       <Link
                         to={`/edit-menu-category/${category.id}`}
@@ -283,7 +288,7 @@ export default function MenuCategoriesTable() {
                         title="Edit Menu Category"
                       >
                         <FontAwesomeIcon icon={faEdit} />
-                        Edit
+                      <span className='mx-1'>Edit</span>  
                       </Link>
                       <button
                         onClick={() => handleDelete(category.id)}
@@ -291,7 +296,7 @@ export default function MenuCategoriesTable() {
                         title="Delete Menu Category"
                       >
                         <FontAwesomeIcon icon={faTrash} />
-                        Delete
+                      <span className='mx-1'>Delete</span>  
                       </button>
                       </div>
 

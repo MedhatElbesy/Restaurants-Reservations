@@ -22,9 +22,7 @@ const NearRestau = () => {
     }
   }, [userId]);
 
-  if (status === "loading") {
-    return <Loader />;
-  }
+ 
 
   return (
     <main className="restau">

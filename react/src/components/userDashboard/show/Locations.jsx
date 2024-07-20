@@ -19,6 +19,7 @@ import { deleteLocationAsync } from '../../../slices/restaurant/location/deleteS
 import { fetchRestaurantById } from '../../../slices/restaurant/restaurantSlice';
 import { deleteTableAsync } from '../../../slices/restaurant/table/deleteTableSlice';
 import { deleteTableImageAsync } from '../../../slices/restaurant/tableImage/tableImage';
+import { Spinner } from 'react-bootstrap';
 
 export default function Locations() {
   const dispatch = useDispatch();
@@ -74,7 +75,11 @@ export default function Locations() {
   }, [tableAvailability]);
 
   if (!restaurant) {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   
@@ -260,7 +265,11 @@ export default function Locations() {
 
 
   if (status === 'loading') {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   const paginatedLocations = (filteredLocations || []).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);

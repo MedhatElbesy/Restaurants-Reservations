@@ -14,6 +14,7 @@ import TableCell from '@mui/material/TableCell';
 import { InputAdornment, TablePagination, TextField } from '@mui/material';
 import Loader from '../../../layouts/loader/loader';
 import Swal from 'sweetalert2';
+import { Spinner } from 'react-bootstrap';
 
 const RestaurantCategory = () => {
   const { restaurantId } = useParams();
@@ -37,7 +38,11 @@ const RestaurantCategory = () => {
   }, [restaurantCategory]);
 
   if (status === 'loading' || !restaurantCategory) {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   const handleSearch = (event) => {

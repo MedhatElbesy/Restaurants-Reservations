@@ -24,7 +24,7 @@ function Sidebar() {
        
        {restaurant && <p>{restaurant.name} Dashboard</p>}
        
-        <div className="ms-auto">
+        <div className="ms-auto mx-2">
           <FontAwesomeIcon icon={faBell} className="custom-notification-icon " />
         </div>
 

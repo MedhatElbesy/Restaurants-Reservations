@@ -1,25 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import CardSlick from "../card/CardSlick";
 import Card from "../card/Card";
-import Loader from "../../../layouts/loader/loader";
 import { NavLink } from "react-router-dom";
-import { fetchRestaurants } from "../../../slices/adminDashboard/adminSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 
-const AllRestaurants = () => {
-  const dispatch = useDispatch();
-  const { restaurants, status } = useSelector((state) => state.adminDashboard);
+const AllRestaurants = ({restaurants}) => {
 
-  useEffect(() => {
-    dispatch(fetchRestaurants());
-  }, []);
-
-  if (status === "loading") {
-    return <Loader />;
-  }
 
   return (
     <main className="restau">
@@ -27,9 +15,6 @@ const AllRestaurants = () => {
         <>
           <section className="d-flex justify-content-between align-items-center mx-1">
             <h1 className="col-10">Discover Our Restaurants</h1>
-
-            <h1 className='col-10'>Discover Our Restaurants</h1>
-            
 
             <NavLink 
              to="all-restaurants" 
