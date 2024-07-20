@@ -24,22 +24,22 @@ const TableDetials = ({ table, details }) => {
         </p>
         <p>
           <span>Seats : </span> {table.max_number_of_persons} Seat
-          {table.max_number_of_persons > 1 && "s"}.
+          {table.max_number_of_persons > 1 ? "s" : ""}
         </p>
         <p>
           <span>Extra Seats : </span>{" "}
           {selectedData.extraSeats > 0
             ? `${selectedData.extraSeats} Seat${
-                selectedData.extraSeats > 1 && "s"
-              }.`
+                selectedData.extraSeats > 1 ? "s" : ""
+              }`
             : `No Extra Seats.`}
         </p>
         <p>
           <span>Kiddy Seats : </span>{" "}
           {selectedData.childSeats > 0
             ? `${selectedData.childSeats} Seat${
-                selectedData.childSeats > 1 && "s"
-              }.`
+                selectedData.childSeats > 1 ? "s" : ""
+              }`
             : `No Kiddy Seats.`}
         </p>
         <p>

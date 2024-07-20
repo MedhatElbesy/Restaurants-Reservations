@@ -40,10 +40,14 @@ export default function Footer({ restaurant }) {
           <p>
             <FontAwesomeIcon icon={faEnvelope} /> Keep in touch
           </p>
-          <p>email@email.com</p>
+          <p>
+            <a href={`mailto: restaurant@gamil.com`} type="email">
+              restaurant@gamil.com
+            </a>
+          </p>
         </div>
       </div>
-      <p className="text-color mb-2">
+      <p className="text-light mb-2">
         {restaurant.name} &copy; {new Date().getFullYear()} - All Rights
         Reserved
       </p>

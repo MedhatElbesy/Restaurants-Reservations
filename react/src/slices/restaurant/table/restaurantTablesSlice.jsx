@@ -28,13 +28,11 @@ const restaurantTablesSlice = createSlice({
       })
       .addCase(fetchRestaurantTablesAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.tables = action.payload;
+        state.tables = action.payload || [];
       })
       .addCase(fetchRestaurantTablesAsync.rejected, (state, action) => {
         state.status = "failed";
         state.loading = false;
-        console.log(action.payload);
-        state.tables = [];
         state.error = action.payload;
       });
   },

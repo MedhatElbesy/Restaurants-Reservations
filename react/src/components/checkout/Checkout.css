@@ -4,6 +4,12 @@
     color: var(--secColor);
     font-size: 1.5rem;
     cursor: pointer;
+    color: #fff;
+    background-color: var(--secColor);
+    width: 20px;
+    height: 20px;
+    padding: 0.5rem;
+    border-radius: 50%;
   }
   .navigation {
     display: flex;
@@ -197,8 +203,18 @@
   }
 }
 
-  .btn-back {
-    background-color: var(--secColor);
-    border: 1px solid var(--secColor);
-    color: var(--backgroundColor) !important;
+.btn-back {
+  background-color: transparent;
+  border: none;
+  color: var(--secColor) !important;
+  font-weight: bold;
+  &:hover {
+    svg {
+      transform: translateX(-0.4rem);
+    }
   }
+  svg {
+    transition: var(--mainTransition);
+    padding-right: 0.5rem;
+  }
+}

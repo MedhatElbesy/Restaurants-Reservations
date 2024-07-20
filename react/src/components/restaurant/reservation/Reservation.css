@@ -1,14 +1,14 @@
 .reservation {
   position: relative;
   margin-bottom: 1rem;
-  border-radius: 1rem;
+  padding-top: 1rem;
   .back {
     color: var(--secColor);
     font-size: 1.5rem;
     cursor: pointer;
     position: absolute;
     left: 1rem;
-    top: .75rem;
+    top: .5remrem;
     color: #FFF;
     background-color: var(--secColor);
     width: 20px;
@@ -114,9 +114,9 @@
       outline: none;
       border-radius: 0.2rem;
       border: 1px solid #c9c9c9ea;
-      color: #8b6c33;
+      color: var(--secColor);
       &:focus {
-        border: 1px solid #8b6c33;
+        border: 1px solid #ff6b1641;;
       }
     }
     .form-check {
@@ -126,15 +126,15 @@
         cursor: pointer;
         margin-right: 5px;
         &:checked {
-          background-color: #8b6c33;
+          background-color: var(--secColor);
         }
         &:focus {
-          box-shadow: 0 0 0 0.25rem rgb(139, 108, 51, 0.25);
+          box-shadow: 0 0 0 0.25rem #ff6b1641;
         }
       }
       color: #494949;
       .terms {
-        color: #8b6c33;
+        color: var(--secColor);
         text-decoration: none;
         font-weight: bold;
         font-size: 0.8rem;

@@ -54,10 +54,10 @@
         <h1>Payment Successful</h1>
     </div>
     <div class="content">
-        <h2>Dear {{ $userName }},</h2>
-        <p>We have received your payment of ${{ $paymentAmount }} on {{ $paymentDate }}.</p>
-        <p>Thank you for your purchase!</p>
-        <div class="reservation-details">
+        <h2>Dear Customer,</h2>
+        <p>We have received your payment, Your reservation has been confirmed.</p>
+        <p>Thank you for your reservation!</p>
+        {{-- <div class="reservation-details">
             <h3>Reservation Details:</h3>
             <p><strong>Total Price:</strong> ${{ $reservation->total_price }}</p>
             <p><strong>Notes:</strong> {{ $reservation->notes }}</p>
@@ -65,8 +65,8 @@
         </div>
         <div class="table-details">
             <h3>Table Details:</h3>
-            <p><strong>Description:</strong> {{ $table->description }}</p>
-            <p><strong>Number of Chairs:</strong> {{ $table->number_of_chairs }}</p>
+            <p><strong>Table No.:</strong> {{ $table->id }}</p>
+            <p><strong>Number of Seats:</strong> {{ $table->max_number_of_persons }}</p>
             <p><strong>Max Number of Persons:</strong> {{ $table->max_number_of_persons }}</p>
             <p><strong>Price:</strong> ${{ $table->price }}</p>
             <p><strong>Sale Price:</strong> ${{ $table->sale_price }}</p>
@@ -74,10 +74,10 @@
             <p><strong>Extra Chair Price:</strong> ${{ $table->extra_chair_price }}</p>
             <p><strong>Extra Child Chairs:</strong> {{ $table->extra_number_of_childs_chairs }}</p>
             <p><strong>Extra Child Chair Price:</strong> ${{ $table->extra_child_chair_price }}</p>
-        </div>
+        </div> --}}
     </div>
     <div class="footer">
-        <p>Thank you for choosing our service!</p>
+        <p>Thank you for choosing our restaurant!</p>
     </div>
 </div>
 </body>

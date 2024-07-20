@@ -129,6 +129,7 @@ export const formatPrice = (price, countryCode) => {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: currency,
+    currencyDisplay: "symbol",
   }).format(price);
 };
 
