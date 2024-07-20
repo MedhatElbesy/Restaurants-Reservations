@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { addRestaurantAsync } from '../../../slices/user/fetchUserSlice';
 
 const AddRestaurant = () => {
   const dispatch = useDispatch();
@@ -97,7 +97,7 @@ const AddRestaurant = () => {
 
   return (
     <main className="container">
-      <section className='formUserDashboard'>
+      <section className='formUserDashboard p-3'>
         <h2 className='text-center my-5'>Add New Restaurant</h2>
         {errorMessage && (
           <div className="alert alert-danger" role="alert">
@@ -160,45 +160,7 @@ const AddRestaurant = () => {
             />
           </div>
 
-          <section className="mb-3">
-            <label className="form-label mx-3">Status</label>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                id="active"
-                name="status"
-                value="Active"
-                checked={formData.status.toLowerCase() === 'active'}
-                onChange={handleChange}
-              />
-              <label className="form-check-label" htmlFor="active">Active</label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                id="inactive"
-                name="status"
-                value="Inactive"
-                checked={formData.status.toLowerCase() === 'inactive'}
-                onChange={handleChange}
-              />
-              <label className="form-check-label" htmlFor="inactive">Inactive</label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                id="deleted"
-                name="status"
-                value="Deleted"
-                checked={formData.status.toLowerCase() === 'deleted'}
-                onChange={handleChange}
-              />
-              <label className="form-check-label" htmlFor="deleted">Deleted</label>
-            </div>
-          </section>
+        
 
           <div className="mb-3">
             <label htmlFor="logo" className="form-label">Logo</label>
@@ -224,7 +186,38 @@ const AddRestaurant = () => {
               onChange={handleFileChange} />
           </div>
 
-          <button type="submit" className="btn btn-warning my-3 col-12">
+
+
+          <section className="mb-3 my-4">
+            <label className="form-label mx-1">Status</label>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                id="active"
+                name="status"
+                value="Active"
+                checked={formData.status.toLowerCase() === 'active'}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor="active">Active</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                id="inactive"
+                name="status"
+                value="Inactive"
+                checked={formData.status.toLowerCase() === 'inactive'}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor="inactive">Inactive</label>
+            </div>
+            
+          </section>
+          
+          <button type="submit" className="custom-button my-3 col-12">
             Submit
           </button>
         </form>

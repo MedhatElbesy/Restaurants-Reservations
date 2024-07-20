@@ -538,13 +538,13 @@ export default function Locations() {
 
                       <Link
                        to={`/edit-table/${table.id}`}
-                        className="btn btn-outline-primary btn-sm"
+                        className="btn btn-outline-primary btn-sm ps-3 pe-3"
                       >
                         <FontAwesomeIcon icon={faEdit} /> Edit 
                       </Link>
 
                       <button
-                        className="btn btn-outline-danger btn-sm"
+                        className="btn btn-outline-danger btn-sm ps-2 pe-2"
                         onClick={() => handleDelete(table.id)}
                       >
                         <FontAwesomeIcon icon={faTrash}/> Delete

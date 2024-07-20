@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addTableImageAsync } from '../../../slices/restaurant/tableImage/tableImage';
+import Swal from 'sweetalert2';
 
 const AddTableImage = () => {
   const dispatch = useDispatch();
@@ -36,16 +37,24 @@ const AddTableImage = () => {
     });
 
     dispatch(addTableImageAsync(formData))
-      .then((result) => {
-        if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
-        }
-      });
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Table Image added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
+      }
+    });
   };
 
   return (
     <main className="container mt-5">
-      <section className='formUserDashboard'>
+      <section className='formUserDashboard p-3'>
         <h1 className='text-center my-2'>Add Table Image</h1>
         
         <form onSubmit={handleSubmit} className="needs-validation my-5" noValidate>
@@ -65,7 +74,7 @@ const AddTableImage = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-warning my-5 col-12">Add Table Images</button>
+          <button type="submit" className="custom-button my-5 col-12">Add Table Images</button>
 
         
         </form>

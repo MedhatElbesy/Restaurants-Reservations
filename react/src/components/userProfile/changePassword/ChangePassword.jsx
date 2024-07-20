@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import Swal from 'sweetalert2';
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,14 @@ const ChangePassword = () => {
     try {
       await dispatch(changePasswordAsync(formData)).then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
+          Swal.fire({
+            title: 'Success!',
+            text: 'Password Updated successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            navigate(-1);
+          });
         }
       });
       setErrorMessage('');
@@ -160,7 +168,7 @@ const ChangePassword = () => {
 
                 </section>
 
-                <button type="submit" className="btn btn-warning col-12 my-4">
+                <button type="submit" className="custom-button col-12 my-4">
                   Change Password
                 </button>
 

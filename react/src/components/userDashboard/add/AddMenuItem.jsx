@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { addMenuItemThunk } from '../../../slices/restaurant/menuItem/addMenuItem'; 
+import Swal from 'sweetalert2';
 
 const AddMenuItem = () => {
   const { menuCategoryId } = useParams();
@@ -34,8 +35,17 @@ const AddMenuItem = () => {
     }
     dispatch(addMenuItemThunk({ ...formData, menu_category_id: menuCategoryId }))
       .unwrap()
-      .then(() => {
-        navigate(-1); 
+      .then((result) => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Menu Item added successfully!',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            navigate(-1); 
+          });
+        
       })
       .catch((error) => {
         console.error('Failed to add menu item:', error);
@@ -47,7 +57,7 @@ const AddMenuItem = () => {
 
 <main className="container">
 
-  <section className='formUserDashboard'>
+  <section className='formUserDashboard p-3'>
 
       <h2 className='text-center my-5'>Add Menu Item</h2>
 
@@ -115,7 +125,7 @@ const AddMenuItem = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning my-4 col-12">Add Menu Item</button>
+        <button type="submit" className="custom-button my-4 col-12">Add Menu Item</button>
       </form>
 
       </section>

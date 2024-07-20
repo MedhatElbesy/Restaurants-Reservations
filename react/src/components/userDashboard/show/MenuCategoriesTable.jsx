@@ -278,7 +278,7 @@ export default function MenuCategoriesTable() {
                         Menu Items
                       </button>
                       <Link
-                        to={`/edit-category/${category.id}`}
+                        to={`/edit-menu-category/${category.id}`}
                         className="btn btn-outline-primary pe-4 ps-4 btn-sm"
                         title="Edit Menu Category"
                       >

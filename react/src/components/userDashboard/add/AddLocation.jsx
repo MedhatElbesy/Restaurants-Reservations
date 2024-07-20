@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
   useMapEvents({
@@ -184,13 +185,29 @@ const AddLocation = () => {
       const resultAction = await dispatch(addLocationAsync(formDataToSend));
   
       if (resultAction.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
-      } else {
-        alert('please enter unique number.'); 
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'Location added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
+
+      } else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Please enter unique number.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+      });
       }
     } catch (error) {
       console.error('Error adding location:', error);
-      alert('please enter unique number.');
+     
     }
   };
   
@@ -201,7 +218,7 @@ const AddLocation = () => {
   return (
  <main className="container">
 
-   <section className='formUserDashboard'>
+   <section className='formUserDashboard p-3'>
 
       <h2 className='text-center my-5'>Add Location</h2>
 
@@ -486,7 +503,22 @@ const AddLocation = () => {
           />
         </div>
 
+       
         <div className="mb-3">
+            <label htmlFor="images" className="form-label">Images</label>
+            <input
+              type="file"
+              className="form-control"
+              id="images"
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleFileChange}
+            />
+          </div>
+
+
+          <div className="mb-3">
           <label htmlFor="status" className="form-label">Status</label>
           <select
             className="form-control"
@@ -501,20 +533,8 @@ const AddLocation = () => {
           </select>
         </div>
 
-        <div className="mb-3">
-            <label htmlFor="images" className="form-label">Images</label>
-            <input
-              type="file"
-              className="form-control"
-              id="images"
-              name="images"
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-            />
-          </div>
 
-        <button type="submit" className="btn btn-warning col-12">Add Location</button>
+        <button type="submit" className=" custom-button my-5 col-12">Add Location</button>
       </form>
 
       </section>
