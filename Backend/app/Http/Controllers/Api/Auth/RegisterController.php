@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Traits\UploadImageTrait;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,8 @@ use Exception;
 
 class RegisterController extends Controller
 {
+    //This is Nagy and i edited here
+    use UploadImageTrait;
     public function __construct()
     {
         /* $this->middleware(['auth:sanctum , verified:sanctum'])->except('store','create_access_token' , 'show' ,'userActivation');*/
@@ -27,6 +30,11 @@ class RegisterController extends Controller
         try {
             $data = $request->except('_token');
 
+
+            /// This is Nagy and i edited here
+            if ($request->hasFile('profile_image')) {
+                $data['profile_image'] = $this->uploadImage($request, 'profile_image', 'profile_images');
+            }
             $user = User::create($data);
 
             /* send unique code to verify email when created new account */
