@@ -82,16 +82,11 @@ const Checkout = () => {
       const response = await dispatch(
         checkoutReservation(checkoutData)
       ).unwrap();
-      console.log(response);
       if(response.status == 200) {
         window.location.href = response.data;
+      } else if (response.status == 201) {
+        navigate("/reservation/done");
       }
-      // if (paymentData.gateway.type === "paypal") {
-      //   const iframe = document.getElementById("paypalIframe");
-      //   iframe.src = response.data;
-      // }
-      // nextStep();
-      // navigate("/reservation/done");
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
     }

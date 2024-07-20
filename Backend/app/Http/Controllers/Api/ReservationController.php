@@ -153,7 +153,7 @@ class ReservationController extends Controller
         return ApiResponse::sendResponse(400, 'Failed to create PayPal order.');
     }
 
-    public function paymentSuccess(Request $request): JsonResponse
+    public function paymentSuccess(Request $request)
     {
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -170,9 +170,12 @@ class ReservationController extends Controller
                     'status' => 'success'
                 ]);
             }
-            return ApiResponse::sendResponse(200, 'Payment successfull');
+            // return ApiResponse::sendResponse(200, 'Payment successfull');
+            // ApiResponse::sendResponse(200, 'Payment successfull');
+            return redirect("http://localhost:5173/reservation/done");
         }
-        return ApiResponse::sendResponse(400, 'Payment failed');
+        return redirect("http://localhost:5173/server-error");
+        // return ApiResponse::sendResponse(400, 'Payment failed');
     }
 
     public function paymentCancel(): JsonResponse
@@ -196,14 +199,14 @@ class ReservationController extends Controller
             $payment->save();
             $user = $reservation->user;
 
-            Mail::send('emails.reservation', ['user' => $user, 'status' => $reservation->status] , function ($message) use ($user) {
+            Mail::send('emails.reservation', ['user' => $user, 'status' => $reservation->status], function ($message) use ($user) {
                 $message->from('noreply@example.com', config('app.name'));
                 $message->to($user['email']);
                 $message->subject('Reservation Confirmation');
             });
 
             return ApiResponse::sendResponse(200, 'Reservation status updated successfully, Check your email.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return ApiResponse::sendResponse(400, 'Failed to update user status.');
         }
     }

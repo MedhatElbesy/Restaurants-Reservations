@@ -94,6 +94,10 @@ import UserRestaurant from "./components/userProfile/userProfilePage/UserRestaur
 import Sidebar from "./layouts/Sidebar.jsx";
 import EditCategoryForm from "./components/userDashboard/edit/EditCategoryForm.jsx";
 
+// Error
+import Error404 from "./components/error/Error404.jsx";
+import Error500 from "./components/error/Error500.jsx";
+
 const Layout = () => (
   <>
     <MyNavbar />
@@ -131,7 +135,6 @@ function App() {
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}
         <Route path="/reservation/done" element={<Done />} />{" "}
-
         {/* all user logged  */}
         <Route path="/userprofile" element={<UserProfile />}></Route>
         <Route path="/edit-profile" element={<EditProfile />} />
@@ -252,6 +255,8 @@ function App() {
       </Route>
       <Route path="/notify" element={<RestaurantLocationNotifications />} />
       <Route path="all-restaurants" element={<AllRestaurantsPage />} />
+      <Route path="/not-found" element={<Error404 />} />
+      <Route path="/server-error" element={<Error500 />} />
     </Route>
   );
 
