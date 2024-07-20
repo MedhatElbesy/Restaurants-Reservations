@@ -11,9 +11,9 @@ class UserAddress extends Model
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
-    public function user()
+    public function user() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function country() : BelongsTo
@@ -25,9 +25,9 @@ class UserAddress extends Model
     {
         return $this->belongsTo(Governorate::class, 'governorate_id', 'id');
     }
-    public function city()
+    public function city() : BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 
     public function state() : BelongsTo

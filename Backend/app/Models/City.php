@@ -26,13 +26,13 @@ class City extends Model
         return $this->hasMany(State::class, 'city_id', 'id');
     }
 
-    public function restaurantLocations()
-    {
-        return $this->hasMany(RestaurantLocation::class);
-    }
+    // public function restaurantLocations()
+    // {
+    //     return $this->hasMany(RestaurantLocation::class);
+    // }
 
-    public function userAddresses()
-    {
-        return $this->hasMany(UserAddress::class);
-    }
+    // public function userAddresses()
+    // {
+    //     return $this->hasMany(UserAddress::class);
+    // }
 }

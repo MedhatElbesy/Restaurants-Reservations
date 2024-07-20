@@ -66,9 +66,8 @@ class User extends Authenticatable
         return $this->first_name.' '. $this->last_name;
     }
 
-    public function userAddresses()
-    {
-        return $this->hasMany(UserAddress::class);
+    public function addresses () : HasMany{
+        return $this->hasMany(UserAddress::class, 'user_id', 'id');
     }
 
     public function restaurants() : HasMany{
