@@ -17,12 +17,18 @@ const NearRestau = () => {
   const userId = decryptData("userId");
 
   useEffect(() => {
-    if(userId){
-        dispatch(fetchNearestRestaurants(userId));
+    if (userId) {
+      dispatch(fetchNearestRestaurants(userId));
     }
-  }, [userId]);
+  }, [dispatch, userId]);
 
- 
+  if(nearestRestaurantsData.length === 0) {
+    return (
+      <p className="text-center mb-5 text-sec fs-4">
+        Add Address To Get Restaurants Nearest You
+      </p>
+    );
+  }
 
   return (
     <main className="restau">

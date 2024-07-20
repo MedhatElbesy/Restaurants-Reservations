@@ -6,8 +6,8 @@
 :root {
   --backgroundColor: #ffffff;
   --mainColor: #9c9c9c;
-  --secColor: #FF6B16;
   --secColor: #993400;
+  --secColor: #FF6B16;
   --textColor: #4e4e4e;
   --errorColor: #dc3545;
   --mainTransition: .3s ease-in-out;
@@ -51,6 +51,9 @@ body {
 
 .text-sec {
   color: var(--secColor);
+}
+.bg-sec-color {
+  background-color: var(--secColor);
 }
 
 .text-color {

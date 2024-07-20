@@ -16,7 +16,7 @@ class LocationController extends Controller
                         ->first(['latitude', 'longitude']);
 
         if (!$userAddress) {
-            return ApiResponse::sendResponse(404,'User address not found');
+            return ApiResponse::sendResponse(204,'User address not found');
         }
 
         $latitude = $userAddress->latitude;
@@ -27,12 +27,12 @@ class LocationController extends Controller
         $nearestLocations = DB::table('restaurant_locations')
                             ->select('restaurant_locations.*', 'restaurant_location_images.image', 'restaurants.name as restaurant_name')
                             ->selectRaw("$haversine AS distance")
-                            ->leftJoin('restaurants', 'restaurant_locations.restaurant_id', '=', 'restaurants.id') 
+                            ->leftJoin('restaurants', 'restaurant_locations.restaurant_id', '=', 'restaurants.id')
                             ->leftJoin('restaurant_location_images', 'restaurant_locations.id', '=', 'restaurant_location_images.restaurant_location_id')
                             ->having('distance', '<', $radius)
                             ->orderBy('distance')
                             ->get();
-                            
+
         return ApiResponse::sendResponse(200,"Nearest",$nearestLocations );
     }
 }
