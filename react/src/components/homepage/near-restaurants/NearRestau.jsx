@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import CardSlick from "../card/CardSlick";
 import Card from "../card/Card";
 import { fetchNearestRestaurants } from "../../../slices/restaurant/nearest-restaurants/nearestRestaurants";
-import Loader from "../../../layouts/loader/loader";
 import { NavLink } from "react-router-dom";
 import { decryptData } from "../../../helpers/cryptoUtils";
 
 const NearRestau = () => {
   const dispatch = useDispatch();
   const userId = decryptData("userId");
-  const { data: nearestRestaurantsData, status } = useSelector(
+  const { data: nearestRestaurantsData, status, error } = useSelector(
     (state) => state.nearestRestaurants
   );
 
@@ -20,12 +19,20 @@ const NearRestau = () => {
     }
   }, [userId]);
 
-  
+ 
+
+  if (status === 'failed') {
+    return (
+      <p className="text-center mb-5 text-sec fs-4">
+       
+      </p>
+    );
+  }
 
   if (nearestRestaurantsData.length === 0) {
     return (
       <p className="text-center mb-5 text-sec fs-4">
-  
+        
       </p>
     );
   }
@@ -34,9 +41,7 @@ const NearRestau = () => {
     <main className="restau">
       {nearestRestaurantsData.length > 3 && (
         <section className="row my-5">
-
           <h1 className="col-10 mx-3 my-5">Nearest Restaurants</h1>
-
           <CardSlick>
             {nearestRestaurantsData.map((restaurant, index) => {
               const restaurantImage = restaurant.images.length
@@ -56,7 +61,6 @@ const NearRestau = () => {
               );
             })}
           </CardSlick>
-          
         </section>
       )}
     </main>
