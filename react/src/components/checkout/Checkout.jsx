@@ -91,7 +91,7 @@ const Checkout = () => {
       //   iframe.src = response.data;
       // }
       // nextStep();
-      navigate("/reservation/done");
+      // navigate("/reservation/done");
     } catch (error) {
       console.error("Error placing order:", error.data.errors);
     }
