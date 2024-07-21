@@ -133,7 +133,7 @@ class RestaurantLocationsController extends Controller
                 }
             }
             DB::commit();
-
+            $location->load('images');
             return ApiResponse::sendResponse(200, 'Location Updated Successfully', $location);
         } catch (Throwable $e) {
             DB::rollback();

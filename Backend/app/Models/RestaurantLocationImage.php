@@ -13,16 +13,16 @@ class RestaurantLocationImage extends Model
 
 
     /// UNder the confirmation of eng medhat elbesy
-//    public function getImageUrlAttribute()
-//    {
-//        if (!$this->image) {
-//            return 'https://img.freepik.com/free-psd/cafe-table-isolated-transparent-background_191095-13805.jpg';
-//        }
-//        if (Str::startsWith($this->cover, ['http://', 'https://'])) {
-//            return $this->image;
-//        }
-//        return url('storage/' . $this->image);
-//    }
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return 'https://img.freepik.com/free-psd/cafe-table-isolated-transparent-background_191095-13805.jpg';
+        }
+        if (Str::startsWith($this->cover, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        return url('storage/' . $this->image);
+    }
 
     public function restaurantLocation() : BelongsTo
     {

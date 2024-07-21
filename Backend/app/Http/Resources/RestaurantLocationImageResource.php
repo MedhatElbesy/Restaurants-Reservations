@@ -17,7 +17,7 @@ class RestaurantLocationImageResource extends JsonResource
         return [
             'id' => $this->id,
             'restaurant_location_id' => $this->restaurant_location_id,
-            'image' => $this->image,
+            'image' => $this->image_url,
         ];
     }
 }
