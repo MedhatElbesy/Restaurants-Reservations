@@ -51,11 +51,13 @@ class MenuCategoryController extends Controller
     {
         try {
             $restaurant = Restaurant::findOrFail($restaurantId);
-            $menuCategories = MenuCategory::where('restaurant_id', $restaurantId)->get();
-            return ApiResponse::sendResponse(200,"menu categories for restaurant",$menuCategories);
-        } catch (ModelNotFoundException $e) {
-            return ApiResponse::sendResponse(404, 'Menu category not found',  $e->getMessage());
-        }
+            $menuCategories = MenuCategory::where('restaurant_id', $restaurantId)
+                                    ->with('menuItems')
+                                    ->get();
+        return ApiResponse::sendResponse(200, "Menu categories for restaurant", $menuCategories);
+    } catch (ModelNotFoundException $e) {
+        return ApiResponse::sendResponse(404, 'Restaurant not found', $e->getMessage());
+    }
     }
 
     public function update(Request $request, $id)
