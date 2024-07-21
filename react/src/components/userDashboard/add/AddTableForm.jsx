@@ -76,9 +76,19 @@ const AddTableForm = () => {
     }
 
     await dispatch(addTableAsync(formDataToSubmit))
-      .then(() => {
-        navigate(-1); 
-      });
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Table added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
+      }
+    });
   };
 
   if (addTableStatus === 'loading') {
@@ -92,9 +102,9 @@ const AddTableForm = () => {
 
         <div className="col-md-6">
 
-          <div className="card">
+          <div>
 
-            <div className="card-body table-card">
+            <div className=" table-card p-3">
 
               <h2 className="card-title text-center mb-4">Add Table</h2>
 
@@ -113,27 +123,27 @@ const AddTableForm = () => {
                     type="number"
                     id="number_of_chairs"
                     name="number_of_chairs"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.number_of_chairs}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group  my-4">
                   <label htmlFor="max_number_of_persons">Max Number of Persons</label>
                   <input
                     type="number"
                     id="max_number_of_persons"
                     name="max_number_of_persons"
-                    className="form-control"
+                    className="form-control  my-2"
                     value={formData.max_number_of_persons}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group my-4">
                   <label htmlFor="cover">Cover</label>
                   <input
                     type="file"
@@ -145,62 +155,76 @@ const AddTableForm = () => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group my-4">
                   <label htmlFor="price">Price</label>
                   <input
                     type="number"
                     id="price"
                     name="price"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.price}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group my-4">
                   <label htmlFor="sale_price">Sale Price</label>
                   <input
                     type="number"
                     id="sale_price"
                     name="sale_price"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.sale_price}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group my-4">
                   <label htmlFor="extra_number_of_chairs">Extra Number of Chairs</label>
                   <input
                     type="number"
                     id="extra_number_of_chairs"
                     name="extra_number_of_chairs"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.extra_number_of_chairs}
                     onChange={handleChange}
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group my-4">
                   <label htmlFor="extra_number_of_childs_chairs">Extra Child Chairs</label>
                   <input
                     type="number"
                     id="extra_number_of_childs_chairs"
                     name="extra_number_of_childs_chairs"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.extra_number_of_childs_chairs}
                     onChange={handleChange}
                   />
                 </div>
 
-                <div className="form-group">
+
+                <div className="form-group my-4">
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    className="form-control my-2"
+                    value={formData.description}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+
+                <div className="form-group my-4">
                   <label htmlFor="status">Status</label>
                   <select
                     id="status"
                     name="status"
-                    className="form-control"
+                    className="form-control my-2"
                     value={formData.status}
                     onChange={handleChange}
                     required
@@ -210,19 +234,8 @@ const AddTableForm = () => {
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="description">Description</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    className="form-control"
-                    value={formData.description}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
 
-                <button type="submit" className="btn btn-warning col-12 my-3">
+                <button type="submit" className="custom-button col-12 my-3">
                   Add Table
                 </button>
 

@@ -3,9 +3,9 @@ import { nearestRestaurants } from '../../../api/restaurant/restaurantFetch';
 
 export const fetchNearestRestaurants = createAsyncThunk(
   'nearestRestaurants/fetchNearestRestaurants',
-  async (userId, { rejectWithValue }) => {
+  async (_,{ rejectWithValue }) => {
     try {
-      const data = await nearestRestaurants(userId);
+      const data = await nearestRestaurants();
       return data;
     } catch (error) {
       console.error('An error occurred during fetching nearest restaurant data', error);
@@ -35,7 +35,8 @@ const nearestRestaurantsSlice = createSlice({
       })
       .addCase(fetchNearestRestaurants.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload.data;
+        console.log(action.payload.data);
+        state.data = action.payload.data || [];
       })
       .addCase(fetchNearestRestaurants.rejected, (state, action) => {
         state.status = 'failed';

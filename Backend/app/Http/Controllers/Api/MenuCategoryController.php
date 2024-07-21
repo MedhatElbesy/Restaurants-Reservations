@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\MenuCategory;
+use App\Models\Restaurant;
+use App\Models\RestaurantLocation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -43,6 +45,19 @@ class MenuCategoryController extends Controller
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Menu category not found'], 404);
         }
+    }
+
+    public function getMenuCategoryByRestaurantId($restaurantId)
+    {
+        try {
+            $restaurant = Restaurant::findOrFail($restaurantId);
+            $menuCategories = MenuCategory::where('restaurant_id', $restaurantId)
+                                    ->with('menuItems')
+                                    ->get();
+        return ApiResponse::sendResponse(200, "Menu categories for restaurant", $menuCategories);
+    } catch (ModelNotFoundException $e) {
+        return ApiResponse::sendResponse(404, 'Restaurant not found', $e->getMessage());
+    }
     }
 
     public function update(Request $request, $id)

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addCategoryAsync, fetchAllCategoryAsync } from '../../../slices/restaurant/restaurantCategory/restaurantCategory';
 import { Form, Button, Alert } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 
 const AddRestaurantCategory = () => {
@@ -41,7 +42,15 @@ const AddRestaurantCategory = () => {
     dispatch(addCategoryAsync(formDataForSubmission))
     .then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
+        Swal.fire({
+          title: 'Success!',
+          text: 'Restaurant Category added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
       }
     });
   };
@@ -57,7 +66,7 @@ const AddRestaurantCategory = () => {
   return (
     <main className='my-5'>
 
-     <section className='formUserDashboard col-6 offset-3'>
+     <section className='formUserDashboard p-3 col-6 offset-3'>
 
        <h2 className='text-center my-5'>Add Category</h2>
 
@@ -104,19 +113,12 @@ const AddRestaurantCategory = () => {
             value="disabled"
             onChange={handleChange}
           />
-           <Form.Check
-            type="radio"
-            id="deleted"
-            name="status"
-            label="Deleted"
-            value="deleted"
-            onChange={handleChange}
-          />
+           
         </div>
 
-        <Button variant="warning col-12 my-3" type="submit">
+        <button className="custom-button col-12 my-3" type="submit">
           Add Category
-        </Button>
+        </button>
       </Form>
 
       </section>

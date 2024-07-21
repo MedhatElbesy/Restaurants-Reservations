@@ -1,24 +1,19 @@
-import React, { useContext } from "react";
-import { BodyColorContext } from "../../BodyColorContext";
+import React from "react";
 import "./AboutUs.css";
 
 export default function AboutUs() {
-  const { bodyColor } = useContext(BodyColorContext);
+  
 
   return (
-    <div className="about-container">
-      <div className={`about-content `}>
+    <div className="about-container my-5">
+      <div className="about-content my-5">
         <h1
-          className={`about-title text-${
-            bodyColor === "light" ? "secondary" : "yello-var"
-          }`}
+          className="about-title"
         >
           About Us
         </h1>
         <p
-          className={`about-description text-${
-            bodyColor === "light" ? "dark" : "light"
-          }`}
+          className="about-description text-dark" 
         >
           Welcome to our restaurant reservation website! We, a group of
           enthusiastic students from the ITI, are passionate about creating a
@@ -26,9 +21,7 @@ export default function AboutUs() {
           experience.
           <br />
           <strong
-            className={`p-1 about-description text-${
-              bodyColor === "light" ? "dark" : "light"
-            }`}
+            className="p-1 about-description text-dark" 
           >
             {" "}
             Make Reservations with Ease:
@@ -39,9 +32,7 @@ export default function AboutUs() {
           all in one place.
           <br/>
           <strong
-            className={` mt-1 p-1 about-description text-${
-              bodyColor === "light" ? "dark" : "light"
-            }`}
+            className="mt-1 p-1 about-description text-dark"
           >
             Dedicated to Your Satisfaction:  
           </strong>

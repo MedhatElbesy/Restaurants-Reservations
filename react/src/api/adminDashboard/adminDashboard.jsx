@@ -4,7 +4,6 @@ import axios from "../../axios";
 export const getRestaurants = async () => {
   try {
     const response = await axios.get('/restaurants');
-    console.log('line seven');
     console.log(response.data.data);
     return response.data.data;
   } catch (error) {
@@ -13,16 +12,7 @@ export const getRestaurants = async () => {
   }
 };
 
-// // Create a restaurant
-// export const createRestaurant = async (restaurantData) => {
-//   try {
-//     const response = await axios.post('/restaurants', restaurantData);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Failed to create restaurant", error);
-//     throw error;
-//   }
-// };
+
 
 // Update a restaurant
 export const updateRestaurant = async (id, restaurantData) => {
@@ -37,17 +27,67 @@ export const updateRestaurant = async (id, restaurantData) => {
 
 
 // Disable a restaurant
-export const disableRestaurant = async (id) => {
+
+//Owners
+export const getOwners = async () => {
   try {
-    const response = await axios.put(`/restaurants/${id}/update-status`);
+    const response = await axios.get('/reports');
     return response.data;
   } catch (error) {
-    console.error(`Failed to disable restaurant with id ${id}`, error);
+    console.error("Failed to fetch owners", error);
     throw error;
   }
 };
-
-
+//Reservations
+export const getReservations = async () => {
+  try {
+    const response = await axios.get('/reservations');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch reservations", error);
+    throw error;
+  }
+};
+//Locations
+export const getLocations = async () => {
+  try {
+    const response = await axios.get('/locations');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch locaions", error);
+    throw error;
+  }
+};
+//cities
+export const getCities = async () => {
+  try {
+    const response = await axios.get('/cities');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch cities", error);
+    throw error;
+  }
+};
+//governoments
+export const getGovernorates = async () => {
+  try {
+    const response = await axios.get('/governorates');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch governorates", error);
+    throw error;
+  }
+};
+//countries
+export const getcountries = async () => {
+  try {
+    const response = await axios.get('/countries');
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch countries", error);
+    throw error;
+  }
+};
 // Reports
 export const getReports = async () => {
   try {

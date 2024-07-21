@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUserAsync } from '../../../slices/user/updateUserSlice';
-import { fetchUserDataById } from '../../../slices/user/fetchUserSlice';
+import { fetchUserDataById, updateUserAsync } from '../../../slices/user/fetchUserSlice';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../../layouts/loader/loader';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import Swal from 'sweetalert2';
 
 export default function EditProfile() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function EditProfile() {
     if (userId) {
       dispatch(fetchUserDataById(userId));
     }
-  }, [userId, dispatch]);
+  }, [userId]);
 
   useEffect(() => {
     if (userData) {
@@ -67,11 +67,18 @@ export default function EditProfile() {
     }
 
     dispatch(updateUserAsync({ userId, data: formDataToUpdate }))
-      .then((result) => {
-        if (result.meta.requestStatus === 'fulfilled') {
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Profile updated successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
           navigate(-1);
-        }
-      });
+        });
+      }
+    })
   };
 
   const handleInputChange = (event) => {
@@ -103,15 +110,15 @@ export default function EditProfile() {
   }
 
   return (
-    <main className="container mt-5">
+    <main className="container edit ">
 
-      <section className="row justify-content-center">
+      <section className="row  my-5">
 
-        <div className="card col-12 table-card">
+        <div className=" col-6 my-5 offset-3 formEditProfile">
 
-          <h1 className="text-center">Edit Profile</h1>
+          <h1 className="text-center my-4">Edit Profile</h1>
 
-          <div className="card-body">
+          <div className="">
 
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
@@ -223,7 +230,7 @@ export default function EditProfile() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-warning my-4 col-12">
+              <button type="submit" className="custom-button my-4 col-12">
                 Update
               </button>
 

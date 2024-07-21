@@ -19,7 +19,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 1,
                 'logo' => 'logos/restaurant1.png',
-                'cover' => 'covers/restaurant1.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1574936145840-28808d77a0b6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D',
                 'name' => 'The Great Restaurant',
                 'slug' => str::slug('The Great Restaurant'),
                 'title' => 'Best Dining Experience',
@@ -34,7 +34,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => 'logos/restaurant2.png',
-                'cover' => 'covers/restaurant2.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1543007631-283050bb3e8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODd8fHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D',
                 'name' => 'Nrban Eats',
                 'slug' => Str::slug('Nrban Eats'),
                 'title' => 'Delicious Urban Cuisine',
@@ -49,7 +49,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => 'logos/restaurant3.png',
-                'cover' => 'covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1602232037779-30b01ac3c457?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTR8fHJlc3RhdXJhbnR8ZW58MHx8MHx8fDA%3D',
                 'name' => 'Urban Eats',
                 'slug' => Str::slug('Urban Eats'),
                 'title' => '3Delicious Urban Cuisine',
@@ -64,7 +64,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => '4logos/restaurant3.png',
-                'cover' => '4covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1569096651661-820d0de8b4ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAzfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '4Urban Eats',
                 'slug' => Str::slug('4Urban Eats'),
                 'title' => '4Delicious Urban Cuisine',
@@ -79,7 +79,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => '5logos/restaurant3.png',
-                'cover' => '5covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1531973819741-e27a5ae2cc7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA5fHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '5Urban Eats',
                 'slug' => Str::slug('5Urban Eats'),
                 'title' => '5Delicious Urban Cuisine',
@@ -94,7 +94,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 1,
                 'logo' => '6logos/restaurant3.png',
-                'cover' => '6covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1567745219000-b99afacf5ef6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTIyfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '6Urban Eats',
                 'slug' => Str::slug('6Urban Eats'),
                 'title' => '6Delicious Urban Cuisine',
@@ -109,7 +109,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 1,
                 'logo' => '7logos/restaurant3.png',
-                'cover' => '7covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1610894803089-0c3283d8d059?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc3fHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '7Urban Eats',
                 'slug' => Str::slug('7Urban Eats'),
                 'title' => '7Delicious Urban Cuisine',
@@ -124,7 +124,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 1,
                 'logo' => '8logos/restaurant3.png',
-                'cover' => '8covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1569541372853-97033ae8983b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTUwfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '8Urban Eats',
                 'slug' => Str::slug('8Urban Eats'),
                 'title' => '8Delicious Urban Cuisine',
@@ -139,7 +139,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => '9logos/restaurant3.png',
-                'cover' => '9covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjAxfHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '9Urban Eats',
                 'slug' => Str::slug('9Urban Eats'),
                 'title' => '9Delicious Urban Cuisine',
@@ -154,7 +154,7 @@ class RestaurantsSeeder extends Seeder
             [
                 'user_id' => 2,
                 'logo' => '10logos/restaurant3.png',
-                'cover' => '10covers/restaurant3.jpg',
+                'cover' => 'https://images.unsplash.com/photo-1554919428-20d72fa44a99?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjc5fHxyZXN0YXVyYW50fGVufDB8fDB8fHww',
                 'name' => '10Urban Eats',
                 'slug' => Str::slug('10Urban Eats'),
                 'title' => '10Delicious Urban Cuisine',

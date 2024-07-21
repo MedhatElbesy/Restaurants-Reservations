@@ -1,0 +1,20 @@
+.main-content {
+  background-color: var(--clr-white);
+  margin-left: 260px;
+  padding: 32px;
+  transition: var(--transition-default);
+  flex: 1;
+}
+
+@media screen and (max-width: 1200px) {
+  .main-content {
+    margin-left: 72px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
+}

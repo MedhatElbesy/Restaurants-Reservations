@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
   useMapEvents({
@@ -41,7 +42,7 @@ const AddLocation = () => {
   const locationStatus = useSelector((state) => state.location.status);
   const {error} = useSelector((state) => state.location);
   const navigate = useNavigate();
-
+  const [isFormValid, setIsFormValid] = useState(true);
   const [position, setPosition] = useState(null);
   const [openingTime, setOpeningTime] = useState(null);
   const [closingTime, setClosingTime] = useState(null);
@@ -130,27 +131,35 @@ const AddLocation = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    const maxSizeInBytes = 2048 * 1024; 
   
-    const isValidFiles = files.every(file => {
-      const sizeInBytes = file.size;
-      return sizeInBytes <= maxSizeInBytes;
-    });
-  
-    if (!isValidFiles) {
-      alert('Please upload images with size up to 2 MB.');
-      return;
-    }
-  
-   
     setImages(files);
   };
+  
   
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
+    const maxSizeInBytes = 2048 * 1024; 
+  
+    const isValidFiles = images.every(file => {
+      const { size, type } = file;
+      const extension = type.split('/').pop(); 
+      return size <= maxSizeInBytes && allowedExtensions.includes(extension);
+    });
+  
+    if (!isValidFiles) {
+      alert('Please upload images with types: jpeg, jpg, png, gif, svg and size up to 2 MB.');
+      setIsFormValid(false);
+      return;
+    }
+  
+   
+    setIsFormValid(true);
+  
+   
     const formDataToSend = new FormData();
     formDataToSend.append('address', formData.address);
     formDataToSend.append('zip', formData.zip);
@@ -176,16 +185,30 @@ const AddLocation = () => {
       const resultAction = await dispatch(addLocationAsync(formDataToSend));
   
       if (resultAction.meta.requestStatus === 'fulfilled') {
-        navigate(-1);
-      } else {
-          
-         alert('An error occurred ,please enter unique number'); 
-        
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'Location added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
+
+      } else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Please enter unique number.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+      });
       }
-    }  catch (error) {
+    } catch (error) {
       console.error('Error adding location:', error);
+     
     }
-    
   };
   
   if (locationStatus === 'loading') {
@@ -195,7 +218,7 @@ const AddLocation = () => {
   return (
  <main className="container">
 
-   <section className='formUserDashboard'>
+   <section className='formUserDashboard p-3'>
 
       <h2 className='text-center my-5'>Add Location</h2>
 
@@ -480,7 +503,22 @@ const AddLocation = () => {
           />
         </div>
 
+       
         <div className="mb-3">
+            <label htmlFor="images" className="form-label">Images</label>
+            <input
+              type="file"
+              className="form-control"
+              id="images"
+              name="images"
+              accept="image/*"
+              multiple
+              onChange={handleFileChange}
+            />
+          </div>
+
+
+          <div className="mb-3">
           <label htmlFor="status" className="form-label">Status</label>
           <select
             className="form-control"
@@ -495,20 +533,8 @@ const AddLocation = () => {
           </select>
         </div>
 
-        <div className="mb-3">
-            <label htmlFor="images" className="form-label">Images</label>
-            <input
-              type="file"
-              className="form-control"
-              id="images"
-              name="images"
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-            />
-          </div>
 
-        <button type="submit" className="btn btn-warning col-12">Add Location</button>
+        <button type="submit" className=" custom-button my-5 col-12">Add Location</button>
       </form>
 
       </section>

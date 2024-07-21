@@ -26,13 +26,12 @@ export const fetchRestaurantById = createAsyncThunk(
   async (restaurantId, { rejectWithValue }) => {
     try {
       const data = await getRestaurantById(restaurantId);
+      console.log(data);
       return data;
     } catch (error) {
-      return rejectWithValue({
-        status: error.response.status,
-        data: error.response.data,
-        message: error.message,
-      });
+      return rejectWithValue(
+        error.response.data
+      );
     }
   }
 );

@@ -1,30 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addUserAddress, updateUserAddress, fetchUserAddress, deleteUserAddress } from '../../api/user/userAddress'; 
+import { fetchUserAddress, deleteUserAddress } from '../../api/user/userAddress'; 
 
-
-export const addUserAddressAsync = createAsyncThunk(
-  'user/addUserAddress',
-  async ({ userId, addressData }, thunkAPI) => {
-    try {
-      const response = await addUserAddress(userId, addressData);
-      return response.data; 
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const updateUserAddressAsync = createAsyncThunk(
-  'user/updateUserAddress',
-  async ({ userId, addressId, addressData }, thunkAPI) => {
-    try {
-      const response = await updateUserAddress(userId, addressId, addressData);
-      return response.data; 
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); 
-    }
-  }
-);
 
 export const fetchUserAddressAsync = createAsyncThunk(
   'user/fetchUserAddress',
@@ -68,15 +44,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      .addCase(addUserAddressAsync.fulfilled, (state, action) => {
-        state.loading = false;
-      })
-     
-      .addCase(updateUserAddressAsync.fulfilled, (state, action) => {
-        state.loading = false;
-      })
-    
-     
       .addCase(fetchUserAddressAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.userAddress = action.payload; 

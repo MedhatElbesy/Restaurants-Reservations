@@ -1,173 +1,233 @@
-import { useContext, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Image,
-  InputGroup,
-} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSun,
-  faMoon,
-  faBars,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-import { BodyColorContext } from "../../BodyColorContext";
-import { NavLink } from "react-router-dom";
+import { faSearch, faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import "./navbar-style.css";
+import { fetchUserDataById } from "../../slices/user/fetchUserSlice";
 import { decryptData } from "../../helpers/cryptoUtils";
 import { logout } from "../../slices/auth/authSlice";
 
-import "./navbar-style.css";
-
-export default function MyNavbar() {
+const MyNavbar = () => {
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [sideNavVisible, setSideNavVisible] = useState(false);
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.auth.loggedIn);
-  const { bodyColor, toggleColor } = useContext(BodyColorContext);
-  const [searchFocused, setSearchFocused] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    decryptData("token") ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  }, [isAuth]);
+  const userId = decryptData("userId");
+  const userData = useSelector((state) => state.user.data);
+
+  const toggleSearch = () => {
+    setSearchVisible(!searchVisible);
+  };
+
+  const toggleSideNav = () => {
+    setSideNavVisible(!sideNavVisible);
+  };
 
   const handleLogout = () => {
     dispatch(logout());
-    setIsLoggedIn(false);
+    navigate("/");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchUserDataById(userId));
+    }
+  }, [dispatch, userId]);
+
+  const isHomeRoute =
+    location.pathname === "/" || location.pathname === "/home";
+  const shouldHideNavbar =
+    location.pathname.startsWith("/user-dashboard") ||
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/login") ||
+    location.pathname.startsWith("/register");
+
+  if (shouldHideNavbar) {
+    return null;
+  }
+
   return (
-    <Navbar bg={bodyColor} expand="lg" className="sticky-top general">
-      <Navbar.Brand href="" className="d-flex align-items-center">
-        <Image
-          src="./images/logo-white.png"
-          roundedCircle
-          alt="Logo"
-          className="mx-5"
-          style={{ width: "4rem", height: "4rem", borderRadius: "50%" }}
-        />
-      </Navbar.Brand>
+    <>
+      <FontAwesomeIcon
+        icon={faBars}
+        onClick={toggleSideNav}
+        className="menu-icon mx-3 my-4 d-lg-none d-md-none "
+      />
 
-      <Navbar.Toggle aria-controls="basic-navbar-nav">
-        <FontAwesomeIcon icon={faBars} />
-      </Navbar.Toggle>
+      <nav
+        className={`navbar nav-height navbar-expand-lg shadow-5-strong fixed-top ${
+          scrolled ? "bg-white" : ""
+        } ${isHomeRoute ? "navbar-transparent" : "bg-white"} d-none d-md-block`}
+      >
+        <div className="container-fluid align-items-center">
+          <div className="navbar-left">
+            <img
+              src="./images/logo-white.png"
+              className="profile-image my-2 rounded-circle"
+              alt="Logo"
+              style={{ width: "50px", height: "50px" }}
+            />
+          </div>
 
-      <Navbar.Collapse id="basic-navbar-nav">
-        <div className="nav-cover">
-          <Form
-            className={
-              searchFocused ? "focused search-bar" : "not-focused search-bar"
-            }
-          >
-            <InputGroup>
-              <InputGroup.Text id="search-icon">
-                <FontAwesomeIcon icon={faSearch} />
-              </InputGroup.Text>
-              <FormControl
+          <section className="navbar-center d-flex flex-row">
+            <ul className="navbar-nav my-3 d-flex flex-row">
+              <li className="nav-item mx-2">
+                <NavLink
+                  to={"/"}
+                  className={`nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  }`}
+                  href="#"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className="nav-item mx-2">
+                <NavLink
+                  to={"/about-us"}
+                  className={`nav-link ${
+                    scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                  }`}
+                  href="#"
+                >
+                  About
+                </NavLink>
+              </li>
+
+              {userId && (
+                <li className="nav-item mx-2">
+                  <NavLink
+                    to={"/userprofile"}
+                    className={`nav-link ${
+                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                    }`}
+                    href="#"
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+              )}
+
+              {!userId && (
+                <li className="nav-item mx-2">
+                  <NavLink
+                    to={"/login"}
+                    className={`nav-link ${
+                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                    }`}
+                    href="#"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+
+              {userId && (
+                <li className="nav-item mx-2">
+                  <button
+                    className={`nav-link ${
+                      scrolled || !isHomeRoute ? "text-dark" : "text-light"
+                    }`}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+            </ul>
+          </section>
+
+          <div className="navbar-right">
+            <FontAwesomeIcon
+              icon={faSearch}
+              onClick={toggleSearch}
+              className="search-icon mx-3 my-4"
+            />
+
+            {searchVisible && (
+              <input
                 type="text"
-                placeholder="Search"
-                aria-label="Search"
-                className="search"
-                aria-describedby="search-icon"
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
-              />
-              <Button
-                variant={`outline-${
-                  bodyColor === "light" ? "primary" : "yello-color"
-                }`}
-              >
-                Search
-              </Button>
-            </InputGroup>
-          </Form>
-        </div>
-        <Nav className="ml-auto nav-elements">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `active text-${bodyColor === "light" ? "day" : "night"}`
-                : `text-${bodyColor === "light" ? "day" : "night"}`
-            }
-            to="/"
-          >
-            Home
-          </NavLink>
-          {!isLoggedIn && (
-            <>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `active text-${bodyColor === "light" ? "day" : "night"}`
-                    : `text-${bodyColor === "light" ? "day" : "night"}`
-                }
-                to="/about-us"
-              >
-                About
-              </NavLink>
-
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `active text-${bodyColor === "light" ? "day" : "night"}`
-                    : `text-${bodyColor === "light" ? "day" : "night"}`
-                }
-                to="/login"
-              >
-                Login
-              </NavLink>
-            </>
-          )}
-          {isLoggedIn && (
-            <>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `active text-${bodyColor === "light" ? "day" : "night"}`
-                    : `text-${bodyColor === "light" ? "day" : "night"}`
-                }
-                to="/userprofile"
-              >
-                Profile
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `active text-${bodyColor === "light" ? "day" : "night"}`
-                    : `text-${bodyColor === "light" ? "day" : "night"}`
-                }
-                onClick={handleLogout}
-                to={"/"}
-              >
-                Logout
-              </NavLink>
-            </>
-          )}
-          <Button
-            variant={`outline-${
-              bodyColor === "light" ? "secondary" : "warning"
-            } bg-${
-              bodyColor === "light" ? "light" : "dark"
-            } rounded-pill button-width`}
-            onClick={toggleColor}
-          >
-            {bodyColor === "light" ? (
-              <FontAwesomeIcon
-                icon={faMoon}
-                className="p-0 fs-5 font-weight-light"
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faSun}
-                className="p-0 sun-large-screen fs-5 font-weight-light text-warning"
+                className="search-input mx-3"
+                placeholder="Search..."
               />
             )}
-          </Button>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+            {userData && (
+              <NavLink to="/userprofile">
+                <img
+                  src={userData.profile_image_url}
+                  className="profile-image rounded-circle"
+                  alt="Profile"
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    marginRight: "10px",
+                    objectFit: "cover",
+                  }}
+                />
+              </NavLink>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {sideNavVisible && (
+        <section className="side-nav d-block d-md-none  d-lg-none">
+          <FontAwesomeIcon
+            icon={faClose}
+            onClick={toggleSideNav}
+            className="menu-icon float-end mx-3 my-4 d-lg-none"
+          />
+
+          <ul className="side-nav-list">
+            <li className="side-nav-item">
+              <NavLink to={"/"}>Home</NavLink>
+            </li>
+            <li className="side-nav-item">
+              <NavLink to={"/about-us"}>About</NavLink>
+            </li>
+
+            {userId && (
+              <li className="side-nav-item">
+                <NavLink to={"/userprofile"}>Profile</NavLink>
+              </li>
+            )}
+
+            {!userId && (
+              <li className="side-nav-item">
+                <NavLink to={"/login"}>Login</NavLink>
+              </li>
+            )}
+
+            {userId && (
+              <li className="side-nav-item">
+                <button className="nav-link" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            )}
+          </ul>
+        </section>
+      )}
+    </>
   );
-}
+};
+
+export default MyNavbar;

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddCategoryForm = () => {
   const dispatch = useDispatch();
@@ -19,16 +20,7 @@ const AddCategoryForm = () => {
 
   const [errorMessage, setErrorMessage] = useState(null);
 
-  useEffect(() => {
-    if (error) {
-      setErrorMessage('Category already exists. Please choose a different name.');
-      const timer = setTimeout(() => {
-        setErrorMessage(null);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,26 +66,37 @@ const AddCategoryForm = () => {
     }
 
     dispatch(addCategoryAsync(formDataForSubmission))
-      .then((result) => {
-        if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
-        }
+    .then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Category added successfully!',
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(-1); 
+        });
+      }else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Category already exists. Please choose a different name',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
       });
+      }
+    });
   };
 
   return (
     <main>
 
-      <section className='formUserDashboard col-6 offset-3'>
+      <section className='category p-3 col-6 offset-3'>
 
         <h2 className='text-center my-5'>Add Category</h2>
 
-        {errorMessage && (
-          <Alert variant="danger" onClose={() => setErrorMessage(null)} dismissible>
-            {errorMessage}
-          </Alert>
-        )}
-
+       
         <Form onSubmit={handleSubmit}>
 
           <div className="mb-3">
@@ -153,9 +156,9 @@ const AddCategoryForm = () => {
             />
           </div>
 
-          <Button className='col-12 my-3' variant="warning" type="submit">
+          <button className='col-12 my-3 custom-button'  type="submit">
             Add Category
-          </Button>
+          </button>
 
         </Form>
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchRestaurantById, updateRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 const EditDetails = () => {
   const { restaurantId } = useParams();
@@ -54,6 +55,18 @@ const EditDetails = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
+   
+    const validExtensions = ['jpg', 'png'];
+
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+   
+    if (!validExtensions.includes(fileExtension)) {
+      alert('Invalid file type. Please choose a file with extension: .jpg or .png');
+      e.target.value = null; 
+      return;
+    }
+
     
     if (file.size > 2097152) {
       alert('File size exceeds 2 MB limit. Please choose a smaller file.');
@@ -61,15 +74,18 @@ const EditDetails = () => {
       return;
     }
 
+  
     setFormData({
       ...formData,
       [e.target.name]: file,
     });
   };
+  
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,25 +107,28 @@ const EditDetails = () => {
     dispatch(updateRestaurantAsync({ restaurantId, formData: formDataForSubmission }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1);
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
   };
 
- 
   if (status === 'loading') {
     return <Loader />;
   }
 
   return (
     <main className="container">
-
       <section className='formUserDashboard'>
-
         <h2 className='text-center my-4'>
           Edit Restaurant Details
         </h2>
-
         <form 
           onSubmit={handleSubmit} 
           className="text-light" 
@@ -134,7 +153,6 @@ const EditDetails = () => {
               required
             />
           </div>
-
 
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
@@ -181,8 +199,6 @@ const EditDetails = () => {
             </textarea>
           </div>
 
-        
-
           <div className="mb-3">
             <label htmlFor="logo" className="form-label">
               Logo
@@ -210,7 +226,6 @@ const EditDetails = () => {
               onChange={handleFileChange}
             />
           </div>
-
 
           <section className="mb-3">
             <label className="form-label">Status</label>
@@ -260,7 +275,7 @@ const EditDetails = () => {
             </div>
           </section>
 
-          <button type="submit" className="btn btn-warning my-3 col-12">
+          <button type="submit" className="custom-button my-3 col-12">
             Submit
           </button>
         </form>

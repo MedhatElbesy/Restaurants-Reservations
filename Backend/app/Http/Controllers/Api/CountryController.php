@@ -6,6 +6,8 @@ use App\Enums\ItemStatus;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Restaurant;
+use App\Models\RestaurantLocation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -40,4 +42,20 @@ class CountryController extends Controller
 
         return ApiResponse::sendResponse(200, 'Country fetched successfully', $country);
     }
+
+    public function show($location_id)
+    {
+        try {
+            $location = RestaurantLocation::findOrFail($location_id);
+            $country = $location->country;
+
+            if (!$country) {
+                return ApiResponse::sendResponse(404, 'Country not found for the given location');
+            }
+            return ApiResponse::sendResponse(200, 'Country fetched successfully', $country);
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to retrieve country information',['error' => $e->getMessage()]);
+        }
+    }
+
 }

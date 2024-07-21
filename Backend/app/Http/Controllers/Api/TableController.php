@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Table\StoreTableRequest;
 use App\Http\Requests\Table\UpdateTableRequest;
 use App\Http\Resources\TableResource;
+use App\Models\RestaurantLocation;
 use App\Models\Table;
 use App\Traits\UploadImageTrait;
 use Illuminate\Support\Facades\DB;
@@ -38,10 +39,28 @@ class TableController extends Controller
         return ApiResponse::sendResponse(201, 'Table created successfully', new TableResource($table));
     }
 
-    public function show(Table $table)
+    public function show( $restaurantLocationId)
     {
+        try {
+            $tables = Table::with('images')->where('restaurant_location_id', $restaurantLocationId)->get();
+            if ($tables->isEmpty()) {
+                return ApiResponse::sendResponse(204, 'No tables found for the given restaurant location', []);
+            }
+        return ApiResponse::sendResponse(200, 'Tables with images', TableResource::collection($tables));
+        } catch (\Exception $e) {
+            return ApiResponse::sendResponse(500, 'An error occurred while retrieving tables',  $e->getMessage());
+        }
+    }
+
+
+    public function getTableByTableId($id)
+    {
+        $table = Table::findOrFail($id);
         $table->load('images');
-        return new TableResource($table);
+        if(!$table){
+            return ApiResponse::sendResponse(500, 'An error occurred while retrieving tables');
+        }
+            return ApiResponse::sendResponse(200, 'Tables', new TableResource($table));
     }
 
     public function update(UpdateTableRequest $request, Table $table)

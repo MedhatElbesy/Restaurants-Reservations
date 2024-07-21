@@ -8,8 +8,8 @@ export const fetchCategoryByIdAsync = createAsyncThunk(
   'category/fetchCategoryById',
   async (categoryId, { rejectWithValue }) => {
     try {
-      const data = await categoryById(categoryId);
-      return data;
+      const response = await categoryById(categoryId);
+      return response.data;
     } catch (error) {
       console.error('An error occurred during fetching nearest restaurant data', error);
       return rejectWithValue({

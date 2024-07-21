@@ -1,0 +1,38 @@
+.footer {
+  background-color: #262626;
+  .rest-info {
+    border-bottom: 1px solid #eeeeee42;
+    div {
+      p {
+        &:first-child {
+          font-family: "Montserrat", sans-serif;
+          color: #eeeeeec5;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+        &:last-child {
+          color: #eee;
+        }
+        svg {
+          padding-right: 5px;
+          color: var(--secColor);
+        }
+        a {
+          text-decoration: none;
+          color: #eee;
+          transition: var(--mainTransition);
+          &:hover {
+            color: #eeeeeece;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (width <= 576px) {
+  .rest-info div:not(:last-child) {
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
+  }
+}
