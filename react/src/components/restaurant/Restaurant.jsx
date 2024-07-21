@@ -35,7 +35,7 @@ export default function RestaurantDetails() {
 
   return (
     <Container fluid className="user-restaurant-container m-nav-height display-flex flex-column">
-      <Navbar />
+      {/* <Navbar /> */}
       {restaurant && (
         <>
           <Outlet />

@@ -18,21 +18,37 @@ const PaymentDetails = ({ table, selectedData, amount }) => {
           <div className="extra-chair-price">
             <p className="extra-chair">
               <span>Extra Seats</span>
-              <span>{price(amount.extraChairTotal)}</span>
+              <span>
+                {selectedData.extraSeats > 0
+                  ? price(amount.extraChairTotal)
+                  : "0"}
+              </span>
             </p>
             <p className="extra-chair-quantity">
-              <span>Qty. {selectedData.extraSeats}</span>
-              <span>{price(table.extra_chair_price)}/each</span>
+              {selectedData.extraSeats > 0 && (
+                <>
+                  <span>Qty. {selectedData.extraSeats}</span>
+                  <span>{price(table.extra_chair_price)}/each</span>
+                </>
+              )}
             </p>
           </div>
           <div className="child-chair-price">
             <p className="child-chair">
               <span>Child Seats</span>
-              <span>{price(amount.extraChildTotal)}</span>
+              <span>
+                {selectedData.childSeats > 0
+                  ? price(amount.extraChildTotal)
+                  : "0"}
+              </span>
             </p>
             <p className="child-chair-quantity">
-              <span>Qty. {selectedData.childSeats}</span>
-              <span>{price(table.extra_child_chair_price)}/each</span>
+              {selectedData.childSeats > 0 && (
+                <>
+                  <span>Qty. {selectedData.childSeats}</span>
+                  <span>{price(table.extra_child_chair_price)}/each</span>
+                </>
+              )}
             </p>
           </div>
         </div>

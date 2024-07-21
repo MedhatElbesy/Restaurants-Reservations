@@ -44,7 +44,7 @@ class TableController extends Controller
         try {
             $tables = Table::with('images')->where('restaurant_location_id', $restaurantLocationId)->get();
             if ($tables->isEmpty()) {
-                return ApiResponse::sendResponse(200, 'No tables found for the given restaurant location', []);
+                return ApiResponse::sendResponse(204, 'No tables found for the given restaurant location', []);
             }
         return ApiResponse::sendResponse(200, 'Tables with images', TableResource::collection($tables));
         } catch (\Exception $e) {

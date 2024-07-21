@@ -1,22 +1,29 @@
-
 .footer {
-  background-color: #26262633;
+  background-color: #262626;
   .rest-info {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #eeeeee42;
     div {
       p {
         &:first-child {
           font-family: "Montserrat", sans-serif;
-          color: var(--mainColor);
+          color: #eeeeeec5;
           margin-bottom: 5px;
           font-weight: bold;
         }
         &:last-child {
-          color: var(--textColor);
+          color: #eee;
         }
         svg {
           padding-right: 5px;
-          color: var(--textColor);
+          color: var(--secColor);
+        }
+        a {
+          text-decoration: none;
+          color: #eee;
+          transition: var(--mainTransition);
+          &:hover {
+            color: #eeeeeece;
+          }
         }
       }
     }

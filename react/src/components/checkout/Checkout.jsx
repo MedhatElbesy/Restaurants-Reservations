@@ -10,7 +10,6 @@ import NavigationBar from "./NavigationBar";
 import RestaurantDetails from "./RestaurantDetails";
 import TableDetails from "./TableDetails";
 import Payment from "./Payment";
-// import Done from "./Done";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -20,8 +19,6 @@ const Checkout = () => {
   const { reservationDetails } = location.state;
   sessionStorage.setItem("reservationData", JSON.stringify(reservationDetails));
   const reservationData = JSON.parse(sessionStorage.getItem("reservationData"));
-  // const reservationData = reservationDetails;
-  // const { restaurant } = useSelector((state) => state.restaurant);
   const restaurant = JSON.parse(sessionStorage.getItem("restaurant"));
   const branch = reservationData.branch;
   const table = reservationData.table;
@@ -57,11 +54,6 @@ const Checkout = () => {
         />
       ),
     }
-    // ,
-    // {
-    //   name: "Done",
-    //   component: <Done />,
-    // },
   ];
 
   const nextStep = () => {

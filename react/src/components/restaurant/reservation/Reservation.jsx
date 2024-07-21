@@ -132,7 +132,7 @@ const Reservation = () => {
       {tableAvailabilityStatus == "succeeded" &&
         tableAvailability.length > 0 && (
           <section
-            className="reservation pt-5 d-flex flex-wrap justify-content-center"
+            className="reservation d-flex flex-wrap justify-content-center"
           >
             <FontAwesomeIcon
               onClick={() => navigate(`/restaurant/${restaurant.id}/branches`)}

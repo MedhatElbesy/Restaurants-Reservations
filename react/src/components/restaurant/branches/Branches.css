@@ -1,4 +1,15 @@
 .branches {
+  .back {
+    color: var(--secColor);
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--secColor);
+    width: 20px;
+    height: 20px;
+    padding: 0.5rem;
+    border-radius: 50%;
+  }
   h3 {
     font-family: "Fugaz One", sans-serif;
     font-size: 2rem;
@@ -31,7 +42,7 @@
             transform: translateY(-50%);
             width: 60px;
             height: 1px;
-            background-color: var(--textColor);
+            background-color: var(--mainColor);
           }
         }
       }
@@ -42,7 +53,7 @@
         padding: 0.3rem 1rem;
         border-radius: 1rem !important;
         white-space: nowrap !important;
-        border: 1px solid var(--textColor) !important;
+        border: 1px solid var(--mainColor) !important;
         position: relative;
         font-weight: bold;
         transition: var(--mainTransition);
