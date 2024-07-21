@@ -47,8 +47,8 @@ class UpdateRestaurantRequest extends FormRequest
             'locations.*.phone_number' => 'nullable|string',
             'locations.*.mobile_number' => 'nullable|string',
             'locations.*.hot_line' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            // 'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            // 'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

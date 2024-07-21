@@ -45,6 +45,7 @@ import Tables from "./components/restaurant/restaurant-tables/Tables.jsx";
 
 // Checkout Details
 import Checkout from "./components/checkout/Checkout.jsx";
+import Done from "./components/checkout/Done.jsx";
 
 import AddLocation from "./components/userDashboard/add/AddLocation.jsx";
 import AddTableForm from "./components/userDashboard/add/AddTableForm.jsx";
@@ -52,7 +53,6 @@ import EditTableForm from "./components/userDashboard/edit/EditTableForm.jsx";
 import AddRestaurant from "./components/userDashboard/add/AddRestaurant.jsx";
 import DetailsTable from "./components/userDashboard/show/DetailsTable.jsx";
 import Locations from "./components/userDashboard/show/Locations.jsx";
-import LocationTables from "./components/userDashboard/show/LocationTables.jsx";
 import MenuCategoriesTable from "./components/userDashboard/show/MenuCategoriesTable.jsx";
 import ChangePassword from "./components/userProfile/changePassword/ChangePassword.jsx";
 import AddCategoryForm from "./components/userDashboard/add/AddCategoryForm.jsx";
@@ -73,7 +73,7 @@ import EditTableImage from "./components/userDashboard/edit/EditTableImage.jsx";
 import AddUserAddress from "./components/userProfile/userAddress/AddUserAddress.jsx";
 import EditUserAddress from "./components/userProfile/userAddress/EditUserAddress.jsx";
 import SpecificCategories from "./components/userDashboard/show/SpecificCategories.jsx";
-import TableAvailability from "./components/userDashboard/show/TableAvailability.jsx";
+
 import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailability.jsx";
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
@@ -123,24 +123,24 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
       {/* User Routes */}
+      {/* Restaurant Details Routes */}
+      <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
+        <Route index element={<Navigate to="home" />} />
+        <Route path="home" element={<RestaurantHome />} />
+        <Route path="branches" element={<Branches />} />
+        <Route path="menu" element={<Menu />} />
+        <Route path="tables" element={<Tables />} />
+      </Route>
       <Route element={<ProtectedRoute />}>
         {/* Restaurant Details Routes */}
         <Route path="/restaurant/:restaurantId" element={<RestaurantDetails />}>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="home" element={<RestaurantHome />} />
-          
-          <Route path="branches" element={<Branches />} />
-          <Route path="menu" element={<Menu />} />
           <Route path="reservation/:tableId" element={<Reservation />} />
-          <Route path="tables" element={<Tables />} />
         </Route>
         {/* Reservation Checkout */}
         <Route path="/reservation/checkout" element={<Checkout />} />{" "}
+        <Route path="/reservation/done" element={<Done />} />{" "}
         {/* all user logged  */}
-        <Route path="/userprofile" element={<UserProfile />} >
-
-      
-        </Route>
+        <Route path="/userprofile" element={<UserProfile />}></Route>
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/add-address" element={<AddUserAddress />} />
@@ -148,37 +148,33 @@ function App() {
       </Route>
 
       {/* Owner only */}
-    
-        {/* Restaurant Owner Routes */}
-        <Route path="/specific" element={<SpecificCategories />} />
-        <Route path="/availability/:tableId" element={<TableAvailability />} />
-        <Route path="/user-restaurants" element={<UserRestaurant />} />
-        
+
+      {/* Restaurant Owner Routes */}
+      <Route path="/specific" element={<SpecificCategories />} />
+      <Route path="/user-restaurants" element={<UserRestaurant />} />
+
+      <Route
+        path="/user-dashboard/restaurant/:restaurantId"
+        element={<Sidebar />}
+      >
+        <Route path="main" element={<UserDashboardHome />} />
+
+        <Route path="details" element={<DetailsTable />} />
+
+        <Route path="locations" element={<Locations />} />
+
+        <Route path="menu-category" element={<MenuCategoriesTable />} />
+
+        <Route path="category" element={<SpecificCategories />} />
+
+        <Route path="restaurant-category" element={<RestaurantCategory />} />
+
         <Route
-          path="/user-dashboard/restaurant/:restaurantId"
-          element={<Sidebar />}
-        >
-          <Route path="main" element={<UserDashboardHome />} />
+          path="location-table/:locationId"
+          element={<RestaurantCategory />}
+        />
 
-          <Route path="details" element={<DetailsTable />} />
-
-          <Route path="locations" element={<Locations />} />
-
-          <Route path="tables" element={<LocationTables />} />
-
-          <Route path="menu-category" element={<MenuCategoriesTable />} />
-
-          <Route path="category" element={<SpecificCategories />} />
-
-          <Route path="restaurant-category" element={<RestaurantCategory />} />
-
-          <Route
-            path="location-table/:locationId"
-            element={<RestaurantCategory />}
-          />
-
-          <Route path="reservation" element={<ShowReservation />} />
-        
+        <Route path="reservation" element={<ShowReservation />} />
       </Route>
       {/* Owner and Admin */}
       <Route element={<ProtectedRoute owner={true} admin={true} />}>
@@ -186,7 +182,10 @@ function App() {
           path="/edit-restaurant/:restaurantId"
           element={<EditDetails />}
         />
-        <Route path="/edit-category/:categoryId" element={<EditCategoryForm />} />
+        <Route
+          path="/edit-category/:categoryId"
+          element={<EditCategoryForm />}
+        />
         <Route path="/edit-location/:locationId" element={<EditLocation />} />
         <Route
           path="/edit-restaurant/:restaurantId"
@@ -206,6 +205,7 @@ function App() {
         <Route path="/add-table/:locationId" element={<AddTableForm />} />
         <Route path="/edit-table/:tableId" element={<EditTableForm />} />
         <Route path="/add-restaurant" element={<AddRestaurant />} />
+
         <Route path="/add-special-category" element={<AddCategoryForm />} />
         <Route
           path="/add-restaurant-category/:restaurantId"
@@ -222,7 +222,7 @@ function App() {
           element={<EditTableAvailability />}
         />
 
-       <Route
+        <Route
           path="/add-availability/:tableId"
           element={<AddAvailabilityForm />}
         />

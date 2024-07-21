@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Circles() {
-
   return (
     <main className="circle-container my-5 mx-2">
       <div

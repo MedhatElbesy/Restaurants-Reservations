@@ -55,7 +55,8 @@ const Comments = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  if (!branchComments && status === "loading") {
+
+  if ((branch.id !== prevBranchId.current && status) === "loading") {
     return <Loader size={100} />;
   }
 
@@ -82,7 +83,7 @@ const Comments = () => {
           paginatedComments.map((comment) => (
             <div key={comment.id} className="user-comment mb-3">
               <div className="user d-flex justify-content-between flex-column flex-sm-row">
-                <p className="user-name text-main mb-2">
+                <p className="user-name text-sec mb-2">
                   {`${comment.user.first_name} ${comment.user.last_name}`}
                 </p>
                 {comment.user.rate && (
@@ -93,7 +94,7 @@ const Comments = () => {
                   />
                 )}
               </div>
-              <p className="comment-date text-sec mb-1">
+              <p className="comment-date text-main mb-1">
                 {formatDate(comment.created_at)}
               </p>
               <p className="comment text-color">{comment.comment}</p>

@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { deleteRestaurantAsync } from '../../../slices/restaurant/restaurantSlice';
 import { decryptData } from '../../../helpers/cryptoUtils';
+import { deleteRestaurantAsync, fetchUserDataById } from '../../../slices/user/fetchUserSlice';
 
 export default function UserRestaurant() {
   const userData = useSelector((state) => state.user.data);
@@ -18,12 +18,16 @@ export default function UserRestaurant() {
   const itemsPerPage = 4;
 
   useEffect(() => {
-    if (userData && userData.restaurants) {
-      setFilteredUserData(userData);
+    dispatch(fetchUserDataById(userId));
+  }, [userId]);
+
+  useEffect(() => {
+    if (userData && Array.isArray(userData.restaurants)) {
+      setFilteredUserData({ restaurants: userData.restaurants });
     }
   }, [userData]);
 
-  if (!userData || !userData.restaurants) {
+  if (!Array.isArray(filteredUserData.restaurants)) {
     return (
       <main className="container-fluid restaurant-dashboard">
         <section className="custom-header">
@@ -49,10 +53,8 @@ export default function UserRestaurant() {
         dispatch(deleteRestaurantAsync(restaurantId))
           .then(() => {
             const updatedRestaurants = filteredUserData.restaurants.filter((restaurant) => restaurant.id !== restaurantId);
-            setFilteredUserData({
-              ...filteredUserData,
-              restaurants: updatedRestaurants
-            });
+          setFilteredUserData({ restaurants: updatedRestaurants });
+         
             Swal.fire(
               'Deleted!',
               'The restaurant has been deleted.',
@@ -71,7 +73,7 @@ export default function UserRestaurant() {
   };
 
   const restaurantNames = filteredUserData.restaurants.map((restaurant) => restaurant.name);
-  const locationCounts = filteredUserData.restaurants.map((restaurant) => restaurant.locations.length);
+  const locationCounts = filteredUserData.restaurants.map((restaurant) => restaurant.locations ? restaurant.locations.length : 0);
 
   const chartData = {
     labels: restaurantNames,
@@ -101,7 +103,7 @@ export default function UserRestaurant() {
   };
 
   // Pagination logic
-  const totalItems = filteredUserData.restaurants.length;
+  const totalItems = filteredUserData.restaurants.length || 0; 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -143,7 +145,7 @@ export default function UserRestaurant() {
       <section className='userdash-restaurant'>
 
         <NavLink to={`/add-restaurant`} className="my-btn">
-          <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+          <FontAwesomeIcon icon={faPlus} className='mx-1'></FontAwesomeIcon>
           Create Restaurant
         </NavLink>
 
@@ -164,25 +166,27 @@ export default function UserRestaurant() {
 
         <section className="row row-cols-1 row-cols-md-4 my-4 g-4">
 
-          {currentItems.map((restaurant) => (
+          {filteredUserData.restaurants.length > 0 ? currentItems.map((restaurant) => (
             <div className="col my-4" key={restaurant.id}>
 
               <div className="custom-card h-100">
+
                 <img 
                   src={restaurant.cover} 
                   alt={restaurant.name} 
-                  className="card-img-top fixed-size-img" 
+                  className="restau-img fixed-size-img" 
                 />
+
                 <div className="custom-card-body text-center">
                   <h5 className="card-title my-3">{restaurant.name}</h5>
-                  <section className="btn-group">
+                  <section className="btn-group pb-3 ps-4 pe-4">
                     <NavLink 
                       to={`/user-dashboard/restaurant/${restaurant.id}/main`} 
-                      className="btn btn-outline-primary  btn-sm">
+                      className="btn btn-outline-primary btn-sm">
                       <FontAwesomeIcon icon={faEye} /> Dashboard
                     </NavLink>
                     <button
-                      className="btn btn-outline-danger btn-sm"
+                      className="btn btn-outline-danger btn-sm ps-3 pe-3"
                       onClick={() => handleDeleteRestaurant(restaurant.id)} 
                     >
                       <FontAwesomeIcon icon={faTrash} /> Delete
@@ -191,7 +195,11 @@ export default function UserRestaurant() {
                 </div>
               </div>
             </div>
-          ))}
+          )) : (
+            <div className="col text-center">
+              <p>No restaurants available.</p>
+            </div>
+          )}
           
         </section>
 
@@ -215,4 +223,3 @@ export default function UserRestaurant() {
     </main>
   );
 }
-

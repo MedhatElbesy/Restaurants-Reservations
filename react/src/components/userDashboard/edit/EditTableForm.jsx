@@ -12,6 +12,7 @@ import {
   selectUpdateTableError,
 } from '../../../slices/restaurant/table/updateTableSlice';
 import Loader from '../../../layouts/loader/loader';
+import Swal from 'sweetalert2';
 
 const EditTableForm = () => {
   const { tableId } = useParams();
@@ -58,7 +59,7 @@ const EditTableForm = () => {
   }, [table]);
 
   const capitalizeFirstLetter = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1) : '';
   };
 
   const handleChange = (e) => {
@@ -89,7 +90,14 @@ const EditTableForm = () => {
 
     await dispatch(updateTableAsync({ tableId, data: formDataToUpdate })).then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1);
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated Successfully',
+          showConfirmButton: true,
+          timer: 9000,
+        }).then((result) => {
+            navigate(-1); 
+        });
       }
     });
   };
@@ -201,6 +209,19 @@ const EditTableForm = () => {
           </div>
 
           <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              className="form-control"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+
+          <div className="form-group">
             <label htmlFor="status">Status</label>
             <select
               id="status"
@@ -215,19 +236,7 @@ const EditTableForm = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              className="form-control"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-warning col-12 my-4">
+          <button type="submit" className="custom-button col-12 my-4">
             Update Table
           </button>
 

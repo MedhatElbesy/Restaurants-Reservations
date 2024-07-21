@@ -43,9 +43,8 @@ class TableController extends Controller
     {
         try {
             $tables = Table::with('images')->where('restaurant_location_id', $restaurantLocationId)->get();
-
             if ($tables->isEmpty()) {
-                return ApiResponse::sendResponse(404,'No tables found for the given restaurant location');
+                return ApiResponse::sendResponse(204, 'No tables found for the given restaurant location', []);
             }
         return ApiResponse::sendResponse(200, 'Tables with images', TableResource::collection($tables));
         } catch (\Exception $e) {
@@ -54,8 +53,9 @@ class TableController extends Controller
     }
 
 
-    public function getTableByTableId(Table $table)
+    public function getTableByTableId($id)
     {
+        $table = Table::findOrFail($id);
         $table->load('images');
         if(!$table){
             return ApiResponse::sendResponse(500, 'An error occurred while retrieving tables');

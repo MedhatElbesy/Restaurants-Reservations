@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Alert } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 
 const LocationMarker = ({ position, setPosition, setFormData }) => {
@@ -172,12 +173,14 @@ const EditLocation = () => {
     const files = Array.from(e.target.files);
     let validFiles = [];
   
+    const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif', 'svg'];
+  
     files.forEach((file) => {
-      if (file.size <= 2 * 1024 * 1024) { 
+      const extension = file.name.split('.').pop().toLowerCase();
+      if (file.size <= 2 * 1024 * 1024 && allowedExtensions.includes(extension)) {
         validFiles.push(file);
       } else {
-       
-        console.log(`File ${file.name} exceeds the maximum size of 2MB.`);
+        alert(`img is not valid. Ensure it is an image with extension 'jpeg', 'jpg', 'png', 'gif', 'svg'  and does not exceed 2MB.`);
       }
     });
   
@@ -186,6 +189,7 @@ const EditLocation = () => {
       images: validFiles,
     });
   };
+  
   
 
   const handleSubmit = (e) => {
@@ -208,7 +212,22 @@ const EditLocation = () => {
     dispatch(updateLocationAsync({ locationId, data: formDataWithImages }))
     .then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
-        navigate(-1); 
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated Successfully',
+          showConfirmButton: true,
+          timer: 9000,
+        }).then((result) => {
+            navigate(-1); 
+        });
+      }else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Please enter unique number.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK'
+      });
       }
     });
   };
@@ -423,7 +442,7 @@ const EditLocation = () => {
           </select>
         </div>
 
-        <button type="submit" className="btn btn-warning my-4 col-12">Update</button>
+        <button type="submit" className="custom-button my-4 col-12">Update</button>
 
       </form>
       </section>

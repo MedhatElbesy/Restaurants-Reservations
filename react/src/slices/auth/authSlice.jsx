@@ -95,9 +95,7 @@ const authSlice = createSlice({
       state.token = null;
       state.loggedIn = false;
       state.role = null;
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("userId");
-      sessionStorage.removeItem("role");
+      sessionStorage.clear();
     },
   },
   extraReducers: (builder) => {
@@ -110,6 +108,7 @@ const authSlice = createSlice({
         // Encrypt sensitive data
         sessionStorage.setItem("token", encryptData(data.token));
         sessionStorage.setItem("userId", encryptData(data.user.id));
+        sessionStorage.setItem("user", encryptData(data.user));
         sessionStorage.setItem("role", encryptData(data.user.roles_name));
 
         state.loggedIn = true;

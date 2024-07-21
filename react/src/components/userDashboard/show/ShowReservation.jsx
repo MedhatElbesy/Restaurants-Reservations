@@ -6,7 +6,6 @@ import {
 } from "../../../slices/checkout/checkoutSlice";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -23,12 +22,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+import '../userDashboardRestaurant.css';
 
 function createData(
   id,
@@ -49,6 +43,7 @@ function createData(
     payments,
   };
 }
+
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
@@ -60,9 +55,21 @@ function Row(props) {
   };
 
   const handleUpdateStatus = () => {
-    dispatch(updateReservationStatus({ reservationId: row.id, status }));
+    if (status) {
+     
+      const payload = { reservationId: row.id, status: { status: status } };
+      console.log("Dispatching data:", payload);
+      dispatch(updateReservationStatus(payload));
+    }
   };
 
+  if (status === 'loading') {
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
+  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -115,9 +122,7 @@ function Row(props) {
                       <TableCell>{detail.reservation_date}</TableCell>
                       <TableCell>{detail.amount}</TableCell>
                       <TableCell>{detail.number_of_extra_chairs}</TableCell>
-                      <TableCell>
-                        {detail.number_of_extra_childs_chairs}
-                      </TableCell>
+                      <TableCell>{detail.number_of_extra_childs_chairs}</TableCell>
                       <TableCell>{row.notes}</TableCell>
                     </TableRow>
                   ))}
@@ -137,6 +142,7 @@ function Row(props) {
                     <TableCell>Transaction ID</TableCell>
                     <TableCell>Amount</TableCell>
                     <TableCell>Customer Name</TableCell>
+                    <TableCell>Image</TableCell>
                     <TableCell>Status</TableCell>
                   </TableRow>
                 </TableHead>
@@ -146,6 +152,17 @@ function Row(props) {
                       <TableCell>{payment.transaction_id}</TableCell>
                       <TableCell>{payment.amount}</TableCell>
                       <TableCell>{payment.customer_name}</TableCell>
+                      <TableCell>
+                      {payment.transaction_image ? (
+                        <img
+                        src={payment.transaction_image} 
+                        alt={`Transaction ${payment.transaction_id}`}
+                        style={{ width: '100px', height: '100px',objectFit:'cover' }} 
+                        />
+                        ) : (
+                        'No Image'
+                      )}
+                      </TableCell>
                       <TableCell>{payment.status}</TableCell>
                     </TableRow>
                   ))}
@@ -192,7 +209,7 @@ export default function CollapsibleTable() {
 
   useEffect(() => {
     dispatch(getAllRestaurantReservations(restaurantId));
-  }, [dispatch, restaurantId]);
+  }, [restaurantId]);
 
   const rows = reservations.map((reservation) =>
     createData(
@@ -207,28 +224,34 @@ export default function CollapsibleTable() {
   );
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>Reservation ID</TableCell>
-              <TableCell align="right">Total Price</TableCell>
-              <TableCell align="right">Reservation Date</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right" colSpan={3}>
-                Actions
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row key={row.id} row={row} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </ThemeProvider>
+    <div>
+      <main className="restaurant-dashboards mx-5">
+        <section className="custom-header">
+          <h3 className="text-center">Reservations</h3>
+          <div className="roof"></div>
+        </section>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Reservation ID</TableCell>
+                <TableCell align="right">Total Price</TableCell>
+                <TableCell align="right">Reservation Date</TableCell>
+                <TableCell align="right">Status</TableCell>
+                <TableCell align="right" colSpan={3}>
+                  Actions
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row key={row.id} row={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </main>
+    </div>
   );
 }

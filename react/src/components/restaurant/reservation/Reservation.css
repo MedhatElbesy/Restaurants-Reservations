@@ -1,4 +1,21 @@
 .reservation {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  .back {
+    color: var(--secColor);
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    left: 1rem;
+    top: .5remrem;
+    color: #FFF;
+    background-color: var(--secColor);
+    width: 20px;
+    height: 20px;
+    padding: .5rem;
+    border-radius: 50%;
+  }
   .head {
     border-bottom: 1px solid rgb(139, 108, 51, 0.25);
     color: #494949;
@@ -18,8 +35,8 @@
       font-weight: bold;
       padding: 0.4rem 0.8rem;
       border-radius: 0.4rem;
-      color: var(--mainColor);
-      background-color: #8b6c33;
+      color: var(--backgroundColor);
+      background-color: var(--secColor);
     }
   }
   .map {
@@ -30,7 +47,6 @@
     }
   }
   .additional {
-    /* background-color: var(--mainColor); */
     & > div {
       border: 1px solid #c9c9c956;
       border-radius: 0.4rem;
@@ -57,13 +73,32 @@
         transition: 0.2s ease-in-out;
         &:hover {
           cursor: pointer;
-          color: var(--mainColor);
-          background-color: #8b6c33;
+          color: var(--backgroundColor);
+          background-color: var(--secColor);
         }
       }
       .selected {
-        color: var(--mainColor);
-        background-color: #8b6c33;
+        color: var(--backgroundColor);
+        background-color: var(--secColor);
+      }
+    }
+  }
+  .resrvation-details {
+    border-right: 1px solid #64646433;
+    p {
+      color: var(--mainColor);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #64646433;
+      font-family: "'Margarine', cursive";
+      span {
+        svg {
+          width: 2rem;
+          padding-right: 0.5rem;
+        }
+        color: var(--secColor);
+        letter-spacing: 2px;
       }
     }
   }
@@ -79,9 +114,9 @@
       outline: none;
       border-radius: 0.2rem;
       border: 1px solid #c9c9c9ea;
-      color: #8b6c33;
+      color: var(--secColor);
       &:focus {
-        border: 1px solid #8b6c33;
+        border: 1px solid #ff6b1641;;
       }
     }
     .form-check {
@@ -91,15 +126,15 @@
         cursor: pointer;
         margin-right: 5px;
         &:checked {
-          background-color: #8b6c33;
+          background-color: var(--secColor);
         }
         &:focus {
-          box-shadow: 0 0 0 0.25rem rgb(139, 108, 51, 0.25);
+          box-shadow: 0 0 0 0.25rem #ff6b1641;
         }
       }
       color: #494949;
       .terms {
-        color: #8b6c33;
+        color: var(--secColor);
         text-decoration: none;
         font-weight: bold;
         font-size: 0.8rem;
@@ -135,4 +170,10 @@ div:where(.swal2-container) .swal2-html-container {
   height: calc(3.5rem) !important;
   min-height: calc(2.5rem) !important;
   line-height: 1 !important;
+}
+
+@media screen and (max-width: 992px) {
+  .reservation .resrvation-details {
+    border: none;
+  }
 }

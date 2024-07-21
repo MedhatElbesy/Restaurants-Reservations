@@ -1,4 +1,6 @@
-const RestaurantDetials = ({restaurant, branch}) => {
+const RestaurantDetials = ({branch}) => {
+  const restaurant = JSON.parse(sessionStorage.getItem("restaurant"))
+  console.log(restaurant)
   return (
     <article className="restaurant-checkout-details my-5 w-75 m-auto">
       <div className="details">
@@ -6,17 +8,14 @@ const RestaurantDetials = ({restaurant, branch}) => {
           <span>Restaurant Name : </span> {restaurant.name}
         </p>
         <p>
-          <span>Restaurant Category : </span>{" "}
-          {restaurant.categories.map((category) => (
-            <span key={category.id}>{category.name}, </span>
-          ))}
+          <span>Restaurant Category : </span> {restaurant.categories[0]}
         </p>
         <p>
-          <span>Branch : </span> {branch.city.name} Branch.
+          <span>Branch : </span> {branch.city_name}.
         </p>
         <p>
-          <span>Branch Address : </span> {branch.address}, {branch.city.name},{" "}
-          {branch.governorate.name}, {branch.country.name}.
+          <span>Branch Address : </span> {branch.address}, {branch.city_name},{" "}
+          {branch.governorate_name}.
         </p>
         <p>
           <span>Contact Number : </span>

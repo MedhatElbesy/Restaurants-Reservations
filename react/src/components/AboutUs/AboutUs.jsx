@@ -2,13 +2,13 @@ import React from "react";
 import "./AboutUs.css";
 
 export default function AboutUs() {
-  const { bodyColor } = useContext(BodyColorContext);
+  
 
   return (
-    <div className="about-container">
-      <div className={`about-content `}>
+    <div className="about-container my-5">
+      <div className="about-content my-5">
         <h1
-          className="about-title text-yello-var"
+          className="about-title"
         >
           About Us
         </h1>

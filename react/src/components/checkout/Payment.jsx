@@ -5,8 +5,7 @@ import CashGateways from "./gateways/CashGateways";
 import PayPal from "./gateways/PayPal";
 import PaymentDetails from "./PaymentDetails";
 import { getGateways } from "../../slices/checkout/gatewaysSlice";
-import Loader from '../../layouts/loader/loader';
-
+import Loader from "../../layouts/loader/loader";
 
 const Payment = ({
   table,
@@ -18,7 +17,9 @@ const Payment = ({
   errors,
 }) => {
   const dispatch = useDispatch();
-  const { gateways, state: gatewayState } = useSelector((state) => state.gateways);
+  const { gateways, status } = useSelector(
+    (state) => state.gateways
+  );
   const { selectedData } = details;
   const amount = checkoutAmount(table, selectedData);
   const [selectedGatewayId, setSelectedGatewayId] = useState(null);
@@ -37,6 +38,9 @@ const Payment = ({
     setSelectedGatewayId(gatewayId);
   };
 
+  if (status == "loading") {
+    return <Loader />;
+  }
   return (
     <article className="payment text-color my-5">
       <div className="table-payment-details m-auto col-11">
@@ -68,7 +72,6 @@ const Payment = ({
               }
             })}
         </div>
-        {gatewayState == "loading" && <Loader />}
         {gateways &&
           gateways.map((gateway) => {
             if (gateway.type === "cash") {

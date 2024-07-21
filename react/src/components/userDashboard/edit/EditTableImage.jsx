@@ -36,7 +36,14 @@ const EditTableImage = () => {
     dispatch(updateTableImageAsync({ imageId, data: formData }))
       .then((result) => {
         if (result.meta.requestStatus === 'fulfilled') {
-          navigate(-1); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 9000,
+          }).then((result) => {
+              navigate(-1); 
+          });
         }
       });
   };
@@ -76,7 +83,7 @@ const EditTableImage = () => {
             </section>
           </div>
 
-          <button type="submit" className="btn btn-warning my-4 col-12">Update Table Image</button>
+          <button type="submit" className="custom-button my-4 col-12">Update Table Image</button>
 
           {status === 'failed' && <p className="mt-3 text-danger">Error: "An error occurred. Please try again later."</p>}
 

@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 
 import Navbar from "./navbar/Navbar";
-import Footer from "./home/Footer";
+import Footer from "./footer/Footer";
 import Loader from "../../layouts/loader/loader";
 import "./Restaurant.css"
 
@@ -16,7 +16,7 @@ export default function RestaurantDetails() {
   const { restaurant, status, error } = useSelector(
     (state) => state.restaurant
   );
-
+  sessionStorage.setItem(`restaurant`, JSON.stringify(restaurant));
   const isFirstRender = useRef(true);
   useEffect(() => {
     if (restaurantId && isFirstRender.current) {
@@ -28,13 +28,14 @@ export default function RestaurantDetails() {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
   if (!restaurant && status === "loading") {
     return <Loader />;
   }
 
   return (
-    <Container fluid className="user-restaurant-container display-flex flex-column">
-      <Navbar />
+    <Container fluid className="user-restaurant-container m-nav-height display-flex flex-column">
+      {/* <Navbar /> */}
       {restaurant && (
         <>
           <Outlet />

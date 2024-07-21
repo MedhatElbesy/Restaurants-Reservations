@@ -11,28 +11,31 @@
         width: 100%;
         padding: 10px;
         margin-bottom: 10px;
-        color: #a18c56;
+        color: #882d00;
         background-color: transparent;
-        border: 1px solid #4f4836e3;
+        border: 1px solid #4d19003d;
         transition: var(--mainTransition);
         &:focus {
-          border: 1px solid #8a7b55d7;
+          border: 1px solid #882d008f;
+        }
+        &::placeholder {
+          color: #882d008f;
         }
       }
       .add-btn {
         outline: none;
         border: 0;
         padding: 0.5rem;
-        background-color: #8a7b55a2;
-        color: #eeeeeed5;
+        background-color: var(--secColor);
+        color: var(--backgroundColor);
         font-size: 0.9rem;
         transition: var(--mainTransition);
         &:hover {
-          background-color: #a18c564f;
+          background-color: #b33c01;
         }
         &:disabled {
-          background-color: #a18c562f;
-          color: #eeeeee52;
+          background-color: #4d19003d;
+          color: #88888891;
         }
       }
     }
@@ -57,21 +60,18 @@
     .filter {
       padding-left: 0 !important;
       .reviews-count {
-        color: #eeeeeea1;
+        color: var(--secColor);
       }
       select {
-        border-color: #a18c565b;
+        border-color: var(--secColor);
         background-color: transparent;
-        color: #eeeeeea1;
+        color: var(--secColor);
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
         outline: none;
         option {
           background-color: var(--backgroundColor);
-          color: #eeeeeec0;
-          &:checked {
-            background-color: #2e2407a9 !important;
-          }
+          color: var(--secColor);
         }
       }
     }
@@ -130,10 +130,10 @@
     margin-top: 7rem !important;
     .modal-content {
       color: var(--secColor);
-      border: 2px solid #4f4836;
+      border: none;
       background-color: var(--backgroundColor) !important;
       .modal-header {
-        border-bottom: 2px solid #4f4836;
+        border-bottom: 2px solid #9933001a;
         .btn-close {
           color: var(--secColor) !important;
         }
@@ -143,16 +143,15 @@
         width: 100%;
         padding: 10px;
         margin-bottom: 10px;
-        color: #a18c56;
+        color: #882d00;
         background-color: transparent;
-        border: 1px solid #4f4836e3;
         transition: var(--mainTransition);
         &:focus {
-          border: 1px solid #8a7b55d7;
-          box-shadow: 0 0 0 0.2rem rgba(138, 123, 85, 0.25);
+          border: 1px solid #9933003d;
+          box-shadow: 0 0 0 0.2rem #e6500510;
         }
         &::placeholder {
-          color: #a18c56d2;
+          color: #882d008f;
         }
       }
     }

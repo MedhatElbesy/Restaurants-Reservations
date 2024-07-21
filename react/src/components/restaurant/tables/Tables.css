@@ -53,6 +53,7 @@
     color: var(--secColor);
     padding: 2.1rem;
     background-color: var(--backgroundColor);
+    background-color: #ececec;
     opacity: 0;
     span {
       font-size: 1rem;
@@ -87,12 +88,12 @@
 
 .table-details {
   position: fixed;
-  top: 10vh;
+  top: 0vh;
   left: 0vw;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   overflow: auto;
-  background-color: #020708f8;
+  background-color: #e4e4e4;
   z-index: 9999;
   border-top: 2px solid var(--secColor);
   h3 {
@@ -102,6 +103,7 @@
   article {
     .details {
       padding: 0 1.8rem;
+      position: relative;
       p {
         color: var(--mainColor);
         font-size: 1.3rem;
@@ -110,13 +112,36 @@
         border-bottom: 1px solid var(--textColor);
         font-family: "'Margarine', cursive";
         span {
+          svg {
+            width: 2rem;
+            padding-right: 0.5rem;
+          }
           color: var(--secColor);
           letter-spacing: 2px;
         }
+        .item-price {
+          color: var(--textColor);
+          font-size: .8rem;
+          letter-spacing: 0px;
+        }
+      }
+      .discount {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 5px;
+        margin-bottom: 1rem;
+        color: var(--secColor);
+        background-color: #3b3b3bea;
+        font-weight: bold;
+        vertical-align: middle;
+        z-index: 9999;
       }
     }
     .gallery {
       height: 60vh;
+      padding-bottom: 50px;
       .images {
         .image {
           position: relative;
@@ -165,14 +190,16 @@
   .reserve-table {
     border: none;
     color: var(--textColor);
+    color: var(--secColor);
     font-size: 1.3rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     margin-top: 2rem;
     transition: var(--mainTransition);
     background-color: #3137382d;
-    border: 1px solid #80808062;
+    background-color: #3b3b3bea;
+    border: 1px solid var(--secColor);
     &:hover {
-      background-color: #3137384d;
+      background-color: #302f2f;
     }
   }
   .close {
@@ -187,7 +214,7 @@
     width: 30px;
     height: 30px;
     color: var(--secColor);
-    background-color: #3b3b3b;
+    background-color: #3b3b3bd0;
     border-radius: 50%;
     font-weight: bold;
     vertical-align: middle;
@@ -211,5 +238,9 @@
 @media screen and (max-width: 991px) {
   .table-details article .gallery {
     height: 50vh;
+  }
+  .table-details article .gallery .images {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
   }
 }

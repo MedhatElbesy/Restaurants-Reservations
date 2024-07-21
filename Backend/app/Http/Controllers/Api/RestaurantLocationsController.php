@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ItemStatus;
 use App\Events\ReservationCreated;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\StoreRestaurantLocationRequest;
 use App\Http\Requests\Restaurant\UpdateRestaurantLocationsRequest;
+use App\Http\Resources\RestaurantLocationResource;
 use App\Models\Restaurant;
 use App\Models\RestaurantLocation;
 use App\Models\RestaurantLocationImage;
@@ -25,15 +27,24 @@ class RestaurantLocationsController extends Controller
     public function getLocationsByRestaurant($restaurantId)
     {
         try {
-            $restaurant = Restaurant::findOrFail($restaurantId);
-            $locations = $restaurant->locations()->get();
+            $restaurant = Restaurant::with([
+                'locations.country',
+                'locations.governorate',
+                'locations.state',
+                'locations.city',
+                ])->findOrFail($restaurantId);
+            $locations = $restaurant->locations()->withCount([
+            'tables as number_of_available_tables' => function ($query) {
+                $query->where('status', ItemStatus::Available);
+            }
+        ])->get();
 
             $locations->each(function ($location) {
                 $location->average_rating = $location->averageRating();
                 $location->comments_count = $location->commentsCount();
             });
 
-            return ApiResponse::sendResponse(200, 'Restaurant locations', $locations);
+            return ApiResponse::sendResponse(200, 'Restaurant locations', RestaurantLocationResource::collection($locations));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, 'Failed to retrieve locations', ['error' => $e->getMessage()]);
         }

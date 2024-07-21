@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchSpecificCategoryAsync, deleteCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
+import { deleteCategoryAsync, fetchSpecificCategoryAsync } from '../../../slices/restaurant/category/categorySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, InputAdornment, TablePagination, TextField } from '@mui/material';
 import Swal from 'sweetalert2';
 import Loader from '../../../layouts/loader/loader';
+import { Spinner } from 'react-bootstrap';
 
 const SpecificCategories = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.category);
   const status = useSelector((state) => state.category.status);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCategories, setFilteredCategories] = useState([]);
 
   useEffect(() => {
     dispatch(fetchSpecificCategoryAsync());
   }, []);
 
+  useEffect(() => {
+    if (Array.isArray(categories)) {
+      setFilteredCategories(categories.filter(category => category.status !== 'deleted'));
+    }
+  }, [categories]);
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    if (event.target.value === '') {
+      setFilteredCategories(categories.filter(category => category.status !== 'deleted'));
+    } else {
+      setFilteredCategories(categories.filter(category => 
+        category.name.toLowerCase().includes(event.target.value.toLowerCase())
+      ));
+    }
   };
 
   const handleDeleteCategory = (categoryId) => {
@@ -35,7 +50,7 @@ const SpecificCategories = () => {
       if (result.isConfirmed) {
         dispatch(deleteCategoryAsync(categoryId))
           .then(() => {
-            dispatch(fetchSpecificCategoryAsync());
+            setFilteredCategories(prevCategories => prevCategories.filter(category => category.id !== categoryId));
             Swal.fire(
               'Deleted!',
               'The category has been deleted.',
@@ -54,10 +69,12 @@ const SpecificCategories = () => {
     });
   };
 
-  const filteredCategories = Array.isArray(categories) ? categories.filter(category => category.status !== 'deleted') : [];
-
   if (status === 'loading') {
-    return <Loader />;
+    return (
+      <main className="centered-flex">
+        <Spinner />
+      </main>
+    );
   }
 
   return (
@@ -69,9 +86,8 @@ const SpecificCategories = () => {
       </section>
 
       <Paper sx={{ width: '100%', marginTop: '10px' }}>
-
         <div className="float-end my-4" style={{ zIndex: 10, position: 'relative' }}>
-          <Link  to={`/add-special-category`} className="btn btn-outline-warning mx-2 text-dark">
+          <Link to={`/add-special-category`} className="btn btn-outline-warning mx-2 text-dark">
             <FontAwesomeIcon icon={faPlus} /> Add
           </Link>
         </div>
@@ -93,8 +109,9 @@ const SpecificCategories = () => {
         />
 
         <TableContainer sx={{ maxHeight: 440, overflowY: 'auto' }}>
-          
+
           <Table aria-label="sticky table">
+
             <TableHead className="table-head">
               <TableRow>
                 <TableCell className="text-center table-cell">Name</TableCell>
@@ -103,7 +120,7 @@ const SpecificCategories = () => {
                 <TableCell className="text-center table-cell">Actions</TableCell>
               </TableRow>
             </TableHead>
-
+            
             <TableBody>
               {filteredCategories.length === 0 ? (
                 <TableRow>
