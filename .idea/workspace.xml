@@ -5,338 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/OwnersController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/owner/StoreOwnerRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/owner/UpdateOwnerRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/app/Mail/PaymentSuccessMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/database/seeders/RatingsSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/resources/views/emails/success_payment.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/routes/api copy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/categories/1720347081_668a69c917796.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/locations_images/1720346675552.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/locations_images/1720346708713.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/profile_images/1721488317_669bd3bd9a39d.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_covers/1720337706_668a452a6f329.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_covers/1720337863_668a45c7576d5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_covers/1720339039_668a4a5f30f50.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1720346837_668a68d511eee.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721405301_669a8f75e2d29.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721405336_669a8f98b4637.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721467234_669b816260bdb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721467240_669b8168ce69b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_images/1720336018_668a3e9263f60.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_images/1721320960_66994600a97da.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_images/1721440943_669b1aaf799f5.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720307176_6689cde8a592c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720325164_668a142c713a3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720328209_668a20115f913.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720340421_668a4fc5261f1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1720344666_668a605a37031.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721424290_669ad9a265776.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721430802_669af312bc268.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721430828_669af32cdefc8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721430939_669af39b37876.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721431197_669af49d9a2f1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721431641_669af6594881d.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721431705_669af6991b300.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721435950_669b072e9cee4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721436402_669b08f22e064.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721474547_669b9df39c6fd.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721477780_669baa944a66c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/transaction_images/1721507667_669c1f53bb5b6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/users/1720337325_668a43adedb1d.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/users/1721321875_6699499387416.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/storage/app/public/users/1721482898_669bbe92c8d83.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/public/images/logo-color.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/alert.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/bell.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/bills.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/budget.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/card.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/empty_check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/gears.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/home.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/menu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/plane.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/plus.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/report.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/search.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/wallet.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/icons/wealth.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/images/person_four.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/images/person_one.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/images/person_three.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/assets/images/person_two.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/alert.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/bell.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/bills.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/budget.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/card.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/empty_check.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/gears.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/home.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/menu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/plane.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/plus.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/report.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/search.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/wallet.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/icons/wealth.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/images/person_four.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/images/person_one.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/images/person_three.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/assets/images/person_two.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Addcard/addcard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Addcard/addcard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Budget/Budget.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Budget/Budget.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Cards/Cards.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Cards/Cards.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Categories/AdminCategories.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Cities/AddCity.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Cities/cities.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Comments/comments.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Content/content.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/ContentMain/ContentMain.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/ContentMain/ContentMain.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/ContentTop/ContentTop.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/ContentTop/ContentTop.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Financial/Financial.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Financial/Financial.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Governorates/governorates.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Locations/EditLocation.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Locations/addlocations.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Locations/locations.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Ratings/ratings.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Report/Report.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Report/Report.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Savings/Savings.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Savings/Savings.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Subscriptions/Subscriptions.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Subscriptions/Subscriptions.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Transactions/Transactions.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Transactions/Transactions.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Users/users.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/restaurants/restaurantlist.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/context/SidebarContext.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/data/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/layout/Content/Content.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/layout/Content/Content.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/layout/Sidebar/Sidebar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/layout/Sidebar/Sidebar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/main.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/reducer/sidebarReducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/utils/images.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/error/Error404.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/error/Error500.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/homepage/AllRestaurantsPage.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/TableBeehive.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/restaurant/footer/Footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Calendar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Details.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/Locations.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/userDashboard/userDashboardRestaurant.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/userDashboard/userDashboardRestaurant.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/UserContext.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/UserRestaurant.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/helpers/adminDash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/layouts/loader/Loader.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/slices/fetchRestaurantByCategory.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/slices/restaurant/menuCategory/fetchRestaurantMenuCaegory.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/slices/restaurant/menuItem/fetchMenuCategoryItems.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/react/src/slices/restaurant/table/restaurantTablesSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CountryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/CountryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/LocationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/LocationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/MenuCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/MenuCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/MenuItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/MenuItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantLocationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/RestaurantLocationsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/UserAddressController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/UserAddressController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/StoreRestaurantLocationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/StoreRestaurantLocationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/UpdateRestaurantLocationsRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/UpdateRestaurantLocationsRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/UpdateRestaurantRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Requests/Restaurant/UpdateRestaurantRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantImagesResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantImagesResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantLocationResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantLocationResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Resources/RestaurantResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/City.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/City.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/Restaurant.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/Restaurant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/RestaurantImages.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/RestaurantImages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Models/TableImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/TableImage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094124_create_reservations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_28_094124_create_reservations_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/CategorySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/CategorySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/RestaurantImagesSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/RestaurantImagesSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/RestaurantLocationImagesSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/RestaurantLocationImagesSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/RestaurantsSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/RestaurantsSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/seeders/UserAddressesSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/seeders/UserAddressesSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/categories/1720289745_668989d115d51.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721397377_669a70810f8ed.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/categories/1720317549_6689f66d7d01f.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720266782_6689301ee6846.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720266840_6689305862582.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720266903_668930971babf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720268303_6689360f99815.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1721430969_669af3b9f3655.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720269782_66893bd6b22b3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/restaurants_logos/1720316720_6689f33042dbf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1720225324_66888e2c39b3c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1720284556_6689758c568d7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1720316173_6689f10d878b5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/table_cover_images/1720316257_6689f16182fb9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/storage/app/public/users/1721481556_669bb954bcc85.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/storage/app/public/table_images/1720225341296.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Mail/PaymentSuccessMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Mail/PaymentSuccessMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/resources/views/emails/success_payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/resources/views/emails/success_payment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/BodyColorContext.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/api/adminDashboard/adminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/api/adminDashboard/adminDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/api/checkout/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/api/checkout/checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/api/restaurant/addRestaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/api/restaurant/addRestaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/api/restaurant/restaurantFetch.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/api/restaurant/restaurantFetch.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/api/restaurant/updateAtRestaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/api/restaurant/updateAtRestaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/bg1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/bg2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/bg3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/bg4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/img1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/img2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/img3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/img4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/bg/img5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/logos/xtremelogo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/logos/xtremelogowhite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/users/user1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/users/user2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/users/user3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/users/user4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/images/users/user5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/scss/_variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/scss/layout/_container.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/scss/layout/_sidebar.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/assets/scss/style.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AboutUs/AboutUs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AboutUs/AboutUs.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Settings/About.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/AddRestaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/restaurants/AddRestaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/AdminCategories.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/adminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/adminDashboard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/comments.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/ratings.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/reports.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/Report/reports.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/AdminDashboard/restaurantList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/AdminDashboard/components/restaurants/restaurantList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/Checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/Checkout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/Checkout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/Checkout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/Done.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/Done.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/Payment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/Payment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/PaymentDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/PaymentDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/RestaurantDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/RestaurantDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/TableDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/TableDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/gateways/CashGateways.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/gateways/CashGateways.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/checkout/gateways/PayPal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/checkout/gateways/PayPal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/CustomCarousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/CustomCarousel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/CustomCarousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/CustomCarousel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/card/Card.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/card/Card.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/card/Card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/card/Card.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/circles/Circles.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/circles/Circles.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/get-all-restaurants/AllRestaurants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/get-all-restaurants/AllRestaurants.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/near-restaurants/NearRestau.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/near-restaurants/NearRestau.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/static-card/StaticCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/static-card/StaticCard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/static-card/StaticCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/static-card/StaticCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/top-rated/TopRestau.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/top-rated/TopRestau.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/homepage/top-rated/TopRestau.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/homepage/top-rated/TopRestau.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/Restaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/Restaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchAddress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchAddress.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchOpening.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchOpening.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchTables.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/BranchTables.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/branches/Branches.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/Branches.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/branches/Branches.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/branches/Branches.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/home/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/home/RestaurantHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/home/RestaurantHome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/home/RestaurantHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/home/RestaurantHome.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/navbar/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/navbar/Navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Calender.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Calendar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Calender.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Reservation.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Reservation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Reservation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/Reservation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/ReservationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/ReservationForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/reservation/TimeAndAdditional.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/reservation/TimeAndAdditional.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/tables/TableDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/tables/TableDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/tables/TableGallery.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/tables/TableGallery.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/restaurant/tables/Tables.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/restaurant/tables/Tables.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/review/comments/BranchComments.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/review/comments/BranchComments.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/review/comments/Comments.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/review/comments/Comments.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/review/rating/Rating.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/review/rating/Rating.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/Restaurant.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/Restaurant.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/RestaurantContext.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddCategoryForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddCategoryForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddLocation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddLocation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddMenuCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddMenuCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddMenuItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddMenuItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddRestaurant.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddRestaurant.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddRestaurantCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddRestaurantCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableAvailability.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableAvailability.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableImage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/add/AddTableImage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditCategoryForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditCategoryForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditLocation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditLocation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditRestaurantCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditRestaurantCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableAvailability.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableAvailability.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableImage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/EditTableImage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/MenuCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/MenuCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/edit/MenuItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/edit/MenuItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/CategoriesTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/CategoriesTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/DetailsTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/DetailsTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/LocationTablesTable.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/LocationsTable.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/MenuCategoriesTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/MenuCategoriesTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantCategory.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantImages.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantImages.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantImages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/RestaurantImages.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/ShowReservation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/ShowReservation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/SpecificCategories.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/SpecificCategories.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/TableAvailability.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userDashboard/show/UserDashboardHome.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userDashboard/show/UserDashboardHome.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/changePassword/ChangePassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/changePassword/ChangePassword.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/editProfile/EditProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/editProfile/EditProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/userAddress/AddUserAddress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/userAddress/AddUserAddress.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/userAddress/EditUserAddress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/userAddress/EditUserAddress.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/UserProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/UserProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/userProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/components/userProfile/userProfilePage/userProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/helpers/checkoutData.js" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/helpers/checkoutData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/helpers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/helpers/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/Sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/footer/Footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/footer/Footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/loader/loader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/loader/loader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/My-navbar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/layouts/nav/navbar-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/adminDashboard/adminSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/adminDashboard/adminSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/auth/authSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/auth/authSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/checkout/checkoutSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/checkout/checkoutSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/restaurant/category/categorySlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/restaurant/category/categorySlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/restaurant/location/locationSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/restaurant/location/locationSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/restaurant/nearest-restaurants/nearestRestaurants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/restaurant/nearest-restaurants/nearestRestaurants.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/restaurant/restaurantSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/restaurant/restaurantSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/restaurant/table/getTableSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/restaurant/table/getTableSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/user/fetchUserSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/user/fetchUserSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/user/updateUserSlice.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/slices/user/userAddressSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/slices/user/userAddressSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react/src/store/Store.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react/src/store/Store.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -490,7 +165,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Restaurants-Reservations/Backend/resources/views/emails",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -533,7 +208,7 @@
       <workItem from="1720324211097" duration="662000" />
       <workItem from="1720325215382" duration="1825000" />
       <workItem from="1720332584280" duration="3404000" />
-      <workItem from="1721532602720" duration="837000" />
+      <workItem from="1721532602720" duration="3974000" />
     </task>
     <task id="LOCAL-00001" summary="edits">
       <option name="closed" value="true" />
@@ -552,5 +227,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edits" />
     <option name="LAST_COMMIT_MESSAGE" value="edits" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
+          <line>195</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Api\ReservationController" />
+            <option name="methodName" value="changeStatus" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

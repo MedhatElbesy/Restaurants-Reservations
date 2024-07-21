@@ -57,24 +57,23 @@
         <h2>Dear Customer,</h2>
         <p>We have received your payment, Your reservation has been confirmed.</p>
         <p>Thank you for your reservation!</p>
-        {{-- <div class="reservation-details">
+        <div class="reservation-details">
             <h3>Reservation Details:</h3>
             <p><strong>Total Price:</strong> ${{ $reservation->total_price }}</p>
             <p><strong>Notes:</strong> {{ $reservation->notes }}</p>
             <p><strong>Status:</strong> {{ $reservation->status }}</p>
         </div>
-        <div class="table-details">
-            <h3>Table Details:</h3>
-            <p><strong>Table No.:</strong> {{ $table->id }}</p>
-            <p><strong>Number of Seats:</strong> {{ $table->max_number_of_persons }}</p>
-            <p><strong>Max Number of Persons:</strong> {{ $table->max_number_of_persons }}</p>
-            <p><strong>Price:</strong> ${{ $table->price }}</p>
-            <p><strong>Sale Price:</strong> ${{ $table->sale_price }}</p>
-            <p><strong>Extra Chairs:</strong> {{ $table->extra_number_of_chairs }}</p>
-            <p><strong>Extra Chair Price:</strong> ${{ $table->extra_chair_price }}</p>
-            <p><strong>Extra Child Chairs:</strong> {{ $table->extra_number_of_childs_chairs }}</p>
-            <p><strong>Extra Child Chair Price:</strong> ${{ $table->extra_child_chair_price }}</p>
-        </div> --}}
+        @foreach($reservation_details as $reservation_detail)
+            <div class="table-details">
+                <h3>Table Details:</h3>
+                <p><strong>Table No.:</strong> {{ $reservation_detail->table->id }}</p>
+                <p><strong>Number of Seats On Table:</strong> {{ $reservation_detail->table->max_number_of_persons }}</p>
+                <p><strong>Extra Chairs:</strong> {{ $reservation_detail->number_of_extra_chairs }}</p>
+                <p><strong>Extra Child Chairs:</strong> {{ $reservation_detail->number_of_extra_childs_chairs }}</p>
+                <p><strong>Price:</strong> ${{ $reservation_detail->table->price }}</p>
+                <p><strong>Sale Price:</strong> ${{ $reservation_detail->sale_price }}</p>
+            </div>
+        @endforeach
     </div>
     <div class="footer">
         <p>Thank you for choosing our restaurant!</p>

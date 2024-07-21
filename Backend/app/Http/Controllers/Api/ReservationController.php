@@ -171,7 +171,8 @@ class ReservationController extends Controller
                     'status' => 'success'
                 ]);
             }
-
+            $payment->load('reservation', 'reservation.details', 'reservation.details.table');
+//            dd($payment);
             //send mail when success
             Mail::to($payment->user->email)->send(new PaymentSuccessMail($payment));
 

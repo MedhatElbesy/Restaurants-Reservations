@@ -19,7 +19,7 @@ class ReservationDetail extends Model
 
     public function table() : BelongsTo
     {
-        return $this->belongsTo(Table::class);
+        return $this->belongsTo(Table::class, 'table_id', 'id');
     }
 
     public function getTransactionImageUrlAttribute()
