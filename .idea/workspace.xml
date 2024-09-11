@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a80edb9a-ec18-4d26-9035-7beed1360062" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/TableController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/database/migrations/2024_06_12_190509_create_tables_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Mail/PaymentSuccessMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Mail/PaymentSuccessMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/app/Models/ReservationDetail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/resources/views/emails/success_payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/resources/views/emails/success_payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,19 +161,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Restaurants-Reservations/Backend/resources/views/emails&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Restaurants-Reservations/Backend/resources/views/emails",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -203,7 +207,8 @@
       <workItem from="1720323878560" duration="214000" />
       <workItem from="1720324211097" duration="662000" />
       <workItem from="1720325215382" duration="1825000" />
-      <workItem from="1720332584280" duration="2015000" />
+      <workItem from="1720332584280" duration="3404000" />
+      <workItem from="1721532602720" duration="3974000" />
     </task>
     <task id="LOCAL-00001" summary="edits">
       <option name="closed" value="true" />
@@ -222,5 +227,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edits" />
     <option name="LAST_COMMIT_MESSAGE" value="edits" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/Backend/app/Http/Controllers/Api/ReservationController.php</url>
+          <line>195</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Api\ReservationController" />
+            <option name="methodName" value="changeStatus" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

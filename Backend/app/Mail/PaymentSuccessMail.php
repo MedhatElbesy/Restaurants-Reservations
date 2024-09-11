@@ -46,7 +46,7 @@ class PaymentSuccessMail extends Mailable
                 'paymentDate' => $this->payment->created_at,
                 'userName' => $this->payment->user->name,
                 'reservation' => $this->payment->reservation,
-                'table' => $this->payment->table
+                'reservation_details' => $this->payment?->reservation?->details
             ],
         );
     }

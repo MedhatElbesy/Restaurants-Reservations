@@ -60,10 +60,13 @@ import AddRestaurantCategory from "./components/userDashboard/add/AddRestaurantC
 import EditRestaurantCategory from "./components/userDashboard/edit/EditRestaurantCategory.jsx";
 
 // Admin Dashboard
-import AdminDashboard from "./components/AdminDashboard/adminDashboard.jsx";
-import Ratings from "./components/AdminDashboard/ratings.jsx";
-import ReportList from "./components/AdminDashboard/reports.jsx";
-import About from "./components/AdminDashboard/About.jsx";
+import AdminDashboard from "./components/AdminDashboard/admindashboard.jsx";
+import Ratings from "./components/AdminDashboard/components/Ratings/ratings.jsx";
+import ReportList from "./components/AdminDashboard/components/Report/reports.jsx";
+import RestaurantList from "./components/AdminDashboard/components/restaurants/restaurantList.jsx";
+import CommentsAdmin from "./components/AdminDashboard/components/Comments/comments.jsx";
+import AdminCategories from "./components/AdminDashboard/components/Categories/AdminCategories.jsx";
+import About from './components/AdminDashboard/components/Settings/About.jsx'
 import Verify from "./components/auth/register/verifyPage.jsx";
 import AddTableImage from "./components/userDashboard/add/AddTableImage.jsx";
 import EditTableImage from "./components/userDashboard/edit/EditTableImage.jsx";
@@ -75,10 +78,6 @@ import AddAvailabilityForm from "./components/userDashboard/add/AddTableAvailabi
 import EditTableAvailability from "./components/userDashboard/edit/EditTableAvailability.jsx";
 import RestaurantCategory from "./components/userDashboard/show/RestaurantCategory.jsx";
 import UserDashboardHome from "./components/userDashboard/show/UserDashboardHome.jsx";
-import RestaurantList from "./components/AdminDashboard/restaurantList.jsx";
-// import RestaurantShow from "./components/AdminDashboard/AddRestaurant.jsx";
-import CommentsAdmin from "./components/AdminDashboard/comments.jsx";
-import AddRest from "./components/AdminDashboard/AddRestaurant.jsx";
 import ShowReservation from "./components/userDashboard/show/ShowReservation.jsx";
 
 // notifaication and about us
@@ -87,16 +86,21 @@ import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
 // Protected Routes
 import { ProtectedRoute, PublicRoute } from "./helpers/ProotectedRoutes.jsx";
-import AdminCategories from "./components/AdminDashboard/AdminCategories.jsx";
+// import AdminCategories from "./components/AdminDashboard/AdminCategories.jsx";
 
 import AllRestaurantsPage from "./components/homepage/AllRestaurantsPage.jsx";
 import UserRestaurant from "./components/userProfile/userProfilePage/UserRestaurant.jsx";
 import Sidebar from "./layouts/Sidebar.jsx";
 import EditCategoryForm from "./components/userDashboard/edit/EditCategoryForm.jsx";
+import AddRest from "./components/AdminDashboard/components/restaurants/AddRestaurant.jsx";
+import Cities from "./components/AdminDashboard/components/Cities/cities.jsx";
+import Governorates from "./components/AdminDashboard/components/Governorates/governorates.jsx";
+import Content from "./components/AdminDashboard/layout/Content/Content.jsx";
+import Users from "./components/AdminDashboard/components/Users/users.jsx";
+import LocationsAdmin from "./components/AdminDashboard/components/Locations/locations.jsx";
 
-// Error
-import Error404 from "./components/error/Error404.jsx";
-import Error500 from "./components/error/Error500.jsx";
+
+
 
 const Layout = () => (
   <>
@@ -223,15 +227,7 @@ function App() {
           element={<AddAvailabilityForm />}
         />
       </Route>
-      {/* AdminDashboard */}
-      {/*<Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/admin/rating" element={<Ratings />} />
-      <Route path="/admin/report" element={<ReportList />} />
-      <Route path="/admin/about" element={<About />} />
-      <Route path="/admin/comments" element={<CommentsAdmin />} />
-      <Route path="/admin/restaurants" element={<RestaurantList />} />
-      <Route path="/restaurant/:id" element={<RestaurantShow />} />
-      </Route> */}
+      
       {/* AdminDashboard */}
       {/* <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/rating" element={<Ratings />} />
@@ -242,21 +238,26 @@ function App() {
       <Route path="/restaurant/:id" element={<RestaurantShow />} /> */}
       {/* Admin Routes  Edited By : Nagy*/}
       {/* Admin Only */}
-      <Route element={<ProtectedRoute admin={true} />}>
-        <Route path="/admin" element={<AdminDashboard />}>
+      
+      <Route element={<ProtectedRoute  admin={true} />}>
+        <Route path="/admin" element={<AdminDashboard/>}>
+          <Route path="home" element={<Content />} />
+          <Route path="users" element={<Users />}/>
+          <Route path="location" element={<LocationsAdmin />}/>
           <Route path="rating" element={<Ratings />} />
           <Route path="report" element={<ReportList />} />
           <Route path="about" element={<About />} />
           <Route path="comments" element={<CommentsAdmin />} />
           <Route path="restaurants" element={<RestaurantList />} />
           <Route path="category" element={<AdminCategories />} />
+          <Route path="cities" element={<Cities />} />
+          <Route path="governorates" element={<Governorates />}/>
         </Route>
         <Route path="/add-restaurant/:id" element={<AddRest />} />
       </Route>
       <Route path="/notify" element={<RestaurantLocationNotifications />} />
       <Route path="all-restaurants" element={<AllRestaurantsPage />} />
-      <Route path="/not-found" element={<Error404 />} />
-      <Route path="/server-error" element={<Error500 />} />
+     
     </Route>
   );
 

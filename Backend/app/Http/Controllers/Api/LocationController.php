@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
 {
-    
+
     public function getLocationsByUserCity()
     {
         $user = Auth::user();

@@ -28,11 +28,11 @@
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "flowbite-react": "^0.10.1",
+    "formik": "^2.4.6",
     "framer-motion": "^11.2.12",
     "iso-country-currency": "^0.7.2",
     "laravel-echo": "^1.16.1",
     "leaflet": "^1.9.4",
-    "lottie-react": "^2.4.0",
     "pusher-js": "^8.4.0-rc2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -54,7 +54,8 @@
     "reactstrap": "^9.2.2",
     "recharts": "^2.12.7",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.12.0"
+    "sweetalert2": "^11.6.13",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
