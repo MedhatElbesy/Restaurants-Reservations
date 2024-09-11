@@ -63,6 +63,7 @@ class TableController extends Controller
             return ApiResponse::sendResponse(200, 'Tables', new TableResource($table));
     }
 
+
     public function update(UpdateTableRequest $request, Table $table)
     {
         $data = $request->all();

@@ -29,13 +29,12 @@ class ReservationCreated implements ShouldBroadcast
     }
 
 
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
-        return new Channel('notifications');
+        return [
+            new Channel('new_restaurantLocation'),
+        ];
     }
 
-    public function broadcastAs()
-    {
-        return 'ReservationCreated';
-    }
+
 }

@@ -14,11 +14,7 @@ class UpdateRestaurantLocationsRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
         return [
@@ -32,7 +28,8 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'longitude' => 'nullable|numeric',
             'opening_time' => 'nullable|string',
             'closed_time' => 'nullable|string',
-            'closed_days' => 'nullable',
+            'closed_days' => 'nullable|array',
+            'closed_days.*' => 'nullable|string',
             'hot_line' => 'nullable|string',
             'number_of_tables' => 'nullable|integer',
             'phone_number' => 'nullable|string',
@@ -40,6 +37,31 @@ class UpdateRestaurantLocationsRequest extends FormRequest
             'status' => 'nullable|in:Opened,Closed,Reported',
             'images' => 'nullable|array|max:2048',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    
+    public function prepareForUpdate(): array
+    {
+        $data = $this->validated();
+
+        return [
+            'address' => $data['address'],
+            'country_id' => $data['country_id'],
+            'governorate_id' => $data['governorate_id'],
+            'city_id' => $data['city_id'],
+            'state_id' => $data['state_id'] ?? null,
+            'zip' => $data['zip'] ?? null,
+            'latitude' => $data['latitude'] ?? null,
+            'longitude' => $data['longitude'] ?? null,
+            'opening_time' => $data['opening_time'] ?? null,
+            'closed_time' => $data['closed_time'] ?? null,
+            'closed_days' => isset($data['closed_days']) ? implode(',', $data['closed_days']) : null,
+            'number_of_tables' => $data['number_of_tables'] ?? 0,
+            'phone_number' => $data['phone_number'] ?? null,
+            'mobile_number' => $data['mobile_number'] ?? null,
+            'hot_line' => $data['hot_line'] ?? null,
+            'status' => $data['status'] ?? 'Opened',
         ];
     }
 }

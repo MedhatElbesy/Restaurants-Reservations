@@ -17,7 +17,6 @@ class RestaurantImagesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            // 'image_url' => image_url,
             'image_url' => $this->image_url,
 
         ];
@@ -27,7 +26,7 @@ class RestaurantImagesResource extends JsonResource
     private function getImageUrl()
     {
         if ($this->image) {
-            return Storage::url($this->image); 
+            return Storage::url($this->image);
         }
 
         return null;

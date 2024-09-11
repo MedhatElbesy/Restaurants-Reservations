@@ -2,60 +2,68 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\ItemStatus;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Models\Country;
-use App\Models\Restaurant;
-use App\Models\RestaurantLocation;
+use App\Repositories\Country\CountryRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Exception;
 
 class CountryController extends Controller
 {
-    public function getAllCountries(): JsonResponse {
-        $countries = Country::select('id', 'name', 'country_code')->get();
+    protected $countryRepository;
 
-        if ($countries->isEmpty()) {
-            return ApiResponse::sendResponse(404, 'No countries found.');
-        }
-
-        return ApiResponse::sendResponse(200, 'Countries fetched successfully', $countries);
+    public function __construct(CountryRepositoryInterface $countryRepository)
+    {
+        $this->countryRepository = $countryRepository;
     }
 
-    public function getCountryById($id): JsonResponse {
+    public function getAllCountries()
+    {
+        try {
+            $countries = $this->countryRepository->getAllCountries();
+
+            if ($countries->isEmpty()) {
+                return ApiResponse::sendResponse(404, 'No countries found.');
+            }
+
+            return ApiResponse::sendResponse(200, 'Countries fetched successfully', $countries);
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to retrieve countries', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function getCountryById($id)
+    {
         if (!is_numeric($id) || $id < 0) {
             return ApiResponse::sendResponse(400, 'Invalid country ID.');
         }
 
-        $country = Country::where('id', $id)->select('id', 'name', 'country_code')
-            ->with(
-                'governorates:id,name,country_id',
-                'governorates.cities:id,name,governorate_id',
-                'governorates.cities.states:id,name,city_id'
-            )
-            ->first();
+        try {
+            $country = $this->countryRepository->getCountryById($id);
 
-        if (!$country){
-            return ApiResponse::sendResponse(404, 'Country not found.');
+            if (!$country) {
+                return ApiResponse::sendResponse(404, 'Country not found.');
+            }
+
+            return ApiResponse::sendResponse(200, 'Country fetched successfully', $country);
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to retrieve country', ['error' => $e->getMessage()]);
         }
-
-        return ApiResponse::sendResponse(200, 'Country fetched successfully', $country);
     }
 
     public function show($location_id)
     {
         try {
-            $location = RestaurantLocation::findOrFail($location_id);
-            $country = $location->country;
+            $country = $this->countryRepository->getCountryByLocationId($location_id);
 
             if (!$country) {
                 return ApiResponse::sendResponse(404, 'Country not found for the given location');
             }
+
             return ApiResponse::sendResponse(200, 'Country fetched successfully', $country);
-        } catch (\Exception $e) {
-            return ApiResponse::sendResponse(500, 'Failed to retrieve country information',['error' => $e->getMessage()]);
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, 'Failed to retrieve country information', ['error' => $e->getMessage()]);
         }
     }
-
 }

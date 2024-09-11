@@ -16,7 +16,7 @@ class City extends Model
         static::addGlobalScope(new EnabledStatusScope);
     }
 
-    protected $hidden = ['created_at', 'updated_at']; // to prevent show in api response
+    protected $hidden = ['created_at', 'updated_at']; 
 
     public function governorate(){
         return $this->belongsTo(Governorate::class, 'governorate_id', 'id');
@@ -26,13 +26,5 @@ class City extends Model
         return $this->hasMany(State::class, 'city_id', 'id');
     }
 
-    // public function restaurantLocations()
-    // {
-    //     return $this->hasMany(RestaurantLocation::class);
-    // }
 
-    // public function userAddresses()
-    // {
-    //     return $this->hasMany(UserAddress::class);
-    // }
 }

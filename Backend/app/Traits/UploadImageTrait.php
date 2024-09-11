@@ -15,9 +15,7 @@ trait UploadImageTrait {
             }
 
             $imageName = time() . '_' . uniqid() . '.' . $extension;
-            //$imageName = time() . rand(1000000, 9999999) .  "." . $extension;
 
-            // Store image in specified folder under 'public' storage disk
             return $image->storeAs($folder, $imageName, 'public');
         }
 

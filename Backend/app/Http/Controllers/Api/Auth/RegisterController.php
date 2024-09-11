@@ -30,15 +30,11 @@ class RegisterController extends Controller
         try {
             $data = $request->except('_token');
 
-
-            /// This is Nagy and i edited here
             if ($request->hasFile('profile_image')) {
                 $data['profile_image'] = $this->uploadImage($request, 'profile_image', 'profile_images');
             }
             $user = User::create($data);
 
-            /* send unique code to verify email when created new account */
-//            $token = rand(000000, 999999);
             $token = 123456;
             DB::table('user_activations')->insert([
                 'user_id' => $user->id,

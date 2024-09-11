@@ -26,7 +26,7 @@ class ReservationController extends Controller
 {
     use UploadImageTrait;
 
-    public function index(): JsonResponse
+    public function index()
     {
         $reservations = Reservation::with(['details', 'payments'])->get();
         return ApiResponse::sendResponse(200, 'Reservations Fetched Successfully', ReservationResource::collection($reservations));
@@ -86,7 +86,6 @@ class ReservationController extends Controller
                 'gateway_id' => $validated['gateway_id'] ?? null,
                 'transaction_image' => $validated['transaction_image'],
                 'transaction_phone_number' => $validated['transaction_phone_number'],
-                //'transaction_id' => $validated['transaction_id'] ?? null,
                 'customer_name' => $validated['customer_name'],
                 'customer_email' => $validated['customer_email'],
                 'customer_phone' => $validated['customer_phone'] ?? null,

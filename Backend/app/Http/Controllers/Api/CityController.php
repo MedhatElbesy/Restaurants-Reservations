@@ -1,55 +1,63 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
-use App\Enums\ItemStatus;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Governorate;
-use App\Models\RestaurantLocation;
-use Illuminate\Http\JsonResponse;
+use App\Repositories\CityRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
-    public function getAllCities(): JsonResponse {
-        $cities = City::select('id', 'governorate_id', 'name')->with('governorate:id,name')->paginate(15);
+    protected $cityRepository;
+
+    public function __construct(CityRepositoryInterface $cityRepository)
+    {
+        $this->cityRepository = $cityRepository;
+    }
+
+    public function getAllCities()
+    {
+        $cities = $this->cityRepository->getAllCities();
 
         if ($cities->isEmpty()) {
             return ApiResponse::sendResponse(404, 'No cities found.');
         }
 
         return ApiResponse::sendResponse(200, 'Cities fetched successfully', $cities);
-
     }
 
-    public function getCityByGovernorateId($governorate_id): JsonResponse {
-        if (!is_numeric($governorate_id) || $governorate_id <= 0) {
-            return ApiResponse::sendResponse(400, 'Invalid governorate ID.');
+    public function getCityByGovernorateId($governorate_id)
+    {
+        $validator = Validator::make(['governorate_id' => $governorate_id], [
+            'governorate_id' => 'required|integer|min:1'
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::sendResponse(400, 'Invalid governorate ID.', $validator->errors());
         }
 
-        $cities = City::where('governorate_id', '=', $governorate_id)->select('id', 'name')->get();
+        $cities = $this->cityRepository->getCityByGovernorateId($governorate_id);
 
         if ($cities->isEmpty()) {
             return ApiResponse::sendResponse(404, 'No cities found for this governorate.');
         }
+
         return ApiResponse::sendResponse(200, 'Cities fetched successfully', $cities);
     }
 
     public function show($location_id)
     {
         try {
-            $location = RestaurantLocation::findOrFail($location_id);
-            $cities = $location->city;
+            $city = $this->cityRepository->getCityByLocationId($location_id);
 
-            if (!$cities) {
-                return ApiResponse::sendResponse(404, 'cities not found for the given location');
+            if (!$city) {
+                return ApiResponse::sendResponse(404, 'City not found for the given location');
             }
-            return ApiResponse::sendResponse(200, 'cities fetched successfully', $cities);
+
+            return ApiResponse::sendResponse(200, 'City fetched successfully', $city);
         } catch (\Exception $e) {
-            return ApiResponse::sendResponse(500, 'Failed to retrieve cities information',['error' => $e->getMessage()]);
+            return ApiResponse::sendResponse(500, 'Failed to retrieve city information', ['error' => $e->getMessage()]);
         }
     }
 }

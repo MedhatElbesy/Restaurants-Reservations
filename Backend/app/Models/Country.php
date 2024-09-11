@@ -16,7 +16,7 @@ class Country extends Model
         static::addGlobalScope(new EnabledStatusScope);
     }
 
-    protected $hidden = ['created_at', 'updated_at']; // to prevent show in api response
+    protected $hidden = ['created_at', 'updated_at']; 
 
     public function governorates(){
         return $this->hasMany(Governorate::class, 'country_id', 'id');

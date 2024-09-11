@@ -16,7 +16,7 @@ class Governorate extends Model
         static::addGlobalScope(new EnabledStatusScope);
     }
 
-    protected $hidden = ['created_at', 'updated_at']; // to prevent show in api response
+    protected $hidden = ['created_at', 'updated_at']; 
 
     public function country(){
         return $this->belongsTo(Country::class, 'country_id', 'id');
